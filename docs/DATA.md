@@ -31,6 +31,7 @@ So: **prefabs hold references and identity. Config assets hold numbers.**
 | `Data/Wardrobe/WardrobeCatalog.asset` | `Core/Wardrobe/WardrobeCatalog` | Every item, by id |
 | `Data/Targets/<Target>.asset` | `Core/Targets/TargetDefinition` | Id, type (open, hidden, fixed, social — GDD §04.4), the NPC action that imitates it |
 | `Data/Layouts/Layout_<A–D>.asset` | `Core/Layouts/LayoutDefinition` | Scene, camera list, target spots, tent spots and stocks, exits (from `docs/LAYOUTS.md`) |
+| `Data/Cameras/CctvFilter_<Name>.asset` | `Core/Config/CctvFilterProfile` | One camera's feed look: resolution (default 320×180), contrast, brightness, grain, scan lines, vignette (D-026) |
 | ~~`Data/Gaits/GaitCatalog.asset`~~ | — | Not made (D-025): base walks and traits are `BaseWalk`/`WalkTrait` and the art JSON; the odds are in `CrowdConfig` |
 
 **Watch the boundary.** What a garment is (its slot, its words) is instance data. How much heat
