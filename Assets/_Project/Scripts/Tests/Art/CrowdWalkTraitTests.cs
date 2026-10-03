@@ -128,7 +128,8 @@ namespace LastSeenWearing.Tests.Art
                 agent.FollowSchedule(1.02d, 0.02f);
                 Assert.That(animator.GetLayerWeight(hunch), Is.EqualTo(1f).Within(1e-4f), "walking");
 
-                for (var t = 5.5d; t < 5.5d + CrowdAgent.IdleBlendSeconds + 0.1d; t += 0.02d)
+                // Standing is known a smoothing window after the last step, then the traits fade.
+                for (var t = 5.5d; t < 5.5d + WalkCycle.SmoothingSeconds + CrowdAgent.IdleBlendSeconds + 0.1d; t += 0.02d)
                 {
                     agent.FollowSchedule(t, 0.02f);
                 }

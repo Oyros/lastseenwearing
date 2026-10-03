@@ -23,6 +23,8 @@ namespace LastSeenWearing.Editor.Import
         public const string StyleParameter = CrowdAgent.StyleParameter;
         public const string PhaseParameter = CrowdAgent.PhaseParameter;
         public const string WalkingParameter = CrowdAgent.WalkingParameter;
+        public const string RunParameter = WalkCycle.RunParameter;
+        public const string RunClip = "Run";
         public const string IdleState = "Idle";
         public const string IdleClip = "Idle_Stand";
 
@@ -71,6 +73,7 @@ namespace LastSeenWearing.Editor.Import
             Clear(controller);
             controller.AddParameter(StyleParameter, AnimatorControllerParameterType.Float);
             controller.AddParameter(PhaseParameter, AnimatorControllerParameterType.Float);
+            controller.AddParameter(RunParameter, AnimatorControllerParameterType.Float);
             controller.AddParameter(new AnimatorControllerParameter
             {
                 name = WalkingParameter,
@@ -96,9 +99,27 @@ namespace LastSeenWearing.Editor.Import
                 tree.AddChild(clip, (float)walk);
             }
 
+            // The run (PL.11b) shares the walk's phase — its contacts sit at 0 and 0.5 like every walk's — so
+            // Run blends walking into running on the same step; WalkCycle stretches the stride with it.
+            if (!clips.TryGetValue(RunClip, out var runClip))
+            {
+                throw new InvalidOperationException($"[CrowdAnimator] {BodyPath} has no clip {RunClip}.");
+            }
+
+            var gait = new BlendTree
+            {
+                name = "WalkToRun",
+                blendType = BlendTreeType.Simple1D,
+                blendParameter = RunParameter,
+                useAutomaticThresholds = false,
+            };
+            AssetDatabase.AddObjectToAsset(gait, controller);
+            gait.AddChild(tree, 0f);
+            gait.AddChild(runClip, 1f);
+
             var machine = controller.layers[0].stateMachine;
             var state = machine.AddState(WalkState);
-            state.motion = tree;
+            state.motion = gait;
             state.timeParameterActive = true;
             state.timeParameter = PhaseParameter;
             // Humanoid retargeting rebuilds the feet in muscle space and lets a planted foot creep (≤ 8.3 mm

@@ -55,8 +55,9 @@ namespace LastSeenWearing.Gameplay.Player
         public override void OnNetworkSpawn()
         {
             _body = GetComponent<CharacterController>();
-            _walk = new WalkCycle(GetComponentInChildren<Animator>(), _crowd.StrideLength);
+            _walk = new WalkCycle(GetComponentInChildren<Animator>(), _crowd.StrideLength, _crowd.RunStrideLength);
             _walk.SetBase(BaseWalk.Normal); // a uniform walks plainly; the patrol is not hiding
+            _walk.SetRunSpeeds(_movement.PatrolWalkSpeed, _movement.PatrolRunSpeed);
             _lastPosition = transform.position;
 
             if (!IsOwner)
@@ -115,7 +116,7 @@ namespace LastSeenWearing.Gameplay.Player
             _walk.Advance(_walked, Time.deltaTime);
             if (_arms != null)
             {
-                _arms.SetFloat(PhaseId, (float)(_walked / _crowd.StrideLength % 1d));
+                _arms.SetFloat(PhaseId, _walk.Phase);
                 _arms.SetBool(WalkingId, _walk.IsWalking);
             }
         }

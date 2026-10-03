@@ -437,3 +437,22 @@ client can cheat the leak. Positions come from the player bodies the server alre
 **Open.** Plainclothes will carry a radio too: a lit radio would expose them — a design question for when
 Plainclothes arrives. Stage noise on the radio waits for the layout.
 **Reversing.** Cheap: radii and volumes are config; the light's trigger is one call.
+
+---
+
+### D-034 — The run shares the walk's phase; speed is averaged, not read off a frame
+**Decision.** The crowd animator's `Walk` state is a 1D blend on `Run` (0 = the base walks, 1 = PL.11b's
+`Run` clip), still timed by `Phase`. Both cycles put contact_L at 0 and contact_R at 0.5, so one phase drives
+both. `WalkCycle` sets `Run` from the body's speed between its walk speed and its run speed
+(`SetRunSpeeds`: fugitive = its pace / `MovementConfig.FugitiveRunSpeed`, patrol = its walk / run) and
+stretches the stride from `CrowdConfig.StrideLength` (1 m) to `RunStrideLength` (2.5 m, art data: JSON speed
+× cycle) with the blend, keeping the phase continuous. Every client derives `Run` from what it sees, so
+nothing is sent. Walk traits fade out as the body runs: a limp is a walk's, and running hides it — at the cost
+of being noticed (GDD §04.3). The crowd never runs: for it the phase is exactly D-022's walked / stride.
+`WalkCycle` averages speed over 0.1 s and counts a body as walking while it moved within 0.1 s; a single
+frame's step is capped at 10 m/s.
+**Why.** Played: the sprint read as out of step. Measured: the owner moves on 50 Hz physics, so per-frame
+speed swung between 0.56× and 1.1× (and to zero at 144 fps — standing on 65% of frames), so `Run` and
+`Walking` flickered. Averaged, a 50 Hz body at 144 fps never reads standing and reaches the full run
+(test); the run's planted foot moves back 2.5 m per cycle, matching the stride.
+**Reversing.** Cheap: traits during the run are one factor; the smoothing window is one constant.

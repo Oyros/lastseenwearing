@@ -18,3 +18,15 @@ MonoBehaviour:
   _dwellMin: 0
   _dwellMax: 6
   _walkSpeed: 1.3
+  _strideLength: 1
+  _runStrideLength: 2.5
+  _noTraitOdds: 0.25
+  _oneTraitOdds: 0.45
+  _twoTraitOdds: 0.3
+  _strongTraitChance: 0.4
+  _slowTempo: 0.85
+  _midTempo: 1
+  _fastTempo: 1.15
+  _takenOverSyncRate: 10
+  _bumpDistance: 2
+  _bumpDuration: 0.4

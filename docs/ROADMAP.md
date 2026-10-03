@@ -175,8 +175,8 @@ open Blender; never save a `.blend` unasked.
 | [x] PL.27 | Bottoms complete: skirt, jeans (rolled cuffs / wide leg), overalls | `LSW_Ref_Clothing.png` | Bottoms lineup passes |
 | [x] PL.28 | Hats complete: straw (wide), beanie (tall), bucket (wider brim), paper crown | `LSW_Ref_Accessories.png` | Hats lineup from the CCTV angle passes |
 | [x] PL.29 | Masks (fox, half, cartoon) on `SOCKET_Face`, light/dark — `LSW_Crowd_Mask_Fox/Half/Cartoon_M/_F`, slot `face`, slot 0 = mask value from `mask_for_skin`, slot 1 = the opposite (eyes, mouth, fox nose/ear insides); full masks carry `excludes: [hat, facial]`, the half mask `close_range: true` | `LSW_Ref_Accessories.png` | Full masks read on camera; half mask at stop distance (D-009) |
-| [ ] PL.30 | Glasses (regular, sun) — close-range clue | D-009 | Readable at 2 m eye level |
-| [ ] PL.31 | Body accessories: scarf, backpack, shoulder bag, umbrella, balloon | `LSW_Ref_Accessories.png` | Backpack and balloon read on camera |
+| [x] PL.30 | Glasses (regular, sun) — close-range clue — `LSW_Crowd_Glasses_Regular/Sun_M/_F`, slot `glasses`, slot 0 = frame value from `mask_for_skin`, slot 1 = LensDark; `excludes: [face]`, `close_range: true` | D-009 | Readable at 2 m eye level |
+| [x] PL.31 | Body accessories: scarf, backpack, shoulder bag, umbrella, balloon — `LSW_Crowd_Acc_<Item>_M/_F`, slots `neck` / `back` / `bag` / `hand_r` / `hand_l` (one item per slot), `Fit_Bulky` key over the Puffer, `Add_Grip_L/R` finger curls | `LSW_Ref_Accessories.png` | Backpack and balloon read on camera |
 | [ ] PL.32 | Face decal for close-ups (neutral, surprise, anger, panic, blink) | D-010 | Flush on all heads and builds; hidden at LOD1+ |
 | [ ] PL.33 | Crowd LODs | ART_PIPELINE §2 | 150-character scene within budget at each LOD |
 | [ ] PL.34 | Full crowd review: 30 random characters | LOOKDEV §2 | Signed off by eye |

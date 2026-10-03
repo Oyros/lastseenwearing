@@ -58,7 +58,7 @@ namespace LastSeenWearing.Gameplay.Player
         public override void OnNetworkSpawn()
         {
             _body = GetComponent<CharacterController>();
-            _walk = new WalkCycle(GetComponentInChildren<Animator>(), _crowd.StrideLength);
+            _walk = new WalkCycle(GetComponentInChildren<Animator>(), _crowd.StrideLength, _crowd.RunStrideLength);
             _lastPosition = transform.position;
             _crowdSeed.OnValueChanged += OnCrowdSeedChanged;
             ApplyGait(_crowdSeed.Value);
@@ -98,6 +98,7 @@ namespace LastSeenWearing.Gameplay.Player
             Gait = GaitPlanner.CharacterSignature(crowdSeed, _crowd.NpcCount, GaitSlot, _crowd.Gait);
             _walk.Apply(Gait);
             _walkSpeed = _crowd.WalkSpeed * _crowd.TempoMultiplier(Gait.Tempo);
+            _walk.SetRunSpeeds(_walkSpeed, _movement.FugitiveRunSpeed); // the sprint breaks into the Run clip (PL.11b)
             if (IsOwner)
             {
                 Debug.Log($"[Fugitive] Your walk: {Gait.Describe()}.");

@@ -66,7 +66,8 @@ namespace LastSeenWearing.Tests.Art
             Assert.That(state.timeParameter, Is.EqualTo(CrowdAnimatorBuilder.PhaseParameter));
             Assert.That(state.iKOnFeet, Is.True, "Foot IK keeps the planted foot planted");
 
-            var tree = (BlendTree)state.motion;
+            // Walk → run first (PL.11b); the base walks are its walking end.
+            var tree = (BlendTree)((BlendTree)state.motion).children[0].motion;
             var walks = (BaseWalk[])Enum.GetValues(typeof(BaseWalk));
             Assert.That(tree.children.Select(c => (c.motion.name, c.threshold)),
                 Is.EqualTo(walks.Select(w => (CrowdAnimatorBuilder.ClipName(w), (float)w))));

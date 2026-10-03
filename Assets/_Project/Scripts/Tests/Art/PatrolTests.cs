@@ -113,8 +113,10 @@ namespace LastSeenWearing.Tests.Art
         [Test]
         public void TheAimFindsTheFirstCharacterAndNotThroughWalls()
         {
+            var crowd = new GameObject("Crowd"); // NPCs live under a parent: the aim must name the NPC, not it
             var self = Character("Self", Vector3.zero);
             var near = Character("Near", new Vector3(0f, 0f, 5f));
+            near.transform.SetParent(crowd.transform, true);
             var far = Character("Far", new Vector3(0f, 0f, 10f));
             var wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
             try
@@ -139,6 +141,7 @@ namespace LastSeenWearing.Tests.Art
                 Object.DestroyImmediate(near);
                 Object.DestroyImmediate(far);
                 Object.DestroyImmediate(wall);
+                Object.DestroyImmediate(crowd);
             }
         }
 

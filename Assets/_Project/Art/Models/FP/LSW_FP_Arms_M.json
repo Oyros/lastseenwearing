@@ -69,7 +69,7 @@
    "hides": [],
    "double_sided": false,
    "region": "Hand",
-   "sex": null,
+   "sex": "M",
    "excludes": [],
    "close_range": false,
    "bone": null
@@ -88,7 +88,7 @@
    "hides": [],
    "double_sided": false,
    "region": "Hand",
-   "sex": null,
+   "sex": "M",
    "excludes": [],
    "close_range": false,
    "bone": null
@@ -193,10 +193,10 @@
  "verify": {
   "limb_nodes": 42,
   "skin_markers": 6,
-  "bytes": 594892,
+  "bytes": 595020,
   "ok": true
  },
- "exported": "2026-10-03 19:12:56",
+ "exported": "2026-10-03 19:26:31",
  "blend": "(unsaved)",
  "exporter": "lsw_export v1",
  "axes": "Unity: -Z forward, Y up, metres"

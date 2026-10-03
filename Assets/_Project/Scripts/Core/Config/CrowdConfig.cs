@@ -29,6 +29,8 @@ namespace LastSeenWearing.Core.Config
         [Tooltip("Metres per walk cycle (two steps). Art data, not tuning: it must equal the clips' stride " +
                  "(LSW_WalkSystem.md §5) — a test checks it against the body's JSON. The cycle runs on distance (D-022).")]
         [SerializeField, Min(0.01f)] private float _strideLength = 1f;
+        [Tooltip("Metres per run cycle (two steps) of the Run clip (PL.11b): art data, its JSON speed × cycle length.")]
+        [SerializeField, Min(0.01f)] private float _runStrideLength = 2.5f;
 
         [Header("Gait (LSW_WalkSystem.md §3)")]
         [Tooltip("Relative odds of a walk with no trait, one trait and two traits. [PROVISIONAL]")]
@@ -57,6 +59,7 @@ namespace LastSeenWearing.Core.Config
         public float DwellMax => _dwellMax;
         public float WalkSpeed => _walkSpeed;
         public float StrideLength => _strideLength;
+        public float RunStrideLength => _runStrideLength;
 
         public GaitSettings Gait => new(_noTraitOdds, _oneTraitOdds, _twoTraitOdds, _strongTraitChance);
 

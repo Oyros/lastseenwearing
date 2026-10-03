@@ -13,6 +13,7 @@ namespace LastSeenWearing.Gameplay.Player
 
         [SerializeField] private GameObject _character;
 
-        public GameObject Character => _character != null ? _character : transform.root.gameObject;
+        // The hitbox sits directly under its character; transform.root would be the crowd's parent for an NPC.
+        public GameObject Character => _character != null ? _character : transform.parent.gameObject;
     }
 }

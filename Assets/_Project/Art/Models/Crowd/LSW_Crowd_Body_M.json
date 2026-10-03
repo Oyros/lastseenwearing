@@ -578,6 +578,106 @@
    "bone": null
   },
   {
+   "name": "LSW_Crowd_Glasses_Regular_F",
+   "base": "LSW_Crowd_Glasses_Regular_F",
+   "lod": 0,
+   "tris": 66,
+   "materials": [
+    "MAT_LSW_MaskBlack",
+    "MAT_LSW_LensDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "glasses",
+   "variant": "Regular",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
+   "excludes": [
+    "face"
+   ],
+   "close_range": true,
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Glasses_Regular_M",
+   "base": "LSW_Crowd_Glasses_Regular_M",
+   "lod": 0,
+   "tris": 66,
+   "materials": [
+    "MAT_LSW_MaskBlack",
+    "MAT_LSW_LensDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "glasses",
+   "variant": "Regular",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "excludes": [
+    "face"
+   ],
+   "close_range": true,
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Glasses_Sun_F",
+   "base": "LSW_Crowd_Glasses_Sun_F",
+   "lod": 0,
+   "tris": 90,
+   "materials": [
+    "MAT_LSW_MaskBlack",
+    "MAT_LSW_LensDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "glasses",
+   "variant": "Sun",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
+   "excludes": [
+    "face"
+   ],
+   "close_range": true,
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Glasses_Sun_M",
+   "base": "LSW_Crowd_Glasses_Sun_M",
+   "lod": 0,
+   "tris": 90,
+   "materials": [
+    "MAT_LSW_MaskBlack",
+    "MAT_LSW_LensDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "glasses",
+   "variant": "Sun",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "excludes": [
+    "face"
+   ],
+   "close_range": true,
+   "bone": null
+  },
+  {
    "name": "LSW_Crowd_Hair_Afro_F",
    "base": "LSW_Crowd_Hair_Afro_F",
    "lod": 0,
@@ -2400,6 +2500,28 @@
    "pair_offset": null
   },
   {
+   "name": "Run",
+   "start": 0,
+   "end": 20,
+   "markers": {
+    "contact_L": 0,
+    "contact_R": 10
+   },
+   "contacts": [
+    0,
+    10
+   ],
+   "loop_end": 20,
+   "additive": false,
+   "additive_base": null,
+   "additive_reference_frame": null,
+   "speed": 3.75,
+   "loop": true,
+   "kind": "run",
+   "pair": null,
+   "pair_offset": null
+  },
+  {
    "name": "Tent_Enter",
    "start": 0,
    "end": 40,
@@ -2534,11 +2656,11 @@
  ],
  "verify": {
   "limb_nodes": 68,
-  "skin_markers": 90,
-  "bytes": 12039052,
+  "skin_markers": 94,
+  "bytes": 12845212,
   "ok": true
  },
- "exported": "2026-10-03 19:12:48",
+ "exported": "2026-10-03 19:33:42",
  "blend": "(unsaved)",
  "exporter": "lsw_export v1",
  "axes": "Unity: -Z forward, Y up, metres"
