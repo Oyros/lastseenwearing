@@ -14,8 +14,10 @@ namespace LastSeenWearing.Core.Config
         [SerializeField] private LobbyConfig _lobby;
         [SerializeField] private MovementConfig _movement;
         [SerializeField] private CrowdConfig _crowd;
+        [SerializeField] private RoundConfig _round;
 
         public LobbyConfig Lobby => _lobby;
+        public RoundConfig Round => _round;
         public MovementConfig Movement => _movement;
         public CrowdConfig Crowd => _crowd;
     }

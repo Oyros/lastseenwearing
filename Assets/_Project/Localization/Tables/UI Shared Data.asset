@@ -71,6 +71,46 @@ MonoBehaviour:
     m_Key: ui.lobby.button.unlock
     m_Metadata:
       m_Items: []
+  - m_Id: 90279649849344
+    m_Key: ui.round.phase.briefing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90279737929728
+    m_Key: ui.round.phase.live
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90279737929729
+    m_Key: ui.round.phase.last_cuff
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90279737929730
+    m_Key: ui.round.phase.result
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90279737929731
+    m_Key: ui.round.phase.case_end
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90279737929732
+    m_Key: ui.round.round_of
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90279737929733
+    m_Key: ui.round.result.time_up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90279737929734
+    m_Key: ui.round.next_round_in
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90279737929735
+    m_Key: ui.round.lobby_in
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90279737929736
+    m_Key: ui.lobby.button.start_case
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

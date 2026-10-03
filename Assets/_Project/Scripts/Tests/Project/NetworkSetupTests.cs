@@ -57,8 +57,11 @@ namespace LastSeenWearing.Tests.Project
 
                 var networkManager = sessions[0].GetComponent<NetworkManager>();
                 Assert.That(networkManager, Is.Not.Null, "NetworkSession is not next to the NetworkManager");
-                Assert.That(networkManager.NetworkConfig.PlayerPrefab,
-                    Is.EqualTo(AssetDatabase.LoadAssetAtPath<GameObject>(PlayerPrefabPath)), "the NetworkManager does not spawn the player capsule");
+                // P1.10: bodies are the round's — RoundDirector spawns them by role; nothing spawns on connect.
+                Assert.That(networkManager.NetworkConfig.PlayerPrefab, Is.Null, "the NetworkManager must not auto-spawn players");
+                var capsule = AssetDatabase.LoadAssetAtPath<GameObject>(PlayerPrefabPath);
+                Assert.That(networkManager.NetworkConfig.Prefabs.NetworkPrefabsLists.Any(list => list.PrefabList.Any(p => p.Prefab == capsule)), Is.True,
+                    "the player capsule must be a registered network prefab");
             }
             finally
             {

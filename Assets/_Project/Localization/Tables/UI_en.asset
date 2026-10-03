@@ -78,6 +78,49 @@ MonoBehaviour:
     m_Localized: Unlock roles
     m_Metadata:
       m_Items: []
+  - m_Id: 90279649849344
+    m_Localized: Briefing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90279737929728
+    m_Localized: Live
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90279737929729
+    m_Localized: Last cuff
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90279737929730
+    m_Localized: Round over
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90279737929731
+    m_Localized: Case closed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90279737929732
+    m_Localized: Round {0} of {1}
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
+  - m_Id: 90279737929733
+    m_Localized: 'Time''s up: the police win'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90279737929734
+    m_Localized: Next round in {0}
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
+  - m_Id: 90279737929735
+    m_Localized: Back to the lobby in {0}
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
+  - m_Id: 90279737929736
+    m_Localized: Start the case
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
@@ -89,3 +132,6 @@ MonoBehaviour:
         - id: 60465291309058
         - id: 60465295503360
         - id: 60465299697664
+        - id: 90279737929732
+        - id: 90279737929734
+        - id: 90279737929735

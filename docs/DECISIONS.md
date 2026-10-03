@@ -327,3 +327,20 @@ pair at 0.5 and 1.0 stays under 5 mm (base walk 3.2–3.7 mm, P1.04/P1.05/P1.08)
 with lookalikes (P1.19), where "limps left" will match more than one person.
 **Reversing.** A no-go later would mean server-owned NPC transforms (D-005's fallback) or authored
 per-character clips — both large; neither is indicated.
+
+---
+
+### D-028 — The round: one director, six minutes, three rounds, time up goes to the police
+**Decision.** `Gameplay/Round/RoundDirector` (server) is the only thing that moves the round, through
+`Core/Round/RoundCycle` (Lobby → Briefing → Live → [LastCuff] → Result → next round | CaseEnd → Lobby).
+It times each phase from `RoundConfig`, raises `Core/Round/Programme` (opening, concert, fireworks,
+closing) to every client, spawns each non-Watcher player's body for Live — Patrol, Plainclothes and Dog
+at their role's point, the fugitive where an NPC stands — and despawns them at Result. NGO no longer
+spawns a player on connect. Every round gets a new crowd: `CrowdSpawner.Reseed(Derive(caseSeed, round))`.
+CaseEnd unlocks the roles (they rotate next case). [PROVISIONAL] values: Live 6 min, 3 rounds per case,
+and **time up = police win** — the fugitive did not get out before the festival closed.
+**Why.** GDD §06 fixes the programme but not the round's length, the case's size or a time-up outcome;
+the team chose these in P1.10. Verified with three MPPM players on a 40 s test config: two full rounds,
+programme on time, bodies by role, a new crowd seed each round reaching the clients, back to the lobby
+with roles unlocked.
+**Reversing.** Cheap: values are `RoundConfig`; the time-up winner is one line in `RoundRules`.

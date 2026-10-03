@@ -64,15 +64,14 @@ namespace LastSeenWearing.Gameplay.Crowd
         {
             if (IsServer)
             {
-                _seed.Value = System.Environment.TickCount;
-                _startTime.Value = NetworkManager.ServerTime.Time;
-                Debug.Log($"[CrowdSpawner] Crowd seed {_seed.Value}, start {_startTime.Value:F3} s server time.");
+                SetSeed(System.Environment.TickCount);
             }
             else
             {
                 NetworkManager.CustomMessagingManager.RegisterNamedMessageHandler(PosesMessage, OnPosesReceived);
             }
 
+            _seed.OnValueChanged += OnSeedChanged;
             Raise(_seed.Value);
 
             if (!IsServer)
@@ -83,11 +82,48 @@ namespace LastSeenWearing.Gameplay.Crowd
 
         public override void OnNetworkDespawn()
         {
+            _seed.OnValueChanged -= OnSeedChanged;
             if (!IsServer && NetworkManager.CustomMessagingManager != null)
             {
                 NetworkManager.CustomMessagingManager.UnregisterNamedMessageHandler(PosesMessage);
             }
 
+            ClearAgents();
+        }
+
+        /// <summary>
+        /// Server: a new crowd from <paramref name="seed"/>, starting now — every round has its own (GDD §06).
+        /// Clients rebuild when the seed reaches them; the start time travels with it.
+        /// </summary>
+        public void Reseed(int seed)
+        {
+            if (IsServer)
+            {
+                SetSeed(seed);
+            }
+        }
+
+        private void SetSeed(int seed)
+        {
+            // Start first: a client rebuilding on the seed's change must already read the new start.
+            _startTime.Value = NetworkManager.ServerTime.Time;
+            _seed.Value = seed;
+            Debug.Log($"[CrowdSpawner] Crowd seed {seed}, start {_startTime.Value:F3} s server time.");
+        }
+
+        private void OnSeedChanged(int previous, int current)
+        {
+            if (_agents == null)
+            {
+                return; // not raised yet: OnNetworkSpawn raises with the current seed
+            }
+
+            ClearAgents();
+            Raise(current);
+        }
+
+        private void ClearAgents()
+        {
             if (_agents == null)
             {
                 return;

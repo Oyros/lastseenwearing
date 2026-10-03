@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5509e778978f1ad4686204fa82a69f50, type: 3}
+  m_Name: RoundConfig_QuickTest
+  m_EditorClassIdentifier: LastSeenWearing.Core::LastSeenWearing.Core.Config.RoundConfig
+  _roundsPerCase: 2
+  _roundSeconds: 40
+  _briefingSeconds: 5
+  _resultSeconds: 6
+  _caseEndSeconds: 5
+  _lastCuffChaseSeconds: 45
+  _concertAt: 10
+  _fireworksAt: 20
+  _closingAt: 30

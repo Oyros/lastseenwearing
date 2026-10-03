@@ -14,7 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
   m_TableCollectionName: Festival
   m_TableCollectionNameGuidString: d0dcc1963209a324ea05d1123a156000
-  m_Entries: []
+  m_Entries:
+  - m_Id: 90277682720768
+    m_Key: festival.event.opening
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90277728858112
+    m_Key: festival.event.concert
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90277728858113
+    m_Key: festival.event.fireworks
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90277728858114
+    m_Key: festival.event.closing
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

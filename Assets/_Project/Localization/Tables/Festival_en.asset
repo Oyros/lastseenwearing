@@ -17,7 +17,23 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: d0dcc1963209a324ea05d1123a156000, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 90277682720768
+    m_Localized: The festival opens
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90277728858112
+    m_Localized: The concert begins
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90277728858113
+    m_Localized: Fireworks
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90277728858114
+    m_Localized: 'Closing time: everyone to the exits'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

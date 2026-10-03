@@ -1,5 +1,7 @@
 using LastSeenWearing.Core.Roles;
+using LastSeenWearing.Core.Round;
 using LastSeenWearing.Gameplay.Roles;
+using LastSeenWearing.Gameplay.Round;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
@@ -27,6 +29,7 @@ namespace LastSeenWearing.UI.Lobby
         private const float ButtonHeight = 32f;
 
         [SerializeField] private RoleRosterSync _roster;
+        [SerializeField] private RoundDirector _round;
 
         private RectTransform _content;
 
@@ -38,6 +41,7 @@ namespace LastSeenWearing.UI.Lobby
         private void OnEnable()
         {
             _roster.Changed += Refresh;
+            _round.PhaseChanged += OnPhaseChanged;
             LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
             Refresh();
         }
@@ -45,10 +49,13 @@ namespace LastSeenWearing.UI.Lobby
         private void OnDisable()
         {
             _roster.Changed -= Refresh;
+            _round.PhaseChanged -= OnPhaseChanged;
             LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
         }
 
         private void OnLocaleChanged(Locale locale) => Refresh();
+
+        private void OnPhaseChanged(RoundPhase phase) => Refresh();
 
         private void Refresh()
         {
@@ -57,7 +64,10 @@ namespace LastSeenWearing.UI.Lobby
                 Destroy(child.gameObject);
             }
 
-            if (_roster == null || !_roster.IsSpawned)
+            // The roster is the lobby's: once the case runs, it gives the screen to the round (P1.10).
+            var inLobby = _round == null || !_round.IsSpawned || _round.Phase == RoundPhase.Lobby;
+            _content.gameObject.SetActive(inLobby);
+            if (_roster == null || !_roster.IsSpawned || !inLobby)
             {
                 return;
             }
@@ -112,6 +122,7 @@ namespace LastSeenWearing.UI.Lobby
                 }
                 else
                 {
+                    AddButton(Text("ui.lobby.button.start_case"), _round != null, _round.StartCase);
                     AddButton(Text("ui.lobby.button.unlock"), true, _roster.Unlock);
                 }
             }
