@@ -154,7 +154,7 @@ namespace LastSeenWearing.Gameplay.Crowd
             {
                 if (!agent.IsTakenOver)
                 {
-                    agent.FollowSchedule(crowdTime);
+                    agent.FollowSchedule(crowdTime, deltaTime);
                 }
                 else if (IsServer)
                 {

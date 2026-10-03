@@ -20,11 +20,24 @@ namespace LastSeenWearing.Gameplay.Crowd
         private static readonly int PhaseId = Animator.StringToHash(PhaseParameter);
         private static readonly int WalkingId = Animator.StringToHash(WalkingParameter);
 
+        /// <summary>Walk ↔ idle, and the walk traits fading with it: long enough to hide the change of pose.</summary>
+        public const float IdleBlendSeconds = 0.25f;
+
+        private static readonly WalkTrait[] Traits = (WalkTrait[])System.Enum.GetValues(typeof(WalkTrait));
+
+        /// <summary>The parameter that picks a two-sided trait's side: −1 first clip, +1 second.</summary>
+        public static string SideParameter(WalkTrait trait) => trait + "Side";
+
         private NpcSchedule _schedule;
         private float _groundY;
         private Animator _animator;
         private float _strideLength;
         private double _lastWalked = -1d;
+
+        // Walk traits (P1.05): signed strength per trait, its layer, and how present the walk is (0 idle … 1 walking).
+        private readonly float[] _traits = new float[Traits.Length];
+        private readonly int[] _traitLayers = new int[Traits.Length];
+        private float _walkPresence = 1f;
 
         // Server: an active shove.
         private Vector3 _bumpFrom;
@@ -53,10 +66,46 @@ namespace LastSeenWearing.Gameplay.Crowd
             if (_animator != null)
             {
                 _animator.SetFloat(StyleId, (float)walk);
+                foreach (var trait in Traits)
+                {
+                    _traitLayers[(int)trait] = _animator.GetLayerIndex(trait.ToString());
+                }
             }
         }
 
-        public void FollowSchedule(double crowdTime)
+        /// <summary>
+        /// A walk trait's strength, 0 to 1; for <see cref="WalkTrait.Limp"/> and <see cref="WalkTrait.ArmSwing"/>
+        /// the sign picks the side (see <see cref="WalkTrait"/>). Applied while walking, faded out while idle.
+        /// </summary>
+        public void SetTrait(WalkTrait trait, float signedStrength)
+        {
+            _traits[(int)trait] = Mathf.Clamp(signedStrength, -1f, 1f);
+            if (_animator != null && (trait == WalkTrait.Limp || trait == WalkTrait.ArmSwing))
+            {
+                _animator.SetFloat(SideParameter(trait), signedStrength < 0f ? -1f : 1f);
+            }
+
+            ApplyTraits();
+        }
+
+        private void ApplyTraits()
+        {
+            if (_animator == null)
+            {
+                return;
+            }
+
+            foreach (var trait in Traits)
+            {
+                var layer = _traitLayers[(int)trait];
+                if (layer > 0)
+                {
+                    _animator.SetLayerWeight(layer, Mathf.Abs(_traits[(int)trait]) * _walkPresence);
+                }
+            }
+        }
+
+        public void FollowSchedule(double crowdTime, float deltaTime)
         {
             var at = _schedule.Evaluate(crowdTime, out var heading, out var walked);
             transform.SetPositionAndRotation(new Vector3(at.X, _groundY, at.Z), Quaternion.Euler(0f, heading, 0f));
@@ -66,8 +115,12 @@ namespace LastSeenWearing.Gameplay.Crowd
             if (_animator != null)
             {
                 _animator.SetFloat(PhaseId, (float)(walked / _strideLength % 1d));
-                // Lingering at a waypoint: the distance stands still, and the body goes to its idle.
-                _animator.SetBool(WalkingId, walked > _lastWalked);
+                // Lingering at a waypoint: the distance stands still, and the body goes to its idle — taking
+                // its traits with it, or a standing NPC would limp on the spot.
+                var walking = walked > _lastWalked;
+                _animator.SetBool(WalkingId, walking);
+                _walkPresence = Mathf.MoveTowards(_walkPresence, walking ? 1f : 0f, deltaTime / IdleBlendSeconds);
+                ApplyTraits();
             }
 
             _lastWalked = walked;

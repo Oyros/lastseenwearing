@@ -26,8 +26,21 @@ namespace LastSeenWearing.Editor.Import
         public const string IdleState = "Idle";
         public const string IdleClip = "Idle_Stand";
 
-        // Walk ↔ idle: long enough to hide the change of pose, short enough that a stop reads as a stop.
-        private const float IdleBlendSeconds = 0.25f;
+        /// <summary>Picks a two-sided layer's clip: −1 the first, +1 the second (see <see cref="WalkTrait"/>).</summary>
+        public static string SideParameter(WalkTrait trait) => CrowdAgent.SideParameter(trait);
+
+        /// <summary>
+        /// Each additive layer's clips (PL.12), in side order: two for a two-sided trait (−, +), one otherwise.
+        /// The layer is named after the trait.
+        /// </summary>
+        public static string[] TraitClips(WalkTrait trait) => trait switch
+        {
+            WalkTrait.Limp => new[] { "Add_Limp_L", "Add_Limp_R" },
+            WalkTrait.ArmSwing => new[] { "Add_ArmSwing_Stiff", "Add_ArmSwing_Big" },
+            _ => new[] { "Add_" + trait },
+        };
+
+        private const float IdleBlendSeconds = CrowdAgent.IdleBlendSeconds;
         public const string WalkState = "Walk";
         private const string ClipPrefix = "Walk_";
 
@@ -105,9 +118,59 @@ namespace LastSeenWearing.Editor.Import
             Connect(state, idle, AnimatorConditionMode.IfNot);
             Connect(idle, state, AnimatorConditionMode.If);
 
+            foreach (WalkTrait trait in Enum.GetValues(typeof(WalkTrait)))
+            {
+                AddTraitLayer(controller, trait, clips);
+            }
+
             EditorUtility.SetDirty(controller);
             AssetDatabase.SaveAssets();
             return controller;
+        }
+
+        // One additive layer per trait (P1.05): its strength is the layer weight (0 until the gait signature
+        // sets it, P1.06), its time the same Phase as the base walk, so the delta stays on the step it was
+        // authored for. Each clip's reference pose is frame 40 of the body file (BodyClipPostprocessor).
+        private static void AddTraitLayer(AnimatorController controller, WalkTrait trait, System.Collections.Generic.Dictionary<string, AnimationClip> clips)
+        {
+            var names = TraitClips(trait);
+            var traitClips = names.Select(n => clips.TryGetValue(n, out var c)
+                ? c
+                : throw new InvalidOperationException($"[CrowdAnimator] {BodyPath} has no clip {n}.")).ToArray();
+
+            Motion motion = traitClips[0];
+            if (traitClips.Length == 2)
+            {
+                var side = SideParameter(trait);
+                controller.AddParameter(side, AnimatorControllerParameterType.Float);
+                var tree = new BlendTree
+                {
+                    name = trait + "Sides",
+                    blendType = BlendTreeType.Simple1D,
+                    blendParameter = side,
+                    useAutomaticThresholds = false,
+                };
+                AssetDatabase.AddObjectToAsset(tree, controller);
+                tree.AddChild(traitClips[0], -1f);
+                tree.AddChild(traitClips[1], 1f);
+                motion = tree;
+            }
+
+            var machine = new AnimatorStateMachine { name = trait.ToString() };
+            AssetDatabase.AddObjectToAsset(machine, controller);
+            var state = machine.AddState(trait.ToString());
+            state.motion = motion;
+            state.timeParameterActive = true;
+            state.timeParameter = PhaseParameter;
+            machine.defaultState = state;
+
+            controller.AddLayer(new AnimatorControllerLayer
+            {
+                name = trait.ToString(),
+                stateMachine = machine,
+                blendingMode = AnimatorLayerBlendingMode.Additive,
+                defaultWeight = 0f,
+            });
         }
 
         private static void Connect(AnimatorState from, AnimatorState to, AnimatorConditionMode walking)
@@ -132,6 +195,18 @@ namespace LastSeenWearing.Editor.Import
             }
 
             var machine = controller.layers[0].stateMachine;
+            foreach (var orphan in AssetDatabase.LoadAllAssetsAtPath(ControllerPath).OfType<AnimatorStateMachine>().Where(m => m != machine))
+            {
+                foreach (var child in orphan.states)
+                {
+                    AssetDatabase.RemoveObjectFromAsset(child.state);
+                    UnityEngine.Object.DestroyImmediate(child.state, true);
+                }
+
+                AssetDatabase.RemoveObjectFromAsset(orphan);
+                UnityEngine.Object.DestroyImmediate(orphan, true);
+            }
+
             foreach (var child in machine.states)
             {
                 machine.RemoveState(child.state);

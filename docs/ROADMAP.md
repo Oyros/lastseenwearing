@@ -144,11 +144,12 @@ open Blender; never save a `.blend` unasked.
 | [x] PL.11 | Walk base clips (Normal, Brisk, Stroll, Heavy) | `LSW_WalkSystem.md` §2 | No foot sliding in a blend test |
 | [x] PL.11a | `Idle_Stand` clip on the crowd rig: weight shift, breathing, same hip height as `Walk_Normal` at rest, loopable; exported in the body FBX and listed in its JSON like the walks | `LSW_WalkSystem.md` §2 | Requested by P1.04 (dwelling NPCs freeze mid-stride until it exists); blends from any walk phase without a pop |
 | [x] PL.12 | Walk additive layers (Limp L/R, Hunch, Sway, Bounce, ArmSwing ±) | `LSW_WalkSystem.md` §2 | Each readable at 0.5 weight in a 320×180 walking lineup |
+| [x] PL.12a | **Spine pitch sign is inverted in `lsw_walk.py`** (found by P1.05): on this rig a negative X rotation on Spine/Chest bends *back*, so `lean` and `hunch` bend the wrong way and Neck/Head compensate the wrong way. Measured on the exported FBX imported **Generic** (raw bones, no Humanoid; front = +Z by the toes): `Walk_Brisk` head 4.5 cm *behind* the hips (meant +9° forward), `Walk_Stroll` 3.8 cm *ahead* (meant −3°), `Add_Hunch` 18 cm *behind*. Flip the X sign for Spine/Chest/Neck/Head in the style lean and the hunch layer; check arm-swing phase against the legs while there | `LSW_WalkSystem.md` §2 | Generic import of the re-export: Brisk head ahead of hips, Stroll behind, Hunch ahead; P1.05 lineup re-rendered |
 | [x] PL.13 | Head base + 2 hair shells (crew cut, long) | `LSW_Ref_HeadsHair.png` | Shells swap with no gap or clipping |
 | [x] PL.14 | Tops: hooded raincoat, t-shirt, hoodie (hood as a thick bunch) | `LSW_Ref_Clothing.png` | No clipping in all builds and poses; hides the right regions |
 | [x] PL.15 | Bottoms: trousers, shorts; hat: baseball cap | `LSW_Ref_Clothing.png`, `LSW_Ref_Accessories.png` | Brim readable from the CCTV angle |
-| [ ] PL.16 | Prototype crowd review: 12 random combinations | LOOKDEV §2 | Every pair describable as different in ≤ 5 words |
-| [ ] PL.17 | Greybox animations: wallet lift, poster swap, tent enter/exit, arrest pair | — | Clips listed in the export JSON |
+| [x] PL.16 | Prototype crowd review: 12 random combinations | LOOKDEV §2 | Every pair describable as different in ≤ 5 words |
+| [x] PL.17 | Greybox animations: wallet lift, poster swap, tent enter/exit, arrest pair | — | Clips listed in the export JSON |
 | [ ] PL.18 | Patrol uniform on the crowd average body; radio on `SOCKET_Radio` with emissive talk light | `Patrol/_Ref` | Identifiable instantly among 12 crowd figures on camera |
 | [ ] PL.19 | First-person arms (patrol sleeves), separate rig | — | Idle, walk, stop gesture, cuffs frame in a 90° FOV camera |
 

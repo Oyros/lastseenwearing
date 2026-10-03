@@ -260,3 +260,19 @@ body) — a per-NPC mesh combine, decided with clothing (P1.18) and the week-1 r
 **Note.** Re-saving a network prefab through prefab contents left `PlayerCapsule`'s
 `GlobalObjectIdHash` stale on disk and MPPM clones refused the host ("NetworkConfig mismatch") until
 it was saved again.
+
+---
+
+### D-024 — Walk traits are additive layers on the walk's phase, set by signed strength
+**Decision.** `AC_Crowd` carries one additive layer per `WalkTrait` (Limp, Hunch, Sway, Bounce,
+ArmSwing), named after it, its time on the same `Phase` as the base walk. Two-sided traits blend their
+two clips on `<Trait>Side` (−1 / +1). `CrowdAgent.SetTrait(trait, signedStrength)` sets the layer weight
+to |strength| and the side to its sign (Limp −left / +right, ArmSwing −stiff / +big); weights fade to 0
+with the walk → idle blend. `Editor/Tools/WalkLineup` renders the CCTV lineup (LOOKDEV §2: 6 m, 35°,
+320×180, grey) into `docs/lookdev/walk_lineup_cctv*.png`.
+**Why.** One layer per trait keeps "max two traits" (WalkSystem §3) a matter of which weights are
+non-zero, and the shared phase keeps every delta on the step it was authored for. Measured in P1.05:
+no trait at full strength moves a planted foot beyond the base walk's 3.2 mm. The lineup found that the
+art's spine pitch is inverted (`Walk_Brisk` leans back, `Add_Hunch` bends back — PL.12a), confirmed on
+a raw Generic import, so it is the clips and not Unity's muscle-space additive.
+**Reversing.** Cheap — layers are generated; a trait added to `WalkTrait` and the builder's clip table.
