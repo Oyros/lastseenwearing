@@ -99,13 +99,21 @@ Voice is the players' own; there is no VO to translate.
 
 ## 6 · Current state
 
-Not set up yet — P0.07. Expected layout:
+Set up in P0.07:
 
 ```
-Localization/LocalizationSettings.asset
+Localization/LocalizationSettings.asset      (registered as the active settings)
 Localization/Locales/en.asset
-Localization/Tables/UI, Roles, Festival
+Localization/Tables/UI, Roles, Festival      (collection + shared data + _en table each)
+Assets/AddressableAssetsData/                (created by the package; table content ships through it)
+Assets/TextMesh Pro/                         (TMP Essential Resources)
 ```
+
+Keys so far: `ui.menu.title`; `role.<watcher|patrol|plainclothes|dog|fugitive>.name`. `Festival` is empty.
+
+Tables load **asynchronously**: a `LocalizeStringEvent` fills its text a frame or two after start,
+so nothing may read a localized string synchronously on the first frame. Player builds must build
+Addressables content first — the build script's job (P0.09, WORKFLOW §8).
 
 - Startup locale: `SpecificLocaleSelector` = `en`.
 - Fonts: TMP Essential Resources as placeholder; a CCTV/terminal-style face for the Watcher
