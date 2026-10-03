@@ -225,3 +225,22 @@ roster is not on `RoundDirector`.
 **Why.** GDD §03/§06 fix roles per case but not how they are chosen; the team wanted both ways,
 chosen per lobby. Random draws use the shared `SeededRandom`, so a logged seed replays a draw.
 **Reversing.** Cheap: a third mode (host assigns) is another branch in `RoleRoster`.
+
+---
+
+### D-022 — The walk cycle runs on distance; a rigged body's rest is its bind pose
+**Decision.** The crowd animator (`AC_Crowd`, built by `Editor/Import/CrowdAnimatorBuilder` from the
+body's clips) has a `Walk` state — a 1D blend tree over the `BaseWalk` clips on `Style`, its time driven
+by `Phase` = metres walked (from `NpcSchedule`) ÷ `CrowdConfig.StrideLength`, Foot IK on — and an `Idle`
+state (`Idle_Stand`, PL.11a, own clock) entered when the distance stops growing (`Walking`, 0.25 s). Clips play
+in place (rotation, height, XZ baked; height from feet). `BodyClipPostprocessor` sets every clip from
+the body's sidecar JSON. Each NPC's base walk is `GaitPlanner.BaseWalkFor(seed, index)` on its own
+stream. The Humanoid importer reads a skinned bone's rest from the meshes' bind matrices, not the node.
+**Why.** Phase from distance makes a planted foot travel back exactly as far as the body travels
+forward at any speed, stops the cycle when the NPC stops, and gives every client the same step for
+free. Measured in P1.04 over 4 walks, three 50/50 blends and 0.6/0.94/1.3 m/s: planted-foot drift
+≤ 8.3 mm without Foot IK, ≤ 3.7 mm with it. The body FBX now carries its clips, and its nodes held a
+clip frame (hands 34–43 cm off rest): an avatar built from the nodes was bent; from the bind pose it
+is not (Borrowed Crown D-059 was the same trap).
+**Reversing.** Time-scaled playback instead of Phase is a controller rebuild plus `CrowdAgent`; it
+brings back sliding whenever speed ≠ 0.9375 m/s × stride.

@@ -11,8 +11,20 @@ namespace LastSeenWearing.Gameplay.Crowd
     /// </summary>
     public sealed class CrowdAgent : MonoBehaviour
     {
+        /// <summary>Animator parameters of the crowd controller (built by CrowdAnimatorBuilder).</summary>
+        public const string StyleParameter = "Style";
+        public const string PhaseParameter = "Phase";
+        public const string WalkingParameter = "Walking";
+
+        private static readonly int StyleId = Animator.StringToHash(StyleParameter);
+        private static readonly int PhaseId = Animator.StringToHash(PhaseParameter);
+        private static readonly int WalkingId = Animator.StringToHash(WalkingParameter);
+
         private NpcSchedule _schedule;
         private float _groundY;
+        private Animator _animator;
+        private float _strideLength;
+        private double _lastWalked = -1d;
 
         // Server: an active shove.
         private Vector3 _bumpFrom;
@@ -31,17 +43,34 @@ namespace LastSeenWearing.Gameplay.Crowd
         /// <summary>Server: the pose changed since it was last sent.</summary>
         public bool PoseDirty { get; set; }
 
-        public void Begin(int index, NpcSchedule schedule, float groundY)
+        public void Begin(int index, NpcSchedule schedule, float groundY, BaseWalk walk, float strideLength)
         {
             Index = index;
             _schedule = schedule;
             _groundY = groundY;
+            _strideLength = strideLength;
+            _animator = GetComponentInChildren<Animator>();
+            if (_animator != null)
+            {
+                _animator.SetFloat(StyleId, (float)walk);
+            }
         }
 
         public void FollowSchedule(double crowdTime)
         {
-            var at = _schedule.Evaluate(crowdTime, out var heading);
+            var at = _schedule.Evaluate(crowdTime, out var heading, out var walked);
             transform.SetPositionAndRotation(new Vector3(at.X, _groundY, at.Z), Quaternion.Euler(0f, heading, 0f));
+
+            // The cycle runs on distance, not time (D-022): one stride per cycle, so a planted foot moves
+            // exactly as far back as the body moves forward — at any speed — and stops when the body stops.
+            if (_animator != null)
+            {
+                _animator.SetFloat(PhaseId, (float)(walked / _strideLength % 1d));
+                // Lingering at a waypoint: the distance stands still, and the body goes to its idle.
+                _animator.SetBool(WalkingId, walked > _lastWalked);
+            }
+
+            _lastWalked = walked;
         }
 
         /// <summary>Server: take the NPC off its schedule and shove it away from <paramref name="from"/>.</summary>

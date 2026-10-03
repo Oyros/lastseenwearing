@@ -33,9 +33,19 @@ namespace LastSeenWearing.Core.Crowd
         /// <summary>Position and heading (degrees, 0 = +Z, clockwise) at <paramref name="time"/> seconds since the crowd started.</summary>
         public GroundPoint Evaluate(double time, out float headingDegrees)
         {
+            return Evaluate(time, out headingDegrees, out _);
+        }
+
+        /// <summary>
+        /// As <see cref="Evaluate(double, out float)"/>, plus the metres walked since the crowd started —
+        /// the clock the walk cycle runs on (D-022): it advances only while walking, at walking speed.
+        /// </summary>
+        public GroundPoint Evaluate(double time, out float headingDegrees, out double distanceWalked)
+        {
             if (time <= 0d)
             {
                 headingDegrees = 0f;
+                distanceWalked = 0d;
                 return _spawn;
             }
 
@@ -50,7 +60,7 @@ namespace LastSeenWearing.Core.Crowd
                 _cursor++;
             }
 
-            return _legs[_cursor].At(time, _speed, out headingDegrees);
+            return _legs[_cursor].At(time, _speed, out headingDegrees, out distanceWalked);
         }
 
         private void ExtendTo(double time)
@@ -60,6 +70,7 @@ namespace LastSeenWearing.Core.Crowd
                 var index = _legs.Count;
                 var from = index == 0 ? _spawn : _legs[index - 1].Last;
                 var start = index == 0 ? 0d : _legs[index - 1].End;
+                var walkedBefore = index == 0 ? 0d : _legs[index - 1].WalkedAfter;
                 var leg = _plan.Route[index % _plan.Route.Length];
                 var to = _waypoints[leg.Waypoint].Offset(leg.OffsetX, leg.OffsetZ);
 
@@ -69,7 +80,7 @@ namespace LastSeenWearing.Core.Crowd
                     path = new[] { from, to };
                 }
 
-                _legs.Add(new Leg(path, start, _speed, leg.DwellSeconds));
+                _legs.Add(new Leg(path, start, walkedBefore, _speed, leg.DwellSeconds));
             }
         }
 
@@ -79,13 +90,17 @@ namespace LastSeenWearing.Core.Crowd
             private readonly double[] _distanceAt;
             private readonly double _walkEnd;
 
+            private readonly double _walkedBefore;
+
             public double Start { get; }
             public double End { get; }
+            public double WalkedAfter => _walkedBefore + _distanceAt[_distanceAt.Length - 1];
             public GroundPoint Last => _path[_path.Length - 1];
 
-            public Leg(GroundPoint[] path, double start, float speed, float dwell)
+            public Leg(GroundPoint[] path, double start, double walkedBefore, float speed, float dwell)
             {
                 _path = path;
+                _walkedBefore = walkedBefore;
                 _distanceAt = new double[path.Length];
                 for (var i = 1; i < path.Length; i++)
                 {
@@ -97,9 +112,10 @@ namespace LastSeenWearing.Core.Crowd
                 End = _walkEnd + dwell;
             }
 
-            public GroundPoint At(double time, float speed, out float headingDegrees)
+            public GroundPoint At(double time, float speed, out float headingDegrees, out double distanceWalked)
             {
                 var distance = Math.Min((time - Start) * speed, _distanceAt[_path.Length - 1]);
+                distanceWalked = _walkedBefore + distance;
                 var segment = 1;
                 while (segment < _path.Length - 1 && distance > _distanceAt[segment])
                 {

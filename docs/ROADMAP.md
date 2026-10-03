@@ -73,7 +73,7 @@ programme, sunset, case format, every tool in §07, replay, art, audio.
 | [x] P1.01 | Seeded crowd: 150 capsule NPCs wander a NavMesh from one seed | §04.1 | Same seed → same paths on two clients |
 | [x] P1.02 | Crowd netcode: host sends seed + only player-affected NPCs (D-005) | §04.1 | 7-min round, 2 clients, no visible desync; bandwidth logged |
 | [x] P1.03 | Crowd base body + armature + bone contract from the art track | ART_PIPELINE §3 | PL.08–PL.09 done; rig imports as Humanoid |
-| [ ] P1.04 | Base walk clips on the crowd rig | ART_PIPELINE, `LSW_WalkSystem.md` | PL.11 done; blend tree switches without foot sliding |
+| [x] P1.04 | Base walk clips on the crowd rig | ART_PIPELINE, `LSW_WalkSystem.md` | PL.11 done; blend tree switches without foot sliding |
 | [ ] P1.05 | Additive walk layers | `LSW_WalkSystem.md` §2 | PL.12 done; each layer reads at 0.5 weight |
 | [ ] P1.06 | Gait signature from seed (quantised buckets, max 2 traits) | §05 | 30 NPCs show distinct walks; log prints each signature in words |
 | [ ] P1.07 | Black-and-white low-res camera filter | §04.1 | Crowd recorded through it; 2 testers find a named walk in under 20 s (`docs/WALKTEST.md`) |
@@ -142,10 +142,11 @@ open Blender; never save a `.blend` unasked.
 | [x] PL.09 | Male builds as shape keys (`Build_Slim`, `Build_Heavy`); slim exaggerated | `Crowd/_Ref` M_Slim, M_Heavy | Three builds nameable in a CCTV lineup |
 | [ ] PL.10 | Run the walk test with 3–5 people; adjust layer strengths in `LSW_WalkSystem.md` | `docs/WALKTEST.md` | Results recorded; strengths updated |
 | [x] PL.11 | Walk base clips (Normal, Brisk, Stroll, Heavy) | `LSW_WalkSystem.md` §2 | No foot sliding in a blend test |
+| [x] PL.11a | `Idle_Stand` clip on the crowd rig: weight shift, breathing, same hip height as `Walk_Normal` at rest, loopable; exported in the body FBX and listed in its JSON like the walks | `LSW_WalkSystem.md` §2 | Requested by P1.04 (dwelling NPCs freeze mid-stride until it exists); blends from any walk phase without a pop |
 | [x] PL.12 | Walk additive layers (Limp L/R, Hunch, Sway, Bounce, ArmSwing ±) | `LSW_WalkSystem.md` §2 | Each readable at 0.5 weight in a 320×180 walking lineup |
 | [x] PL.13 | Head base + 2 hair shells (crew cut, long) | `LSW_Ref_HeadsHair.png` | Shells swap with no gap or clipping |
-| [ ] PL.14 | Tops: hooded raincoat, t-shirt, hoodie (hood as a thick bunch) | `LSW_Ref_Clothing.png` | No clipping in all builds and poses; hides the right regions |
-| [ ] PL.15 | Bottoms: trousers, shorts; hat: baseball cap | `LSW_Ref_Clothing.png`, `LSW_Ref_Accessories.png` | Brim readable from the CCTV angle |
+| [x] PL.14 | Tops: hooded raincoat, t-shirt, hoodie (hood as a thick bunch) | `LSW_Ref_Clothing.png` | No clipping in all builds and poses; hides the right regions |
+| [x] PL.15 | Bottoms: trousers, shorts; hat: baseball cap | `LSW_Ref_Clothing.png`, `LSW_Ref_Accessories.png` | Brim readable from the CCTV angle |
 | [ ] PL.16 | Prototype crowd review: 12 random combinations | LOOKDEV §2 | Every pair describable as different in ≤ 5 words |
 | [ ] PL.17 | Greybox animations: wallet lift, poster swap, tent enter/exit, arrest pair | — | Clips listed in the export JSON |
 | [ ] PL.18 | Patrol uniform on the crowd average body; radio on `SOCKET_Radio` with emissive talk light | `Patrol/_Ref` | Identifiable instantly among 12 crowd figures on camera |

@@ -25,6 +25,9 @@ namespace LastSeenWearing.Core.Config
         [Header("Pace")]
         [Tooltip("Metres per second. [PROVISIONAL] — the gait system (P1.04–P1.06) refines this.")]
         [SerializeField, Min(0f)] private float _walkSpeed = 1.3f;
+        [Tooltip("Metres per walk cycle (two steps). Art data, not tuning: it must equal the clips' stride " +
+                 "(LSW_WalkSystem.md §5) — a test checks it against the body's JSON. The cycle runs on distance (D-022).")]
+        [SerializeField, Min(0.01f)] private float _strideLength = 1f;
 
         [Header("Taken-over NPCs (D-005, D-019)")]
         [Tooltip("Pose updates per second for NPCs the server has taken over from their schedule.")]
@@ -40,6 +43,7 @@ namespace LastSeenWearing.Core.Config
         public float DwellMin => _dwellMin;
         public float DwellMax => _dwellMax;
         public float WalkSpeed => _walkSpeed;
+        public float StrideLength => _strideLength;
         public float TakenOverSyncRate => _takenOverSyncRate;
         public float BumpDistance => _bumpDistance;
         public float BumpDuration => _bumpDuration;

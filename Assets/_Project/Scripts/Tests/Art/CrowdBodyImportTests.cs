@@ -10,7 +10,8 @@ using Object = UnityEngine.Object;
 namespace LastSeenWearing.Tests.Art
 {
     /// <summary>
-    /// P1.03: the crowd body from the art track imports as a Humanoid that keeps the locked bone
+    /// P1.03 (P1.04: the rest is the bind pose, since the body now carries its clips): the crowd body
+    /// from the art track imports as a Humanoid that keeps the locked bone
     /// contract (ART_PIPELINE §3, D-018) and whose avatar reads the A-pose art correctly (D-020).
     /// </summary>
     public sealed class CrowdBodyImportTests
@@ -105,6 +106,7 @@ namespace LastSeenWearing.Tests.Art
         public void TheRestPoseReadsInsideEveryMuscleRangeAndSymmetrically()
         {
             var body = Object.Instantiate(Body);
+            HumanoidImportPostprocessor.ApplyRestPose(body);
             var handler = new HumanPoseHandler(Avatar, body.transform);
             try
             {
@@ -138,6 +140,7 @@ namespace LastSeenWearing.Tests.Art
         public void APoseSurvivesAHumanoidRoundTrip()
         {
             var body = Object.Instantiate(Body);
+            HumanoidImportPostprocessor.ApplyRestPose(body);
             var handler = new HumanPoseHandler(Avatar, body.transform);
             try
             {
@@ -155,6 +158,19 @@ namespace LastSeenWearing.Tests.Art
             {
                 handler.Dispose();
                 Object.DestroyImmediate(body);
+            }
+        }
+
+        [Test]
+        public void TheAvatarIsBuiltFromTheBindPoseNotTheNodes()
+        {
+            // The nodes may hold a clip's frame; the avatar's skeleton must hold the bind pose's rotations
+            // for every bone the T-pose leaves alone (spine, neck, head, shoulders).
+            var skeleton = ((ModelImporter)AssetImporter.GetAtPath(BodyPath)).humanDescription.skeleton.ToDictionary(b => b.name);
+            var rest = HumanoidImportPostprocessor.RestPose(Body, out _).ToDictionary(b => b.name);
+            foreach (var name in new[] { "Hips", "Spine", "Chest", "Neck", "Head", "Shoulder.L", "Shoulder.R" })
+            {
+                Assert.That(Quaternion.Angle(skeleton[name].rotation, rest[name].rotation), Is.LessThan(0.01f), name);
             }
         }
 

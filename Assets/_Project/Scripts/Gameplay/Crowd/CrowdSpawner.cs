@@ -308,7 +308,7 @@ namespace LastSeenWearing.Gameplay.Crowd
                 var schedule = new NpcSchedule(plans[i], waypoints, _config.WalkSpeed, (from, to) => FindPath(from, to, groundY));
                 _agents[i] = Instantiate(_agentPrefab, transform);
                 _agents[i].name = $"Npc_{i:000}";
-                _agents[i].Begin(i, schedule, groundY);
+                _agents[i].Begin(i, schedule, groundY, GaitPlanner.BaseWalkFor(seed, i), _config.StrideLength);
             }
         }
 

@@ -33,7 +33,7 @@ namespace LastSeenWearing.Editor.Import
     {
         // Unity reuses a cached import result unless this changes: bump it with every change to what
         // this postprocessor writes, or a model can come back from the cache imported by the old rules.
-        private const uint Version = 1;
+        private const uint Version = 3; // 2: bodies import their clips. 3: rest pose from the bind matrices
 
         public override uint GetVersion()
         {
@@ -111,7 +111,8 @@ namespace LastSeenWearing.Editor.Import
             else
             {
                 context.DependsOnSourceAsset(Path.ChangeExtension(assetPath, ".json"));
-                importer.importAnimation = false;
+                // A body that carries its clips (PL.11+) imports them; BodyClipPostprocessor sets each from the JSON.
+                importer.importAnimation = BodyClipPostprocessor.HasClips(assetPath);
                 importer.materialImportMode = ModelImporterMaterialImportMode.ImportViaMaterialDescription;
                 importer.importBlendShapes = true;
                 importer.importNormals = ModelImporterNormals.Import;
@@ -221,26 +222,90 @@ namespace LastSeenWearing.Editor.Import
             model.SaveAndReimport();
         }
 
-        // Every transform of the imported model at its rest pose — the file's own A-pose — and
-        // each one's parent name, which the T-pose needs to work in world space.
-        private static SkeletonBone[] RestPose(GameObject root, out string[] parents)
+        /// <summary>
+        /// Every transform of the model at its rest pose — the file's own A-pose — and each one's parent
+        /// name, which the T-pose needs to work in world space. A skinned bone's rest is its <em>bind</em>
+        /// pose, read from the meshes' bind matrices, never the node's transform: a body exported with its
+        /// clips (PL.11+) leaves the nodes at whatever frame Blender was on — an arm swing put the hands
+        /// 34–43 cm off rest in P1.04 (D-022; Borrowed Crown D-059). Unskinned transforms (Root, sockets,
+        /// mesh nodes, a clip file's bones) keep their node transform.
+        /// </summary>
+        public static SkeletonBone[] RestPose(GameObject root, out string[] parents)
         {
+            var bind = BindPose(root);
             var bones = new List<SkeletonBone>();
             var parentNames = new List<string>();
             foreach (var transform in root.GetComponentsInChildren<Transform>(true))
             {
                 parentNames.Add(transform == root.transform || transform.parent == null ? null : transform.parent.name);
-                bones.Add(new SkeletonBone
+                var bone = new SkeletonBone
                 {
                     name = transform.name,
                     position = transform.localPosition,
                     rotation = transform.localRotation,
                     scale = transform.localScale,
-                });
+                };
+
+                if (transform != root.transform && bind.TryGetValue(transform, out var world))
+                {
+                    var parentWorld = bind.TryGetValue(transform.parent, out var boundParent)
+                        ? boundParent
+                        : root.transform.worldToLocalMatrix * transform.parent.localToWorldMatrix;
+                    var local = parentWorld.inverse * world;
+                    bone.position = local.GetColumn(3);
+                    bone.rotation = local.rotation;
+                    bone.scale = local.lossyScale;
+                }
+
+                bones.Add(bone);
             }
 
             parents = parentNames.ToArray();
             return bones.ToArray();
+        }
+
+        /// <summary>Puts every skinned bone of <paramref name="root"/> at its bind pose (tests measure the rest with it).</summary>
+        public static void ApplyRestPose(GameObject root)
+        {
+            var rest = RestPose(root, out _).ToDictionary(b => b.name);
+            foreach (var transform in root.GetComponentsInChildren<Transform>(true))
+            {
+                if (transform != root.transform && rest.TryGetValue(transform.name, out var bone))
+                {
+                    transform.localPosition = bone.position;
+                    transform.localRotation = bone.rotation;
+                    transform.localScale = bone.scale;
+                }
+            }
+        }
+
+        // Each skinned bone's bind matrix in the root's space: the inverse bind pose, taken through the
+        // renderer that holds it. Every renderer of one rig agrees on it.
+        private static Dictionary<Transform, Matrix4x4> BindPose(GameObject root)
+        {
+            var bind = new Dictionary<Transform, Matrix4x4>();
+            var toRoot = root.transform.worldToLocalMatrix;
+            foreach (var renderer in root.GetComponentsInChildren<SkinnedMeshRenderer>(true))
+            {
+                var mesh = renderer.sharedMesh;
+                if (mesh == null)
+                {
+                    continue;
+                }
+
+                var poses = mesh.bindposes;
+                var rendererToRoot = toRoot * renderer.transform.localToWorldMatrix;
+                for (var i = 0; i < renderer.bones.Length && i < poses.Length; i++)
+                {
+                    var bone = renderer.bones[i];
+                    if (bone != null && !bind.ContainsKey(bone))
+                    {
+                        bind[bone] = rendererToRoot * poses[i].inverse;
+                    }
+                }
+            }
+
+            return bind;
         }
 
         // The clip's own bone lengths with the rest rotations — and the hips' rest position — of the

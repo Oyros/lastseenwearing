@@ -70,6 +70,50 @@
  ],
  "meshes": [
   {
+   "name": "LSW_Crowd_Bottom_Shorts_M",
+   "base": "LSW_Crowd_Bottom_Shorts_M",
+   "lod": 0,
+   "tris": 184,
+   "materials": [
+    "MAT_LSW_ClothOliveLight"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "bottom",
+   "variant": "Shorts",
+   "hides": [
+    "Pelvis"
+   ],
+   "double_sided": true,
+   "region": null,
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Bottom_Trousers_M",
+   "base": "LSW_Crowd_Bottom_Trousers_M",
+   "lod": 0,
+   "tris": 408,
+   "materials": [
+    "MAT_LSW_ClothDenimDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "bottom",
+   "variant": "Trousers",
+   "hides": [
+    "Pelvis",
+    "Thigh",
+    "Shin"
+   ],
+   "double_sided": true,
+   "region": null,
+   "bone": null
+  },
+  {
    "name": "LSW_Crowd_Foot_M.L",
    "base": "LSW_Crowd_Foot_M.L",
    "lod": 0,
@@ -84,6 +128,8 @@
    "slot": "body",
    "variant": null,
    "hides": [],
+   "double_sided": false,
+   "region": "Foot",
    "bone": null
   },
   {
@@ -101,6 +147,8 @@
    "slot": "body",
    "variant": null,
    "hides": [],
+   "double_sided": false,
+   "region": "Foot",
    "bone": null
   },
   {
@@ -118,6 +166,8 @@
    "slot": "body",
    "variant": null,
    "hides": [],
+   "double_sided": false,
+   "region": "Forearm",
    "bone": null
   },
   {
@@ -135,6 +185,46 @@
    "slot": "body",
    "variant": null,
    "hides": [],
+   "double_sided": false,
+   "region": "Forearm",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hair_Crew_M",
+   "base": "LSW_Crowd_Hair_Crew_M",
+   "lod": 0,
+   "tris": 210,
+   "materials": [
+    "MAT_LSW_HairDarkBrown"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "hair",
+   "variant": "Crew",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hair_Long_M",
+   "base": "LSW_Crowd_Hair_Long_M",
+   "lod": 0,
+   "tris": 364,
+   "materials": [
+    "MAT_LSW_HairBrown"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "hair",
+   "variant": "Long",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
    "bone": null
   },
   {
@@ -152,6 +242,8 @@
    "slot": "body",
    "variant": null,
    "hides": [],
+   "double_sided": false,
+   "region": "Hand",
    "bone": null
   },
   {
@@ -169,13 +261,34 @@
    "slot": "body",
    "variant": null,
    "hides": [],
+   "double_sided": false,
+   "region": "Hand",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hat_Cap_M",
+   "base": "LSW_Crowd_Hat_Cap_M",
+   "lod": 0,
+   "tris": 134,
+   "materials": [
+    "MAT_LSW_ClothRedDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "hat",
+   "variant": "Cap",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
    "bone": null
   },
   {
    "name": "LSW_Crowd_Head_M",
    "base": "LSW_Crowd_Head_M",
    "lod": 0,
-   "tris": 238,
+   "tris": 388,
    "materials": [
     "MAT_LSW_SkinMid"
    ],
@@ -186,6 +299,27 @@
    "slot": "body",
    "variant": null,
    "hides": [],
+   "double_sided": false,
+   "region": "Head",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Pelvis_M",
+   "base": "LSW_Crowd_Pelvis_M",
+   "lod": 0,
+   "tris": 28,
+   "materials": [
+    "MAT_LSW_SkinMid"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "body",
+   "variant": null,
+   "hides": [],
+   "double_sided": false,
+   "region": "Pelvis",
    "bone": null
   },
   {
@@ -203,6 +337,8 @@
    "slot": "body",
    "variant": null,
    "hides": [],
+   "double_sided": false,
+   "region": "Shin",
    "bone": null
   },
   {
@@ -220,6 +356,8 @@
    "slot": "body",
    "variant": null,
    "hides": [],
+   "double_sided": false,
+   "region": "Shin",
    "bone": null
   },
   {
@@ -237,6 +375,8 @@
    "slot": "body",
    "variant": null,
    "hides": [],
+   "double_sided": false,
+   "region": "Thigh",
    "bone": null
   },
   {
@@ -254,13 +394,83 @@
    "slot": "body",
    "variant": null,
    "hides": [],
+   "double_sided": false,
+   "region": "Thigh",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Top_Hoodie_M",
+   "base": "LSW_Crowd_Top_Hoodie_M",
+   "lod": 0,
+   "tris": 508,
+   "materials": [
+    "MAT_LSW_ClothBlueDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "top",
+   "variant": "Hoodie",
+   "hides": [
+    "Torso",
+    "UpperArm",
+    "Forearm"
+   ],
+   "double_sided": true,
+   "region": null,
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Top_Raincoat_M",
+   "base": "LSW_Crowd_Top_Raincoat_M",
+   "lod": 0,
+   "tris": 570,
+   "materials": [
+    "MAT_LSW_ClothMustardLight"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "top",
+   "variant": "Raincoat",
+   "hides": [
+    "Torso",
+    "UpperArm",
+    "Forearm",
+    "Hair"
+   ],
+   "double_sided": true,
+   "region": null,
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Top_TShirt_M",
+   "base": "LSW_Crowd_Top_TShirt_M",
+   "lod": 0,
+   "tris": 304,
+   "materials": [
+    "MAT_LSW_ClothRedLight"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "top",
+   "variant": "TShirt",
+   "hides": [
+    "Torso"
+   ],
+   "double_sided": true,
+   "region": null,
    "bone": null
   },
   {
    "name": "LSW_Crowd_Torso_M",
    "base": "LSW_Crowd_Torso_M",
    "lod": 0,
-   "tris": 252,
+   "tris": 208,
    "materials": [
     "MAT_LSW_SkinMid"
    ],
@@ -271,6 +481,8 @@
    "slot": "body",
    "variant": null,
    "hides": [],
+   "double_sided": false,
+   "region": "Torso",
    "bone": null
   },
   {
@@ -288,6 +500,8 @@
    "slot": "body",
    "variant": null,
    "hides": [],
+   "double_sided": false,
+   "region": "UpperArm",
    "bone": null
   },
   {
@@ -305,17 +519,237 @@
    "slot": "body",
    "variant": null,
    "hides": [],
+   "double_sided": false,
+   "region": "UpperArm",
    "bone": null
   }
  ],
- "clips": [],
+ "clips": [
+  {
+   "name": "Add_ArmSwing_Big",
+   "start": 0,
+   "end": 40,
+   "markers": {
+    "contact_L": 0,
+    "contact_R": 16,
+    "additive_reference": 40
+   },
+   "contacts": [
+    0,
+    16
+   ],
+   "loop_end": 32,
+   "additive": true,
+   "additive_base": "Walk_Normal",
+   "additive_reference_frame": 40,
+   "speed": null
+  },
+  {
+   "name": "Add_ArmSwing_Stiff",
+   "start": 0,
+   "end": 40,
+   "markers": {
+    "contact_L": 0,
+    "contact_R": 16,
+    "additive_reference": 40
+   },
+   "contacts": [
+    0,
+    16
+   ],
+   "loop_end": 32,
+   "additive": true,
+   "additive_base": "Walk_Normal",
+   "additive_reference_frame": 40,
+   "speed": null
+  },
+  {
+   "name": "Add_Bounce",
+   "start": 0,
+   "end": 40,
+   "markers": {
+    "contact_L": 0,
+    "contact_R": 16,
+    "additive_reference": 40
+   },
+   "contacts": [
+    0,
+    16
+   ],
+   "loop_end": 32,
+   "additive": true,
+   "additive_base": "Walk_Normal",
+   "additive_reference_frame": 40,
+   "speed": null
+  },
+  {
+   "name": "Add_Hunch",
+   "start": 0,
+   "end": 40,
+   "markers": {
+    "contact_L": 0,
+    "contact_R": 16,
+    "additive_reference": 40
+   },
+   "contacts": [
+    0,
+    16
+   ],
+   "loop_end": 32,
+   "additive": true,
+   "additive_base": "Walk_Normal",
+   "additive_reference_frame": 40,
+   "speed": null
+  },
+  {
+   "name": "Add_Limp_L",
+   "start": 0,
+   "end": 40,
+   "markers": {
+    "contact_L": 0,
+    "contact_R": 16,
+    "additive_reference": 40
+   },
+   "contacts": [
+    0,
+    16
+   ],
+   "loop_end": 32,
+   "additive": true,
+   "additive_base": "Walk_Normal",
+   "additive_reference_frame": 40,
+   "speed": null
+  },
+  {
+   "name": "Add_Limp_R",
+   "start": 0,
+   "end": 40,
+   "markers": {
+    "contact_L": 0,
+    "contact_R": 16,
+    "additive_reference": 40
+   },
+   "contacts": [
+    0,
+    16
+   ],
+   "loop_end": 32,
+   "additive": true,
+   "additive_base": "Walk_Normal",
+   "additive_reference_frame": 40,
+   "speed": null
+  },
+  {
+   "name": "Add_Sway",
+   "start": 0,
+   "end": 40,
+   "markers": {
+    "contact_L": 0,
+    "contact_R": 16,
+    "additive_reference": 40
+   },
+   "contacts": [
+    0,
+    16
+   ],
+   "loop_end": 32,
+   "additive": true,
+   "additive_base": "Walk_Normal",
+   "additive_reference_frame": 40,
+   "speed": null
+  },
+  {
+   "name": "Idle_Stand",
+   "start": 0,
+   "end": 120,
+   "markers": {},
+   "contacts": [],
+   "loop_end": 120,
+   "additive": false,
+   "additive_base": null,
+   "additive_reference_frame": null,
+   "speed": 0.0
+  },
+  {
+   "name": "Walk_Brisk",
+   "start": 0,
+   "end": 32,
+   "markers": {
+    "contact_L": 0,
+    "contact_R": 16
+   },
+   "contacts": [
+    0,
+    16
+   ],
+   "loop_end": 32,
+   "additive": false,
+   "additive_base": null,
+   "additive_reference_frame": null,
+   "speed": 0.9375
+  },
+  {
+   "name": "Walk_Heavy",
+   "start": 0,
+   "end": 32,
+   "markers": {
+    "contact_L": 0,
+    "contact_R": 16
+   },
+   "contacts": [
+    0,
+    16
+   ],
+   "loop_end": 32,
+   "additive": false,
+   "additive_base": null,
+   "additive_reference_frame": null,
+   "speed": 0.9375
+  },
+  {
+   "name": "Walk_Normal",
+   "start": 0,
+   "end": 32,
+   "markers": {
+    "contact_L": 0,
+    "contact_R": 16
+   },
+   "contacts": [
+    0,
+    16
+   ],
+   "loop_end": 32,
+   "additive": false,
+   "additive_base": null,
+   "additive_reference_frame": null,
+   "speed": 0.9375
+  },
+  {
+   "name": "Walk_Stroll",
+   "start": 0,
+   "end": 32,
+   "markers": {
+    "contact_L": 0,
+    "contact_R": 16
+   },
+   "contacts": [
+    0,
+    16
+   ],
+   "loop_end": 32,
+   "additive": false,
+   "additive_base": null,
+   "additive_reference_frame": null,
+   "speed": 0.9375
+  }
+ ],
  "verify": {
   "limb_nodes": 68,
-  "skin_markers": 16,
-  "bytes": 658860,
+  "skin_markers": 25,
+  "bytes": 4051916,
   "ok": true
  },
- "exported": "2026-10-03 09:43:14",
+ "exported": "2026-10-03 13:04:32",
  "blend": "(unsaved)",
  "exporter": "lsw_export v1",
  "axes": "Unity: -Z forward, Y up, metres"
