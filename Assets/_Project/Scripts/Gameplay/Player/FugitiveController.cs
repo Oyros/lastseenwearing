@@ -23,6 +23,9 @@ namespace LastSeenWearing.Gameplay.Player
         // The fugitive's slot among the characters outside the crowd (GaitPlanner.CharacterSignature).
         private const int GaitSlot = 0;
 
+        // The local fugitive's root carries this tag so its own collider never blocks its camera.
+        private const string SelfTag = "Player";
+
         [SerializeField] private MovementConfig _movement;
         [SerializeField] private CameraConfig _camera;
         [SerializeField] private CrowdConfig _crowd;
@@ -72,6 +75,7 @@ namespace LastSeenWearing.Gameplay.Player
                 _controls = new LastSeenWearingControls();
                 _controls.Field.Enable();
                 _yaw = transform.eulerAngles.y;
+                gameObject.tag = SelfTag;
                 CreateCamera();
             }
             else
@@ -215,10 +219,12 @@ namespace LastSeenWearing.Gameplay.Player
             follow.VerticalArmLength = 0f;
             follow.Damping = Vector3.one * _camera.ThirdPersonDamping;
             // Layout A's stalls and walls (P1.17): pull the camera in rather than clip through them. Characters
-            // are triggers on their own layer and never block it.
+            // are triggers on their own layer and never block it; the body's own controller is ignored by tag,
+            // or the camera would pull into the fugitive's head.
             var obstacles = follow.AvoidObstacles;
             obstacles.Enabled = true;
             obstacles.CollisionFilter = LayerMask.GetMask("Default");
+            obstacles.IgnoreTag = SelfTag;
             obstacles.CameraRadius = _camera.ThirdPersonCollisionRadius;
             follow.AvoidObstacles = obstacles;
         }

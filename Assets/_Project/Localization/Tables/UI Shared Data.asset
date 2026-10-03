@@ -119,6 +119,10 @@ MonoBehaviour:
     m_Key: ui.watcher.switching
     m_Metadata:
       m_Items: []
+  - m_Id: 181227662716928
+    m_Key: ui.watcher.camera_zoom
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

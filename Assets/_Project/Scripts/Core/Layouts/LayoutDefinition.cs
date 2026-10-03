@@ -61,6 +61,8 @@ namespace LastSeenWearing.Core.Layouts
         [SerializeField] private string _id;
         [SerializeField] private string _title;
         [SerializeField] private CameraSpot[] _cameras = Array.Empty<CameraSpot>();
+        [Tooltip("Index into the cameras of the one that pans and zooms (GDD §04.1, P1.17a).")]
+        [SerializeField] private int _zoomCamera;
         [SerializeField] private TargetSpot[] _targets = Array.Empty<TargetSpot>();
         [SerializeField] private Spot[] _tents = Array.Empty<Spot>();
         [SerializeField] private Spot[] _exits = Array.Empty<Spot>();
@@ -71,6 +73,7 @@ namespace LastSeenWearing.Core.Layouts
         public string Id => _id;
         public string Title => _title;
         public CameraSpot[] Cameras => _cameras;
+        public int ZoomCamera => _zoomCamera;
         public TargetSpot[] Targets => _targets;
         public Spot[] Tents => _tents;
         public Spot[] Exits => _exits;
@@ -78,12 +81,13 @@ namespace LastSeenWearing.Core.Layouts
         public Area Bounds => _bounds;
 
         /// <summary>Editor import only: replaces everything from the art's JSON.</summary>
-        public void Set(string id, string title, CameraSpot[] cameras, TargetSpot[] targets, Spot[] tents, Spot[] exits,
-            Area[] crowdAreas, Area bounds)
+        public void Set(string id, string title, CameraSpot[] cameras, int zoomCamera, TargetSpot[] targets, Spot[] tents,
+            Spot[] exits, Area[] crowdAreas, Area bounds)
         {
             _id = id;
             _title = title;
             _cameras = cameras;
+            _zoomCamera = zoomCamera;
             _targets = targets;
             _tents = tents;
             _exits = exits;

@@ -475,3 +475,19 @@ re-import. Blender cameras imported as Unity cameras drew over every player's vi
 new layout per round come with the case format. The scene copies the sandbox's systems — two scenes to keep in
 step until systems move to a shared scene or prefab.
 **Reversing.** Cheap for the importer; the scene split is the part to revisit when B–D arrive.
+
+---
+
+### D-036 — One zoom camera per layout, aimed locally and slowly
+**Decision.** Each layout has one zoom camera — layout data (`LayoutDefinition.ZoomCamera`, from the JSON's
+`"zoom": true`; until the art marks one, PL.30, the first camera and a warning), flagged on its `CctvCamera`.
+While a monitor shows it, the Watcher's Pan and Zoom aim it (`Core/Watcher/ZoomPan`): yaw/pitch within a
+range around its mount, magnification up to the narrowest view, the camera following its target no faster than
+`WatcherConfig`'s rates (GDD §04.1: *slow* pan + zoom), and panning finer the further in it is. The wheel asks
+for a step per notch, triggers and stick for a rate. The aim is the Watcher's own client's, like the switch
+delay (D-031). The feed keeps its resolution, so zoom is real magnification: a figure at layout A's far-only
+centre goes from ~17 px to ~73 px tall.
+**Why.** LAYOUTS.md: without zoom the watcher cannot tell anyone apart in the far-only ground (half of A, two
+thirds of C and D). Slow rates keep zooming a decision — while zoomed in, the rest of the camera's ground is
+out of view.
+**Reversing.** Cheap: rates and limits are config; the camera choice is data.

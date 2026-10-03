@@ -20,7 +20,8 @@ namespace LastSeenWearing.UI.Watcher
     /// screen only, from Briefing on. A number key (or a click on the list) sends a camera to the left monitor;
     /// with SecondMonitor held, to the right one. Switching shows static for <see cref="WatcherConfig"/>'s
     /// switch time (<see cref="FeedSwitcher"/>). Only the cameras on a monitor render; the Watcher has no body,
-    /// so the main camera is off while the wall is up. P1 placeholder look, built in code like <c>RoundHud</c>.
+    /// so the main camera is off while the wall is up. Pan and zoom aim the layout's zoom camera while it is on a
+    /// monitor (<see cref="ZoomPan"/>, P1.17a). P1 placeholder look, built in code like <c>RoundHud</c>.
     /// </summary>
     public sealed class WatcherWall : MonoBehaviour
     {
@@ -56,15 +57,28 @@ namespace LastSeenWearing.UI.Watcher
         private Camera _mainCamera;
         private bool _up;
 
+        // The layout's zoom camera (P1.17a): its mount, and the aim the Watcher moves it to.
+        private int _zoomIndex = -1;
+        private Quaternion _zoomMount;
+        private ZoomPan _zoomPan;
+
         private void Awake()
         {
             _switcher = new FeedSwitcher(_config.FeedSwitchSeconds, _cameras.Length);
             _controls = new LastSeenWearingControls();
             _static = new Texture2D(StaticWidth, StaticHeight, TextureFormat.RGBA32, false) { filterMode = FilterMode.Point };
             _staticPixels = new Color32[StaticWidth * StaticHeight];
-            foreach (var feedCamera in _cameras)
+            for (var c = 0; c < _cameras.Length; c++)
             {
-                feedCamera.GetComponent<Camera>().enabled = false; // nothing renders until a monitor shows it
+                var feedCamera = _cameras[c].GetComponent<Camera>();
+                feedCamera.enabled = false; // nothing renders until a monitor shows it
+                if (_cameras[c].Zoomable)
+                {
+                    _zoomIndex = c;
+                    _zoomMount = feedCamera.transform.rotation;
+                    _zoomPan = new ZoomPan(feedCamera.fieldOfView, _config.ZoomMinFieldOfView, _config.PanYawRange,
+                        _config.PanPitchRange, _config.PanDegreesPerSecond, _config.ZoomOctavesPerSecond);
+                }
             }
 
             BuildFrame();
@@ -91,6 +105,7 @@ namespace LastSeenWearing.UI.Watcher
             }
 
             ReadInput();
+            AimZoomCamera(Time.deltaTime);
             Refresh(Time.timeAsDouble);
         }
 
@@ -138,6 +153,49 @@ namespace LastSeenWearing.UI.Watcher
             Choose(cameraIndex);
         }
 
+        // Pan and zoom act on the zoom camera while a monitor shows (or is switching to) it.
+        private void AimZoomCamera(float deltaTime)
+        {
+            if (_zoomPan == null)
+            {
+                return;
+            }
+
+            var watcher = _controls.Watcher;
+            if (_switcher.Target(0) == _zoomIndex || _switcher.Target(1) == _zoomIndex)
+            {
+                var pan = watcher.Pan.ReadValue<Vector2>();
+                var zoom = watcher.Zoom.ReadValue<float>();
+                if (watcher.Pan.activeControl?.device is Mouse)
+                {
+                    _zoomPan.PanBy(pan.x * _config.PanDegreesPerPixel, pan.y * _config.PanDegreesPerPixel);
+                }
+                else
+                {
+                    var step = _config.PanDegreesPerSecond * deltaTime;
+                    _zoomPan.PanBy(pan.x * step, pan.y * step);
+                }
+
+                if (watcher.Zoom.activeControl?.device is Mouse)
+                {
+                    if (zoom != 0f)
+                    {
+                        _zoomPan.ZoomBy(Mathf.Sign(zoom) * _config.ZoomOctavesPerNotch); // one notch, one step
+                    }
+                }
+                else
+                {
+                    _zoomPan.ZoomBy(zoom * _config.ZoomOctavesPerSecond * deltaTime);
+                }
+            }
+
+            _zoomPan.Advance(deltaTime);
+            var camera = _cameras[_zoomIndex].GetComponent<Camera>();
+            camera.transform.rotation = Quaternion.AngleAxis(_zoomPan.Yaw, Vector3.up) * _zoomMount
+                                        * Quaternion.AngleAxis(-_zoomPan.Pitch, Vector3.right);
+            camera.fieldOfView = _zoomPan.FieldOfView;
+        }
+
         private void Choose(int cameraIndex)
         {
             var monitor = _controls.Watcher.SecondMonitor.IsPressed() ? 1 : 0;
@@ -160,9 +218,10 @@ namespace LastSeenWearing.UI.Watcher
                     monitor.Feed.Show(_cameras[showing]); // the new camera's own filter (P1.14)
                 }
 
-                monitor.Label.text = _switcher.Target(m) == FeedSwitcher.NoCamera
-                    ? string.Empty
-                    : Text("ui.watcher.camera_n", _switcher.Target(m) + 1);
+                var target = _switcher.Target(m);
+                monitor.Label.text = target == FeedSwitcher.NoCamera ? string.Empty
+                    : target == _zoomIndex ? Text("ui.watcher.camera_zoom", target + 1, _zoomPan.Magnification)
+                    : Text("ui.watcher.camera_n", target + 1);
             }
 
             // Render only what a monitor shows.
