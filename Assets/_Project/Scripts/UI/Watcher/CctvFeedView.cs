@@ -60,10 +60,19 @@ namespace LastSeenWearing.UI.Watcher
             }
         }
 
+        /// <summary>The CCTV look's material, for views built in code (the Watcher's wall).</summary>
+        public Material FeedMaterial
+        {
+            set
+            {
+                _feedMaterial = value;
+                Apply();
+            }
+        }
+
         private void Awake()
         {
             _image = GetComponent<RawImage>();
-            _material = new Material(_feedMaterial) { name = $"{_feedMaterial.name} ({name})" };
         }
 
         private void OnEnable()
@@ -73,14 +82,22 @@ namespace LastSeenWearing.UI.Watcher
 
         private void OnDestroy()
         {
-            Destroy(_material);
+            if (_material != null)
+            {
+                Destroy(_material);
+            }
         }
 
         private void Apply()
         {
-            if (_image == null || _camera == null)
+            if (_image == null || _camera == null || _feedMaterial == null)
             {
                 return;
+            }
+
+            if (_material == null)
+            {
+                _material = new Material(_feedMaterial) { name = $"{_feedMaterial.name} ({name})" };
             }
 
             var profile = _camera.Profile;

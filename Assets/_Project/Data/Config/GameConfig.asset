@@ -17,3 +17,4 @@ MonoBehaviour:
   _crowd: {fileID: 11400000, guid: 121a58c0c85683542b4069daa63b0841, type: 2}
   _round: {fileID: 11400000, guid: 42e07275cc864c748ac925146444ed8a, type: 2}
   _camera: {fileID: 11400000, guid: 37291f18641088948bb382695dc838e8, type: 2}
+  _watcher: {fileID: 11400000, guid: 37202be0176ede24aa5781b983117f78, type: 2}

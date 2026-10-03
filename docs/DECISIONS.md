@@ -383,3 +383,18 @@ act on. Patrol sprint 4.2 m/s beats the fugitive's 3.4 (GDD §03: the patrol is 
 at Unity's vertical 90° the arms read too big and high; at horizontal 90° they match the review sheets.
 **Open.** The team found the arms' idle and walk poses poor (P1.12 play test) — PL.19b asks art to redo them.
 **Reversing.** Cheap: the FOV convention is one line; the eye-bone seat is one method.
+
+---
+
+### D-031 — The camera wall: a local switch delay, and only shown cameras render
+**Decision.** The Watcher's wall (`UI/Watcher/WatcherWall`) shows two monitors and the camera list on the
+Watcher's screen only. `Core/Watcher/FeedSwitcher` decides what each monitor shows: switching to another
+camera costs `WatcherConfig.FeedSwitchSeconds` (1.5 s, provisional) of static; the camera already shown or
+already coming is free; a new choice mid-switch restarts the wait. This state is the Watcher's own client's —
+not on the server-truth list (CLAUDE.md rule 3), never sent. Only cameras on a monitor render; with the wall
+up the main camera is off (the Watcher has no body). Four placeholder corner cameras stand in `Sandbox_Crowd`
+until layout A's (P1.17).
+**Why.** What the Watcher looks at changes no one else's game, so a server round trip would only add lag.
+Rendering only the shown feeds keeps the CCTV cost at two cameras however many a layout has.
+**Reversing.** Cheap: if switching ever needs to be seen by others (a "camera moved" tell for the fugitive),
+send the selection by RPC and keep `FeedSwitcher` as is.

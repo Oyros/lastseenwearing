@@ -121,6 +121,15 @@ MonoBehaviour:
     m_Localized: Start the case
     m_Metadata:
       m_Items: []
+  - m_Id: 101783560368128
+    m_Localized: Cam {0}
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
+  - m_Id: 101783640059904
+    m_Localized: "Connecting\u2026"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
@@ -135,3 +144,4 @@ MonoBehaviour:
         - id: 90279737929732
         - id: 90279737929734
         - id: 90279737929735
+        - id: 101783560368128

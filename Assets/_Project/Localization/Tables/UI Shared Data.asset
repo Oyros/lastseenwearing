@@ -111,6 +111,14 @@ MonoBehaviour:
     m_Key: ui.lobby.button.start_case
     m_Metadata:
       m_Items: []
+  - m_Id: 101783560368128
+    m_Key: ui.watcher.camera_n
+    m_Metadata:
+      m_Items: []
+  - m_Id: 101783640059904
+    m_Key: ui.watcher.switching
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

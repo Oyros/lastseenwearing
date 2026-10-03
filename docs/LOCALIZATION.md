@@ -110,7 +110,8 @@ Assets/TextMesh Pro/                         (TMP Essential Resources)
 ```
 
 Keys so far: `ui.menu.title`; `ui.lobby.*` (roster panel, P1.09 — `player`, `player_you`, `row` are Smart);
-`role.<watcher|patrol|plainclothes|dog|fugitive>.name`. `Festival` is empty.
+`role.<watcher|patrol|plainclothes|dog|fugitive>.name`; `ui.round.*` (P1.10); `ui.watcher.camera_n` (Smart),
+`ui.watcher.switching` (P1.13). `Festival`: `festival.event.*` (P1.10).
 
 Tables load **asynchronously**: a `LocalizeStringEvent` fills its text a frame or two after start,
 so nothing may read a localized string synchronously on the first frame. Player builds must build

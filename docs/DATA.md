@@ -54,7 +54,7 @@ Values below are the GDD's first numbers; P1 tunes them.
 | `CompositeConfig` | Errors per composite 1–2; reveal order per round (build+height, hair, walk, then the rest — D-008); witness-confidence levels | §04.1 |
 | `CaptureConfig` | Heat sources and rates (stop, running nearby, looking at cameras); full-heat threshold; stop 3 s; complaints per lost cuff 3; cuffs per round 3; wrong-arrest time bonus and panic radius | §04.3 |
 | `FugitiveConfig` | Target durations — open 2 s, social 4 s, fixed 3 s, hidden 5 s; targets on map 5, needed 3; exits 2–3; fake walk ≤ 20 s; NPC control 10 s, 1/round; camera panel 3 s | §04.4, §07 |
-| `WatcherConfig` | Rewind 30 s; feed switch time; zoom range and pan speed; announcements 1/round; festival-control anger cost | §04.1, §07 |
+| `WatcherConfig` | **In use (P1.13): feed switch 1.5 s [PROVISIONAL].** Later: rewind 30 s; feed switch time; zoom range and pan speed; announcements 1/round; festival-control anger cost | §04.1, §07 |
 | `DisguiseConfig` | Tent uses per round 1; masked-NPC cluster radius at the mask stall | §05 |
 | `DogConfig` | Scent trail 10 s; bark radius, stamina cost, NPC anger; move speed | §03 |
 | `RadioConfig` | Noise by distance to the stage; proximity leak radius; talk-light | §04.2 |
