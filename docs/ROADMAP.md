@@ -46,7 +46,7 @@ instances join one lobby.
 | [x] P0.07 | Localization settings, `en` locale, tables `UI`, `Roles`, `Festival` | A test key renders through TMP |
 | [x] P0.08 | Test runner: one passing edit-mode test in `LastSeenWearing.Tests` | Test runner green |
 | [x] P0.09 | Windows build script (Editor menu) | One click produces a runnable `Builds/` exe |
-| [ ] P0.10 | NGO + Facepunch transport: host / join a Steam lobby (dev app id 480), Multiplayer Play Mode for a second editor player | Two instances in one lobby; each sees the other's capsule move — *local path verified (editor + MPPM, D-016); Steam check with two accounts open* |
+| [x] P0.10 | NGO + Facepunch transport: host / join a Steam lobby (dev app id 480), Multiplayer Play Mode for a second editor player | Two instances in one lobby; each sees the other's capsule move |
 
 **Exit.** Clean open, clean build, green tests, two players connected, first commit pushed.
 
