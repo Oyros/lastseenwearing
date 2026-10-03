@@ -164,6 +164,7 @@ open Blender; never save a `.blend` unasked.
 | [x] PL.20 | Greybox kit (16 pieces) on a 1 m grid | `Festival/_Ref` | `lsw_check` 15/15 pass; CCTV props lineup (D-013) |
 | [x] PL.21 | Layouts A–D with 5 targets, tents, exits, 4 cameras; coverage maps | `docs/LAYOUTS.md` | Coverage stats and target visibility recorded |
 | [x] PL.22 | Export greybox kit and layouts to Unity (art side done 2026-10-03: `_Export/Festival/Layouts/`; open layout A in Unity to close) | — | PL.04 done; layout A opens in Unity at scale |
+| [ ] PL.22a | Mark one camera per layout as the zoom camera in the layout JSON: `"zoom": true` on that camera (`lsw_layout_export`); pick it from the coverage map — the camera that sees most "far only" ground and is not the worn one | LAYOUTS.md, D-036 | Requested by P1.17a — until then Unity zooms each layout's first camera and warns |
 
 ### Track D — full crowd, dog, festival (v1)
 
@@ -176,7 +177,6 @@ open Blender; never save a `.blend` unasked.
 | [x] PL.27 | Bottoms complete: skirt, jeans (rolled cuffs / wide leg), overalls | `LSW_Ref_Clothing.png` | Bottoms lineup passes |
 | [x] PL.28 | Hats complete: straw (wide), beanie (tall), bucket (wider brim), paper crown | `LSW_Ref_Accessories.png` | Hats lineup from the CCTV angle passes |
 | [x] PL.29 | Masks (fox, half, cartoon) on `SOCKET_Face`, light/dark — `LSW_Crowd_Mask_Fox/Half/Cartoon_M/_F`, slot `face`, slot 0 = mask value from `mask_for_skin`, slot 1 = the opposite (eyes, mouth, fox nose/ear insides); full masks carry `excludes: [hat, facial]`, the half mask `close_range: true` | `LSW_Ref_Accessories.png` | Full masks read on camera; half mask at stop distance (D-009) |
-| [ ] PL.30 | Mark one camera per layout as the zoom camera in the layout JSON: `"zoom": true` on that camera (`lsw_layout_export`); pick it from the coverage map — the camera that sees most "far only" ground and is not the worn one | LAYOUTS.md, D-036 | Requested by P1.17a — until then Unity zooms each layout's first camera and warns |
 | [x] PL.30 | Glasses (regular, sun) — close-range clue — `LSW_Crowd_Glasses_Regular/Sun_M/_F`, slot `glasses`, slot 0 = frame value from `mask_for_skin`, slot 1 = LensDark; `excludes: [face]`, `close_range: true` | D-009 | Readable at 2 m eye level |
 | [x] PL.31 | Body accessories: scarf, backpack, shoulder bag, umbrella, balloon — `LSW_Crowd_Acc_<Item>_M/_F`, slots `neck` / `back` / `bag` / `hand_r` / `hand_l` (one item per slot), `Fit_Bulky` key over the Puffer, `Add_Grip_L/R` finger curls | `LSW_Ref_Accessories.png` | Backpack and balloon read on camera |
 | [x] PL.32 | Face decal for close-ups (neutral, surprise, anger, panic, blink) — `LSW_Crowd_FaceDecal_M/_F` (slot `face_decal`, `lod0_only`), atlas `_Export/Crowd/LSW_FaceAtlas.png` + `.json` (cell UV offsets) | D-010 | Flush on all heads and builds; hidden at LOD1+ |

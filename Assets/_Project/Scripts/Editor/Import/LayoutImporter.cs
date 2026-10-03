@@ -59,7 +59,7 @@ namespace LastSeenWearing.Editor.Import
             var zoom = Array.FindIndex(json.cameras, c => c.zoom);
             if (zoom < 0)
             {
-                // Until the art marks one ("zoom": true on a camera, PL.30), the first camera zooms.
+                // Until the art marks one ("zoom": true on a camera, PL.22a), the first camera zooms.
                 Debug.LogWarning($"[LayoutImporter] Layout {id}: no camera is marked \"zoom\" in the JSON; {json.cameras[0].name} zooms.");
                 zoom = 0;
             }

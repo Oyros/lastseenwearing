@@ -480,7 +480,7 @@ step until systems move to a shared scene or prefab.
 
 ### D-036 — One zoom camera per layout, aimed locally and slowly
 **Decision.** Each layout has one zoom camera — layout data (`LayoutDefinition.ZoomCamera`, from the JSON's
-`"zoom": true`; until the art marks one, PL.30, the first camera and a warning), flagged on its `CctvCamera`.
+`"zoom": true`; until the art marks one, PL.22a, the first camera and a warning), flagged on its `CctvCamera`.
 While a monitor shows it, the Watcher's Pan and Zoom aim it (`Core/Watcher/ZoomPan`): yaw/pitch within a
 range around its mount, magnification up to the narrowest view, the camera following its target no faster than
 `WatcherConfig`'s rates (GDD §04.1: *slow* pan + zoom), and panning finer the further in it is. The wheel asks
