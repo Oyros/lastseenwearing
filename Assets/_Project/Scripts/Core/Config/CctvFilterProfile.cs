@@ -27,6 +27,11 @@ namespace LastSeenWearing.Core.Config
         [Tooltip("Corner darkening, 0–1.")]
         [SerializeField, Range(0f, 1f)] private float _vignette = 0.35f;
 
+        [Header("Zoom (P1.17a, D-036)")]
+        [Tooltip("How far this camera can zoom in, × its unzoomed view. Every camera zooms; a better camera zooms further. [PROVISIONAL]")]
+        [SerializeField, Range(1.5f, 8f)] private float _maxZoom = 4f;
+
+        public float MaxZoom => _maxZoom;
         public int Width => _width;
         public int Height => _height;
         public float Contrast => _contrast;

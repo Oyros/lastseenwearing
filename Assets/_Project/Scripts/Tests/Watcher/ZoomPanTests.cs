@@ -10,14 +10,14 @@ using UnityEngine;
 namespace LastSeenWearing.Tests.Watcher
 {
     /// <summary>
-    /// P1.17a: one camera per layout pans and zooms, slowly (GDD §04.1) — far enough in that a figure in a
-    /// "far only" zone of layout A (docs/LAYOUTS.md) becomes big enough to tell apart.
+    /// P1.17a, D-036: every camera pans and zooms, slowly (GDD §04.1), as far as its profile allows — far enough
+    /// on a good camera that a figure in a "far only" zone of layout A (docs/LAYOUTS.md) can be told apart.
     /// </summary>
     public sealed class ZoomPanTests
     {
         private const float BaseFov = 58.72f;
 
-        private static ZoomPan NewZoomPan() => new(BaseFov, 15f, 35f, 15f, 20f, 1f);
+        private static ZoomPan NewZoomPan() => new(BaseFov, 4f, 35f, 15f, 20f, 1f);
 
         [Test]
         public void ItZoomsSlowlyUpToTheNarrowestView()
@@ -32,8 +32,8 @@ namespace LastSeenWearing.Tests.Watcher
                 aim.Advance(0.1f);
             }
 
-            Assert.That(aim.FieldOfView, Is.EqualTo(15f).Within(0.01f), "stops at the narrowest view");
-            Assert.That(aim.Magnification, Is.EqualTo(ZoomPan.MagnificationOf(BaseFov, 15f)).Within(1e-3f));
+            Assert.That(aim.Magnification, Is.EqualTo(4f).Within(1e-3f), "stops at the camera's own maximum");
+            Assert.That(ZoomPan.MagnificationOf(BaseFov, aim.FieldOfView), Is.EqualTo(4f).Within(1e-3f), "the view narrows to match");
 
             aim.ZoomBy(-100f);
             for (var i = 0; i < 100; i++)
@@ -64,13 +64,12 @@ namespace LastSeenWearing.Tests.Watcher
         }
 
         [Test]
-        public void LayoutAHasOneZoomCameraOnTheGoodFilter()
+        public void EveryCameraZoomsAndTheWornOneLess()
         {
-            var definition = AssetDatabase.LoadAssetAtPath<LayoutDefinition>(LayoutImporter.DefinitionPath("A"));
-            Assert.That(definition.ZoomCamera, Is.InRange(0, definition.Cameras.Length - 1));
-
-            var scene = System.IO.File.ReadAllText("Assets/_Project/Scenes/Festival_A.unity");
-            Assert.That(scene.Split('\n').Count(l => l.Trim() == "_zoomable: 1"), Is.EqualTo(1), "exactly one camera zooms");
+            var good = AssetDatabase.LoadAssetAtPath<CctvFilterProfile>("Assets/_Project/Data/Cameras/CctvFilter_Default.asset");
+            var worn = AssetDatabase.LoadAssetAtPath<CctvFilterProfile>("Assets/_Project/Data/Cameras/CctvFilter_Worn.asset");
+            Assert.That(worn.MaxZoom, Is.GreaterThan(1f), "no fixed cameras (D-036)");
+            Assert.That(good.MaxZoom, Is.GreaterThan(worn.MaxZoom), "a better camera zooms further");
         }
 
         [Test]
@@ -78,15 +77,15 @@ namespace LastSeenWearing.Tests.Watcher
         {
             // The centre of layout A's square is "far only" from every camera (docs/LAYOUTS.md coverage map).
             var definition = AssetDatabase.LoadAssetAtPath<LayoutDefinition>(LayoutImporter.DefinitionPath("A"));
-            var watcher = AssetDatabase.LoadAssetAtPath<WatcherConfig>("Assets/_Project/Data/Config/WatcherConfig.asset");
             var profile = AssetDatabase.LoadAssetAtPath<CctvFilterProfile>("Assets/_Project/Data/Cameras/CctvFilter_Default.asset");
-            var camera = definition.Cameras[definition.ZoomCamera];
+            var camera = definition.Cameras[0];
             var distance = Vector3.Distance(camera.Position, new Vector3(0f, 0.9f, 0f));
 
             float PixelsTall(float fov) => profile.Height * 1.75f / distance / (2f * Mathf.Tan(fov * Mathf.Deg2Rad / 2f));
 
             Assert.That(PixelsTall(camera.VerticalFieldOfView), Is.LessThan(25f), "unzoomed: a few pixels, no face, no clothes");
-            Assert.That(PixelsTall(watcher.ZoomMinFieldOfView), Is.GreaterThanOrEqualTo(60f), "zoomed in: a figure to describe");
+            var zoomed = 2f * Mathf.Atan(Mathf.Tan(camera.VerticalFieldOfView * Mathf.Deg2Rad / 2f) / profile.MaxZoom) * Mathf.Rad2Deg;
+            Assert.That(PixelsTall(zoomed), Is.GreaterThanOrEqualTo(60f), "zoomed in on a good camera: a figure to describe");
         }
     }
 }

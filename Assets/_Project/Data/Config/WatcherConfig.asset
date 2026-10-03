@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: WatcherConfig
   m_EditorClassIdentifier: LastSeenWearing.Core::LastSeenWearing.Core.Config.WatcherConfig
   _feedSwitchSeconds: 1.5
-  _zoomMinFieldOfView: 15
   _zoomOctavesPerSecond: 1
   _zoomOctavesPerNotch: 0.25
   _panYawRange: 35

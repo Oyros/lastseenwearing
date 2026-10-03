@@ -87,7 +87,7 @@ programme, sunset, case format, every tool in §07, replay, art, audio.
 | [x] P1.15 | Radio channel watcher → field | §04.2 | Patrol hears the watcher anywhere |
 | [x] P1.16 | Proximity voice + radio leak; radio light over a talking officer | §04.2 | A fugitive within range hears the radio; the light shows |
 | [x] P1.17 | Greybox layout A in Unity from the art greybox export | LAYOUTS.md | PL.04 done; layout walkable, cameras placed as in layout A |
-| [x] P1.17a | Zoom camera: one camera per layout slowly pans and zooms; the Watcher's `Pan` / `Zoom` act on it (zoom range and pan speed in `WatcherConfig`); which camera zooms is layout data | §04.1, LAYOUTS.md | The Watcher picks out a figure in a "far only" zone of layout A on the zoom camera |
+| [x] P1.17a | Zoom cameras: every camera slowly pans and zooms, as far as its profile allows (D-036); the Watcher's `Pan` / `Zoom` act on the active monitor's camera (rates in `WatcherConfig`) | §04.1, LAYOUTS.md | The Watcher picks out a figure in a "far only" zone of layout A on the zoom camera |
 | [ ] P1.18 | Modular NPC with 3–4 clothing slots on the base body | §05 | PL.13–PL.15 done; crowd dressed from the seed |
 | [ ] P1.19 | Composite generation: traits + 1–2 errors; fugitive sees which | §04.1 | Watcher and fugitive panels show the right versions |
 | [ ] P1.20 | Watcher UI: composite panel, last-seen clothing with age timer | §04.1 | Timer counts from the last confirmed sighting |
@@ -164,7 +164,6 @@ open Blender; never save a `.blend` unasked.
 | [x] PL.20 | Greybox kit (16 pieces) on a 1 m grid | `Festival/_Ref` | `lsw_check` 15/15 pass; CCTV props lineup (D-013) |
 | [x] PL.21 | Layouts A–D with 5 targets, tents, exits, 4 cameras; coverage maps | `docs/LAYOUTS.md` | Coverage stats and target visibility recorded |
 | [x] PL.22 | Export greybox kit and layouts to Unity (art side done 2026-10-03: `_Export/Festival/Layouts/`; open layout A in Unity to close) | — | PL.04 done; layout A opens in Unity at scale |
-| [ ] PL.22a | Mark one camera per layout as the zoom camera in the layout JSON: `"zoom": true` on that camera (`lsw_layout_export`); pick it from the coverage map — the camera that sees most "far only" ground and is not the worn one | LAYOUTS.md, D-036 | Requested by P1.17a — until then Unity zooms each layout's first camera and warns |
 
 ### Track D — full crowd, dog, festival (v1)
 

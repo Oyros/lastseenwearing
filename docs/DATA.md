@@ -31,7 +31,7 @@ So: **prefabs hold references and identity. Config assets hold numbers.**
 | `Data/Wardrobe/WardrobeCatalog.asset` | `Core/Wardrobe/WardrobeCatalog` | Every item, by id |
 | `Data/Targets/<Target>.asset` | `Core/Targets/TargetDefinition` | Id, type (open, hidden, fixed, social — GDD §04.4), the NPC action that imitates it |
 | `Data/Layouts/Layout_<A–D>.asset` | `Core/Layouts/LayoutDefinition` | **In use (P1.17): `Layout_A`.** Generated from the art's layout JSON by `Editor/Import/LayoutImporter` (menu *Layouts › Import Layout A*), never typed: cameras (position, forward, vertical FOV), target spots by kind, tents, exits, crowd areas, bounds. Tent stocks later |
-| `Data/Cameras/CctvFilter_<Name>.asset` | `Core/Config/CctvFilterProfile` | One camera's feed look: resolution (default 320×180), contrast, brightness, grain, scan lines, vignette (D-026) — profiles: `Default` 320×180, the good camera; `Worn` 240×135, harder contrast, more grain, scan lines and vignette [PROVISIONAL] (P1.14) |
+| `Data/Cameras/CctvFilter_<Name>.asset` | `Core/Config/CctvFilterProfile` | One camera's feed look: resolution (default 320×180), contrast, brightness, grain, scan lines, vignette (D-026) — profiles: `Default` 320×180, the good camera; `Worn` 240×135, harder contrast, more grain, scan lines and vignette [PROVISIONAL] (P1.14); max zoom per profile — `Default` 4×, `Worn` 2×; no fixed cameras (P1.17a, D-036) |
 | ~~`Data/Gaits/GaitCatalog.asset`~~ | — | Not made (D-025): base walks and traits are `BaseWalk`/`WalkTrait` and the art JSON; the odds are in `CrowdConfig` |
 
 **Watch the boundary.** What a garment is (its slot, its words) is instance data. How much heat
@@ -54,7 +54,7 @@ Values below are the GDD's first numbers; P1 tunes them.
 | `CompositeConfig` | Errors per composite 1–2; reveal order per round (build+height, hair, walk, then the rest — D-008); witness-confidence levels | §04.1 |
 | `CaptureConfig` | Heat sources and rates (stop, running nearby, looking at cameras); full-heat threshold; stop 3 s; complaints per lost cuff 3; cuffs per round 3; wrong-arrest time bonus and panic radius | §04.3 |
 | `FugitiveConfig` | Target durations — open 2 s, social 4 s, fixed 3 s, hidden 5 s; targets on map 5, needed 3; exits 2–3; fake walk ≤ 20 s; NPC control 10 s, 1/round; camera panel 3 s | §04.4, §07 |
-| `WatcherConfig` | **In use (P1.13, P1.17a): feed switch 1.5 s; zoom camera — narrowest view 15° (~3.9×), 1 doubling/s, ¼ doubling per wheel notch, pan ±35° yaw / ±15° pitch at 20°/s (finer when zoomed), 0.1°/px drag [PROVISIONAL].** Later: rewind 30 s; feed switch time; zoom range and pan speed; announcements 1/round; festival-control anger cost | §04.1, §07 |
+| `WatcherConfig` | **In use (P1.13, P1.17a): feed switch 1.5 s; pan and zoom for every camera — 1 doubling/s, ¼ doubling per wheel notch, pan ±35° yaw / ±15° pitch at 20°/s (finer when zoomed), 0.1°/px drag [PROVISIONAL].** Later: rewind 30 s; feed switch time; zoom range and pan speed; announcements 1/round; festival-control anger cost | §04.1, §07 |
 | `DisguiseConfig` | Tent uses per round 1; masked-NPC cluster radius at the mask stall | §05 |
 | `DogConfig` | Scent trail 10 s; bark radius, stamina cost, NPC anger; move speed | §03 |
 | `RadioConfig` | **In use (P1.15): 8 kHz µ-law, 100 ms packets, 200 ms prebuffer, 1 s max buffer, volume, radio band-pass 300–3400 Hz; (P1.16) proximity radius 12 m, leak radius 5 m, leak volume 0.5, on-air hold 0.3 s [PROVISIONAL].** Later: noise by distance to the stage | §04.2 |

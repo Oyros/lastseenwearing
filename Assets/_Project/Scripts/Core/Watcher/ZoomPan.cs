@@ -3,8 +3,8 @@ using System;
 namespace LastSeenWearing.Core.Watcher
 {
     /// <summary>
-    /// The zoom camera's aim (GDD §04.1: "slow pan + zoom", P1.17a): yaw and pitch around the camera's mounted
-    /// direction within a range, and a magnification from 1× up to what the narrowest field of view gives. Input
+    /// A CCTV camera's aim (GDD §04.1: "slow pan + zoom", P1.17a, D-036): yaw and pitch around the camera's mounted
+    /// direction within a range, and a magnification from 1× up to the camera's own maximum. Input
     /// moves a target; the camera follows it no faster than the configured rates, so it always pans and zooms
     /// slowly, and pans finer the further it is zoomed in. Local to the Watcher's client, like
     /// <see cref="FeedSwitcher"/>.
@@ -22,12 +22,12 @@ namespace LastSeenWearing.Core.Watcher
         private float _targetOctaves;
 
         /// <param name="baseFieldOfView">Vertical degrees unzoomed.</param>
-        /// <param name="minFieldOfView">Vertical degrees fully zoomed.</param>
-        public ZoomPan(float baseFieldOfView, float minFieldOfView, float yawRange, float pitchRange,
+        /// <param name="maxMagnification">How far in it can zoom, × the unzoomed view.</param>
+        public ZoomPan(float baseFieldOfView, float maxMagnification, float yawRange, float pitchRange,
             float panDegreesPerSecond, float zoomOctavesPerSecond)
         {
             _baseFieldOfView = baseFieldOfView;
-            _maxOctaves = (float)Math.Log(MagnificationOf(baseFieldOfView, minFieldOfView), 2d);
+            _maxOctaves = (float)Math.Log(Math.Max(1f, maxMagnification), 2d);
             _yawRange = yawRange;
             _pitchRange = pitchRange;
             _panDegreesPerSecond = panDegreesPerSecond;

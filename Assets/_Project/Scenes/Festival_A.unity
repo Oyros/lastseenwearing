@@ -196,7 +196,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: LastSeenWearing.Gameplay::LastSeenWearing.Gameplay.Cameras.CctvCamera
   _profile: {fileID: 11400000, guid: fdb3308f047d4f44facfed4cb72bcc85, type: 2}
-  _zoomable: 0
 --- !u!20 &18497613
 Camera:
   m_ObjectHideFlags: 0
@@ -943,7 +942,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: LastSeenWearing.Gameplay::LastSeenWearing.Gameplay.Cameras.CctvCamera
   _profile: {fileID: 11400000, guid: 6f490d926373127498ef2b50e76148c9, type: 2}
-  _zoomable: 0
 --- !u!20 &593470870
 Camera:
   m_ObjectHideFlags: 0
@@ -2435,7 +2433,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: LastSeenWearing.Gameplay::LastSeenWearing.Gameplay.Cameras.CctvCamera
   _profile: {fileID: 11400000, guid: fdb3308f047d4f44facfed4cb72bcc85, type: 2}
-  _zoomable: 0
 --- !u!20 &1612013605
 Camera:
   m_ObjectHideFlags: 0
@@ -3090,7 +3087,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: LastSeenWearing.Gameplay::LastSeenWearing.Gameplay.Cameras.CctvCamera
   _profile: {fileID: 11400000, guid: fdb3308f047d4f44facfed4cb72bcc85, type: 2}
-  _zoomable: 1
 --- !u!20 &2003736229
 Camera:
   m_ObjectHideFlags: 0

@@ -19,3 +19,4 @@ MonoBehaviour:
   _grain: 0.16
   _scanLines: 0.22
   _vignette: 0.55
+  _maxZoom: 2

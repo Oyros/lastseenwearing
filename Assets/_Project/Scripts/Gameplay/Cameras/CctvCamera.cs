@@ -13,13 +13,10 @@ namespace LastSeenWearing.Gameplay.Cameras
     public sealed class CctvCamera : MonoBehaviour
     {
         [SerializeField] private CctvFilterProfile _profile;
-        [Tooltip("The layout's one camera that pans and zooms (P1.17a).")]
-        [SerializeField] private bool _zoomable;
 
         private RenderTexture _feed;
 
         public CctvFilterProfile Profile => _profile;
-        public bool Zoomable => _zoomable;
 
         /// <summary>The camera's picture. Created on first use.</summary>
         public RenderTexture Feed

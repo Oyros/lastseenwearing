@@ -31,7 +31,6 @@ MonoBehaviour:
     Position: {x: -10.9964, y: 5.7, z: -10.5138}
     Forward: {x: 0.69847286, y: -0.23949069, z: 0.67437375}
     VerticalFieldOfView: 58.72
-  _zoomCamera: 0
   _targets:
   - Kind: 0
     Tag: open

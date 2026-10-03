@@ -3,7 +3,7 @@ using UnityEngine;
 namespace LastSeenWearing.Core.Config
 {
     /// <summary>
-    /// The Watcher's camera wall (docs/DATA.md §3, GDD §04.1). The zoom camera's pan and zoom (P1.17a). Rewind,
+    /// The Watcher's camera wall (docs/DATA.md §3, GDD §04.1). Every camera's pan and zoom rates (P1.17a; how far a camera zooms is its CctvFilterProfile's). Rewind,
     /// announcements and festival controls join with their tasks.
     /// </summary>
     [CreateAssetMenu(fileName = "WatcherConfig", menuName = "Last Seen Wearing/Config/Watcher")]
@@ -13,9 +13,7 @@ namespace LastSeenWearing.Core.Config
         [Tooltip("Seconds a monitor shows static after it is switched to another camera. GDD §04.1: switching cameras costs time. [PROVISIONAL]")]
         [SerializeField, Min(0f)] private float _feedSwitchSeconds = 1.5f;
 
-        [Header("Zoom camera (P1.17a) — GDD §04.1: slow pan + zoom")]
-        [Tooltip("Vertical field of view fully zoomed, degrees. The layout's 58.7° → 15° is about 4×. [PROVISIONAL]")]
-        [SerializeField, Range(3f, 40f)] private float _zoomMinFieldOfView = 15f;
+        [Header("Pan and zoom, every camera (P1.17a, D-036) — GDD §04.1: slow pan + zoom; how far is the camera's profile")]
         [Tooltip("Doublings of magnification per second the camera can zoom. [PROVISIONAL]")]
         [SerializeField, Range(0.1f, 4f)] private float _zoomOctavesPerSecond = 1f;
         [Tooltip("Doublings one mouse-wheel notch asks for. [PROVISIONAL]")]
@@ -30,7 +28,6 @@ namespace LastSeenWearing.Core.Config
         [SerializeField, Range(0.01f, 1f)] private float _panDegreesPerPixel = 0.1f;
 
         public float FeedSwitchSeconds => _feedSwitchSeconds;
-        public float ZoomMinFieldOfView => _zoomMinFieldOfView;
         public float ZoomOctavesPerSecond => _zoomOctavesPerSecond;
         public float ZoomOctavesPerNotch => _zoomOctavesPerNotch;
         public float PanYawRange => _panYawRange;

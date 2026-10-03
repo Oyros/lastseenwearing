@@ -56,14 +56,6 @@ namespace LastSeenWearing.Editor.Import
         public static LayoutDefinition Import(string id)
         {
             var json = JsonUtility.FromJson<LayoutJson>(File.ReadAllText(Path.ChangeExtension(ModelPath(id), ".json")));
-            var zoom = Array.FindIndex(json.cameras, c => c.zoom);
-            if (zoom < 0)
-            {
-                // Until the art marks one ("zoom": true on a camera, PL.22a), the first camera zooms.
-                Debug.LogWarning($"[LayoutImporter] Layout {id}: no camera is marked \"zoom\" in the JSON; {json.cameras[0].name} zooms.");
-                zoom = 0;
-            }
-
             var path = DefinitionPath(id);
             var definition = AssetDatabase.LoadAssetAtPath<LayoutDefinition>(path);
             if (definition == null)
@@ -83,7 +75,6 @@ namespace LastSeenWearing.Editor.Import
                     Forward = Vec(c.forward).normalized,
                     VerticalFieldOfView = c.fov_vertical_16x9,
                 }).ToArray(),
-                zoom,
                 json.targets.Select(t => new LayoutDefinition.TargetSpot
                 {
                     Kind = Kind(t.type),
@@ -134,7 +125,6 @@ namespace LastSeenWearing.Editor.Import
             public float[] pos;
             public float[] forward;
             public float fov_vertical_16x9;
-            public bool zoom;
         }
 
         [Serializable]
