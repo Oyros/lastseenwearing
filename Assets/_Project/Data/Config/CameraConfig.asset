@@ -19,6 +19,7 @@ MonoBehaviour:
   _thirdPersonPitchMin: -35
   _thirdPersonPitchMax: 60
   _thirdPersonFieldOfView: 60
+  _thirdPersonCollisionRadius: 0.2
   _firstPersonEyeHeight: 1.68
   _firstPersonFieldOfView: 90
   _firstPersonNearClip: 0.05

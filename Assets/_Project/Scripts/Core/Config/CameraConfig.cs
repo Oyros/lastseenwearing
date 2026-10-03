@@ -22,6 +22,8 @@ namespace LastSeenWearing.Core.Config
         [SerializeField, Range(-89f, 0f)] private float _thirdPersonPitchMin = -35f;
         [SerializeField, Range(0f, 89f)] private float _thirdPersonPitchMax = 60f;
         [SerializeField, Range(30f, 100f)] private float _thirdPersonFieldOfView = 60f;
+        [Tooltip("Metres the third-person camera keeps from walls and props (it pulls in rather than clip through).")]
+        [SerializeField, Range(0.05f, 1f)] private float _thirdPersonCollisionRadius = 0.2f;
 
         [Header("Field team — first person (P1.12)")]
         [Tooltip("Eye height above the feet, metres — the uniform body's SOCKET_Eye.")]
@@ -51,5 +53,6 @@ namespace LastSeenWearing.Core.Config
         public float ThirdPersonPitchMin => _thirdPersonPitchMin;
         public float ThirdPersonPitchMax => _thirdPersonPitchMax;
         public float ThirdPersonFieldOfView => _thirdPersonFieldOfView;
+        public float ThirdPersonCollisionRadius => _thirdPersonCollisionRadius;
     }
 }

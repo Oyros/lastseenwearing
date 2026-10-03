@@ -1,0 +1,1087 @@
+{
+ "kind": "layout",
+ "layout": "A",
+ "title": "Town Square",
+ "axes": "Unity = (-x, z, -y) of Blender; yaw_unity = -yaw_blender (degrees about +Y, clockwise seen from above); a piece's front is its local -Y in Blender = +Z in Unity; metres",
+ "units": "m",
+ "fbx": "LSW_Festival_Layout_A.fbx",
+ "pieces": [
+  {
+   "piece": "GroundTile",
+   "prefab": "LSW_Festival_GB_GroundTile.fbx",
+   "name": "A_GroundTile",
+   "tag": null,
+   "pos": [
+    10.0,
+    0.0,
+    10.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "GroundTile",
+   "prefab": "LSW_Festival_GB_GroundTile.fbx",
+   "name": "A_GroundTile.001",
+   "tag": null,
+   "pos": [
+    10.0,
+    0.0,
+    6.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "PathTile",
+   "prefab": "LSW_Festival_GB_PathTile.fbx",
+   "name": "A_PathTile",
+   "tag": null,
+   "pos": [
+    10.0,
+    0.0,
+    2.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "PathTile",
+   "prefab": "LSW_Festival_GB_PathTile.fbx",
+   "name": "A_PathTile.001",
+   "tag": null,
+   "pos": [
+    10.0,
+    0.0,
+    -2.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "GroundTile",
+   "prefab": "LSW_Festival_GB_GroundTile.fbx",
+   "name": "A_GroundTile.002",
+   "tag": null,
+   "pos": [
+    10.0,
+    0.0,
+    -6.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "GroundTile",
+   "prefab": "LSW_Festival_GB_GroundTile.fbx",
+   "name": "A_GroundTile.003",
+   "tag": null,
+   "pos": [
+    10.0,
+    0.0,
+    -10.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "GroundTile",
+   "prefab": "LSW_Festival_GB_GroundTile.fbx",
+   "name": "A_GroundTile.004",
+   "tag": null,
+   "pos": [
+    6.0,
+    0.0,
+    10.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "GroundTile",
+   "prefab": "LSW_Festival_GB_GroundTile.fbx",
+   "name": "A_GroundTile.005",
+   "tag": null,
+   "pos": [
+    6.0,
+    0.0,
+    6.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "PathTile",
+   "prefab": "LSW_Festival_GB_PathTile.fbx",
+   "name": "A_PathTile.002",
+   "tag": null,
+   "pos": [
+    6.0,
+    0.0,
+    2.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "PathTile",
+   "prefab": "LSW_Festival_GB_PathTile.fbx",
+   "name": "A_PathTile.003",
+   "tag": null,
+   "pos": [
+    6.0,
+    0.0,
+    -2.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "GroundTile",
+   "prefab": "LSW_Festival_GB_GroundTile.fbx",
+   "name": "A_GroundTile.006",
+   "tag": null,
+   "pos": [
+    6.0,
+    0.0,
+    -6.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "GroundTile",
+   "prefab": "LSW_Festival_GB_GroundTile.fbx",
+   "name": "A_GroundTile.007",
+   "tag": null,
+   "pos": [
+    6.0,
+    0.0,
+    -10.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "PathTile",
+   "prefab": "LSW_Festival_GB_PathTile.fbx",
+   "name": "A_PathTile.004",
+   "tag": null,
+   "pos": [
+    2.0,
+    0.0,
+    10.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "PathTile",
+   "prefab": "LSW_Festival_GB_PathTile.fbx",
+   "name": "A_PathTile.005",
+   "tag": null,
+   "pos": [
+    2.0,
+    0.0,
+    6.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "PathTile",
+   "prefab": "LSW_Festival_GB_PathTile.fbx",
+   "name": "A_PathTile.006",
+   "tag": null,
+   "pos": [
+    2.0,
+    0.0,
+    2.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "PathTile",
+   "prefab": "LSW_Festival_GB_PathTile.fbx",
+   "name": "A_PathTile.007",
+   "tag": null,
+   "pos": [
+    2.0,
+    0.0,
+    -2.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "PathTile",
+   "prefab": "LSW_Festival_GB_PathTile.fbx",
+   "name": "A_PathTile.008",
+   "tag": null,
+   "pos": [
+    2.0,
+    0.0,
+    -6.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "PathTile",
+   "prefab": "LSW_Festival_GB_PathTile.fbx",
+   "name": "A_PathTile.009",
+   "tag": null,
+   "pos": [
+    2.0,
+    0.0,
+    -10.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "PathTile",
+   "prefab": "LSW_Festival_GB_PathTile.fbx",
+   "name": "A_PathTile.010",
+   "tag": null,
+   "pos": [
+    -2.0,
+    0.0,
+    10.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "PathTile",
+   "prefab": "LSW_Festival_GB_PathTile.fbx",
+   "name": "A_PathTile.011",
+   "tag": null,
+   "pos": [
+    -2.0,
+    0.0,
+    6.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "PathTile",
+   "prefab": "LSW_Festival_GB_PathTile.fbx",
+   "name": "A_PathTile.012",
+   "tag": null,
+   "pos": [
+    -2.0,
+    0.0,
+    2.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "PathTile",
+   "prefab": "LSW_Festival_GB_PathTile.fbx",
+   "name": "A_PathTile.013",
+   "tag": null,
+   "pos": [
+    -2.0,
+    0.0,
+    -2.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "PathTile",
+   "prefab": "LSW_Festival_GB_PathTile.fbx",
+   "name": "A_PathTile.014",
+   "tag": null,
+   "pos": [
+    -2.0,
+    0.0,
+    -6.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "PathTile",
+   "prefab": "LSW_Festival_GB_PathTile.fbx",
+   "name": "A_PathTile.015",
+   "tag": null,
+   "pos": [
+    -2.0,
+    0.0,
+    -10.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "GroundTile",
+   "prefab": "LSW_Festival_GB_GroundTile.fbx",
+   "name": "A_GroundTile.008",
+   "tag": null,
+   "pos": [
+    -6.0,
+    0.0,
+    10.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "GroundTile",
+   "prefab": "LSW_Festival_GB_GroundTile.fbx",
+   "name": "A_GroundTile.009",
+   "tag": null,
+   "pos": [
+    -6.0,
+    0.0,
+    6.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "PathTile",
+   "prefab": "LSW_Festival_GB_PathTile.fbx",
+   "name": "A_PathTile.016",
+   "tag": null,
+   "pos": [
+    -6.0,
+    0.0,
+    2.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "PathTile",
+   "prefab": "LSW_Festival_GB_PathTile.fbx",
+   "name": "A_PathTile.017",
+   "tag": null,
+   "pos": [
+    -6.0,
+    0.0,
+    -2.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "GroundTile",
+   "prefab": "LSW_Festival_GB_GroundTile.fbx",
+   "name": "A_GroundTile.010",
+   "tag": null,
+   "pos": [
+    -6.0,
+    0.0,
+    -6.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "GroundTile",
+   "prefab": "LSW_Festival_GB_GroundTile.fbx",
+   "name": "A_GroundTile.011",
+   "tag": null,
+   "pos": [
+    -6.0,
+    0.0,
+    -10.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "GroundTile",
+   "prefab": "LSW_Festival_GB_GroundTile.fbx",
+   "name": "A_GroundTile.012",
+   "tag": null,
+   "pos": [
+    -10.0,
+    0.0,
+    10.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "GroundTile",
+   "prefab": "LSW_Festival_GB_GroundTile.fbx",
+   "name": "A_GroundTile.013",
+   "tag": null,
+   "pos": [
+    -10.0,
+    0.0,
+    6.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "PathTile",
+   "prefab": "LSW_Festival_GB_PathTile.fbx",
+   "name": "A_PathTile.018",
+   "tag": null,
+   "pos": [
+    -10.0,
+    0.0,
+    2.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "PathTile",
+   "prefab": "LSW_Festival_GB_PathTile.fbx",
+   "name": "A_PathTile.019",
+   "tag": null,
+   "pos": [
+    -10.0,
+    0.0,
+    -2.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "GroundTile",
+   "prefab": "LSW_Festival_GB_GroundTile.fbx",
+   "name": "A_GroundTile.014",
+   "tag": null,
+   "pos": [
+    -10.0,
+    0.0,
+    -6.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "GroundTile",
+   "prefab": "LSW_Festival_GB_GroundTile.fbx",
+   "name": "A_GroundTile.015",
+   "tag": null,
+   "pos": [
+    -10.0,
+    0.0,
+    -10.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "PathTile",
+   "prefab": "LSW_Festival_GB_PathTile.fbx",
+   "name": "A_PathTile.020",
+   "tag": null,
+   "pos": [
+    14.0,
+    0.0,
+    -14.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "PathTile",
+   "prefab": "LSW_Festival_GB_PathTile.fbx",
+   "name": "A_PathTile.021",
+   "tag": null,
+   "pos": [
+    14.0,
+    0.0,
+    -18.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "PathTile",
+   "prefab": "LSW_Festival_GB_PathTile.fbx",
+   "name": "A_PathTile.022",
+   "tag": null,
+   "pos": [
+    14.0,
+    0.0,
+    -22.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "AlleyWall",
+   "prefab": "LSW_Festival_GB_AlleyWall.fbx",
+   "name": "A_AlleyWall",
+   "tag": null,
+   "pos": [
+    16.2,
+    0.0,
+    -14.0
+   ],
+   "yaw": -90.0
+  },
+  {
+   "piece": "AlleyWall",
+   "prefab": "LSW_Festival_GB_AlleyWall.fbx",
+   "name": "A_AlleyWall.001",
+   "tag": null,
+   "pos": [
+    11.8,
+    0.0,
+    -14.0
+   ],
+   "yaw": -90.0
+  },
+  {
+   "piece": "AlleyWall",
+   "prefab": "LSW_Festival_GB_AlleyWall.fbx",
+   "name": "A_AlleyWall.002",
+   "tag": null,
+   "pos": [
+    16.2,
+    0.0,
+    -18.0
+   ],
+   "yaw": -90.0
+  },
+  {
+   "piece": "AlleyWall",
+   "prefab": "LSW_Festival_GB_AlleyWall.fbx",
+   "name": "A_AlleyWall.003",
+   "tag": null,
+   "pos": [
+    11.8,
+    0.0,
+    -18.0
+   ],
+   "yaw": -90.0
+  },
+  {
+   "piece": "AlleyWall",
+   "prefab": "LSW_Festival_GB_AlleyWall.fbx",
+   "name": "A_AlleyWall.004",
+   "tag": null,
+   "pos": [
+    16.2,
+    0.0,
+    -22.0
+   ],
+   "yaw": -90.0
+  },
+  {
+   "piece": "AlleyWall",
+   "prefab": "LSW_Festival_GB_AlleyWall.fbx",
+   "name": "A_AlleyWall.005",
+   "tag": null,
+   "pos": [
+    11.8,
+    0.0,
+    -22.0
+   ],
+   "yaw": -90.0
+  },
+  {
+   "piece": "BuildingBlock",
+   "prefab": "LSW_Festival_GB_BuildingBlock.fbx",
+   "name": "A_BuildingBlock",
+   "tag": null,
+   "pos": [
+    20.0,
+    0.0,
+    8.0
+   ],
+   "yaw": -90.0
+  },
+  {
+   "piece": "BuildingBlock",
+   "prefab": "LSW_Festival_GB_BuildingBlock.fbx",
+   "name": "A_BuildingBlock.001",
+   "tag": null,
+   "pos": [
+    20.0,
+    0.0,
+    -0.0
+   ],
+   "yaw": -90.0
+  },
+  {
+   "piece": "BuildingBlock",
+   "prefab": "LSW_Festival_GB_BuildingBlock.fbx",
+   "name": "A_BuildingBlock.002",
+   "tag": null,
+   "pos": [
+    20.0,
+    0.0,
+    -8.0
+   ],
+   "yaw": -90.0
+  },
+  {
+   "piece": "BuildingBlock",
+   "prefab": "LSW_Festival_GB_BuildingBlock.fbx",
+   "name": "A_BuildingBlock.003",
+   "tag": null,
+   "pos": [
+    -20.0,
+    0.0,
+    8.0
+   ],
+   "yaw": 90.0
+  },
+  {
+   "piece": "BuildingBlock",
+   "prefab": "LSW_Festival_GB_BuildingBlock.fbx",
+   "name": "A_BuildingBlock.004",
+   "tag": null,
+   "pos": [
+    -20.0,
+    0.0,
+    -0.0
+   ],
+   "yaw": 90.0
+  },
+  {
+   "piece": "BuildingBlock",
+   "prefab": "LSW_Festival_GB_BuildingBlock.fbx",
+   "name": "A_BuildingBlock.005",
+   "tag": null,
+   "pos": [
+    -20.0,
+    0.0,
+    -8.0
+   ],
+   "yaw": 90.0
+  },
+  {
+   "piece": "BuildingBlock",
+   "prefab": "LSW_Festival_GB_BuildingBlock.fbx",
+   "name": "A_BuildingBlock.006",
+   "tag": null,
+   "pos": [
+    6.0,
+    0.0,
+    -20.0
+   ],
+   "yaw": 180.0
+  },
+  {
+   "piece": "Stage",
+   "prefab": "LSW_Festival_GB_Stage.fbx",
+   "name": "A_Stage",
+   "tag": null,
+   "pos": [
+    -6.0,
+    0.0,
+    -17.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "FerrisWheel",
+   "prefab": "LSW_Festival_GB_FerrisWheel.fbx",
+   "name": "A_FerrisWheel",
+   "tag": null,
+   "pos": [
+    2.0,
+    0.0,
+    -36.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "TentChanging",
+   "prefab": "LSW_Festival_GB_TentChanging.fbx",
+   "name": "A_TentChanging",
+   "tag": null,
+   "pos": [
+    8.0,
+    0.0,
+    6.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "TentChanging",
+   "prefab": "LSW_Festival_GB_TentChanging.fbx",
+   "name": "A_TentChanging.001",
+   "tag": null,
+   "pos": [
+    -9.0,
+    0.0,
+    -4.0
+   ],
+   "yaw": -90.0
+  },
+  {
+   "piece": "TargetWallet",
+   "prefab": "LSW_Festival_GB_TargetWallet.fbx",
+   "name": "A_TargetWallet_open",
+   "tag": "open",
+   "pos": [
+    3.0,
+    0.0,
+    -6.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "TargetPoster",
+   "prefab": "LSW_Festival_GB_TargetPoster.fbx",
+   "name": "A_TargetPoster_fixed",
+   "tag": "fixed",
+   "pos": [
+    -11.0,
+    0.0,
+    6.0
+   ],
+   "yaw": 90.0
+  },
+  {
+   "piece": "TargetVendor",
+   "prefab": "LSW_Festival_GB_TargetVendor.fbx",
+   "name": "A_TargetVendor_social",
+   "tag": "social",
+   "pos": [
+    11.0,
+    0.0,
+    -2.0
+   ],
+   "yaw": -90.0
+  },
+  {
+   "piece": "TargetSafe",
+   "prefab": "LSW_Festival_GB_TargetSafe.fbx",
+   "name": "A_TargetSafe_hidden",
+   "tag": "hidden",
+   "pos": [
+    14.0,
+    0.0,
+    -21.0
+   ],
+   "yaw": 90.0
+  },
+  {
+   "piece": "StallBase",
+   "prefab": "LSW_Festival_GB_StallBase.fbx",
+   "name": "A_StallBase",
+   "tag": null,
+   "pos": [
+    9.0,
+    0.0,
+    9.5
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "StallBase",
+   "prefab": "LSW_Festival_GB_StallBase.fbx",
+   "name": "A_StallBase.001",
+   "tag": null,
+   "pos": [
+    5.0,
+    0.0,
+    9.5
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "StallBase",
+   "prefab": "LSW_Festival_GB_StallBase.fbx",
+   "name": "A_StallBase.002",
+   "tag": null,
+   "pos": [
+    -5.0,
+    0.0,
+    9.5
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "StallBase",
+   "prefab": "LSW_Festival_GB_StallBase.fbx",
+   "name": "A_StallBase.003",
+   "tag": null,
+   "pos": [
+    -9.0,
+    0.0,
+    9.5
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "TargetVendor",
+   "prefab": "LSW_Festival_GB_TargetVendor.fbx",
+   "name": "A_TargetVendor_social2",
+   "tag": "social2",
+   "pos": [
+    -7.0,
+    0.0,
+    4.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "ExitGate",
+   "prefab": "LSW_Festival_GB_ExitGate.fbx",
+   "name": "A_ExitGate_exit_south",
+   "tag": "exit_south",
+   "pos": [
+    -0.0,
+    0.0,
+    14.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "ExitGate",
+   "prefab": "LSW_Festival_GB_ExitGate.fbx",
+   "name": "A_ExitGate_exit_alley",
+   "tag": "exit_alley",
+   "pos": [
+    14.0,
+    0.0,
+    -26.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "Barrier",
+   "prefab": "LSW_Festival_GB_Barrier.fbx",
+   "name": "A_Barrier",
+   "tag": null,
+   "pos": [
+    6.0,
+    0.0,
+    13.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "Barrier",
+   "prefab": "LSW_Festival_GB_Barrier.fbx",
+   "name": "A_Barrier.001",
+   "tag": null,
+   "pos": [
+    -6.0,
+    0.0,
+    13.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "piece": "CCTVPole",
+   "prefab": "LSW_Festival_GB_CCTVPole.fbx",
+   "name": "A_CCTVPole_cam1",
+   "tag": "cam1",
+   "pos": [
+    11.5,
+    0.0,
+    11.5
+   ],
+   "yaw": -135.0
+  },
+  {
+   "piece": "CCTVPole",
+   "prefab": "LSW_Festival_GB_CCTVPole.fbx",
+   "name": "A_CCTVPole_cam2",
+   "tag": "cam2",
+   "pos": [
+    -11.5,
+    0.0,
+    11.5
+   ],
+   "yaw": 135.0
+  },
+  {
+   "piece": "CCTVPole",
+   "prefab": "LSW_Festival_GB_CCTVPole.fbx",
+   "name": "A_CCTVPole_cam3",
+   "tag": "cam3",
+   "pos": [
+    11.5,
+    0.0,
+    -11.5
+   ],
+   "yaw": -41.05
+  },
+  {
+   "piece": "CCTVPole",
+   "prefab": "LSW_Festival_GB_CCTVPole.fbx",
+   "name": "A_CCTVPole_cam4",
+   "tag": "cam4",
+   "pos": [
+    -11.5,
+    0.0,
+    -11.0
+   ],
+   "yaw": 46.01
+  }
+ ],
+ "planes": [
+  {
+   "name": "A_Surround",
+   "x0": -60.0,
+   "z0": -60.0,
+   "x1": 60.0,
+   "z1": 60.0,
+   "y": -0.01,
+   "material": "MAT_LSW_GB_Ground"
+  }
+ ],
+ "targets": [
+  {
+   "type": "open",
+   "tag": "open",
+   "piece": "TargetWallet",
+   "pos": [
+    3.0,
+    0.0,
+    -6.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "type": "fixed",
+   "tag": "fixed",
+   "piece": "TargetPoster",
+   "pos": [
+    -11.0,
+    0.0,
+    6.0
+   ],
+   "yaw": 90.0
+  },
+  {
+   "type": "social",
+   "tag": "social",
+   "piece": "TargetVendor",
+   "pos": [
+    11.0,
+    0.0,
+    -2.0
+   ],
+   "yaw": -90.0
+  },
+  {
+   "type": "hidden",
+   "tag": "hidden",
+   "piece": "TargetSafe",
+   "pos": [
+    14.0,
+    0.0,
+    -21.0
+   ],
+   "yaw": 90.0
+  },
+  {
+   "type": "social",
+   "tag": "social2",
+   "piece": "TargetVendor",
+   "pos": [
+    -7.0,
+    0.0,
+    4.0
+   ],
+   "yaw": 0.0
+  }
+ ],
+ "tents": [
+  {
+   "name": "A_TentChanging",
+   "pos": [
+    8.0,
+    0.0,
+    6.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "name": "A_TentChanging.001",
+   "pos": [
+    -9.0,
+    0.0,
+    -4.0
+   ],
+   "yaw": -90.0
+  }
+ ],
+ "exits": [
+  {
+   "tag": "exit_south",
+   "pos": [
+    -0.0,
+    0.0,
+    14.0
+   ],
+   "yaw": 0.0
+  },
+  {
+   "tag": "exit_alley",
+   "pos": [
+    14.0,
+    0.0,
+    -26.0
+   ],
+   "yaw": 0.0
+  }
+ ],
+ "cameras": [
+  {
+   "name": "CAM_A_1",
+   "pos": [
+    11.005,
+    5.7,
+    11.005
+   ],
+   "forward": [
+    -0.6872,
+    -0.2355,
+    -0.6872
+   ],
+   "lens_mm": 18.0,
+   "fov_vertical_16x9": 58.72
+  },
+  {
+   "name": "CAM_A_2",
+   "pos": [
+    -11.005,
+    5.7,
+    11.005
+   ],
+   "forward": [
+    0.6872,
+    -0.2355,
+    -0.6872
+   ],
+   "lens_mm": 18.0,
+   "fov_vertical_16x9": 58.72
+  },
+  {
+   "name": "CAM_A_3",
+   "pos": [
+    11.0403,
+    5.7,
+    -10.9721
+   ],
+   "forward": [
+    -0.6384,
+    -0.235,
+    0.733
+   ],
+   "lens_mm": 18.0,
+   "fov_vertical_16x9": 58.72
+  },
+  {
+   "name": "CAM_A_4",
+   "pos": [
+    -10.9964,
+    5.7,
+    -10.5138
+   ],
+   "forward": [
+    0.6985,
+    -0.2395,
+    0.6744
+   ],
+   "lens_mm": 18.0,
+   "fov_vertical_16x9": 58.72
+  }
+ ],
+ "spawn": [
+  {
+   "x0": -11,
+   "z0": -11,
+   "x1": 11,
+   "z1": 12
+  },
+  {
+   "x0": 13,
+   "z0": -24,
+   "x1": 15,
+   "z1": -12
+  }
+ ],
+ "bounds": {
+  "x0": -60.0,
+  "z0": -60.0,
+  "x1": 60.0,
+  "z1": 60.0
+ },
+ "exported": "2026-10-03 14:12:58",
+ "blend": "LSW_Festival_Greybox.blend",
+ "exporter": "lsw_layout_export v1",
+ "counts": {
+  "pieces": 73,
+  "planes": 1,
+  "cameras": 4,
+  "targets": 5,
+  "tents": 2,
+  "exits": 2
+ }
+}

@@ -456,3 +456,22 @@ speed swung between 0.56× and 1.1× (and to zero at 144 fps — standing on 65%
 `Walking` flickered. Averaged, a 50 Hz body at 144 fps never reads standing and reaches the full run
 (test); the run's planted foot moves back 2.5 m per cycle, matching the stride.
 **Reversing.** Cheap: traits during the run are one factor; the smoothing window is one constant.
+
+---
+
+### D-035 — Layouts come from the art's export; Festival_A is the play scene
+**Decision.** A layout is the art's whole-layout FBX (`Art/Models/Festival/LSW_Festival_Layout_<id>.fbx`,
+imported by `LayoutImporter` with mesh colliders, without its Blender cameras and lights) plus a
+`LayoutDefinition` generated from its JSON — cameras, target spots by kind, tents, exits, crowd areas, bounds.
+`Festival_A.unity` holds the game's systems (copied from `Sandbox_Crowd`) on layout A: NavMesh baked on the
+layout, crowd waypoints on a 3 m grid inside the JSON's crowd areas (kept where the NavMesh is at ground
+level), CCTV cameras at the definition's spots (the last one on the worn filter), field spawns inside the
+south exit. Bootstrap's first scene and the editor's session scene are `Festival_A`; `Sandbox_Crowd` stays as
+a sandbox. Target, tent and exit spots are data only until P1.21–23 give them behaviour.
+**Why.** The art owns the level; Unity reads it rather than rebuilding it piece by piece, so a re-export is a
+re-import. Blender cameras imported as Unity cameras drew over every player's view and cost 4 full renders
+(14 fps → 28 fps without them).
+**Open.** A zoomable camera (docs/LAYOUTS.md: "essential, not a bonus") has no task yet. Layouts B–D and a
+new layout per round come with the case format. The scene copies the sandbox's systems — two scenes to keep in
+step until systems move to a shared scene or prefab.
+**Reversing.** Cheap for the importer; the scene split is the part to revisit when B–D arrive.

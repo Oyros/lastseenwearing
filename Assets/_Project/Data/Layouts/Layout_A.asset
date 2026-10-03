@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89d14ccb31887cf47ba1a9b9b965b19b, type: 3}
+  m_Name: Layout_A
+  m_EditorClassIdentifier: LastSeenWearing.Core::LastSeenWearing.Core.Layouts.LayoutDefinition
+  _id: A
+  _title: Town Square
+  _cameras:
+  - Name: CAM_A_1
+    Position: {x: 11.005, y: 5.7, z: 11.005}
+    Forward: {x: -0.6872179, y: -0.23550613, z: -0.6872179}
+    VerticalFieldOfView: 58.72
+  - Name: CAM_A_2
+    Position: {x: -11.005, y: 5.7, z: 11.005}
+    Forward: {x: 0.6872179, y: -0.23550613, z: -0.6872179}
+    VerticalFieldOfView: 58.72
+  - Name: CAM_A_3
+    Position: {x: 11.0403, y: 5.7, z: -10.9721}
+    Forward: {x: -0.6383781, y: -0.23499194, z: 0.7329748}
+    VerticalFieldOfView: 58.72
+  - Name: CAM_A_4
+    Position: {x: -10.9964, y: 5.7, z: -10.5138}
+    Forward: {x: 0.69847286, y: -0.23949069, z: 0.67437375}
+    VerticalFieldOfView: 58.72
+  _targets:
+  - Kind: 0
+    Tag: open
+    Position: {x: 3, y: 0, z: -6}
+    Yaw: 0
+  - Kind: 1
+    Tag: fixed
+    Position: {x: -11, y: 0, z: 6}
+    Yaw: 90
+  - Kind: 2
+    Tag: social
+    Position: {x: 11, y: 0, z: -2}
+    Yaw: -90
+  - Kind: 3
+    Tag: hidden
+    Position: {x: 14, y: 0, z: -21}
+    Yaw: 90
+  - Kind: 2
+    Tag: social2
+    Position: {x: -7, y: 0, z: 4}
+    Yaw: 0
+  _tents:
+  - Name: A_TentChanging
+    Position: {x: 8, y: 0, z: 6}
+    Yaw: 0
+  - Name: A_TentChanging.001
+    Position: {x: -9, y: 0, z: -4}
+    Yaw: -90
+  _exits:
+  - Name: exit_south
+    Position: {x: -0, y: 0, z: 14}
+    Yaw: 0
+  - Name: exit_alley
+    Position: {x: 14, y: 0, z: -26}
+    Yaw: 0
+  _crowdAreas:
+  - X0: -11
+    Z0: -11
+    X1: 11
+    Z1: 12
+  - X0: 13
+    Z0: -24
+    X1: 15
+    Z1: -12
+  _bounds:
+    X0: -60
+    Z0: -60
+    X1: 60
+    Z1: 60

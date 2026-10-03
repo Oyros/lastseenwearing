@@ -86,7 +86,7 @@ programme, sunset, case format, every tool in §07, replay, art, audio.
 | [x] P1.14 | Camera filters per camera (B/W, low-res) | §04.1 | Two different filters on two cameras |
 | [x] P1.15 | Radio channel watcher → field | §04.2 | Patrol hears the watcher anywhere |
 | [x] P1.16 | Proximity voice + radio leak; radio light over a talking officer | §04.2 | A fugitive within range hears the radio; the light shows |
-| [ ] P1.17 | Greybox layout A in Unity from the art greybox export | LAYOUTS.md | PL.04 done; layout walkable, cameras placed as in layout A |
+| [x] P1.17 | Greybox layout A in Unity from the art greybox export | LAYOUTS.md | PL.04 done; layout walkable, cameras placed as in layout A |
 | [ ] P1.18 | Modular NPC with 3–4 clothing slots on the base body | §05 | PL.13–PL.15 done; crowd dressed from the seed |
 | [ ] P1.19 | Composite generation: traits + 1–2 errors; fugitive sees which | §04.1 | Watcher and fugitive panels show the right versions |
 | [ ] P1.20 | Watcher UI: composite panel, last-seen clothing with age timer | §04.1 | Timer counts from the last confirmed sighting |
@@ -162,7 +162,7 @@ open Blender; never save a `.blend` unasked.
 |---|---|---|---|
 | [x] PL.20 | Greybox kit (16 pieces) on a 1 m grid | `Festival/_Ref` | `lsw_check` 15/15 pass; CCTV props lineup (D-013) |
 | [x] PL.21 | Layouts A–D with 5 targets, tents, exits, 4 cameras; coverage maps | `docs/LAYOUTS.md` | Coverage stats and target visibility recorded |
-| [ ] PL.22 | Export greybox kit and layouts to Unity (art side done 2026-10-03: `_Export/Festival/Layouts/`; open layout A in Unity to close) | — | PL.04 done; layout A opens in Unity at scale |
+| [x] PL.22 | Export greybox kit and layouts to Unity (art side done 2026-10-03: `_Export/Festival/Layouts/`; open layout A in Unity to close) | — | PL.04 done; layout A opens in Unity at scale |
 
 ### Track D — full crowd, dog, festival (v1)
 

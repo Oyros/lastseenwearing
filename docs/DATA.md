@@ -30,7 +30,7 @@ So: **prefabs hold references and identity. Config assets hold numbers.**
 | `Data/Wardrobe/<Item>.asset` | `Core/Wardrobe/WardrobeItem` | Id, slot (top, bottom, shoes, hat, face, back, hand, hair), mesh name from the art JSON, body regions it hides, value (light/dark), the words a player would use for it (loc key) |
 | `Data/Wardrobe/WardrobeCatalog.asset` | `Core/Wardrobe/WardrobeCatalog` | Every item, by id |
 | `Data/Targets/<Target>.asset` | `Core/Targets/TargetDefinition` | Id, type (open, hidden, fixed, social — GDD §04.4), the NPC action that imitates it |
-| `Data/Layouts/Layout_<A–D>.asset` | `Core/Layouts/LayoutDefinition` | Scene, camera list, target spots, tent spots and stocks, exits (from `docs/LAYOUTS.md`) |
+| `Data/Layouts/Layout_<A–D>.asset` | `Core/Layouts/LayoutDefinition` | **In use (P1.17): `Layout_A`.** Generated from the art's layout JSON by `Editor/Import/LayoutImporter` (menu *Layouts › Import Layout A*), never typed: cameras (position, forward, vertical FOV), target spots by kind, tents, exits, crowd areas, bounds. Tent stocks later |
 | `Data/Cameras/CctvFilter_<Name>.asset` | `Core/Config/CctvFilterProfile` | One camera's feed look: resolution (default 320×180), contrast, brightness, grain, scan lines, vignette (D-026) — profiles: `Default` 320×180, the good camera; `Worn` 240×135, harder contrast, more grain, scan lines and vignette [PROVISIONAL] (P1.14) |
 | ~~`Data/Gaits/GaitCatalog.asset`~~ | — | Not made (D-025): base walks and traits are `BaseWalk`/`WalkTrait` and the art JSON; the odds are in `CrowdConfig` |
 
@@ -59,7 +59,7 @@ Values below are the GDD's first numbers; P1 tunes them.
 | `DogConfig` | Scent trail 10 s; bark radius, stamina cost, NPC anger; move speed | §03 |
 | `RadioConfig` | **In use (P1.15): 8 kHz µ-law, 100 ms packets, 200 ms prebuffer, 1 s max buffer, volume, radio band-pass 300–3400 Hz; (P1.16) proximity radius 12 m, leak radius 5 m, leak volume 0.5, on-air hold 0.3 s [PROVISIONAL].** Later: noise by distance to the stage | §04.2 |
 | `MovementConfig` | **In use (P0.10, P1.11, P1.12): placeholder capsule walk; patrol walk 1.7 / run 4.2; fugitive run speed, acceleration, turn speed, mouse/stick look, interact range. The fugitive's walk speed is `CrowdConfig`'s (D-029).** Walk/run speeds per role (patrol fast, dog slow), acceleration, look sensitivity | §03 |
-| `CameraConfig` | **In use (P1.11, P1.12): fugitive third person — distance, pivot height, shoulder, damping, pitch range, FOV; field first person — eye height 1.68, horizontal FOV 90 (D-030), near clip, pitch range; aim range 30 m.** Per-role eye heights with the dog | §02 |
+| `CameraConfig` | **In use (P1.11, P1.12): fugitive third person — distance, pivot height, shoulder, damping, pitch range, FOV; field first person — eye height 1.68, horizontal FOV 90 (D-030), near clip, pitch range; aim range 30 m; third-person collision radius 0.2 m (P1.17).** Per-role eye heights with the dog | §02 |
 | `InterrogationConfig` | Scene 10 s; expression choices | §07 |
 
 Adding a domain means adding a row here **and** a field on `GameConfig`. A config that

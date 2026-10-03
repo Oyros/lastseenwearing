@@ -214,6 +214,13 @@ namespace LastSeenWearing.Gameplay.Player
             follow.ShoulderOffset = new Vector3(_camera.ThirdPersonShoulder, 0f, 0f);
             follow.VerticalArmLength = 0f;
             follow.Damping = Vector3.one * _camera.ThirdPersonDamping;
+            // Layout A's stalls and walls (P1.17): pull the camera in rather than clip through them. Characters
+            // are triggers on their own layer and never block it.
+            var obstacles = follow.AvoidObstacles;
+            obstacles.Enabled = true;
+            obstacles.CollisionFilter = LayerMask.GetMask("Default");
+            obstacles.CameraRadius = _camera.ThirdPersonCollisionRadius;
+            follow.AvoidObstacles = obstacles;
         }
     }
 }
