@@ -13,7 +13,7 @@ Keep it short. A snapshot, not a log; finished phases move to §4 as one line.
 |---|---|
 | **Phase** | **P0 — Scaffold** (`docs/ROADMAP.md`) — open, build, connect two players |
 | **In flight** | Nothing |
-| **Next** | `P0.06` — Input Actions asset, `Field` and `Watcher` maps (`/next`) |
+| **Next** | `P0.07` — Localization settings, `en` locale, tables `UI`, `Roles`, `Festival` (`/next`) |
 | **Blocking** | Nothing — UnityMCP connected; Blender MCP timed out this session (only matters for PL work) |
 | **Parallel** | **PL — Look-dev & art**: `PL.00`, `PL.02`, `PL.03`, `PL.05`, `PL.20`, `PL.21` done (references, check/CCTV/ref-loader tools, greybox kit, layouts A–D). Next: `PL.06` self-test in this machine's Blender, then `PL.01` palette and `PL.04` export, then `PL.07` the male base body |
 | **Unity** | 6000.5.7f1 · URP · Netcode for GameObjects + Facepunch transport (listen server over Steam) |
@@ -26,6 +26,7 @@ Keep it short. A snapshot, not a log; finished phases move to §4 as one line.
 - `P0.03` — git repo (`main` + `development`), LFS via `.gitattributes`, first commit; empty `_Project` folders carry `.keep` so their `.meta` files survive a clone.
 - `P0.04` — `GameConfig` (`Core/Config`) and `Data/Config/GameConfig.asset`; empty until the first domain config lands.
 - `P0.05` — `Bootstrap.unity` (only `GameBootstrap`: holds `GameConfig`, loads the first scene) and `Sandbox_Empty.unity`; build list Bootstrap → Sandbox; a Windows dev build runs clean.
+- `P0.06` — `Settings/LastSeenWearingControls.inputactions` (`Field` 10 actions, `Watcher` 12; KeyboardMouse + Gamepad) and the generated `Gameplay/Player/LastSeenWearingControls`; bindings fixed in DATA.md §7 (D-014).
 
 ## 3 · Open questions
 

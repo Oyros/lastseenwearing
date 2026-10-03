@@ -113,3 +113,17 @@ interactive, and test tools work in a temporary scene they delete.
 **Why.** Work continued while the PC was off; headless EEVEE crashes in the NVIDIA driver here, so
 the local path must never spawn `blender.exe`.
 **Reversing.** Nothing to reverse; re-running a generator locally rebuilds the same file in memory.
+
+---
+
+### D-014 — Input gaps closed in the asset, hold timings stay in it
+**Decision.** P0.06 adds three bindings the draft lacked: `Announcement` (N / R3, hold 0.5 s),
+`SecondMonitor` (Shift / RB, held with `SelectFeed`) and `Point` (mouse position). The fugitive's
+fake alarm and camera panel are not actions; they fire from `Interact` at the stall or booth.
+Hold durations (Arrest, Announcement) live on the `Hold` interaction in the `.inputactions` asset,
+not in a config.
+**Why.** GDD §03/§07 name the tools but the draft table had no key for them. LB is already the
+Watcher's push-to-talk, so the second-monitor modifier moved to RB and the announcement to R3.
+Hold length is input feel, edited in the Input Actions editor; a config would split one binding
+across two assets.
+**Reversing.** Cheap: rebinding is an asset edit; moving holds to a config means a processor read.

@@ -117,7 +117,10 @@ Step 5 is not optional. This table is the map; an unmapped config is a lost conf
 ## 7 · Input bindings
 
 Asset: `Assets/_Project/Settings/LastSeenWearingControls.inputactions`. Two control schemes,
-`KeyboardMouse` and `Gamepad`. Code rules: `CONVENTIONS.md` §6. Draft — fixed in P0.
+`KeyboardMouse` and `Gamepad`. Code rules: `CONVENTIONS.md` §6. Fixed in P0.06 (D-014).
+
+Hold timings (Arrest, Announcement: 0.5 s) live on the action's `Hold` interaction in the asset —
+input feel, not gameplay tuning (D-014).
 
 ### `Field` — patrol, plainclothes, dog, fugitive
 
@@ -126,11 +129,11 @@ Asset: `Assets/_Project/Settings/LastSeenWearingControls.inputactions`. Two cont
 | Move | WASD | Left stick | |
 | Look | Mouse delta | Right stick | |
 | Sprint | Shift | L3 | Running raises heat (§04.3) |
-| Interact | E | A | Stop / question / tent / target, by role and context |
-| Arrest | F (hold) | X (hold) | Patrol only |
+| Interact | E | A | Stop / question / tent / target, by role and context; also the fugitive's fake alarm (at a stall) and camera panel (at the booth) — GDD §07 |
+| Arrest | F (hold 0.5 s) | X (hold 0.5 s) | Patrol only |
 | RoleAction | Q | Y | Bark (dog), fake walk (fugitive) |
 | RoleAction2 | R | B | Sniff (dog), NPC control (fugitive) |
-| Signal | Mouse wheel / 1–4 | D-pad | Patrol hand signals |
+| Signal | Mouse wheel / 1–4 | D-pad | Patrol hand signals; a `Vector2` — 1 up, 2 right, 3 down, 4 left |
 | PushToTalk | V | LB | Radio for the Watcher, proximity for the rest |
 | Pause | Esc | Start | |
 
@@ -138,12 +141,15 @@ Asset: `Assets/_Project/Settings/LastSeenWearingControls.inputactions`. Two cont
 
 | Action | Keyboard + mouse | Gamepad | Note |
 |---|---|---|---|
-| SelectFeed | 1–8, click | D-pad | |
-| Pan | Mouse drag / WASD | Left stick | |
+| SelectFeed | 1–8 | D-pad | The pressed control says which feed; a click on a wall tile goes through `Point` + `Mark` |
+| SecondMonitor | Shift (held) | RB (held) | Held with SelectFeed: sends the feed to the second monitor (GDD §03) |
+| Point | Mouse position | — | Cursor on the camera wall |
+| Pan | RMB drag / WASD | Left stick | |
 | Zoom | Mouse wheel | Triggers | |
-| Rewind | Hold R | Hold X | Live feed missed while held |
+| Rewind | R (held) | X (held) | Live feed missed while held; a plain button read while pressed |
 | Mark | LMB | A | Private to the Watcher (§04.2) |
 | CameraLamp | L | Y | |
 | FestivalControls | Tab | View | Opens the panel |
+| Announcement | N (hold 0.5 s) | R3 (hold 0.5 s) | One per round (GDD §07); held so it is never an accident |
 | PushToTalk | V | LB | Radio |
 | Pause | Esc | Start | |
