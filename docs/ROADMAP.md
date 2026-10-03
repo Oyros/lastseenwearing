@@ -87,6 +87,7 @@ programme, sunset, case format, every tool in §07, replay, art, audio.
 | [x] P1.15 | Radio channel watcher → field | §04.2 | Patrol hears the watcher anywhere |
 | [x] P1.16 | Proximity voice + radio leak; radio light over a talking officer | §04.2 | A fugitive within range hears the radio; the light shows |
 | [x] P1.17 | Greybox layout A in Unity from the art greybox export | LAYOUTS.md | PL.04 done; layout walkable, cameras placed as in layout A |
+| [ ] P1.17a | Zoom camera: one camera per layout slowly pans and zooms; the Watcher's `Pan` / `Zoom` act on it (zoom range and pan speed in `WatcherConfig`); which camera zooms is layout data | §04.1, LAYOUTS.md | The Watcher picks out a figure in a "far only" zone of layout A on the zoom camera |
 | [ ] P1.18 | Modular NPC with 3–4 clothing slots on the base body | §05 | PL.13–PL.15 done; crowd dressed from the seed |
 | [ ] P1.19 | Composite generation: traits + 1–2 errors; fugitive sees which | §04.1 | Watcher and fugitive panels show the right versions |
 | [ ] P1.20 | Watcher UI: composite panel, last-seen clothing with age timer | §04.1 | Timer counts from the last confirmed sighting |

@@ -471,7 +471,7 @@ a sandbox. Target, tent and exit spots are data only until P1.21–23 give them 
 **Why.** The art owns the level; Unity reads it rather than rebuilding it piece by piece, so a re-export is a
 re-import. Blender cameras imported as Unity cameras drew over every player's view and cost 4 full renders
 (14 fps → 28 fps without them).
-**Open.** A zoomable camera (docs/LAYOUTS.md: "essential, not a bonus") has no task yet. Layouts B–D and a
+**Open.** A zoomable camera (docs/LAYOUTS.md: "essential, not a bonus") is task P1.17a. Layouts B–D and a
 new layout per round come with the case format. The scene copies the sandbox's systems — two scenes to keep in
 step until systems move to a shared scene or prefab.
 **Reversing.** Cheap for the importer; the scene split is the part to revisit when B–D arrive.
