@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/Sandbox_Empty.unity
     guid: 81757a40223622d448a02ce12445ec3c
+  - enabled: 1
+    path: Assets/_Project/Scenes/Sandbox_Crowd.unity
+    guid: 0f414301ffa850c4cbb0d888cd12c5a7
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 69c79787a767f9d43aad0806c413da8e, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: cfc7f8648c8ab5448a78e67cb8fc44c1, type: 2}

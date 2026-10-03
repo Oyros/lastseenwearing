@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: LastSeenWearing.Gameplay::LastSeenWearing.Gameplay.Bootstrap.GameBootstrap
   _gameConfig: {fileID: 11400000, guid: 44b302cc330a8d240b2015eb40ed140f, type: 2}
-  _firstSceneName: Sandbox_Empty
+  _firstSceneName: Sandbox_Crowd
 --- !u!4 &1188425748
 Transform:
   m_ObjectHideFlags: 0
@@ -202,7 +202,7 @@ MonoBehaviour:
   _editorTransport: 0
   _playerTransport: 1
   _steamAppId: 480
-  _sessionSceneName: Sandbox_Empty
+  _sessionSceneName: Sandbox_Crowd
   _editorAutoStart: 1
 --- !u!114 &1188425751
 MonoBehaviour:

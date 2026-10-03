@@ -13,14 +13,14 @@ Keep it short. A snapshot, not a log; finished phases move to §4 as one line.
 |---|---|
 | **Phase** | **P1 — Prototype** (`docs/ROADMAP.md`) — is it fun for the watcher to describe and the field to search? |
 | **In flight** | Nothing |
-| **Next** | `P1.01` — seeded crowd: 150 capsule NPCs wander a NavMesh from one seed (`/next`) |
+| **Next** | `P1.02` — crowd netcode: host sends seed + only player-affected NPCs; 7-min drift + bandwidth (`/next`) |
 | **Blocking** | Nothing — UnityMCP connected; Blender MCP timed out this session (only matters for PL work) |
 | **Parallel** | **PL — Look-dev & art**: `PL.00`–`PL.06`, `PL.20`, `PL.21` done (references, palette — 85 `MAT_LSW_*` + `_Export/LSW_Palette.json`, check/CCTV/ref-loader tools, `lsw_export` FBX+JSON bridge — greybox kit pieces already in `_Export/Festival/`, layouts A–D). Next: `PL.07` the male base body |
 | **Unity** | 6000.5.7f1 · URP · Netcode for GameObjects + Facepunch transport (listen server over Steam) |
 
 ## 2 · Done in this phase
 
-—
+- `P1.01` — `Core/Crowd` (own PRNG, `CrowdPlanner`, D-017), `CrowdConfig`, `Sandbox_Crowd.unity` (40×40 m, 16 waypoints, baked NavMesh) now the dev sandbox; 150 NPCs; host and MPPM clone get the same seed, plans and path corners. Clone starts later, so positions differ by a phase offset — P1.02.
 
 ## 3 · Open questions
 

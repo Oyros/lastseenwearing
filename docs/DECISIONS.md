@@ -152,3 +152,17 @@ so a Steam session cannot be tested on one machine. D-002 still holds for the ga
 how a developer gets two players without a second PC.
 **Reversing.** Cheap: flip `_editorTransport` to Steam on the bootstrap. The Steam path is unproven
 until two accounts run it (P0.10 stays open for that).
+
+---
+
+### D-017 — The crowd plan is ours: own PRNG, per-NPC streams, no local avoidance
+**Decision.** `Core/Crowd/SeededRandom` (xorshift64* seeded through SplitMix64) is the only RNG the
+crowd uses; NPC `i` draws from `Derive(seed, i)`. `CrowdPlanner` turns the seed into each NPC's
+spawn and looping route of waypoint legs (offset, dwell). `CrowdAgent` walks the plan with a
+`NavMeshAgent` whose obstacle avoidance is off. The pinned-sequence test fails if the PRNG changes.
+**Why.** "Same seed → same crowd" must hold across machines and runtimes; `System.Random`'s
+sequence is an implementation detail, and local avoidance depends on frame timing. Per-NPC streams
+keep NPC `i`'s plan stable when the crowd size changes. Verified in P1.01: host and MPPM clone build
+identical plans and identical NavMesh path corners.
+**Reversing.** The PRNG is cheap to swap but re-rolls every seed. Turning avoidance on needs P1.02's
+answer on how much positional drift the crowd netcode tolerates.

@@ -70,7 +70,7 @@ programme, sunset, case format, every tool in §07, replay, art, audio.
 
 | ID | Task | § | Done when |
 |---|---|---|---|
-| [ ] P1.01 | Seeded crowd: 150 capsule NPCs wander a NavMesh from one seed | §04.1 | Same seed → same paths on two clients |
+| [x] P1.01 | Seeded crowd: 150 capsule NPCs wander a NavMesh from one seed | §04.1 | Same seed → same paths on two clients |
 | [ ] P1.02 | Crowd netcode: host sends seed + only player-affected NPCs (D-005) | §04.1 | 7-min round, 2 clients, no visible desync; bandwidth logged |
 | [ ] P1.03 | Crowd base body + armature + bone contract from the art track | ART_PIPELINE §3 | PL.08–PL.09 done; rig imports as Humanoid |
 | [ ] P1.04 | Base walk clips on the crowd rig | ART_PIPELINE, `LSW_WalkSystem.md` | PL.11 done; blend tree switches without foot sliding |

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: LastSeenWearing.Core::LastSeenWearing.Core.Config.GameConfig
   _lobby: {fileID: 11400000, guid: afa82fcbe9068154485b24df38dd7745, type: 2}
   _movement: {fileID: 11400000, guid: 1cd9eff69a4b471439075844be22e455, type: 2}
+  _crowd: {fileID: 11400000, guid: 121a58c0c85683542b4069daa63b0841, type: 2}
