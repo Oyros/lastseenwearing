@@ -44,7 +44,7 @@ instances join one lobby.
 | [x] P0.05 | `Bootstrap.unity` and `Sandbox_Empty.unity`; Bootstrap first in build list | Build runs to an empty scene |
 | [x] P0.06 | Input Actions asset: `Field` map (patrol, plainclothes, dog, fugitive) and `Watcher` map; keyboard+mouse and gamepad | Both maps load; bindings listed in `docs/DATA.md` |
 | [x] P0.07 | Localization settings, `en` locale, tables `UI`, `Roles`, `Festival` | A test key renders through TMP |
-| [ ] P0.08 | Test runner: one passing edit-mode test in `LastSeenWearing.Tests` | Test runner green |
+| [x] P0.08 | Test runner: one passing edit-mode test in `LastSeenWearing.Tests` | Test runner green |
 | [ ] P0.09 | Windows build script (Editor menu) | One click produces a runnable `Builds/` exe |
 | [ ] P0.10 | NGO + Facepunch transport: host / join a Steam lobby (dev app id 480), Multiplayer Play Mode for a second editor player | Two instances in one lobby; each sees the other's capsule move |
 
