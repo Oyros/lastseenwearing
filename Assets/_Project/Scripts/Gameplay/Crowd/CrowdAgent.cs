@@ -1,72 +1,101 @@
 using LastSeenWearing.Core.Crowd;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace LastSeenWearing.Gameplay.Crowd
 {
     /// <summary>
-    /// Walks one NPC through its <see cref="NpcPlan"/> on the NavMesh: to a leg's waypoint, linger,
-    /// next leg, loop. Local avoidance is off — it is not deterministic, and every client must walk
-    /// the same crowd (P1.01; P1.02 measures what drift remains).
+    /// One crowd NPC on this client. Untouched, it stands wherever its <see cref="NpcSchedule"/> says
+    /// it is at the current crowd time (D-019) — nothing is sent for it. Once a player affects it, the
+    /// server takes it over: the server moves it and every client follows the poses it sends (D-005).
+    /// Driven by <see cref="CrowdSpawner"/>, which ticks every agent in one loop.
     /// </summary>
-    [RequireComponent(typeof(NavMeshAgent))]
     public sealed class CrowdAgent : MonoBehaviour
     {
-        private NavMeshAgent _agent;
-        private NpcPlan _plan;
-        private Vector3[] _waypoints;
-        private int _leg;
-        private float _dwellRemaining;
-        private bool _dwelling;
+        private NpcSchedule _schedule;
+        private float _groundY;
 
-        /// <summary>The leg being walked or lingered at; the same on every client for the same seed.</summary>
-        public int Leg => _leg;
+        // Server: an active shove.
+        private Vector3 _bumpFrom;
+        private Vector3 _bumpTo;
+        private float _bumpElapsed;
+        private float _bumpDuration;
+        private bool _bumping;
 
-        public void Begin(NpcPlan plan, Vector3[] waypoints, float walkSpeed)
+        // Client: the latest pose the server sent.
+        private Vector3 _syncedPosition;
+        private Quaternion _syncedRotation;
+
+        public int Index { get; private set; }
+        public bool IsTakenOver { get; private set; }
+
+        /// <summary>Server: the pose changed since it was last sent.</summary>
+        public bool PoseDirty { get; set; }
+
+        public void Begin(int index, NpcSchedule schedule, float groundY)
         {
-            _agent = GetComponent<NavMeshAgent>();
-            _agent.speed = walkSpeed;
-            _agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
-            _agent.autoBraking = true;
-
-            _plan = plan;
-            _waypoints = waypoints;
-            _agent.Warp(waypoints[plan.SpawnWaypoint] + new Vector3(plan.SpawnOffsetX, 0f, plan.SpawnOffsetZ));
-            _leg = 0;
-            SetDestination();
+            Index = index;
+            _schedule = schedule;
+            _groundY = groundY;
         }
 
-        private void Update()
+        public void FollowSchedule(double crowdTime)
         {
-            if (_plan == null)
+            var at = _schedule.Evaluate(crowdTime, out var heading);
+            transform.SetPositionAndRotation(new Vector3(at.X, _groundY, at.Z), Quaternion.Euler(0f, heading, 0f));
+        }
+
+        /// <summary>Server: take the NPC off its schedule and shove it away from <paramref name="from"/>.</summary>
+        public void Bump(Vector3 from, float distance, float duration)
+        {
+            IsTakenOver = true;
+            var away = transform.position - from;
+            away.y = 0f;
+            if (away.sqrMagnitude < 1e-4f)
+            {
+                away = transform.forward;
+            }
+
+            _bumpFrom = transform.position;
+            _bumpTo = transform.position + away.normalized * distance;
+            _bumpElapsed = 0f;
+            _bumpDuration = duration;
+            _bumping = true;
+        }
+
+        /// <summary>Client: the server says this NPC is taken over and stands here.</summary>
+        public void ReceivePose(Vector3 position, float heading)
+        {
+            if (!IsTakenOver)
+            {
+                IsTakenOver = true;
+                transform.SetPositionAndRotation(position, Quaternion.Euler(0f, heading, 0f));
+            }
+
+            _syncedPosition = position;
+            _syncedRotation = Quaternion.Euler(0f, heading, 0f);
+        }
+
+        public void TickServer(float deltaTime)
+        {
+            if (!_bumping)
             {
                 return;
             }
 
-            if (_dwelling)
-            {
-                _dwellRemaining -= Time.deltaTime;
-                if (_dwellRemaining <= 0f)
-                {
-                    _dwelling = false;
-                    _leg = (_leg + 1) % _plan.Route.Length;
-                    SetDestination();
-                }
-
-                return;
-            }
-
-            if (!_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance)
-            {
-                _dwelling = true;
-                _dwellRemaining = _plan.Route[_leg].DwellSeconds;
-            }
+            _bumpElapsed += deltaTime;
+            var t = Mathf.Clamp01(_bumpElapsed / _bumpDuration);
+            transform.position = Vector3.Lerp(_bumpFrom, _bumpTo, Mathf.SmoothStep(0f, 1f, t));
+            PoseDirty = true;
+            _bumping = t < 1f;
         }
 
-        private void SetDestination()
+        /// <summary>Client: ease toward the last received pose, at the rate poses arrive.</summary>
+        public void TickClient(float deltaTime, float syncRate)
         {
-            var leg = _plan.Route[_leg];
-            _agent.SetDestination(_waypoints[leg.Waypoint] + new Vector3(leg.OffsetX, 0f, leg.OffsetZ));
+            var k = 1f - Mathf.Exp(-syncRate * deltaTime);
+            transform.SetPositionAndRotation(
+                Vector3.Lerp(transform.position, _syncedPosition, k),
+                Quaternion.Slerp(transform.rotation, _syncedRotation, k));
         }
     }
 }

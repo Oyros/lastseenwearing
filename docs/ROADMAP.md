@@ -71,7 +71,7 @@ programme, sunset, case format, every tool in §07, replay, art, audio.
 | ID | Task | § | Done when |
 |---|---|---|---|
 | [x] P1.01 | Seeded crowd: 150 capsule NPCs wander a NavMesh from one seed | §04.1 | Same seed → same paths on two clients |
-| [ ] P1.02 | Crowd netcode: host sends seed + only player-affected NPCs (D-005) | §04.1 | 7-min round, 2 clients, no visible desync; bandwidth logged |
+| [x] P1.02 | Crowd netcode: host sends seed + only player-affected NPCs (D-005) | §04.1 | 7-min round, 2 clients, no visible desync; bandwidth logged |
 | [ ] P1.03 | Crowd base body + armature + bone contract from the art track | ART_PIPELINE §3 | PL.08–PL.09 done; rig imports as Humanoid |
 | [ ] P1.04 | Base walk clips on the crowd rig | ART_PIPELINE, `LSW_WalkSystem.md` | PL.11 done; blend tree switches without foot sliding |
 | [ ] P1.05 | Additive walk layers | `LSW_WalkSystem.md` §2 | PL.12 done; each layer reads at 0.5 weight |
@@ -137,9 +137,9 @@ open Blender; never save a `.blend` unasked.
 
 | ID | Task | Ref | Done when |
 |---|---|---|---|
-| [ ] PL.07 | Male base body (average), body regions split | `Crowd/_Ref` Body + LowPoly M_Average, Hand | Exit gate (ART_PIPELINE §5); seams closed in A-pose |
-| [ ] PL.08 | Armature + skin, sockets; contract table final | ART_PIPELINE §3 | Exported; the contract is locked (DECISIONS) |
-| [ ] PL.09 | Male builds as shape keys (`Build_Slim`, `Build_Heavy`); slim exaggerated | `Crowd/_Ref` M_Slim, M_Heavy | Three builds nameable in a CCTV lineup |
+| [x] PL.07 | Male base body (average), body regions split | `Crowd/_Ref` Body + LowPoly M_Average, Hand | Exit gate (ART_PIPELINE §5); seams closed in A-pose |
+| [x] PL.08 | Armature + skin, sockets; contract table final | ART_PIPELINE §3 | Exported; the contract is locked (DECISIONS) |
+| [x] PL.09 | Male builds as shape keys (`Build_Slim`, `Build_Heavy`); slim exaggerated | `Crowd/_Ref` M_Slim, M_Heavy | Three builds nameable in a CCTV lineup |
 | [ ] PL.10 | Run the walk test with 3–5 people; adjust layer strengths in `LSW_WalkSystem.md` | `docs/WALKTEST.md` | Results recorded; strengths updated |
 | [ ] PL.11 | Walk base clips (Normal, Brisk, Stroll, Heavy) | `LSW_WalkSystem.md` §2 | No foot sliding in a blend test |
 | [ ] PL.12 | Walk additive layers (Limp L/R, Hunch, Sway, Bounce, ArmSwing ±) | `LSW_WalkSystem.md` §2 | Each readable at 0.5 weight in a 320×180 walking lineup |

@@ -37,14 +37,14 @@ Unity 6000.5 (`GetInstanceID` obsolete-as-error); 3.1.7 does (Borrowed Crown D-0
 
 ---
 
-### D-005 — Crowd is derived from a seed [PROVISIONAL]
+### D-005 — Crowd is derived from a seed
 **Decision.** Every client simulates the same 100–150 NPCs from the round seed (appearance, gait,
 routes). Only NPCs a player has affected — bumped, stopped, controlled, scattered — become
 server-owned and synced.
 **Why.** Syncing 150 transforms at 4–5 players costs bandwidth for no gameplay; a seed costs one int.
 Gait signatures in particular never need sending.
-**Reversing.** P1.02 decides with a spike. If determinism drifts, fall back to server-owned NPCs with
-reduced-rate transforms — a networking rewrite of the crowd, not of the rules.
+**Reversing.** Confirmed by P1.02 (D-019). If determinism ever drifts, fall back to server-owned NPCs
+with reduced-rate transforms — a networking rewrite of the crowd, not of the rules.
 
 ---
 
@@ -166,3 +166,32 @@ keep NPC `i`'s plan stable when the crowd size changes. Verified in P1.01: host 
 identical plans and identical NavMesh path corners.
 **Reversing.** The PRNG is cheap to swap but re-rolls every seed. Turning avoidance on needs P1.02's
 answer on how much positional drift the crowd netcode tolerates.
+
+---
+
+### D-018 — Crowd bone contract locked
+**Decision.** The crowd skeleton is `LSW_Crowd_Rig_M` from `LastSeenWearingArt/Scripts/lsw_rig.py`: 34 bones
+(ART_PIPELINE §3), `Root` non-deform above `Hips`, Blender `.L/.R` names kept in the FBX, seven sockets as empties
+parented to bones. Exported as `_Export/Crowd/LSW_Crowd_Body_M.fbx` + `.json` (PL.08).
+**Why.** Unity Humanoid needs a stable bone set before P1.03 builds the avatar, and every garment, hair shell and
+clip from here on is skinned against these names. Weights come from a position function, not hand painting, so
+regions and future garments get identical weights where they meet and can be regenerated.
+**Reversing.** Expensive after P1.03: a renamed or re-parented bone breaks the avatar, every exported garment and
+every clip. Adding a bone (e.g. full fingers) is cheap — the mesh keeps separate fingers for that (D-012).
+
+---
+
+### D-019 — An untouched NPC is a function of server time
+**Decision.** An NPC's pose is `NpcSchedule.Evaluate(crowd time)`: its plan's legs laid out on the
+NavMesh, walked at a fixed speed with dwells, looping (`Core/Crowd`). Crowd time is NGO server time
+minus the crowd's start, which the host sends once with the seed. Nothing else is sent for an
+untouched NPC. An affected NPC (P1.02: a bump) is taken over by the server; its pose goes to clients
+as a named message (index, x, z, heading — 16 B) at `CrowdConfig.TakenOverSyncRate`, and a late
+joiner asks for every taken-over NPC once. `NavMeshAgent` is gone from the crowd.
+**Why.** A per-frame simulation drifts with frame timing and leaves a late joiner behind. Measured in
+P1.02 over 7.4 min, editor host + MPPM client: the client's crowd clock sat a constant 0.049–0.052 s
+behind (NGO's 50 ms server buffer) with no growth; the same NPC differed by at most ~7 cm. Crowd sync
+was 0 B/min untouched, 80 B for one bump; a client that left and rejoined mid-round rebuilt the same
+crowd with the bumped NPC in place.
+**Reversing.** NPCs react only once taken over; anything reactive (scatter, stop, NPC control) is a
+takeover. Removing the 50 ms offset is one line (add `ServerBufferSec` on clients) if it ever shows.

@@ -26,12 +26,23 @@ namespace LastSeenWearing.Core.Config
         [Tooltip("Metres per second. [PROVISIONAL] — the gait system (P1.04–P1.06) refines this.")]
         [SerializeField, Min(0f)] private float _walkSpeed = 1.3f;
 
+        [Header("Taken-over NPCs (D-005, D-019)")]
+        [Tooltip("Pose updates per second for NPCs the server has taken over from their schedule.")]
+        [SerializeField, Range(1f, 30f)] private float _takenOverSyncRate = 10f;
+        [Tooltip("Metres a bumped NPC is shoved. [PROVISIONAL]")]
+        [SerializeField, Min(0f)] private float _bumpDistance = 2f;
+        [Tooltip("Seconds the shove takes.")]
+        [SerializeField, Min(0.01f)] private float _bumpDuration = 0.4f;
+
         public int NpcCount => _npcCount;
         public int RouteLength => _routeLength;
         public float WaypointSpread => _waypointSpread;
         public float DwellMin => _dwellMin;
         public float DwellMax => _dwellMax;
         public float WalkSpeed => _walkSpeed;
+        public float TakenOverSyncRate => _takenOverSyncRate;
+        public float BumpDistance => _bumpDistance;
+        public float BumpDuration => _bumpDuration;
 
         private void OnValidate()
         {

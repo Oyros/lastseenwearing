@@ -49,7 +49,7 @@ Values below are the GDD's first numbers; P1 tunes them.
 | `GameConfig` | The root. References every config below. Nothing else | — |
 | `LobbyConfig` | **In use (P0.10): min/max players.** Players 4–5; a 4-player lobby drops the dog (D-007); rounds per case default and range | §03, §06 |
 | `RoundConfig` | Round length; programme times — concert 2:00, fireworks 4:00 (flare 10 s), closing 5:00; sunset curve; last-cuff chase 45 s | §06 |
-| `CrowdConfig` | **In use (P1.01): NPC count, route length, waypoint spread, dwell range, walk speed.** NPC count 100–150; lookalikes per round 2–3; height scale 0.92–1.10 in three bands; reaction radii (running, bump, dog bark); false-positive target-action rate | §04.1, §04.4 |
+| `CrowdConfig` | **In use (P1.01–02): NPC count, route length, waypoint spread, dwell range, walk speed, taken-over sync rate, bump distance and duration.** NPC count 100–150; lookalikes per round 2–3; height scale 0.92–1.10 in three bands; reaction radii (running, bump, dog bark); false-positive target-action rate | §04.1, §04.4 |
 | `CompositeConfig` | Errors per composite 1–2; reveal order per round (build+height, hair, walk, then the rest — D-008); witness-confidence levels | §04.1 |
 | `CaptureConfig` | Heat sources and rates (stop, running nearby, looking at cameras); full-heat threshold; stop 3 s; complaints per lost cuff 3; cuffs per round 3; wrong-arrest time bonus and panic radius | §04.3 |
 | `FugitiveConfig` | Target durations — open 2 s, social 4 s, fixed 3 s, hidden 5 s; targets on map 5, needed 3; exits 2–3; fake walk ≤ 20 s; NPC control 10 s, 1/round; camera panel 3 s | §04.4, §07 |
