@@ -5,6 +5,7 @@ using LastSeenWearing.Core.Randomness;
 using LastSeenWearing.Core.Roles;
 using LastSeenWearing.Core.Round;
 using LastSeenWearing.Gameplay.Crowd;
+using LastSeenWearing.Gameplay.Player;
 using LastSeenWearing.Gameplay.Roles;
 using Unity.Netcode;
 using UnityEngine;
@@ -23,7 +24,12 @@ namespace LastSeenWearing.Gameplay.Round
         private struct RoleSpawn
         {
             public Role Role;
+
+            /// <summary>Where the role starts; none for the fugitive, who starts inside the crowd.</summary>
             public Transform Point;
+
+            /// <summary>The role's body; none falls back to the placeholder player prefab.</summary>
+            public NetworkObject Prefab;
         }
 
         [SerializeField] private RoundConfig _config;
@@ -191,8 +197,13 @@ namespace LastSeenWearing.Gameplay.Round
                 }
 
                 var position = SpawnPoint(entry.Role, random);
-                var body = Instantiate(_playerPrefab, position, Quaternion.identity);
+                var body = Instantiate(PrefabFor(entry.Role), position, Quaternion.identity);
                 body.SpawnAsPlayerObject(entry.ClientId, true);
+                if (body.TryGetComponent<FugitiveController>(out var fugitive))
+                {
+                    // After the spawn: a network variable written before it is not tied to the object yet.
+                    fugitive.SetCrowdSeed(_crowd.Seed); // its walk is drawn after this round's crowd
+                }
                 _bodies.Add(body);
             }
         }
@@ -214,6 +225,19 @@ namespace LastSeenWearing.Gameplay.Round
             }
 
             return transform.position;
+        }
+
+        private NetworkObject PrefabFor(Role role)
+        {
+            foreach (var spawn in _spawns)
+            {
+                if (spawn.Role == role && spawn.Prefab != null)
+                {
+                    return spawn.Prefab;
+                }
+            }
+
+            return _playerPrefab;
         }
 
         private void DespawnBodies()

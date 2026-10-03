@@ -72,6 +72,15 @@ namespace LastSeenWearing.Core.Crowd
             return signatures;
         }
 
+        /// <summary>
+        /// The walk of a character who is not in the crowd — the fugitive (slot 0), later the plainclothes —
+        /// drawn after the crowd's, so it is unique among them too (GDD §05). Every client gets the same.
+        /// </summary>
+        public static GaitSignature CharacterSignature(int crowdSeed, int crowdSize, int slot, GaitSettings settings)
+        {
+            return SignaturesFor(crowdSeed, crowdSize + slot + 1, settings)[crowdSize + slot];
+        }
+
         private static GaitSignature Draw(SeededRandom random, GaitSettings settings)
         {
             var walk = (BaseWalk)random.Range(0, BaseWalkCount);

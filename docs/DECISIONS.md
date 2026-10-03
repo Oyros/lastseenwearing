@@ -344,3 +344,22 @@ the team chose these in P1.10. Verified with three MPPM players on a 40 s test c
 programme on time, bodies by role, a new crowd seed each round reaching the clients, back to the lobby
 with roles unlocked.
 **Reversing.** Cheap: values are `RoundConfig`; the time-up winner is one line in `RoundRules`.
+
+---
+
+### D-029 — The fugitive is a crowd body that walks on the crowd's own code
+**Decision.** The fugitive (`Prefabs/Characters/Fugitive.prefab`, `Gameplay/Player/FugitiveController`) is
+the crowd NPC's body — same model, visible parts and animator — driven by the same `Gameplay/Crowd/
+WalkCycle` the NPCs now use. It walks at `CrowdConfig.WalkSpeed` × its pace (only the sprint, turning,
+look and interact range are `MovementConfig`'s), its walk is `GaitPlanner.CharacterSignature(crowd seed,
+crowd size, slot 0)` — drawn after the crowd's, so no NPC shares it — and the server hands it the
+crowd seed right after spawning it. Every client animates it from the distance its body covers. The owner
+steers relative to a Cinemachine third-person camera on a look pivot (`CameraConfig`). Interact asks the
+server, which checks range and the target (`Gameplay/Interaction`). `RoundDirector` spawns a prefab per
+role; Patrol stays a capsule until P1.12.
+**Why.** "Moves like an NPC by default" (P1.11) is strongest when there is one walk implementation, not
+two that agree. Tested: a fugitive and an NPC given the same walk and distance produce identical animator
+phase, walking state and layer weights; played by the team, it blends in.
+**Open.** The sprint plays the walk cycle faster and looks comic (team, P1.11): a run clip is asked of the
+art track (PL.11b).
+**Reversing.** Cheap for the camera and config; the shared `WalkCycle` is the point and should stay.

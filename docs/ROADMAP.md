@@ -80,7 +80,7 @@ programme, sunset, case format, every tool in §07, replay, art, audio.
 | [x] P1.08 | Week-1 review: crowd model and walk system go / no-go | — | Decision recorded in DECISIONS |
 | [x] P1.09 | Lobby roles: Watcher, Patrol, Fugitive assignment | §03 | Three players get their roles; roles are visible to all |
 | [x] P1.10 | Round flow: spawn, timer, end screen; one `RoundDirector` authority | §06 | Round starts, ends on timer, restarts |
-| [ ] P1.11 | Fugitive controller: third person, NPC-speed walk, interact | §03 | Fugitive moves like an NPC by default |
+| [x] P1.11 | Fugitive controller: third person, NPC-speed walk, interact | §03 | Fugitive moves like an NPC by default |
 | [ ] P1.12 | Patrol controller: first person, run, placeholder FP arms | §03 | Patrol moves and aims |
 | [ ] P1.13 | Watcher view: 2 monitor feeds, camera list, switch delay | §04.1 | Switching costs the configured delay |
 | [ ] P1.14 | Camera filters per camera (B/W, low-res) | §04.1 | Two different filters on two cameras |
@@ -143,6 +143,7 @@ open Blender; never save a `.blend` unasked.
 | [ ] PL.10 | Run the walk test with 3–5 people; adjust layer strengths in `LSW_WalkSystem.md` | `docs/WALKTEST.md` | Results recorded; strengths updated |
 | [x] PL.11 | Walk base clips (Normal, Brisk, Stroll, Heavy) | `LSW_WalkSystem.md` §2 | No foot sliding in a blend test |
 | [x] PL.11a | `Idle_Stand` clip on the crowd rig: weight shift, breathing, same hip height as `Walk_Normal` at rest, loopable; exported in the body FBX and listed in its JSON like the walks | `LSW_WalkSystem.md` §2 | Requested by P1.04 (dwelling NPCs freeze mid-stride until it exists); blends from any walk phase without a pop |
+| [ ] PL.11b | `Run` clip on the crowd rig for the fugitive's sprint: same contact convention as the walks (`contact_L`/`contact_R` markers), its own stride length in the JSON (`speed` × cycle), loopable, in the body FBX | `LSW_WalkSystem.md` §2 | Requested by P1.11 — the sprint plays the walk cycle faster and the team called it comic; blends from `Walk_*` without a foot pop |
 | [x] PL.12 | Walk additive layers (Limp L/R, Hunch, Sway, Bounce, ArmSwing ±) | `LSW_WalkSystem.md` §2 | Each readable at 0.5 weight in a 320×180 walking lineup |
 | [x] PL.12a | **Spine pitch sign is inverted in `lsw_walk.py`** (found by P1.05): on this rig a negative X rotation on Spine/Chest bends *back*, so `lean` and `hunch` bend the wrong way and Neck/Head compensate the wrong way. Measured on the exported FBX imported **Generic** (raw bones, no Humanoid; front = +Z by the toes): `Walk_Brisk` head 4.5 cm *behind* the hips (meant +9° forward), `Walk_Stroll` 3.8 cm *ahead* (meant −3°), `Add_Hunch` 18 cm *behind*. Flip the X sign for Spine/Chest/Neck/Head in the style lean and the hunch layer; check arm-swing phase against the legs while there | `LSW_WalkSystem.md` §2 | Generic import of the re-export: Brisk head ahead of hips, Stroll behind, Hunch ahead; P1.05 lineup re-rendered |
 | [x] PL.13 | Head base + 2 hair shells (crew cut, long) | `LSW_Ref_HeadsHair.png` | Shells swap with no gap or clipping |
@@ -168,7 +169,7 @@ open Blender; never save a `.blend` unasked.
 | [x] PL.23 | Female base body + builds on the same armature | `Crowd/_Ref` F_* | Binds; walk clips play without retarget artefacts |
 | [x] PL.24 | Every garment fitted to the female body | — | Garments × 2 sexes × 3 builds, no clipping |
 | [x] PL.25 | Hair set complete (8 options incl. beard/moustache shells) | `LSW_Ref_HeadsHair.png` | 8 options distinct in a CCTV lineup |
-| [ ] PL.26 | Tops complete: trench (belted), open flannel over tee, puffer (big bands), sweater, vest | `LSW_Ref_Clothing.png` | No two tops confusable at 320×180 |
+| [x] PL.26 | Tops complete: trench (belted), open flannel over tee, puffer (big bands), sweater, vest | `LSW_Ref_Clothing.png` | No two tops confusable at 320×180 |
 | [ ] PL.27 | Bottoms complete: skirt, jeans (rolled cuffs / wide leg), overalls | `LSW_Ref_Clothing.png` | Bottoms lineup passes |
 | [ ] PL.28 | Hats complete: straw (wide), beanie (tall), bucket (wider brim), paper crown | `LSW_Ref_Accessories.png` | Hats lineup from the CCTV angle passes |
 | [ ] PL.29 | Masks (fox, half, cartoon) on `SOCKET_Face`, light/dark | `LSW_Ref_Accessories.png` | Full masks read on camera; half mask at stop distance (D-009) |

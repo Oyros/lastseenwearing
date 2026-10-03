@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddd25ab04a14e2e4caef88ae446b0715, type: 3}
+  m_Name: CameraConfig
+  m_EditorClassIdentifier: LastSeenWearing.Core::LastSeenWearing.Core.Config.CameraConfig
+  _thirdPersonDistance: 3.2
+  _thirdPersonPivotHeight: 1.55
+  _thirdPersonShoulder: 0.45
+  _thirdPersonDamping: 0.12
+  _thirdPersonPitchMin: -35
+  _thirdPersonPitchMax: 60
+  _thirdPersonFieldOfView: 60
