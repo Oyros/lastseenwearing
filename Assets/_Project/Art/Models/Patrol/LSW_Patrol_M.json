@@ -1,7 +1,7 @@
 {
  "kind": "rigged",
  "family": "Patrol",
- "fbx": "LSW_Patrol_M",
+ "fbx": "LSW_Patrol_M.fbx",
  "armature": "LSW_Patrol_Rig_M",
  "bones": [
   "Hips",
@@ -88,6 +88,8 @@
    "double_sided": true,
    "region": null,
    "sex": null,
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -105,6 +107,8 @@
    "double_sided": true,
    "region": null,
    "sex": null,
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -122,6 +126,8 @@
    "double_sided": true,
    "region": null,
    "sex": null,
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -143,6 +149,8 @@
    "double_sided": true,
    "region": null,
    "sex": null,
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -160,6 +168,8 @@
    "double_sided": false,
    "region": "Foot",
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -177,6 +187,8 @@
    "double_sided": false,
    "region": "Foot",
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -194,6 +206,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -211,6 +225,8 @@
    "double_sided": false,
    "region": "Hand",
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -228,6 +244,8 @@
    "double_sided": false,
    "region": "Hand",
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -247,6 +265,8 @@
    "double_sided": true,
    "region": null,
    "sex": null,
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -264,6 +284,8 @@
    "double_sided": false,
    "region": "Head",
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -285,6 +307,8 @@
    "double_sided": true,
    "region": null,
    "sex": null,
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -303,6 +327,8 @@
    "double_sided": true,
    "region": null,
    "sex": null,
+   "excludes": [],
+   "close_range": false,
    "bone": null
   }
  ],
@@ -310,10 +336,10 @@
  "verify": {
   "limb_nodes": 68,
   "skin_markers": 15,
-  "bytes": 3794492,
+  "bytes": 3815596,
   "ok": true
  },
- "exported": "2026-10-03 14:26:53",
+ "exported": "2026-10-03 19:12:55",
  "blend": "(unsaved)",
  "exporter": "lsw_export v1",
  "axes": "Unity: -Z forward, Y up, metres"

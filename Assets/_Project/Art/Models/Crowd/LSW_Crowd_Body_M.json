@@ -1,7 +1,7 @@
 {
  "kind": "rigged",
  "family": "Crowd",
- "fbx": "LSW_Crowd_Body_M",
+ "fbx": "LSW_Crowd_Body_M.fbx",
  "armature": "LSW_Crowd_Rig_M",
  "bones": [
   "Hips",
@@ -87,6 +87,8 @@
    "double_sided": true,
    "region": null,
    "sex": null,
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -112,6 +114,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -137,6 +141,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -161,6 +167,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -185,6 +193,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -208,6 +218,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -231,6 +243,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -254,6 +268,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -277,6 +293,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -301,6 +319,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -325,6 +345,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -349,6 +371,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -373,6 +397,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -393,6 +419,8 @@
    "double_sided": false,
    "region": "Foot",
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -413,6 +441,8 @@
    "double_sided": false,
    "region": "Foot",
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -433,6 +463,8 @@
    "double_sided": false,
    "region": "Foot",
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -453,6 +485,8 @@
    "double_sided": false,
    "region": "Foot",
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -473,6 +507,8 @@
    "double_sided": false,
    "region": "Forearm",
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -493,6 +529,8 @@
    "double_sided": false,
    "region": "Forearm",
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -513,6 +551,8 @@
    "double_sided": false,
    "region": "Forearm",
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -533,6 +573,8 @@
    "double_sided": false,
    "region": "Forearm",
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -553,6 +595,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -573,6 +617,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -593,6 +639,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -613,6 +661,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -633,6 +683,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -653,6 +705,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -673,6 +727,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -693,6 +749,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -713,6 +771,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -733,6 +793,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -753,6 +815,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -773,6 +837,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -793,6 +859,8 @@
    "double_sided": false,
    "region": "Hand",
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -813,6 +881,8 @@
    "double_sided": false,
    "region": "Hand",
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -833,6 +903,8 @@
    "double_sided": false,
    "region": "Hand",
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -853,6 +925,8 @@
    "double_sided": false,
    "region": "Hand",
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -873,6 +947,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -893,6 +969,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -913,6 +991,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -933,6 +1013,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -953,6 +1035,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -973,6 +1057,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -993,6 +1079,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1013,6 +1101,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1034,6 +1124,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1055,6 +1147,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1075,6 +1169,8 @@
    "double_sided": false,
    "region": "Head",
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1095,6 +1191,158 @@
    "double_sided": false,
    "region": "Head",
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Mask_Cartoon_F",
+   "base": "LSW_Crowd_Mask_Cartoon_F",
+   "lod": 0,
+   "tris": 96,
+   "materials": [
+    "MAT_LSW_MaskWhite",
+    "MAT_LSW_MaskBlack"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "face",
+   "variant": "Cartoon",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
+   "excludes": [
+    "hat",
+    "facial"
+   ],
+   "close_range": false,
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Mask_Cartoon_M",
+   "base": "LSW_Crowd_Mask_Cartoon_M",
+   "lod": 0,
+   "tris": 96,
+   "materials": [
+    "MAT_LSW_MaskWhite",
+    "MAT_LSW_MaskBlack"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "face",
+   "variant": "Cartoon",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "excludes": [
+    "hat",
+    "facial"
+   ],
+   "close_range": false,
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Mask_Fox_F",
+   "base": "LSW_Crowd_Mask_Fox_F",
+   "lod": 0,
+   "tris": 140,
+   "materials": [
+    "MAT_LSW_MaskWhite",
+    "MAT_LSW_MaskBlack"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "face",
+   "variant": "Fox",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
+   "excludes": [
+    "hat",
+    "facial"
+   ],
+   "close_range": false,
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Mask_Fox_M",
+   "base": "LSW_Crowd_Mask_Fox_M",
+   "lod": 0,
+   "tris": 140,
+   "materials": [
+    "MAT_LSW_MaskWhite",
+    "MAT_LSW_MaskBlack"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "face",
+   "variant": "Fox",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "excludes": [
+    "hat",
+    "facial"
+   ],
+   "close_range": false,
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Mask_Half_F",
+   "base": "LSW_Crowd_Mask_Half_F",
+   "lod": 0,
+   "tris": 64,
+   "materials": [
+    "MAT_LSW_MaskWhite",
+    "MAT_LSW_MaskBlack"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "face",
+   "variant": "Half",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
+   "excludes": [],
+   "close_range": true,
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Mask_Half_M",
+   "base": "LSW_Crowd_Mask_Half_M",
+   "lod": 0,
+   "tris": 64,
+   "materials": [
+    "MAT_LSW_MaskWhite",
+    "MAT_LSW_MaskBlack"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "face",
+   "variant": "Half",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "excludes": [],
+   "close_range": true,
    "bone": null
   },
   {
@@ -1115,6 +1363,8 @@
    "double_sided": true,
    "region": null,
    "sex": null,
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1135,6 +1385,8 @@
    "double_sided": false,
    "region": "Pelvis",
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1155,6 +1407,8 @@
    "double_sided": false,
    "region": "Pelvis",
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1175,6 +1429,8 @@
    "double_sided": false,
    "region": "Shin",
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1195,6 +1451,8 @@
    "double_sided": false,
    "region": "Shin",
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1215,6 +1473,8 @@
    "double_sided": false,
    "region": "Shin",
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1235,6 +1495,8 @@
    "double_sided": false,
    "region": "Shin",
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1255,6 +1517,8 @@
    "double_sided": false,
    "region": "Thigh",
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1275,6 +1539,8 @@
    "double_sided": false,
    "region": "Thigh",
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1295,6 +1561,8 @@
    "double_sided": false,
    "region": "Thigh",
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1315,6 +1583,8 @@
    "double_sided": false,
    "region": "Thigh",
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1340,6 +1610,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1365,6 +1637,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1389,6 +1663,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1413,6 +1689,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1437,6 +1715,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1461,6 +1741,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1486,6 +1768,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1511,6 +1795,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1536,6 +1822,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1561,6 +1849,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1586,6 +1876,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1611,6 +1903,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1633,6 +1927,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1655,6 +1951,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1677,6 +1975,8 @@
    "double_sided": true,
    "region": null,
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1699,6 +1999,8 @@
    "double_sided": true,
    "region": null,
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1719,6 +2021,8 @@
    "double_sided": false,
    "region": "Torso",
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1739,6 +2043,8 @@
    "double_sided": false,
    "region": "Torso",
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1759,6 +2065,8 @@
    "double_sided": false,
    "region": "UpperArm",
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1779,6 +2087,8 @@
    "double_sided": false,
    "region": "UpperArm",
    "sex": "F",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1799,6 +2109,8 @@
    "double_sided": false,
    "region": "UpperArm",
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -1819,6 +2131,8 @@
    "double_sided": false,
    "region": "UpperArm",
    "sex": "M",
+   "excludes": [],
+   "close_range": false,
    "bone": null
   }
  ],
@@ -2220,11 +2534,11 @@
  ],
  "verify": {
   "limb_nodes": 68,
-  "skin_markers": 84,
-  "bytes": 11476460,
+  "skin_markers": 90,
+  "bytes": 12039052,
   "ok": true
  },
- "exported": "2026-10-03 15:20:22",
+ "exported": "2026-10-03 19:12:48",
  "blend": "(unsaved)",
  "exporter": "lsw_export v1",
  "axes": "Unity: -Z forward, Y up, metres"

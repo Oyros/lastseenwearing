@@ -1,7 +1,7 @@
 {
  "kind": "rigged",
  "family": "FP",
- "fbx": "LSW_FP_Arms_M",
+ "fbx": "LSW_FP_Arms_M.fbx",
  "armature": "LSW_FP_Rig_M",
  "bones": [
   "Shoulder.L",
@@ -50,6 +50,9 @@
    "hides": [],
    "double_sided": true,
    "region": null,
+   "sex": null,
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -66,6 +69,9 @@
    "hides": [],
    "double_sided": false,
    "region": "Hand",
+   "sex": null,
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -82,6 +88,9 @@
    "hides": [],
    "double_sided": false,
    "region": "Hand",
+   "sex": null,
+   "excludes": [],
+   "close_range": false,
    "bone": null
   },
   {
@@ -98,6 +107,9 @@
    "hides": [],
    "double_sided": true,
    "region": null,
+   "sex": null,
+   "excludes": [],
+   "close_range": false,
    "bone": null
   }
  ],
@@ -184,7 +196,7 @@
   "bytes": 594892,
   "ok": true
  },
- "exported": "2026-10-03 14:06:53",
+ "exported": "2026-10-03 19:12:56",
  "blend": "(unsaved)",
  "exporter": "lsw_export v1",
  "axes": "Unity: -Z forward, Y up, metres"
