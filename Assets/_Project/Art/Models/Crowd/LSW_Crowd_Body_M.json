@@ -70,12 +70,131 @@
  ],
  "meshes": [
   {
-   "name": "LSW_Crowd_Bottom_Shorts_M",
-   "base": "LSW_Crowd_Bottom_Shorts_M",
+   "name": "LSW_Crowd_Beard_M",
+   "base": "LSW_Crowd_Beard_M",
    "lod": 0,
-   "tris": 184,
+   "tris": 72,
    "materials": [
-    "MAT_LSW_ClothOliveLight"
+    "MAT_LSW_HairDarkBrown"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "facial",
+   "variant": "Beard",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": null,
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Bottom_Jeans_F",
+   "base": "LSW_Crowd_Bottom_Jeans_F",
+   "lod": 0,
+   "tris": 440,
+   "materials": [
+    "MAT_LSW_ClothDenimDark",
+    "MAT_LSW_ClothDenimLight"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "bottom",
+   "variant": "Jeans",
+   "hides": [
+    "Pelvis",
+    "Thigh",
+    "Shin"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Bottom_Jeans_M",
+   "base": "LSW_Crowd_Bottom_Jeans_M",
+   "lod": 0,
+   "tris": 440,
+   "materials": [
+    "MAT_LSW_ClothDenimDark",
+    "MAT_LSW_ClothDenimLight"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "bottom",
+   "variant": "Jeans",
+   "hides": [
+    "Pelvis",
+    "Thigh",
+    "Shin"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Bottom_Overalls_F",
+   "base": "LSW_Crowd_Bottom_Overalls_F",
+   "lod": 0,
+   "tris": 460,
+   "materials": [
+    "MAT_LSW_ClothBlueLight"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "bottom",
+   "variant": "Overalls",
+   "hides": [
+    "Pelvis",
+    "Thigh",
+    "Shin"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Bottom_Overalls_M",
+   "base": "LSW_Crowd_Bottom_Overalls_M",
+   "lod": 0,
+   "tris": 460,
+   "materials": [
+    "MAT_LSW_ClothBlueLight"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "bottom",
+   "variant": "Overalls",
+   "hides": [
+    "Pelvis",
+    "Thigh",
+    "Shin"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Bottom_Shorts_F",
+   "base": "LSW_Crowd_Bottom_Shorts_F",
+   "lod": 0,
+   "tris": 216,
+   "materials": [
+    "MAT_LSW_ClothOliveLight",
+    "MAT_LSW_ClothOliveDark"
    ],
    "shape_keys": [
     "Build_Slim",
@@ -88,6 +207,100 @@
    ],
    "double_sided": true,
    "region": null,
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Bottom_Shorts_M",
+   "base": "LSW_Crowd_Bottom_Shorts_M",
+   "lod": 0,
+   "tris": 216,
+   "materials": [
+    "MAT_LSW_ClothOliveLight",
+    "MAT_LSW_ClothOliveDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "bottom",
+   "variant": "Shorts",
+   "hides": [
+    "Pelvis"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Bottom_Skirt_F",
+   "base": "LSW_Crowd_Bottom_Skirt_F",
+   "lod": 0,
+   "tris": 140,
+   "materials": [
+    "MAT_LSW_ClothPurpleDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "bottom",
+   "variant": "Skirt",
+   "hides": [
+    "Pelvis",
+    "Thigh"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Bottom_Skirt_M",
+   "base": "LSW_Crowd_Bottom_Skirt_M",
+   "lod": 0,
+   "tris": 140,
+   "materials": [
+    "MAT_LSW_ClothPurpleDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "bottom",
+   "variant": "Skirt",
+   "hides": [
+    "Pelvis",
+    "Thigh"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Bottom_Trousers_F",
+   "base": "LSW_Crowd_Bottom_Trousers_F",
+   "lod": 0,
+   "tris": 408,
+   "materials": [
+    "MAT_LSW_ClothDenimDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "bottom",
+   "variant": "Trousers",
+   "hides": [
+    "Pelvis",
+    "Thigh",
+    "Shin"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
    "bone": null
   },
   {
@@ -111,6 +324,95 @@
    ],
    "double_sided": true,
    "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Bottom_WideLeg_F",
+   "base": "LSW_Crowd_Bottom_WideLeg_F",
+   "lod": 0,
+   "tris": 408,
+   "materials": [
+    "MAT_LSW_ClothMonoDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "bottom",
+   "variant": "WideLeg",
+   "hides": [
+    "Pelvis",
+    "Thigh",
+    "Shin"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Bottom_WideLeg_M",
+   "base": "LSW_Crowd_Bottom_WideLeg_M",
+   "lod": 0,
+   "tris": 408,
+   "materials": [
+    "MAT_LSW_ClothMonoDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "bottom",
+   "variant": "WideLeg",
+   "hides": [
+    "Pelvis",
+    "Thigh",
+    "Shin"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Foot_F.L",
+   "base": "LSW_Crowd_Foot_F.L",
+   "lod": 0,
+   "tris": 54,
+   "materials": [
+    "MAT_LSW_SkinMid"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "body",
+   "variant": "F",
+   "hides": [],
+   "double_sided": false,
+   "region": "Foot",
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Foot_F.R",
+   "base": "LSW_Crowd_Foot_F.R",
+   "lod": 0,
+   "tris": 54,
+   "materials": [
+    "MAT_LSW_SkinMid"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "body",
+   "variant": "F",
+   "hides": [],
+   "double_sided": false,
+   "region": "Foot",
+   "sex": "F",
    "bone": null
   },
   {
@@ -130,6 +432,7 @@
    "hides": [],
    "double_sided": false,
    "region": "Foot",
+   "sex": "M",
    "bone": null
   },
   {
@@ -149,6 +452,47 @@
    "hides": [],
    "double_sided": false,
    "region": "Foot",
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Forearm_F.L",
+   "base": "LSW_Crowd_Forearm_F.L",
+   "lod": 0,
+   "tris": 80,
+   "materials": [
+    "MAT_LSW_SkinMid"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "body",
+   "variant": "F",
+   "hides": [],
+   "double_sided": false,
+   "region": "Forearm",
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Forearm_F.R",
+   "base": "LSW_Crowd_Forearm_F.R",
+   "lod": 0,
+   "tris": 80,
+   "materials": [
+    "MAT_LSW_SkinMid"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "body",
+   "variant": "F",
+   "hides": [],
+   "double_sided": false,
+   "region": "Forearm",
+   "sex": "F",
    "bone": null
   },
   {
@@ -168,6 +512,7 @@
    "hides": [],
    "double_sided": false,
    "region": "Forearm",
+   "sex": "M",
    "bone": null
   },
   {
@@ -187,6 +532,147 @@
    "hides": [],
    "double_sided": false,
    "region": "Forearm",
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hair_Afro_F",
+   "base": "LSW_Crowd_Hair_Afro_F",
+   "lod": 0,
+   "tris": 228,
+   "materials": [
+    "MAT_LSW_HairBlack"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "hair",
+   "variant": "Afro",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hair_Afro_M",
+   "base": "LSW_Crowd_Hair_Afro_M",
+   "lod": 0,
+   "tris": 228,
+   "materials": [
+    "MAT_LSW_HairBlack"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "hair",
+   "variant": "Afro",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hair_Balding_F",
+   "base": "LSW_Crowd_Hair_Balding_F",
+   "lod": 0,
+   "tris": 144,
+   "materials": [
+    "MAT_LSW_HairGrey"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "hair",
+   "variant": "Balding",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hair_Balding_M",
+   "base": "LSW_Crowd_Hair_Balding_M",
+   "lod": 0,
+   "tris": 144,
+   "materials": [
+    "MAT_LSW_HairGrey"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "hair",
+   "variant": "Balding",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hair_Bob_F",
+   "base": "LSW_Crowd_Hair_Bob_F",
+   "lod": 0,
+   "tris": 372,
+   "materials": [
+    "MAT_LSW_HairAuburn"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "hair",
+   "variant": "Bob",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hair_Bob_M",
+   "base": "LSW_Crowd_Hair_Bob_M",
+   "lod": 0,
+   "tris": 372,
+   "materials": [
+    "MAT_LSW_HairAuburn"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "hair",
+   "variant": "Bob",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hair_Crew_F",
+   "base": "LSW_Crowd_Hair_Crew_F",
+   "lod": 0,
+   "tris": 210,
+   "materials": [
+    "MAT_LSW_HairDarkBrown"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "hair",
+   "variant": "Crew",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
    "bone": null
   },
   {
@@ -206,6 +692,27 @@
    "hides": [],
    "double_sided": true,
    "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hair_Long_F",
+   "base": "LSW_Crowd_Hair_Long_F",
+   "lod": 0,
+   "tris": 364,
+   "materials": [
+    "MAT_LSW_HairBrown"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "hair",
+   "variant": "Long",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
    "bone": null
   },
   {
@@ -225,6 +732,87 @@
    "hides": [],
    "double_sided": true,
    "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hair_Ponytail_F",
+   "base": "LSW_Crowd_Hair_Ponytail_F",
+   "lod": 0,
+   "tris": 268,
+   "materials": [
+    "MAT_LSW_HairBlack"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "hair",
+   "variant": "Ponytail",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hair_Ponytail_M",
+   "base": "LSW_Crowd_Hair_Ponytail_M",
+   "lod": 0,
+   "tris": 268,
+   "materials": [
+    "MAT_LSW_HairBlack"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "hair",
+   "variant": "Ponytail",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hand_F.L",
+   "base": "LSW_Crowd_Hand_F.L",
+   "lod": 0,
+   "tris": 226,
+   "materials": [
+    "MAT_LSW_SkinMid"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "body",
+   "variant": "F",
+   "hides": [],
+   "double_sided": false,
+   "region": "Hand",
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hand_F.R",
+   "base": "LSW_Crowd_Hand_F.R",
+   "lod": 0,
+   "tris": 226,
+   "materials": [
+    "MAT_LSW_SkinMid"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "body",
+   "variant": "F",
+   "hides": [],
+   "double_sided": false,
+   "region": "Hand",
+   "sex": "F",
    "bone": null
   },
   {
@@ -244,6 +832,7 @@
    "hides": [],
    "double_sided": false,
    "region": "Hand",
+   "sex": "M",
    "bone": null
   },
   {
@@ -263,13 +852,94 @@
    "hides": [],
    "double_sided": false,
    "region": "Hand",
+   "sex": "M",
    "bone": null
   },
   {
-   "name": "LSW_Crowd_Hat_Cap_M",
-   "base": "LSW_Crowd_Hat_Cap_M",
+   "name": "LSW_Crowd_Hat_Beanie_F",
+   "base": "LSW_Crowd_Hat_Beanie_F",
+   "lod": 0,
+   "tris": 176,
+   "materials": [
+    "MAT_LSW_ClothRedLight"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "hat",
+   "variant": "Beanie",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hat_Beanie_M",
+   "base": "LSW_Crowd_Hat_Beanie_M",
+   "lod": 0,
+   "tris": 176,
+   "materials": [
+    "MAT_LSW_ClothRedLight"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "hat",
+   "variant": "Beanie",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hat_Bucket_F",
+   "base": "LSW_Crowd_Hat_Bucket_F",
    "lod": 0,
    "tris": 144,
+   "materials": [
+    "MAT_LSW_ClothOliveDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "hat",
+   "variant": "Bucket",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hat_Bucket_M",
+   "base": "LSW_Crowd_Hat_Bucket_M",
+   "lod": 0,
+   "tris": 144,
+   "materials": [
+    "MAT_LSW_ClothOliveDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "hat",
+   "variant": "Bucket",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hat_Cap_F",
+   "base": "LSW_Crowd_Hat_Cap_F",
+   "lod": 0,
+   "tris": 140,
    "materials": [
     "MAT_LSW_ClothRedDark"
    ],
@@ -282,6 +952,129 @@
    "hides": [],
    "double_sided": true,
    "region": null,
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hat_Cap_M",
+   "base": "LSW_Crowd_Hat_Cap_M",
+   "lod": 0,
+   "tris": 140,
+   "materials": [
+    "MAT_LSW_ClothRedDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "hat",
+   "variant": "Cap",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hat_Crown_F",
+   "base": "LSW_Crowd_Hat_Crown_F",
+   "lod": 0,
+   "tris": 32,
+   "materials": [
+    "MAT_LSW_ClothMustardLight"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "hat",
+   "variant": "Crown",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hat_Crown_M",
+   "base": "LSW_Crowd_Hat_Crown_M",
+   "lod": 0,
+   "tris": 32,
+   "materials": [
+    "MAT_LSW_ClothMustardLight"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "hat",
+   "variant": "Crown",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hat_Straw_F",
+   "base": "LSW_Crowd_Hat_Straw_F",
+   "lod": 0,
+   "tris": 176,
+   "materials": [
+    "MAT_LSW_ClothMustardLight",
+    "MAT_LSW_ClothBrownDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "hat",
+   "variant": "Straw",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Hat_Straw_M",
+   "base": "LSW_Crowd_Hat_Straw_M",
+   "lod": 0,
+   "tris": 176,
+   "materials": [
+    "MAT_LSW_ClothMustardLight",
+    "MAT_LSW_ClothBrownDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "hat",
+   "variant": "Straw",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Head_F",
+   "base": "LSW_Crowd_Head_F",
+   "lod": 0,
+   "tris": 388,
+   "materials": [
+    "MAT_LSW_SkinMid"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "body",
+   "variant": "F",
+   "hides": [],
+   "double_sided": false,
+   "region": "Head",
+   "sex": "F",
    "bone": null
   },
   {
@@ -301,6 +1094,47 @@
    "hides": [],
    "double_sided": false,
    "region": "Head",
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Moustache_M",
+   "base": "LSW_Crowd_Moustache_M",
+   "lod": 0,
+   "tris": 24,
+   "materials": [
+    "MAT_LSW_HairGrey"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "facial",
+   "variant": "Moustache",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": null,
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Pelvis_F",
+   "base": "LSW_Crowd_Pelvis_F",
+   "lod": 0,
+   "tris": 28,
+   "materials": [
+    "MAT_LSW_SkinMid"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "body",
+   "variant": "F",
+   "hides": [],
+   "double_sided": false,
+   "region": "Pelvis",
+   "sex": "F",
    "bone": null
   },
   {
@@ -320,6 +1154,47 @@
    "hides": [],
    "double_sided": false,
    "region": "Pelvis",
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Shin_F.L",
+   "base": "LSW_Crowd_Shin_F.L",
+   "lod": 0,
+   "tris": 96,
+   "materials": [
+    "MAT_LSW_SkinMid"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "body",
+   "variant": "F",
+   "hides": [],
+   "double_sided": false,
+   "region": "Shin",
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Shin_F.R",
+   "base": "LSW_Crowd_Shin_F.R",
+   "lod": 0,
+   "tris": 96,
+   "materials": [
+    "MAT_LSW_SkinMid"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "body",
+   "variant": "F",
+   "hides": [],
+   "double_sided": false,
+   "region": "Shin",
+   "sex": "F",
    "bone": null
   },
   {
@@ -339,6 +1214,7 @@
    "hides": [],
    "double_sided": false,
    "region": "Shin",
+   "sex": "M",
    "bone": null
   },
   {
@@ -358,6 +1234,47 @@
    "hides": [],
    "double_sided": false,
    "region": "Shin",
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Thigh_F.L",
+   "base": "LSW_Crowd_Thigh_F.L",
+   "lod": 0,
+   "tris": 80,
+   "materials": [
+    "MAT_LSW_SkinMid"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "body",
+   "variant": "F",
+   "hides": [],
+   "double_sided": false,
+   "region": "Thigh",
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Thigh_F.R",
+   "base": "LSW_Crowd_Thigh_F.R",
+   "lod": 0,
+   "tris": 80,
+   "materials": [
+    "MAT_LSW_SkinMid"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "body",
+   "variant": "F",
+   "hides": [],
+   "double_sided": false,
+   "region": "Thigh",
+   "sex": "F",
    "bone": null
   },
   {
@@ -377,6 +1294,7 @@
    "hides": [],
    "double_sided": false,
    "region": "Thigh",
+   "sex": "M",
    "bone": null
   },
   {
@@ -396,6 +1314,81 @@
    "hides": [],
    "double_sided": false,
    "region": "Thigh",
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Top_Flannel_F",
+   "base": "LSW_Crowd_Top_Flannel_F",
+   "lod": 0,
+   "tris": 396,
+   "materials": [
+    "MAT_LSW_ClothRedDark",
+    "MAT_LSW_ClothMonoLight"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "top",
+   "variant": "Flannel",
+   "hides": [
+    "Torso",
+    "UpperArm",
+    "Forearm"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Top_Flannel_M",
+   "base": "LSW_Crowd_Top_Flannel_M",
+   "lod": 0,
+   "tris": 396,
+   "materials": [
+    "MAT_LSW_ClothRedDark",
+    "MAT_LSW_ClothMonoLight"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "top",
+   "variant": "Flannel",
+   "hides": [
+    "Torso",
+    "UpperArm",
+    "Forearm"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Top_Hoodie_F",
+   "base": "LSW_Crowd_Top_Hoodie_F",
+   "lod": 0,
+   "tris": 508,
+   "materials": [
+    "MAT_LSW_ClothBlueDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "top",
+   "variant": "Hoodie",
+   "hides": [
+    "Torso",
+    "UpperArm",
+    "Forearm"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
    "bone": null
   },
   {
@@ -419,6 +1412,80 @@
    ],
    "double_sided": true,
    "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Top_Puffer_F",
+   "base": "LSW_Crowd_Top_Puffer_F",
+   "lod": 0,
+   "tris": 492,
+   "materials": [
+    "MAT_LSW_ClothBlueDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "top",
+   "variant": "Puffer",
+   "hides": [
+    "Torso",
+    "UpperArm",
+    "Forearm"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Top_Puffer_M",
+   "base": "LSW_Crowd_Top_Puffer_M",
+   "lod": 0,
+   "tris": 492,
+   "materials": [
+    "MAT_LSW_ClothBlueDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "top",
+   "variant": "Puffer",
+   "hides": [
+    "Torso",
+    "UpperArm",
+    "Forearm"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Top_Raincoat_F",
+   "base": "LSW_Crowd_Top_Raincoat_F",
+   "lod": 0,
+   "tris": 570,
+   "materials": [
+    "MAT_LSW_ClothMustardLight"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "top",
+   "variant": "Raincoat",
+   "hides": [
+    "Torso",
+    "UpperArm",
+    "Forearm",
+    "Hair"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
    "bone": null
   },
   {
@@ -443,6 +1510,129 @@
    ],
    "double_sided": true,
    "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Top_Sweater_F",
+   "base": "LSW_Crowd_Top_Sweater_F",
+   "lod": 0,
+   "tris": 428,
+   "materials": [
+    "MAT_LSW_ClothGreenDark",
+    "MAT_LSW_ClothMonoLight"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "top",
+   "variant": "Sweater",
+   "hides": [
+    "Torso",
+    "UpperArm",
+    "Forearm"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Top_Sweater_M",
+   "base": "LSW_Crowd_Top_Sweater_M",
+   "lod": 0,
+   "tris": 428,
+   "materials": [
+    "MAT_LSW_ClothGreenDark",
+    "MAT_LSW_ClothMonoLight"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "top",
+   "variant": "Sweater",
+   "hides": [
+    "Torso",
+    "UpperArm",
+    "Forearm"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Top_Trench_F",
+   "base": "LSW_Crowd_Top_Trench_F",
+   "lod": 0,
+   "tris": 388,
+   "materials": [
+    "MAT_LSW_ClothBrownLight",
+    "MAT_LSW_ClothBrownDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "top",
+   "variant": "Trench",
+   "hides": [
+    "Torso",
+    "UpperArm",
+    "Forearm"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Top_Trench_M",
+   "base": "LSW_Crowd_Top_Trench_M",
+   "lod": 0,
+   "tris": 388,
+   "materials": [
+    "MAT_LSW_ClothBrownLight",
+    "MAT_LSW_ClothBrownDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "top",
+   "variant": "Trench",
+   "hides": [
+    "Torso",
+    "UpperArm",
+    "Forearm"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Top_TShirt_F",
+   "base": "LSW_Crowd_Top_TShirt_F",
+   "lod": 0,
+   "tris": 304,
+   "materials": [
+    "MAT_LSW_ClothRedLight"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "top",
+   "variant": "TShirt",
+   "hides": [
+    "Torso"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
    "bone": null
   },
   {
@@ -464,6 +1654,71 @@
    ],
    "double_sided": true,
    "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Top_Vest_F",
+   "base": "LSW_Crowd_Top_Vest_F",
+   "lod": 0,
+   "tris": 208,
+   "materials": [
+    "MAT_LSW_ClothOliveDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "top",
+   "variant": "Vest",
+   "hides": [
+    "Torso"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Top_Vest_M",
+   "base": "LSW_Crowd_Top_Vest_M",
+   "lod": 0,
+   "tris": 208,
+   "materials": [
+    "MAT_LSW_ClothOliveDark"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "top",
+   "variant": "Vest",
+   "hides": [
+    "Torso"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_Torso_F",
+   "base": "LSW_Crowd_Torso_F",
+   "lod": 0,
+   "tris": 208,
+   "materials": [
+    "MAT_LSW_SkinMid"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "body",
+   "variant": "F",
+   "hides": [],
+   "double_sided": false,
+   "region": "Torso",
+   "sex": "F",
    "bone": null
   },
   {
@@ -483,6 +1738,47 @@
    "hides": [],
    "double_sided": false,
    "region": "Torso",
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_UpperArm_F.L",
+   "base": "LSW_Crowd_UpperArm_F.L",
+   "lod": 0,
+   "tris": 80,
+   "materials": [
+    "MAT_LSW_SkinMid"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "body",
+   "variant": "F",
+   "hides": [],
+   "double_sided": false,
+   "region": "UpperArm",
+   "sex": "F",
+   "bone": null
+  },
+  {
+   "name": "LSW_Crowd_UpperArm_F.R",
+   "base": "LSW_Crowd_UpperArm_F.R",
+   "lod": 0,
+   "tris": 80,
+   "materials": [
+    "MAT_LSW_SkinMid"
+   ],
+   "shape_keys": [
+    "Build_Slim",
+    "Build_Heavy"
+   ],
+   "slot": "body",
+   "variant": "F",
+   "hides": [],
+   "double_sided": false,
+   "region": "UpperArm",
+   "sex": "F",
    "bone": null
   },
   {
@@ -502,6 +1798,7 @@
    "hides": [],
    "double_sided": false,
    "region": "UpperArm",
+   "sex": "M",
    "bone": null
   },
   {
@@ -521,6 +1818,7 @@
    "hides": [],
    "double_sided": false,
    "region": "UpperArm",
+   "sex": "M",
    "bone": null
   }
  ],
@@ -922,11 +2220,11 @@
  ],
  "verify": {
   "limb_nodes": 68,
-  "skin_markers": 25,
-  "bytes": 5532076,
+  "skin_markers": 84,
+  "bytes": 11476460,
   "ok": true
  },
- "exported": "2026-10-03 13:49:46",
+ "exported": "2026-10-03 15:20:22",
  "blend": "(unsaved)",
  "exporter": "lsw_export v1",
  "axes": "Unity: -Z forward, Y up, metres"
