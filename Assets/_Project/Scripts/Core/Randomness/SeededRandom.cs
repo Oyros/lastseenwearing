@@ -1,4 +1,4 @@
-namespace LastSeenWearing.Core.Crowd
+namespace LastSeenWearing.Core.Randomness
 {
     /// <summary>
     /// The game's own PRNG (xorshift64*). Every client must draw the same numbers from the same

@@ -78,7 +78,7 @@ programme, sunset, case format, every tool in §07, replay, art, audio.
 | [ ] P1.06 | Gait signature from seed (quantised buckets, max 2 traits) | §05 | 30 NPCs show distinct walks; log prints each signature in words |
 | [ ] P1.07 | Black-and-white low-res camera filter | §04.1 | Crowd recorded through it; 2 testers find a named walk in under 20 s (`docs/WALKTEST.md`) |
 | [ ] P1.08 | Week-1 review: crowd model and walk system go / no-go | — | Decision recorded in DECISIONS |
-| [ ] P1.09 | Lobby roles: Watcher, Patrol, Fugitive assignment | §03 | Three players get their roles; roles are visible to all |
+| [x] P1.09 | Lobby roles: Watcher, Patrol, Fugitive assignment | §03 | Three players get their roles; roles are visible to all |
 | [ ] P1.10 | Round flow: spawn, timer, end screen; one `RoundDirector` authority | §06 | Round starts, ends on timer, restarts |
 | [ ] P1.11 | Fugitive controller: third person, NPC-speed walk, interact | §03 | Fugitive moves like an NPC by default |
 | [ ] P1.12 | Patrol controller: first person, run, placeholder FP arms | §03 | Patrol moves and aims |
@@ -141,9 +141,9 @@ open Blender; never save a `.blend` unasked.
 | [x] PL.08 | Armature + skin, sockets; contract table final | ART_PIPELINE §3 | Exported; the contract is locked (DECISIONS) |
 | [x] PL.09 | Male builds as shape keys (`Build_Slim`, `Build_Heavy`); slim exaggerated | `Crowd/_Ref` M_Slim, M_Heavy | Three builds nameable in a CCTV lineup |
 | [ ] PL.10 | Run the walk test with 3–5 people; adjust layer strengths in `LSW_WalkSystem.md` | `docs/WALKTEST.md` | Results recorded; strengths updated |
-| [ ] PL.11 | Walk base clips (Normal, Brisk, Stroll, Heavy) | `LSW_WalkSystem.md` §2 | No foot sliding in a blend test |
-| [ ] PL.12 | Walk additive layers (Limp L/R, Hunch, Sway, Bounce, ArmSwing ±) | `LSW_WalkSystem.md` §2 | Each readable at 0.5 weight in a 320×180 walking lineup |
-| [ ] PL.13 | Head base + 2 hair shells (crew cut, long) | `LSW_Ref_HeadsHair.png` | Shells swap with no gap or clipping |
+| [x] PL.11 | Walk base clips (Normal, Brisk, Stroll, Heavy) | `LSW_WalkSystem.md` §2 | No foot sliding in a blend test |
+| [x] PL.12 | Walk additive layers (Limp L/R, Hunch, Sway, Bounce, ArmSwing ±) | `LSW_WalkSystem.md` §2 | Each readable at 0.5 weight in a 320×180 walking lineup |
+| [x] PL.13 | Head base + 2 hair shells (crew cut, long) | `LSW_Ref_HeadsHair.png` | Shells swap with no gap or clipping |
 | [ ] PL.14 | Tops: hooded raincoat, t-shirt, hoodie (hood as a thick bunch) | `LSW_Ref_Clothing.png` | No clipping in all builds and poses; hides the right regions |
 | [ ] PL.15 | Bottoms: trousers, shorts; hat: baseball cap | `LSW_Ref_Clothing.png`, `LSW_Ref_Accessories.png` | Brim readable from the CCTV angle |
 | [ ] PL.16 | Prototype crowd review: 12 random combinations | LOOKDEV §2 | Every pair describable as different in ≤ 5 words |

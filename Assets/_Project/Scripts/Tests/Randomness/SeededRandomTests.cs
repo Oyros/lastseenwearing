@@ -1,7 +1,7 @@
-using LastSeenWearing.Core.Crowd;
+using LastSeenWearing.Core.Randomness;
 using NUnit.Framework;
 
-namespace LastSeenWearing.Tests.Crowd
+namespace LastSeenWearing.Tests.Randomness
 {
     /// <summary>
     /// P1.01: the PRNG every client shares. The pinned values catch a change to the algorithm —

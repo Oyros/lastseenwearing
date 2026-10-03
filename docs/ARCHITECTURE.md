@@ -42,7 +42,8 @@ same session runs on Unity Transport so Multiplayer Play Mode clones can join (D
 
 | Thing | Authority | Synced how |
 |---|---|---|
-| Roles, round phase, timer | Server | `NetworkVariable`s on `RoundDirector` |
+| Roles | Server | `RoleRosterSync` (`NetworkList`), public to all — the case's, not the round's (D-021) |
+| Round phase, timer | Server | `NetworkVariable`s on `RoundDirector` |
 | Crowd (100–150 NPCs) | **Seed + server time** | Every client computes each NPC's pose from the seed and server time (`NpcSchedule`); only NPCs a player has affected (bumped, stopped, controlled, scattered) are taken over by the server and their poses sent (D-005, D-019) |
 | Gait signatures | Seed | `f(seed, index)` computed locally; never sent |
 | Player characters | Owner moves, server validates | `NetworkTransform` (owner authority) |

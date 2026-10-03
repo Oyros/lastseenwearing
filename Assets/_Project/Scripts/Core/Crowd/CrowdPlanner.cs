@@ -1,3 +1,5 @@
+using LastSeenWearing.Core.Randomness;
+
 namespace LastSeenWearing.Core.Crowd
 {
     /// <summary>

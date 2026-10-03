@@ -16,12 +16,76 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: e908160d4ab53f0409cbca0328920d75, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 3517454320335585380
   m_TableData:
   - m_Id: 33465675776
     m_Localized: Last Seen Wearing
     m_Metadata:
       m_Items: []
+  - m_Id: 60465236783104
+    m_Localized: Roles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60465291309056
+    m_Localized: Pick your role
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60465291309057
+    m_Localized: Roles are drawn at random
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60465291309058
+    m_Localized: Player {0}
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
+  - m_Id: 60465295503360
+    m_Localized: '{0} (you)'
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
+  - m_Id: 60465299697664
+    m_Localized: '{0}: {1}'
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
+  - m_Id: 60465299697665
+    m_Localized: No role yet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60465299697666
+    m_Localized: Roles are locked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60465299697667
+    m_Localized: Give up my role
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60465299697668
+    m_Localized: Let players pick
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60465299697669
+    m_Localized: Draw roles at random
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60465299697670
+    m_Localized: Lock roles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60465299697671
+    m_Localized: Unlock roles
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3517454320335585380
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 60465291309058
+        - id: 60465295503360
+        - id: 60465299697664

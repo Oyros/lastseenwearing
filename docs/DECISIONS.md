@@ -211,3 +211,17 @@ Humanoid round trip ≤ 0.1 mm at hands, feet, head and finger tips, and muscles
 (arm up, knee back, fingers into the palm).
 **Reversing.** Adding full finger chains later is a table edit plus a reimport; clips made before
 then animate only the middle finger for the three shared fingers.
+
+---
+
+### D-021 — Role hand-out is a lobby setting: pick or random
+**Decision.** The host chooses how roles are handed out, per lobby: **Pick** — players claim roles,
+and whoever has none when the host locks gets a random free one; **Random** — no claims, every role
+is drawn when the host locks. The default is `LobbyConfig.DefaultRoleSelection` (Pick). Lock needs
+Watcher, Patrol and Fugitive covered; nothing changes while locked. The rules live in
+`Core/Roles/RoleRoster`; `Gameplay/Roles/RoleRosterSync` (server-owned, public to all — D-006)
+publishes them; `UI/Lobby/RosterPanel` shows them. Roles belong to the case, not the round, so the
+roster is not on `RoundDirector`.
+**Why.** GDD §03/§06 fix roles per case but not how they are chosen; the team wanted both ways,
+chosen per lobby. Random draws use the shared `SeededRandom`, so a logged seed replays a draw.
+**Reversing.** Cheap: a third mode (host assigns) is another branch in `RoleRoster`.

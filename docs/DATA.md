@@ -47,7 +47,7 @@ Values below are the GDD's first numbers; P1 tunes them.
 | Asset | Owns | GDD |
 |---|---|---|
 | `GameConfig` | The root. References every config below. Nothing else | — |
-| `LobbyConfig` | **In use (P0.10): min/max players.** Players 4–5; a 4-player lobby drops the dog (D-007); rounds per case default and range | §03, §06 |
+| `LobbyConfig` | **In use (P0.10, P1.09): min/max players (min 3 during P1), default role selection (D-021).** Players 4–5; a 4-player lobby drops the dog (D-007); rounds per case default and range | §03, §06 |
 | `RoundConfig` | Round length; programme times — concert 2:00, fireworks 4:00 (flare 10 s), closing 5:00; sunset curve; last-cuff chase 45 s | §06 |
 | `CrowdConfig` | **In use (P1.01–02): NPC count, route length, waypoint spread, dwell range, walk speed, taken-over sync rate, bump distance and duration.** NPC count 100–150; lookalikes per round 2–3; height scale 0.92–1.10 in three bands; reaction radii (running, bump, dog bark); false-positive target-action rate | §04.1, §04.4 |
 | `CompositeConfig` | Errors per composite 1–2; reveal order per round (build+height, hair, walk, then the rest — D-008); witness-confidence levels | §04.1 |

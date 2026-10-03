@@ -109,7 +109,8 @@ Assets/AddressableAssetsData/                (created by the package; table cont
 Assets/TextMesh Pro/                         (TMP Essential Resources)
 ```
 
-Keys so far: `ui.menu.title`; `role.<watcher|patrol|plainclothes|dog|fugitive>.name`. `Festival` is empty.
+Keys so far: `ui.menu.title`; `ui.lobby.*` (roster panel, P1.09 — `player`, `player_you`, `row` are Smart);
+`role.<watcher|patrol|plainclothes|dog|fugitive>.name`. `Festival` is empty.
 
 Tables load **asynchronously**: a `LocalizeStringEvent` fills its text a frame or two after start,
 so nothing may read a localized string synchronously on the first frame. Player builds must build

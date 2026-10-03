@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 155da3e7623006a48b5c532b5055f260, type: 3}
   m_Name: LobbyConfig
   m_EditorClassIdentifier: LastSeenWearing.Core::LastSeenWearing.Core.Config.LobbyConfig
-  _minPlayers: 4
+  _minPlayers: 3
   _maxPlayers: 5
+  _defaultRoleSelection: 0

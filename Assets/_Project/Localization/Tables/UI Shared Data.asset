@@ -19,6 +19,58 @@ MonoBehaviour:
     m_Key: ui.menu.title
     m_Metadata:
       m_Items: []
+  - m_Id: 60465236783104
+    m_Key: ui.lobby.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60465291309056
+    m_Key: ui.lobby.mode.pick
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60465291309057
+    m_Key: ui.lobby.mode.random
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60465291309058
+    m_Key: ui.lobby.player
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60465295503360
+    m_Key: ui.lobby.player_you
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60465299697664
+    m_Key: ui.lobby.row
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60465299697665
+    m_Key: ui.lobby.no_role
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60465299697666
+    m_Key: ui.lobby.locked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60465299697667
+    m_Key: ui.lobby.button.release
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60465299697668
+    m_Key: ui.lobby.button.mode_pick
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60465299697669
+    m_Key: ui.lobby.button.mode_random
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60465299697670
+    m_Key: ui.lobby.button.lock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60465299697671
+    m_Key: ui.lobby.button.unlock
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

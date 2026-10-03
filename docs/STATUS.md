@@ -13,9 +13,9 @@ Keep it short. A snapshot, not a log; finished phases move to §4 as one line.
 |---|---|
 | **Phase** | **P1 — Prototype** (`docs/ROADMAP.md`) — is it fun for the watcher to describe and the field to search? |
 | **In flight** | Nothing |
-| **Next** | `P1.09` lobby roles, then `P1.10` round flow — `P1.04`–`P1.07` wait on the walk clips (PL.10–PL.12) (`/next`) |
+| **Next** | `P1.04` base walk clips (PL.11 done), `P1.05` additive layers (PL.12 done), or `P1.10` round flow (`/next`) |
 | **Blocking** | Nothing — UnityMCP connected; Blender MCP timed out this session (only matters for PL work) |
-| **Parallel** | **PL — Look-dev & art**: `PL.00`–`PL.09`, `PL.20`, `PL.21` done (references, palette — 85 `MAT_LSW_*` + `_Export/LSW_Palette.json`, check/CCTV/ref-loader tools, `lsw_export` FBX+JSON bridge — greybox kit pieces already in `_Export/Festival/`, layouts A–D, male base body — 15 regions, 1,722 tris, `Scripts/lsw_body.py`; rig `LSW_Crowd_Rig_M` — 34 bones, 7 sockets, contract locked D-018, `_Export/Crowd/LSW_Crowd_Body_M.fbx` with `Build_Slim` / `Build_Heavy` blend shapes). **P1.03 is unblocked** (PL.08–PL.09 done). Next art: `PL.10` walk test with people, then `PL.11` walk base clips |
+| **Parallel** | **PL — Look-dev & art**: `PL.00`–`PL.09`, `PL.11`–`PL.13`, `PL.20`, `PL.21` done (references, palette — 85 `MAT_LSW_*` + `_Export/LSW_Palette.json`, check/CCTV/ref-loader tools, `lsw_export` FBX+JSON bridge — greybox kit pieces already in `_Export/Festival/`, layouts A–D, male base body — 15 regions, 1,722 tris, `Scripts/lsw_body.py`; rig `LSW_Crowd_Rig_M` — 34 bones, 7 sockets, contract locked D-018, `_Export/Crowd/LSW_Crowd_Body_M.fbx` with `Build_Slim` / `Build_Heavy` blend shapes). Walk clips `Walk_Normal/Brisk/Stroll/Heavy` in the same FBX (32 f @ 30 fps, stride 1.0 m, in place — Unity moves the body at 0.9375 m/s × playback speed; contacts L 0 / R 16 as markers in the JSON). **P1.04 is unblocked.** Additive layers `Add_Limp_L/R`, `Add_Hunch`, `Add_Sway`, `Add_Bounce`, `Add_ArmSwing_Big/Stiff` in the same FBX (loop 0–32, additive reference = rest pose at frame 40 — see `LastSeenWearingArt/_Docs/LSW_WalkSystem.md` §6). **P1.05 is unblocked.** Head reworked (16-sided, face plane, nose block, eye band, ears; body now 1,872 tris) + hair shells `LSW_Crowd_Hair_Crew_M` / `LSW_Crowd_Hair_Long_M` in the same FBX (two-sided material, `lsw_double_sided` in the JSON; one shown at a time). Next art: `PL.14` tops; `PL.10` (walk test with 3–5 people) is Gokhan's and only retunes layer strengths |
 | **Unity** | 6000.5.7f1 · URP · Netcode for GameObjects + Facepunch transport (listen server over Steam) |
 
 ## 2 · Done in this phase
@@ -23,6 +23,7 @@ Keep it short. A snapshot, not a log; finished phases move to §4 as one line.
 - `P1.01` — `Core/Crowd` (own PRNG, `CrowdPlanner`, D-017), `CrowdConfig`, `Sandbox_Crowd.unity` (40×40 m, 16 waypoints, baked NavMesh) now the dev sandbox; 150 NPCs; host and MPPM clone get the same seed, plans and path corners.
 - `P1.02` — NPC pose = `f(seed, server time)` (`NpcSchedule`, D-019); bumped NPCs taken over and synced (16 B/NPC/update); 7.4 min run: constant 50 ms client offset, ≤ 7 cm, 0 B/min untouched; late join rebuilds the same crowd. `CrowdDebugPanel`: bump button + 30 s drift probe log.
 - `P1.03` — `LSW_Crowd_Body_M` in `Art/Models/Crowd/` imports as Humanoid via `Editor/Import` (bone table, A-pose → T-pose avatar, ported from Borrowed Crown, D-020); 8 tests: contract match, sockets, T-pose, muscle range + symmetry, round trip ≤ 0.1 mm, build blend shapes.
+- `P1.09` — roles: `Core/Roles` (`RoleRoster`, pick or random per lobby, D-021), `RoleRosterSync`, localized `RosterPanel`; verified with 3 MPPM players — same roster on all three, conflicting claim refused, random lock, non-host unlock refused.
 
 ## 3 · Open questions
 

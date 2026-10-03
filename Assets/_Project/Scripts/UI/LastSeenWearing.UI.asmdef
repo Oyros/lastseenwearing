@@ -4,6 +4,7 @@
     "references": [
         "LastSeenWearing.Core",
         "LastSeenWearing.Gameplay",
+        "Unity.Netcode.Runtime",
         "Unity.InputSystem",
         "Unity.Localization",
         "Unity.TextMeshPro",
