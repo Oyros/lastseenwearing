@@ -244,3 +244,19 @@ clip frame (hands 34–43 cm off rest): an avatar built from the nodes was bent;
 is not (Borrowed Crown D-059 was the same trap).
 **Reversing.** Time-scaled playback instead of Phase is a controller rebuild plus `CrowdAgent`; it
 brings back sliding whenever speed ≠ 0.9375 m/s × stride.
+
+---
+
+### D-023 — URP asset assigned, GPU skinning on
+**Decision.** `Assets/_Project/Settings/Rendering/LSW_URP.asset` (+ `LSW_URP_Renderer`) is the default
+pipeline and every quality level's, SRP Batcher on; Player › Mesh Deformation is GPU (batched).
+Built-in `Default-Material` users (sandbox ground, boxes, player capsule) moved to URP Lit; the body's
+imported materials are URP Lit by import. `Tests/Project/RenderingSetupTests` keeps all of it true.
+**Why.** P0 installed the URP package but never assigned a pipeline asset, so the project drew with
+Built-in and skinned on the CPU. P1.04 measured 150 bodies at ~10 fps (editor + two MPPM clones);
+with URP and GPU skinning, three connected players run ~40 fps on the same machine.
+**Reversing.** Nothing to reverse; what is left is the crowd's renderer count (15+ skinned meshes per
+body) — a per-NPC mesh combine, decided with clothing (P1.18) and the week-1 review (P1.08).
+**Note.** Re-saving a network prefab through prefab contents left `PlayerCapsule`'s
+`GlobalObjectIdHash` stale on disk and MPPM clones refused the host ("NetworkConfig mismatch") until
+it was saved again.
