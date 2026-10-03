@@ -13,6 +13,9 @@ namespace LastSeenWearing.Core.Roles
 
         public static IReadOnlyList<Role> CoreRoles => Core;
 
+        /// <summary>Patrol, Plainclothes and Dog — the officers on the ground (glossary: field team).</summary>
+        public static bool IsFieldTeam(Role role) => role is Role.Patrol or Role.Plainclothes or Role.Dog;
+
         public static IReadOnlyList<Role> RolesFor(int playerCount)
         {
             var roles = new List<Role>(Core);

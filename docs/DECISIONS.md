@@ -398,3 +398,24 @@ until layout A's (P1.17).
 Rendering only the shown feeds keeps the CCTV cost at two cameras however many a layout has.
 **Reversing.** Cheap: if switching ever needs to be seen by others (a "camera moved" tell for the fugitive),
 send the selection by RPC and keep `FeedSwitcher` as is.
+
+---
+
+### D-032 — Voice: our own packets, routed by the server, 8 kHz µ-law
+**Decision.** Voice is not Steam voice (ARCHITECTURE said so before). The talking client records the
+microphone (`Gameplay/Voice/VoiceCapture`), resamples it to `RadioConfig`'s rate (8 kHz) and µ-law encodes
+it (`Core/Voice/MuLaw`, one byte a sample, 100 ms packets ≈ 8 KB/s). Packets go to the server as NGO named
+messages; the server checks the speaker may use the channel and forwards each packet only to the clients who
+hear it (`Core/Voice/VoiceRouting`, roles from the roster). Listeners play each speaker through a jitter
+buffer (`Core/Voice/JitterBuffer`) on a streaming clip (`VoicePlayback`). The radio is one way — Watcher
+talks, field team hears it anywhere (GDD §03: field "listen only") — played flat through a 300–3400 Hz
+band-pass. The fugitive never receives radio packets; the leak (P1.16) will be a proximity rule.
+**Why.** One path that works over both transports (Unity Transport in the editor, Steam in builds — D-016),
+so it can be built and tested on one machine; Steam voice cannot run in MPPM. Server routing makes "who
+hears what" server truth (CLAUDE.md rule 3) — a client never gets audio its role must not hear. 8 kHz is
+already a radio's band, so the codec's limit is the look. Verified in play: 88 packets talked, 88 reached
+the patrol and were heard, the fugitive got none.
+**Cost.** Bandwidth: the host relays each talker to every listener (radio: ≤ 3 × 8 KB/s). Proximity voice
+may want a better rate; Opus (or Steam's codec) can replace µ-law behind `VoiceCapture`/`VoicePlayback`
+without touching routing.
+**Reversing.** Moderate: the codec is swappable; the routing should stay.

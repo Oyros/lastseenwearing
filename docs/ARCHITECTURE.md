@@ -50,7 +50,7 @@ same session runs on Unity Transport so Multiplayer Play Mode clones can join (D
 | Fugitive outfit, fake walk | Server | Small state (outfit ids, preset id, on/off) |
 | Composite, tents, targets, heat, cuffs | Server | Server-only state; clients get what their role may see |
 | Watcher camera feeds | Local render | Each client renders the cameras it is allowed to see; nothing streamed |
-| Voice | Steam voice | Radio channel (watcher → field) + proximity; the leak is a proximity rule on the radio stream |
+| Voice | Server-routed packets (D-032) | Microphone → 8 kHz µ-law → NGO named messages; the server forwards each packet to the roles that hear it (`VoiceRouting`). Radio channel (watcher → field) + proximity; the leak is a proximity rule on the radio stream |
 
 **Information hiding is part of the design.** The server never sends a client data its role
 must not know (the fugitive's identity to police clients, the composite's errors to the
