@@ -24,6 +24,21 @@ namespace LastSeenWearing.Tests.Project
         }
 
         [Test]
+        public void EveryDomainConfigIsAssigned()
+        {
+            var config = new SerializedObject(AssetDatabase.LoadAssetAtPath<GameConfig>(GameConfigPath));
+            var field = config.GetIterator();
+            field.NextVisible(true);
+            while (field.NextVisible(false))
+            {
+                if (field.propertyType == SerializedPropertyType.ObjectReference)
+                {
+                    Assert.That(field.objectReferenceValue, Is.Not.Null, $"GameConfig.{field.name} is not assigned");
+                }
+            }
+        }
+
+        [Test]
         public void TheBootstrapHoldsTheGameConfig()
         {
             var scene = EditorSceneManager.OpenScene(BootstrapScenePath, OpenSceneMode.Additive);

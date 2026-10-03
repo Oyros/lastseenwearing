@@ -11,5 +11,10 @@ namespace LastSeenWearing.Core.Config
     [CreateAssetMenu(fileName = "GameConfig", menuName = "Last Seen Wearing/Config/Game Config")]
     public sealed class GameConfig : ScriptableObject
     {
+        [SerializeField] private LobbyConfig _lobby;
+        [SerializeField] private MovementConfig _movement;
+
+        public LobbyConfig Lobby => _lobby;
+        public MovementConfig Movement => _movement;
     }
 }

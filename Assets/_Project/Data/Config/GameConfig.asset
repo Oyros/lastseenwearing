@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff799eb89aeea84b90d733a97ec2784, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: LastSeenWearing.Core::LastSeenWearing.Core.Config.GameConfig
+  _lobby: {fileID: 11400000, guid: afa82fcbe9068154485b24df38dd7745, type: 2}
+  _movement: {fileID: 11400000, guid: 1cd9eff69a4b471439075844be22e455, type: 2}

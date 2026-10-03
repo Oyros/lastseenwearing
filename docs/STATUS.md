@@ -12,10 +12,10 @@ Keep it short. A snapshot, not a log; finished phases move to §4 as one line.
 | | |
 |---|---|
 | **Phase** | **P0 — Scaffold** (`docs/ROADMAP.md`) — open, build, connect two players |
-| **In flight** | Nothing |
-| **Next** | `P0.10` — NGO + Facepunch transport, Steam lobby (app id 480), two players (`/next`) |
+| **In flight** | `P0.10` — local path done (editor + MPPM Player 2: both capsules move on both sides). **Open: the Steam check** — two Steam accounts, dev build, host invites, friend joins (deferred by the team) |
+| **Next** | P0 exit needs the P0.10 Steam check. Then P1 |
 | **Blocking** | Nothing — UnityMCP connected; Blender MCP timed out this session (only matters for PL work) |
-| **Parallel** | **PL — Look-dev & art**: `PL.00`, `PL.02`, `PL.03`, `PL.05`, `PL.20`, `PL.21` done (references, check/CCTV/ref-loader tools, greybox kit, layouts A–D). Next: `PL.06` self-test in this machine's Blender, then `PL.01` palette and `PL.04` export, then `PL.07` the male base body |
+| **Parallel** | **PL — Look-dev & art**: `PL.00`–`PL.06`, `PL.20`, `PL.21` done (references, palette — 85 `MAT_LSW_*` + `_Export/LSW_Palette.json`, check/CCTV/ref-loader tools, `lsw_export` FBX+JSON bridge — greybox kit pieces already in `_Export/Festival/`, layouts A–D). Next: `PL.07` the male base body |
 | **Unity** | 6000.5.7f1 · URP · Netcode for GameObjects + Facepunch transport (listen server over Steam) |
 
 ## 2 · Done in this phase

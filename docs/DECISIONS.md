@@ -138,3 +138,17 @@ Addressables step.
 preference, so one machine's build would carry the text and the other's would not. Verified in
 P0.09: a menu build logs `ui.menu.title` as "Last Seen Wearing" from the player.
 **Reversing.** Cheap: flip the setting and add a `BuildPlayerContent()` call to `WindowsBuild`.
+
+---
+
+### D-016 — Unity Transport in the editor, Steam in builds
+**Decision.** `NetworkSession` picks the transport per instance: Unity Transport on `127.0.0.1`
+in the editor (main editor + Multiplayer Play Mode clones), Facepunch/Steam in player builds. In
+the editor the session starts itself when `Sandbox_Empty` loads: the main editor hosts, every MPPM
+clone joins. The Steam path (friends-only lobby, overlay invite, join by the owner's Steam id) is
+the same code with the other transport.
+**Why.** One Steam account cannot connect to itself, and every MPPM clone runs as the same account,
+so a Steam session cannot be tested on one machine. D-002 still holds for the game; this is only
+how a developer gets two players without a second PC.
+**Reversing.** Cheap: flip `_editorTransport` to Steam on the bootstrap. The Steam path is unproven
+until two accounts run it (P0.10 stays open for that).

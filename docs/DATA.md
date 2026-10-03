@@ -47,7 +47,7 @@ Values below are the GDD's first numbers; P1 tunes them.
 | Asset | Owns | GDD |
 |---|---|---|
 | `GameConfig` | The root. References every config below. Nothing else | — |
-| `LobbyConfig` | Players 4–5; a 4-player lobby drops the dog (D-007); rounds per case default and range | §03, §06 |
+| `LobbyConfig` | **In use (P0.10): min/max players.** Players 4–5; a 4-player lobby drops the dog (D-007); rounds per case default and range | §03, §06 |
 | `RoundConfig` | Round length; programme times — concert 2:00, fireworks 4:00 (flare 10 s), closing 5:00; sunset curve; last-cuff chase 45 s | §06 |
 | `CrowdConfig` | NPC count 100–150; lookalikes per round 2–3; height scale 0.92–1.10 in three bands; reaction radii (running, bump, dog bark); false-positive target-action rate | §04.1, §04.4 |
 | `CompositeConfig` | Errors per composite 1–2; reveal order per round (build+height, hair, walk, then the rest — D-008); witness-confidence levels | §04.1 |
@@ -57,7 +57,7 @@ Values below are the GDD's first numbers; P1 tunes them.
 | `DisguiseConfig` | Tent uses per round 1; masked-NPC cluster radius at the mask stall | §05 |
 | `DogConfig` | Scent trail 10 s; bark radius, stamina cost, NPC anger; move speed | §03 |
 | `RadioConfig` | Noise by distance to the stage; proximity leak radius; talk-light | §04.2 |
-| `MovementConfig` | Walk/run speeds per role (patrol fast, dog slow), acceleration, look sensitivity | §03 |
+| `MovementConfig` | **In use (P0.10): one walk speed.** Walk/run speeds per role (patrol fast, dog slow), acceleration, look sensitivity | §03 |
 | `CameraConfig` | Field FP camera (FOV, height per role), fugitive TP camera (distance, height, damping) | §02 |
 | `InterrogationConfig` | Scene 10 s; expression choices | §07 |
 

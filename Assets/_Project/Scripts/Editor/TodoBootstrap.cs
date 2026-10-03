@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Unity.Multiplayer.PlayMode;
 using UnityEditor;
 using UnityEngine;
 
@@ -22,6 +23,12 @@ namespace LastSeenWearing.Editor
 
         static TodoBootstrap()
         {
+            // A Multiplayer Play Mode clone is a copy under Library/VP with no TODO.template.md.
+            if (!CurrentPlayer.IsMainEditor)
+            {
+                return;
+            }
+
             // Application.dataPath is <project>/Assets — the files live one level up.
             var projectRoot = Directory.GetParent(Application.dataPath)?.FullName;
             if (string.IsNullOrEmpty(projectRoot))

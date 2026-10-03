@@ -36,7 +36,9 @@ are scheduled by `Core/Round/Programme` and raised by the director.
 
 ## Networking
 
-Listen server over Steam (Facepunch transport), same model as Pane & Panic.
+Listen server over Steam (Facepunch transport), same model as Pane & Panic. In the editor the
+same session runs on Unity Transport so Multiplayer Play Mode clones can join (D-016).
+`Gameplay/Network/NetworkSession` on the bootstrap object owns starting and ending a session.
 
 | Thing | Authority | Synced how |
 |---|---|---|
