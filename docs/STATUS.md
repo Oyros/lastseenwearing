@@ -13,7 +13,7 @@ Keep it short. A snapshot, not a log; finished phases move to §4 as one line.
 |---|---|
 | **Phase** | **P0 — Scaffold** (`docs/ROADMAP.md`) — open, build, connect two players |
 | **In flight** | Nothing |
-| **Next** | `P0.04` — `GameConfig` root in `Data/Config/` (`/next`) |
+| **Next** | `P0.05` — `Bootstrap.unity` and `Sandbox_Empty.unity` (`/next`) |
 | **Blocking** | Nothing — UnityMCP connected; Blender MCP timed out this session (only matters for PL work) |
 | **Parallel** | **PL — Look-dev & art**: `PL.00`, `PL.02`, `PL.03`, `PL.05`, `PL.20`, `PL.21` done (references, check/CCTV/ref-loader tools, greybox kit, layouts A–D). Next: `PL.06` self-test in this machine's Blender, then `PL.01` palette and `PL.04` export, then `PL.07` the male base body |
 | **Unity** | 6000.5.7f1 · URP · Netcode for GameObjects + Facepunch transport (listen server over Steam) |
@@ -24,6 +24,7 @@ Keep it short. A snapshot, not a log; finished phases move to §4 as one line.
 - `P0.01` — `Assets/_Project/` tree (Borrowed Crown layout) and asmdefs `LastSeenWearing.Core/Gameplay/UI/Editor/Tests` through Unity MCP; all references resolve.
 - `P0.02` — opens in 6000.5.7f1, packages resolve, console clean.
 - `P0.03` — git repo (`main` + `development`), LFS via `.gitattributes`, first commit; empty `_Project` folders carry `.keep` so their `.meta` files survive a clone.
+- `P0.04` — `GameConfig` (`Core/Config`) and `Data/Config/GameConfig.asset`; empty until the first domain config lands.
 
 ## 3 · Open questions
 
