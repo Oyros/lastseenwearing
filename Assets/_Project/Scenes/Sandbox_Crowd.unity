@@ -2315,7 +2315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea50bdab93e4c6499354f9a842ce4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: LastSeenWearing.Gameplay::LastSeenWearing.Gameplay.Cameras.CctvCamera
-  _profile: {fileID: 11400000, guid: fdb3308f047d4f44facfed4cb72bcc85, type: 2}
+  _profile: {fileID: 11400000, guid: 6f490d926373127498ef2b50e76148c9, type: 2}
 --- !u!20 &1480936714
 Camera:
   m_ObjectHideFlags: 0

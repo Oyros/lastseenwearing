@@ -83,7 +83,7 @@ programme, sunset, case format, every tool in §07, replay, art, audio.
 | [x] P1.11 | Fugitive controller: third person, NPC-speed walk, interact | §03 | Fugitive moves like an NPC by default |
 | [x] P1.12 | Patrol controller: first person, run, placeholder FP arms | §03 | Patrol moves and aims |
 | [x] P1.13 | Watcher view: 2 monitor feeds, camera list, switch delay | §04.1 | Switching costs the configured delay |
-| [ ] P1.14 | Camera filters per camera (B/W, low-res) | §04.1 | Two different filters on two cameras |
+| [x] P1.14 | Camera filters per camera (B/W, low-res) | §04.1 | Two different filters on two cameras |
 | [ ] P1.15 | Radio channel watcher → field | §04.2 | Patrol hears the watcher anywhere |
 | [ ] P1.16 | Proximity voice + radio leak; radio light over a talking officer | §04.2 | A fugitive within range hears the radio; the light shows |
 | [ ] P1.17 | Greybox layout A in Unity from the art greybox export | LAYOUTS.md | PL.04 done; layout walkable, cameras placed as in layout A |

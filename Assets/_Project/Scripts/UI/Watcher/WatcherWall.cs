@@ -155,9 +155,9 @@ namespace LastSeenWearing.UI.Watcher
                 anySwitching |= switching;
                 monitor.Static.gameObject.SetActive(switching || showing == FeedSwitcher.NoCamera);
                 monitor.Status.text = switching ? Text("ui.watcher.switching") : string.Empty;
-                if (showing != FeedSwitcher.NoCamera)
+                if (showing != FeedSwitcher.NoCamera && monitor.Feed.Showing != _cameras[showing])
                 {
-                    monitor.Feed.Show(_cameras[showing]);
+                    monitor.Feed.Show(_cameras[showing]); // the new camera's own filter (P1.14)
                 }
 
                 monitor.Label.text = _switcher.Target(m) == FeedSwitcher.NoCamera

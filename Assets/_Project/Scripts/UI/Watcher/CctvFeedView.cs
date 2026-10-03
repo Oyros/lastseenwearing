@@ -36,6 +36,9 @@ namespace LastSeenWearing.UI.Watcher
             }
         }
 
+        /// <summary>The camera this view shows, or none.</summary>
+        public CctvCamera Showing => _camera;
+
         public void Show(CctvCamera feedCamera)
         {
             _camera = feedCamera;
