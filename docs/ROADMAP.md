@@ -77,7 +77,7 @@ programme, sunset, case format, every tool in §07, replay, art, audio.
 | [x] P1.05 | Additive walk layers | `LSW_WalkSystem.md` §2 | PL.12 done; each layer reads at 0.5 weight |
 | [x] P1.06 | Gait signature from seed (quantised buckets, max 2 traits) | §05 | 30 NPCs show distinct walks; log prints each signature in words |
 | [x] P1.07 | Black-and-white low-res camera filter | §04.1 | Crowd recorded through it; 2 testers find a named walk in under 20 s (`docs/WALKTEST.md`) |
-| [ ] P1.08 | Week-1 review: crowd model and walk system go / no-go | — | Decision recorded in DECISIONS |
+| [x] P1.08 | Week-1 review: crowd model and walk system go / no-go | — | Decision recorded in DECISIONS |
 | [x] P1.09 | Lobby roles: Watcher, Patrol, Fugitive assignment | §03 | Three players get their roles; roles are visible to all |
 | [ ] P1.10 | Round flow: spawn, timer, end screen; one `RoundDirector` authority | §06 | Round starts, ends on timer, restarts |
 | [ ] P1.11 | Fugitive controller: third person, NPC-speed walk, interact | §03 | Fugitive moves like an NPC by default |
@@ -166,7 +166,7 @@ open Blender; never save a `.blend` unasked.
 | ID | Task | Ref | Done when |
 |---|---|---|---|
 | [x] PL.23 | Female base body + builds on the same armature | `Crowd/_Ref` F_* | Binds; walk clips play without retarget artefacts |
-| [ ] PL.24 | Every garment fitted to the female body | — | Garments × 2 sexes × 3 builds, no clipping |
+| [x] PL.24 | Every garment fitted to the female body | — | Garments × 2 sexes × 3 builds, no clipping |
 | [ ] PL.25 | Hair set complete (8 options incl. beard/moustache shells) | `LSW_Ref_HeadsHair.png` | 8 options distinct in a CCTV lineup |
 | [ ] PL.26 | Tops complete: trench (belted), open flannel over tee, puffer (big bands), sweater, vest | `LSW_Ref_Clothing.png` | No two tops confusable at 320×180 |
 | [ ] PL.27 | Bottoms complete: skirt, jeans (rolled cuffs / wide leg), overalls | `LSW_Ref_Clothing.png` | Bottoms lineup passes |

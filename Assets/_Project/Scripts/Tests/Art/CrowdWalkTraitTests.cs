@@ -176,6 +176,49 @@ namespace LastSeenWearing.Tests.Art
             }
         }
 
+        /// <summary>
+        /// P1.08 (WalkSystem §7 "no foot sliding when layers combine"): every pair of traits a signature can
+        /// carry, at half and full strength, on the side that moves the body most (limp left, stiff arms).
+        /// </summary>
+        [Test]
+        public void NoPairOfTraitsMakesAPlantedFootSlide()
+        {
+            var npc = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(NpcPrefabPath));
+            try
+            {
+                var animator = npc.GetComponentInChildren<Animator>();
+                animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+                var bones = npc.GetComponentsInChildren<Transform>(true);
+                var left = bones.Single(t => t.name == "Foot.L");
+                var right = bones.Single(t => t.name == "Foot.R");
+                for (var a = 0; a < Traits.Length; a++)
+                {
+                    for (var b = a + 1; b < Traits.Length; b++)
+                    {
+                        foreach (var weight in new[] { 0.5f, 1f })
+                        {
+                            animator.Rebind();
+                            foreach (var trait in new[] { Traits[a], Traits[b] })
+                            {
+                                animator.SetLayerWeight(animator.GetLayerIndex(trait.ToString()), weight);
+                                if (trait == WalkTrait.Limp || trait == WalkTrait.ArmSwing)
+                                {
+                                    animator.SetFloat(CrowdAgent.SideParameter(trait), -1f);
+                                }
+                            }
+
+                            Assert.That(WorstSlip(npc.transform, animator, left, right), Is.LessThan(MaxSlipMetres),
+                                $"{Traits[a]} + {Traits[b]} at {weight}");
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                Object.DestroyImmediate(npc);
+            }
+        }
+
         // An agent on the P1.04 test schedule: 10 m legs at 2 m/s, 3 s dwell; stride 1 m.
         private static void WithAgent(Action<CrowdAgent, Animator> test)
         {

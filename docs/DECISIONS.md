@@ -309,3 +309,21 @@ honest — the same pixels, unfiltered. Recording in Unity tests the real rig, c
 box stand-ins; game time is locked to the video's frame rate, so the files play at real speed.
 **Reversing.** Cheap: a full-screen render feature could replace the UI shader if a feed must be
 filtered before it is shown; the profile and camera stay.
+
+---
+
+### D-027 — Week-1 review: the crowd model and the walk system are a go
+**Decision.** GO for both (P1.08). The crowd stays seed + server time with server takeover (D-005,
+D-019); the walk system stays base walks + additive trait layers on a distance-driven phase with
+unique bucketed signatures (D-022, D-024, D-025).
+**Why.** Against `LSW_WalkSystem.md` §7: 30+ characters with distinct signatures — 150 unique walks
+per crowd, logged in words (P1.06); a recording through the B/W low-res filter — `docs/walktest/`
+(P1.07); a named walk found through the filter — the team found every asked-for trait (P1.07; timings
+and tester details not recorded); no foot sliding when layers combine — every single trait and every
+pair at 0.5 and 1.0 stays under 5 mm (base walk 3.2–3.7 mm, P1.04/P1.05/P1.08). The crowd model held a
+7-minute run at ≤ 7 cm and 0 B/min untouched, with late join (P1.02).
+**Follow-ups, not blockers.** Per-NPC mesh combine for the 15+ body renderers, with clothing (P1.18;
+~40 fps with three editors, D-023). Uniqueness skews the trait odds (D-025): judge it in a 150-NPC crowd
+with lookalikes (P1.19), where "limps left" will match more than one person.
+**Reversing.** A no-go later would mean server-owned NPC transforms (D-005's fallback) or authored
+per-character clips — both large; neither is indicated.
