@@ -1,7 +1,7 @@
 {
  "kind": "rigged",
  "family": "Crowd",
- "fbx": "LSW_Crowd_Body_M.fbx",
+ "fbx": "LSW_Crowd_Body_M",
  "armature": "LSW_Crowd_Rig_M",
  "bones": [
   "Hips",
@@ -269,7 +269,7 @@
    "name": "LSW_Crowd_Hat_Cap_M",
    "base": "LSW_Crowd_Hat_Cap_M",
    "lod": 0,
-   "tris": 134,
+   "tris": 144,
    "materials": [
     "MAT_LSW_ClothRedDark"
    ],
@@ -526,6 +526,45 @@
  ],
  "clips": [
   {
+   "name": "Act_PosterSwap",
+   "start": 0,
+   "end": 90,
+   "markers": {
+    "peel": 34,
+    "place": 58,
+    "done": 80
+   },
+   "contacts": [],
+   "loop_end": 90,
+   "additive": false,
+   "additive_base": null,
+   "additive_reference_frame": null,
+   "speed": 0.0,
+   "loop": false,
+   "kind": "target_fixed",
+   "pair": null,
+   "pair_offset": null
+  },
+  {
+   "name": "Act_WalletLift",
+   "start": 0,
+   "end": 60,
+   "markers": {
+    "grab": 30,
+    "stash": 46
+   },
+   "contacts": [],
+   "loop_end": 60,
+   "additive": false,
+   "additive_base": null,
+   "additive_reference_frame": null,
+   "speed": 0.0,
+   "loop": false,
+   "kind": "target_open",
+   "pair": null,
+   "pair_offset": null
+  },
+  {
    "name": "Add_ArmSwing_Big",
    "start": 0,
    "end": 40,
@@ -542,7 +581,11 @@
    "additive": true,
    "additive_base": "Walk_Normal",
    "additive_reference_frame": 40,
-   "speed": null
+   "speed": null,
+   "loop": true,
+   "kind": null,
+   "pair": null,
+   "pair_offset": null
   },
   {
    "name": "Add_ArmSwing_Stiff",
@@ -561,7 +604,11 @@
    "additive": true,
    "additive_base": "Walk_Normal",
    "additive_reference_frame": 40,
-   "speed": null
+   "speed": null,
+   "loop": true,
+   "kind": null,
+   "pair": null,
+   "pair_offset": null
   },
   {
    "name": "Add_Bounce",
@@ -580,7 +627,11 @@
    "additive": true,
    "additive_base": "Walk_Normal",
    "additive_reference_frame": 40,
-   "speed": null
+   "speed": null,
+   "loop": true,
+   "kind": null,
+   "pair": null,
+   "pair_offset": null
   },
   {
    "name": "Add_Hunch",
@@ -599,7 +650,11 @@
    "additive": true,
    "additive_base": "Walk_Normal",
    "additive_reference_frame": 40,
-   "speed": null
+   "speed": null,
+   "loop": true,
+   "kind": null,
+   "pair": null,
+   "pair_offset": null
   },
   {
    "name": "Add_Limp_L",
@@ -618,7 +673,11 @@
    "additive": true,
    "additive_base": "Walk_Normal",
    "additive_reference_frame": 40,
-   "speed": null
+   "speed": null,
+   "loop": true,
+   "kind": null,
+   "pair": null,
+   "pair_offset": null
   },
   {
    "name": "Add_Limp_R",
@@ -637,7 +696,11 @@
    "additive": true,
    "additive_base": "Walk_Normal",
    "additive_reference_frame": 40,
-   "speed": null
+   "speed": null,
+   "loop": true,
+   "kind": null,
+   "pair": null,
+   "pair_offset": null
   },
   {
    "name": "Add_Sway",
@@ -656,7 +719,57 @@
    "additive": true,
    "additive_base": "Walk_Normal",
    "additive_reference_frame": 40,
-   "speed": null
+   "speed": null,
+   "loop": true,
+   "kind": null,
+   "pair": null,
+   "pair_offset": null
+  },
+  {
+   "name": "Arrest_Officer",
+   "start": 0,
+   "end": 90,
+   "markers": {
+    "grab": 24,
+    "cuffed": 56
+   },
+   "contacts": [],
+   "loop_end": 90,
+   "additive": false,
+   "additive_base": null,
+   "additive_reference_frame": null,
+   "speed": 0.0,
+   "loop": false,
+   "kind": "arrest",
+   "pair": "Arrest_Suspect",
+   "pair_offset": {
+    "right": 0.0,
+    "forward": 0.55,
+    "up": 0.0
+   }
+  },
+  {
+   "name": "Arrest_Suspect",
+   "start": 0,
+   "end": 90,
+   "markers": {
+    "grab": 24,
+    "cuffed": 56
+   },
+   "contacts": [],
+   "loop_end": 90,
+   "additive": false,
+   "additive_base": null,
+   "additive_reference_frame": null,
+   "speed": 0.0,
+   "loop": false,
+   "kind": "arrest",
+   "pair": "Arrest_Officer",
+   "pair_offset": {
+    "right": 0.0,
+    "forward": -0.55,
+    "up": 0.0
+   }
   },
   {
    "name": "Idle_Stand",
@@ -668,7 +781,55 @@
    "additive": false,
    "additive_base": null,
    "additive_reference_frame": null,
-   "speed": 0.0
+   "speed": 0.0,
+   "loop": true,
+   "kind": null,
+   "pair": null,
+   "pair_offset": null
+  },
+  {
+   "name": "Tent_Enter",
+   "start": 0,
+   "end": 40,
+   "markers": {
+    "contact_L": 0,
+    "contact_R": 20
+   },
+   "contacts": [
+    0,
+    20
+   ],
+   "loop_end": 40,
+   "additive": false,
+   "additive_base": null,
+   "additive_reference_frame": null,
+   "speed": 0.75,
+   "loop": false,
+   "kind": "tent",
+   "pair": null,
+   "pair_offset": null
+  },
+  {
+   "name": "Tent_Exit",
+   "start": 0,
+   "end": 40,
+   "markers": {
+    "contact_L": 0,
+    "contact_R": 20
+   },
+   "contacts": [
+    0,
+    20
+   ],
+   "loop_end": 40,
+   "additive": false,
+   "additive_base": null,
+   "additive_reference_frame": null,
+   "speed": 0.75,
+   "loop": false,
+   "kind": "tent",
+   "pair": null,
+   "pair_offset": null
   },
   {
    "name": "Walk_Brisk",
@@ -686,7 +847,11 @@
    "additive": false,
    "additive_base": null,
    "additive_reference_frame": null,
-   "speed": 0.9375
+   "speed": 0.9375,
+   "loop": true,
+   "kind": null,
+   "pair": null,
+   "pair_offset": null
   },
   {
    "name": "Walk_Heavy",
@@ -704,7 +869,11 @@
    "additive": false,
    "additive_base": null,
    "additive_reference_frame": null,
-   "speed": 0.9375
+   "speed": 0.9375,
+   "loop": true,
+   "kind": null,
+   "pair": null,
+   "pair_offset": null
   },
   {
    "name": "Walk_Normal",
@@ -722,7 +891,11 @@
    "additive": false,
    "additive_base": null,
    "additive_reference_frame": null,
-   "speed": 0.9375
+   "speed": 0.9375,
+   "loop": true,
+   "kind": null,
+   "pair": null,
+   "pair_offset": null
   },
   {
    "name": "Walk_Stroll",
@@ -740,16 +913,20 @@
    "additive": false,
    "additive_base": null,
    "additive_reference_frame": null,
-   "speed": 0.9375
+   "speed": 0.9375,
+   "loop": true,
+   "kind": null,
+   "pair": null,
+   "pair_offset": null
   }
  ],
  "verify": {
   "limb_nodes": 68,
   "skin_markers": 25,
-  "bytes": 4051916,
+  "bytes": 5532076,
   "ok": true
  },
- "exported": "2026-10-03 13:04:32",
+ "exported": "2026-10-03 13:49:46",
  "blend": "(unsaved)",
  "exporter": "lsw_export v1",
  "axes": "Unity: -Z forward, Y up, metres"

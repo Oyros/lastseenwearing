@@ -45,6 +45,59 @@ namespace LastSeenWearing.Tests.Art
             }
         }
 
+        /// <summary>
+        /// PL.12a: the art once shipped every spine pitch inverted (Brisk leaned back, Hunch bent back). The
+        /// leans must order as LSW_WalkSystem's styles do — Brisk +9°, Heavy +5°, Normal +3°, Stroll −3° — and
+        /// the hunch must put the head forward. Measured as head ahead of hips (+Z is the body's front).
+        /// </summary>
+        [Test]
+        public void TheBodyLeansTheWayTheArtMeans()
+        {
+            var npc = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(NpcPrefabPath));
+            try
+            {
+                var animator = npc.GetComponentInChildren<Animator>();
+                animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+                var bones = npc.GetComponentsInChildren<Transform>(true);
+                var hips = bones.Single(t => t.name == "Hips");
+                var head = bones.Single(t => t.name == "Head");
+
+                float Lean(BaseWalk walk, WalkTrait? trait)
+                {
+                    animator.Rebind();
+                    animator.SetFloat(CrowdAnimatorBuilder.StyleParameter, (float)walk);
+                    if (trait is WalkTrait t)
+                    {
+                        animator.SetLayerWeight(animator.GetLayerIndex(t.ToString()), 1f);
+                    }
+
+                    var sum = 0f;
+                    foreach (var phase in new[] { 0f, 0.25f, 0.5f, 0.75f })
+                    {
+                        animator.SetFloat(CrowdAnimatorBuilder.PhaseParameter, phase);
+                        animator.Update(1f / 60f);
+                        sum += head.position.z - hips.position.z;
+                    }
+
+                    return sum / 4f;
+                }
+
+                var brisk = Lean(BaseWalk.Brisk, null);
+                var heavy = Lean(BaseWalk.Heavy, null);
+                var normal = Lean(BaseWalk.Normal, null);
+                var stroll = Lean(BaseWalk.Stroll, null);
+                Assert.That(brisk, Is.GreaterThan(heavy), "Brisk leans forward of Heavy");
+                Assert.That(heavy, Is.GreaterThan(normal), "Heavy leans forward of Normal");
+                Assert.That(normal, Is.GreaterThan(stroll), "Normal leans forward of Stroll");
+                Assert.That(brisk, Is.GreaterThan(0f), "Brisk leans forward");
+                Assert.That(Lean(BaseWalk.Normal, WalkTrait.Hunch), Is.GreaterThan(normal + 0.1f), "the hunch brings the head well forward");
+            }
+            finally
+            {
+                Object.DestroyImmediate(npc);
+            }
+        }
+
         [Test]
         public void ASignedStrengthSetsWeightAndSide()
         {

@@ -37,7 +37,7 @@ namespace LastSeenWearing.Tests.Art
                 var clip = Clip(entry.name);
                 Assert.That(clip, Is.Not.Null, entry.name);
                 var settings = AnimationUtility.GetAnimationClipSettings(clip);
-                Assert.That(settings.loopTime, Is.True, $"{entry.name} loops");
+                Assert.That(settings.loopTime, Is.EqualTo(entry.loop), $"{entry.name} loop");
                 Assert.That(clip.length * clip.frameRate, Is.EqualTo(entry.loop_end - entry.start).Within(0.01f), $"{entry.name} frame range");
                 Assert.That(settings.hasAdditiveReferencePose, Is.EqualTo(entry.additive), $"{entry.name} additive");
                 if (entry.additive)

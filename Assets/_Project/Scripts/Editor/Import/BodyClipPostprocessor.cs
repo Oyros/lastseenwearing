@@ -7,8 +7,8 @@ using UnityEngine;
 namespace LastSeenWearing.Editor.Import
 {
     /// <summary>
-    /// Sets the clips a rigged body carries (lsw_walk.py: walks and additive layers, PL.11–PL.12) from
-    /// the body's sidecar JSON, the single source (P1.04, D-022): each clip's frame range, loop, and for
+    /// Sets the clips a rigged body carries (walks, additive layers, idle and one-shot actions, PL.11–PL.17) from
+    /// the body's sidecar JSON, the single source (P1.04, D-022): each clip's frame range, whether it loops, and for
     /// an additive layer its reference-pose frame. Every clip plays in place — rotation, height and XZ
     /// baked into the pose, height from the feet — because the crowd moves the body itself and drives
     /// the walk phase from distance walked.
@@ -16,7 +16,7 @@ namespace LastSeenWearing.Editor.Import
     public sealed class BodyClipPostprocessor : AssetPostprocessor
     {
         // Bump with every change to what this writes (see HumanoidImportPostprocessor).
-        private const uint Version = 1;
+        private const uint Version = 2; // 2: loop from the JSON (one-shot action clips, PL.17)
 
         public override uint GetVersion()
         {
@@ -39,6 +39,7 @@ namespace LastSeenWearing.Editor.Import
             public bool additive;
             public int additive_reference_frame;
             public float speed;
+            public bool loop;
         }
 
         public static Sidecar Load(string assetPath)
@@ -87,9 +88,10 @@ namespace LastSeenWearing.Editor.Import
             clip.firstFrame = entry.start;
             clip.lastFrame = entry.loop_end > 0 ? entry.loop_end : entry.end;
 
-            // Authored to close exactly on the cycle (frame loop_end == frame start): loop, but no Loop Pose
-            // smoothing, which would bend a closed cycle.
-            clip.loopTime = true;
+            // Walks, layers and the idle are authored to close exactly on the cycle (frame loop_end == frame
+            // start): they loop, without Loop Pose smoothing, which would bend a closed cycle. Actions,
+            // the arrest and the tent clips play once.
+            clip.loopTime = entry.loop;
             clip.loopPose = false;
 
             // In place: nothing goes to the root.
