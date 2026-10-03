@@ -16,7 +16,7 @@ namespace LastSeenWearing.Editor.Import
     public sealed class BodyClipPostprocessor : AssetPostprocessor
     {
         // Bump with every change to what this writes (see HumanoidImportPostprocessor).
-        private const uint Version = 2; // 2: loop from the JSON (one-shot action clips, PL.17)
+        private const uint Version = 3; // 2: loop from the JSON (one-shot action clips, PL.17). 3: any rigged export, Generic too
 
         public override uint GetVersion()
         {
@@ -56,7 +56,7 @@ namespace LastSeenWearing.Editor.Import
 
         private void OnPreprocessAnimation()
         {
-            if (!HumanoidImportPostprocessor.Applies(assetPath) || !HasClips(assetPath))
+            if (!HumanoidImportPostprocessor.IsRigged(assetPath) || !HasClips(assetPath))
             {
                 return;
             }

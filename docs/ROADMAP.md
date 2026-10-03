@@ -81,7 +81,7 @@ programme, sunset, case format, every tool in §07, replay, art, audio.
 | [x] P1.09 | Lobby roles: Watcher, Patrol, Fugitive assignment | §03 | Three players get their roles; roles are visible to all |
 | [x] P1.10 | Round flow: spawn, timer, end screen; one `RoundDirector` authority | §06 | Round starts, ends on timer, restarts |
 | [x] P1.11 | Fugitive controller: third person, NPC-speed walk, interact | §03 | Fugitive moves like an NPC by default |
-| [ ] P1.12 | Patrol controller: first person, run, placeholder FP arms | §03 | Patrol moves and aims |
+| [x] P1.12 | Patrol controller: first person, run, placeholder FP arms | §03 | Patrol moves and aims |
 | [ ] P1.13 | Watcher view: 2 monitor feeds, camera list, switch delay | §04.1 | Switching costs the configured delay |
 | [ ] P1.14 | Camera filters per camera (B/W, low-res) | §04.1 | Two different filters on two cameras |
 | [ ] P1.15 | Radio channel watcher → field | §04.2 | Patrol hears the watcher anywhere |
@@ -153,6 +153,7 @@ open Blender; never save a `.blend` unasked.
 | [x] PL.17 | Greybox animations: wallet lift, poster swap, tent enter/exit, arrest pair | — | Clips listed in the export JSON |
 | [x] PL.18 | Patrol uniform on the crowd average body; radio on `SOCKET_Radio` with emissive talk light | `Patrol/_Ref` | Identifiable instantly among 12 crowd figures on camera |
 | [x] PL.19 | First-person arms (patrol sleeves), separate rig | — | Idle, walk, stop gesture, cuffs frame in a 90° FOV camera |
+| [ ] PL.19b | Redo the first-person arms' `FP_Idle` and `FP_Walk` poses: in play the hands point up and in like horns from the bottom corners and read wrong (team, P1.12). Keep the rig, the `Camera` eye bone, the contacts (0/16) and the clip names; frame for a **horizontal** 90° FOV at 16:9. Also: the exporter still writes FBX files without the `.fbx` extension | `_Review/PL.19_FP_*.png`, D-030 | Requested by P1.12 — the team reads the idle and walk arms as natural in play |
 
 ### Track C — greybox festival
 
@@ -170,8 +171,8 @@ open Blender; never save a `.blend` unasked.
 | [x] PL.24 | Every garment fitted to the female body | — | Garments × 2 sexes × 3 builds, no clipping |
 | [x] PL.25 | Hair set complete (8 options incl. beard/moustache shells) | `LSW_Ref_HeadsHair.png` | 8 options distinct in a CCTV lineup |
 | [x] PL.26 | Tops complete: trench (belted), open flannel over tee, puffer (big bands), sweater, vest | `LSW_Ref_Clothing.png` | No two tops confusable at 320×180 |
-| [ ] PL.27 | Bottoms complete: skirt, jeans (rolled cuffs / wide leg), overalls | `LSW_Ref_Clothing.png` | Bottoms lineup passes |
-| [ ] PL.28 | Hats complete: straw (wide), beanie (tall), bucket (wider brim), paper crown | `LSW_Ref_Accessories.png` | Hats lineup from the CCTV angle passes |
+| [x] PL.27 | Bottoms complete: skirt, jeans (rolled cuffs / wide leg), overalls | `LSW_Ref_Clothing.png` | Bottoms lineup passes |
+| [x] PL.28 | Hats complete: straw (wide), beanie (tall), bucket (wider brim), paper crown | `LSW_Ref_Accessories.png` | Hats lineup from the CCTV angle passes |
 | [ ] PL.29 | Masks (fox, half, cartoon) on `SOCKET_Face`, light/dark | `LSW_Ref_Accessories.png` | Full masks read on camera; half mask at stop distance (D-009) |
 | [ ] PL.30 | Glasses (regular, sun) — close-range clue | D-009 | Readable at 2 m eye level |
 | [ ] PL.31 | Body accessories: scarf, backpack, shoulder bag, umbrella, balloon | `LSW_Ref_Accessories.png` | Backpack and balloon read on camera |

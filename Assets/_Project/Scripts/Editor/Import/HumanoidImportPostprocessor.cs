@@ -33,7 +33,7 @@ namespace LastSeenWearing.Editor.Import
     {
         // Unity reuses a cached import result unless this changes: bump it with every change to what
         // this postprocessor writes, or a model can come back from the cache imported by the old rules.
-        private const uint Version = 3; // 2: bodies import their clips. 3: rest pose from the bind matrices
+        private const uint Version = 4; // 2: bodies import their clips. 3: rest pose from the bind matrices. 4: humanoid only with Hips
 
         public override uint GetVersion()
         {
@@ -58,26 +58,36 @@ namespace LastSeenWearing.Editor.Import
         private sealed class ExportSidecar
         {
             public string kind;
+            public string[] bones;
         }
 
-        /// <summary>True for a rigged character body: <c>LSW_*.fbx</c> under Models whose sidecar JSON says rigged.</summary>
+        /// <summary>True for any rigged export: <c>LSW_*.fbx</c> under Models whose sidecar JSON says rigged.</summary>
+        public static bool IsRigged(string assetPath)
+        {
+            return Sidecar(assetPath)?.kind == RiggedKind;
+        }
+
+        /// <summary>
+        /// True for a rigged character body on the crowd contract — rigged, with <see cref="HumanoidBoneMap.RootBone"/>
+        /// among its bones. Other rigs (the first-person arms, PL.19) import Generic (<see cref="GenericRigPostprocessor"/>).
+        /// </summary>
         public static bool Applies(string assetPath)
+        {
+            var data = Sidecar(assetPath);
+            return data?.kind == RiggedKind && data.bones != null && System.Array.IndexOf(data.bones, HumanoidBoneMap.RootBone) >= 0;
+        }
+
+        private static ExportSidecar Sidecar(string assetPath)
         {
             if (!assetPath.StartsWith(ModelsFolder)
                 || !Path.GetFileName(assetPath).StartsWith(ModelPrefix)
                 || Path.GetExtension(assetPath).ToLowerInvariant() != ".fbx")
             {
-                return false;
+                return null;
             }
 
             var sidecar = Path.ChangeExtension(assetPath, ".json");
-            if (!File.Exists(sidecar))
-            {
-                return false;
-            }
-
-            var data = JsonUtility.FromJson<ExportSidecar>(File.ReadAllText(sidecar));
-            return data != null && data.kind == RiggedKind;
+            return File.Exists(sidecar) ? JsonUtility.FromJson<ExportSidecar>(File.ReadAllText(sidecar)) : null;
         }
 
         /// <summary>True for an animation file: <c>LSW_A_*.fbx</c> under <see cref="AnimationsFolder"/>.</summary>

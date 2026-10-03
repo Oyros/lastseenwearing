@@ -23,6 +23,27 @@ namespace LastSeenWearing.Core.Config
         [SerializeField, Range(0f, 89f)] private float _thirdPersonPitchMax = 60f;
         [SerializeField, Range(30f, 100f)] private float _thirdPersonFieldOfView = 60f;
 
+        [Header("Field team — first person (P1.12)")]
+        [Tooltip("Eye height above the feet, metres — the uniform body's SOCKET_Eye.")]
+        [SerializeField, Min(0.5f)] private float _firstPersonEyeHeight = 1.68f;
+        [Tooltip("HORIZONTAL degrees, as Blender frames PL.19's arms (90°); turned into Unity's vertical field of view for the screen's aspect.")]
+        [SerializeField, Range(50f, 110f)] private float _firstPersonFieldOfView = 90f;
+        [Tooltip("Near clip, metres: the arms sit a hand's breadth from the eye.")]
+        [SerializeField, Range(0.01f, 0.3f)] private float _firstPersonNearClip = 0.05f;
+        [SerializeField, Range(-89f, 0f)] private float _firstPersonPitchMin = -80f;
+        [SerializeField, Range(0f, 89f)] private float _firstPersonPitchMax = 80f;
+
+        [Header("Aim")]
+        [Tooltip("Metres the field team's aim reaches: who you are looking at, for stops and arrests.")]
+        [SerializeField, Min(1f)] private float _aimRange = 30f;
+
+        public float FirstPersonEyeHeight => _firstPersonEyeHeight;
+        public float FirstPersonFieldOfView => _firstPersonFieldOfView;
+        public float FirstPersonNearClip => _firstPersonNearClip;
+        public float FirstPersonPitchMin => _firstPersonPitchMin;
+        public float FirstPersonPitchMax => _firstPersonPitchMax;
+        public float AimRange => _aimRange;
+
         public float ThirdPersonDistance => _thirdPersonDistance;
         public float ThirdPersonPivotHeight => _thirdPersonPivotHeight;
         public float ThirdPersonShoulder => _thirdPersonShoulder;

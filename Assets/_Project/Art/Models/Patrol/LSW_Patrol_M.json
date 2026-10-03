@@ -1,0 +1,320 @@
+{
+ "kind": "rigged",
+ "family": "Patrol",
+ "fbx": "LSW_Patrol_M",
+ "armature": "LSW_Patrol_Rig_M",
+ "bones": [
+  "Hips",
+  "Spine",
+  "Chest",
+  "Neck",
+  "Head",
+  "Shoulder.L",
+  "UpperArm.L",
+  "LowerArm.L",
+  "Hand.L",
+  "Thumb1.L",
+  "Thumb2.L",
+  "Index1.L",
+  "Index2.L",
+  "Fingers1.L",
+  "Fingers2.L",
+  "Shoulder.R",
+  "UpperArm.R",
+  "LowerArm.R",
+  "Hand.R",
+  "Thumb1.R",
+  "Thumb2.R",
+  "Index1.R",
+  "Index2.R",
+  "Fingers1.R",
+  "Fingers2.R",
+  "UpperLeg.L",
+  "LowerLeg.L",
+  "Foot.L",
+  "Toes.L",
+  "UpperLeg.R",
+  "LowerLeg.R",
+  "Foot.R",
+  "Toes.R"
+ ],
+ "sockets": [
+  {
+   "name": "SOCKET_Back",
+   "bone": "Chest"
+  },
+  {
+   "name": "SOCKET_Eye",
+   "bone": "Head"
+  },
+  {
+   "name": "SOCKET_Face",
+   "bone": "Head"
+  },
+  {
+   "name": "SOCKET_Hand.L",
+   "bone": "Hand.L"
+  },
+  {
+   "name": "SOCKET_Hand.R",
+   "bone": "Hand.R"
+  },
+  {
+   "name": "SOCKET_Hat",
+   "bone": "Head"
+  },
+  {
+   "name": "SOCKET_Radio",
+   "bone": "Chest"
+  },
+  {
+   "name": "SOCKET_Shoulder.R",
+   "bone": "Chest"
+  }
+ ],
+ "meshes": [
+  {
+   "name": "LSW_Patrol_Acc_Belt_M",
+   "base": "LSW_Patrol_Acc_Belt_M",
+   "lod": 0,
+   "tris": 88,
+   "materials": [
+    "MAT_LSW_UniformBelt"
+   ],
+   "shape_keys": [],
+   "slot": "acc",
+   "variant": "Belt",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": null,
+   "bone": null
+  },
+  {
+   "name": "LSW_Patrol_Acc_Radio_M",
+   "base": "LSW_Patrol_Acc_Radio_M",
+   "lod": 0,
+   "tris": 24,
+   "materials": [
+    "MAT_LSW_UniformBelt"
+   ],
+   "shape_keys": [],
+   "slot": "acc",
+   "variant": "Radio",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": null,
+   "bone": null
+  },
+  {
+   "name": "LSW_Patrol_Acc_RadioLight_M",
+   "base": "LSW_Patrol_Acc_RadioLight_M",
+   "lod": 0,
+   "tris": 12,
+   "materials": [
+    "MAT_LSW_EmitRadioTalk"
+   ],
+   "shape_keys": [],
+   "slot": "radio_light",
+   "variant": "TalkLight",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": null,
+   "bone": null
+  },
+  {
+   "name": "LSW_Patrol_Bottom_Trousers_M",
+   "base": "LSW_Patrol_Bottom_Trousers_M",
+   "lod": 0,
+   "tris": 408,
+   "materials": [
+    "MAT_LSW_UniformDark"
+   ],
+   "shape_keys": [],
+   "slot": "bottom",
+   "variant": "PatrolTrousers",
+   "hides": [
+    "Pelvis",
+    "Thigh",
+    "Shin"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": null,
+   "bone": null
+  },
+  {
+   "name": "LSW_Patrol_Foot_M.L",
+   "base": "LSW_Patrol_Foot_M.L",
+   "lod": 0,
+   "tris": 54,
+   "materials": [
+    "MAT_LSW_UniformBelt"
+   ],
+   "shape_keys": [],
+   "slot": "shoes",
+   "variant": "Boots",
+   "hides": [],
+   "double_sided": false,
+   "region": "Foot",
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Patrol_Foot_M.R",
+   "base": "LSW_Patrol_Foot_M.R",
+   "lod": 0,
+   "tris": 54,
+   "materials": [
+    "MAT_LSW_UniformBelt"
+   ],
+   "shape_keys": [],
+   "slot": "shoes",
+   "variant": "Boots",
+   "hides": [],
+   "double_sided": false,
+   "region": "Foot",
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Patrol_Hair_Crew_M",
+   "base": "LSW_Patrol_Hair_Crew_M",
+   "lod": 0,
+   "tris": 210,
+   "materials": [
+    "MAT_LSW_HairDarkBrown"
+   ],
+   "shape_keys": [],
+   "slot": "hair",
+   "variant": "Crew",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Patrol_Hand_M.L",
+   "base": "LSW_Patrol_Hand_M.L",
+   "lod": 0,
+   "tris": 226,
+   "materials": [
+    "MAT_LSW_SkinMid"
+   ],
+   "shape_keys": [],
+   "slot": "body",
+   "variant": null,
+   "hides": [],
+   "double_sided": false,
+   "region": "Hand",
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Patrol_Hand_M.R",
+   "base": "LSW_Patrol_Hand_M.R",
+   "lod": 0,
+   "tris": 226,
+   "materials": [
+    "MAT_LSW_SkinMid"
+   ],
+   "shape_keys": [],
+   "slot": "body",
+   "variant": null,
+   "hides": [],
+   "double_sided": false,
+   "region": "Hand",
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Patrol_Hat_Cap_M",
+   "base": "LSW_Patrol_Hat_Cap_M",
+   "lod": 0,
+   "tris": 110,
+   "materials": [
+    "MAT_LSW_UniformDark",
+    "MAT_LSW_UniformCapBand",
+    "MAT_LSW_UniformBelt"
+   ],
+   "shape_keys": [],
+   "slot": "hat",
+   "variant": "PatrolCap",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": null,
+   "bone": null
+  },
+  {
+   "name": "LSW_Patrol_Head_M",
+   "base": "LSW_Patrol_Head_M",
+   "lod": 0,
+   "tris": 388,
+   "materials": [
+    "MAT_LSW_SkinMid"
+   ],
+   "shape_keys": [],
+   "slot": "body",
+   "variant": null,
+   "hides": [],
+   "double_sided": false,
+   "region": "Head",
+   "sex": "M",
+   "bone": null
+  },
+  {
+   "name": "LSW_Patrol_Top_Shirt_M",
+   "base": "LSW_Patrol_Top_Shirt_M",
+   "lod": 0,
+   "tris": 428,
+   "materials": [
+    "MAT_LSW_UniformDark"
+   ],
+   "shape_keys": [],
+   "slot": "top",
+   "variant": "PatrolShirt",
+   "hides": [
+    "Torso",
+    "UpperArm",
+    "Forearm"
+   ],
+   "double_sided": true,
+   "region": null,
+   "sex": null,
+   "bone": null
+  },
+  {
+   "name": "LSW_Patrol_Top_Vest_M",
+   "base": "LSW_Patrol_Top_Vest_M",
+   "lod": 0,
+   "tris": 152,
+   "materials": [
+    "MAT_LSW_UniformHiVis",
+    "MAT_LSW_UniformCapBand"
+   ],
+   "shape_keys": [],
+   "slot": "vest",
+   "variant": "HiVis",
+   "hides": [],
+   "double_sided": true,
+   "region": null,
+   "sex": null,
+   "bone": null
+  }
+ ],
+ "clips": [],
+ "verify": {
+  "limb_nodes": 68,
+  "skin_markers": 15,
+  "bytes": 3794492,
+  "ok": true
+ },
+ "exported": "2026-10-03 14:26:53",
+ "blend": "(unsaved)",
+ "exporter": "lsw_export v1",
+ "axes": "Unity: -Z forward, Y up, metres"
+}
