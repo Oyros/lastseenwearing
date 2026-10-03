@@ -1,8 +1,17 @@
 # Walk readability test — how to run it
 
-Files: `LastSeenWearingArt/_Review/walktest/LSW_WalkTest_near.mp4`, `LSW_WalkTest_far.mp4`, `LSW_WalkTest_key.mp4` (answer key). Rebuild with `LastSeenWearingArt/Scripts/lsw_walktest.py`.
+**Current files (P1.07, Unity):** `docs/walktest/LSW_WalkTest_near.mp4`, `LSW_WalkTest_far.mp4`, `LSW_WalkTest_key.mp4`.
+Rebuild: open `Sandbox_WalkTest`, enter play mode, **Last Seen Wearing → Art → Record Walk Test (in play mode)**
+(`Editor/Tools/WalkTestRecorder`). Keys 1 / 2 / 3 switch near / far / key by hand in play mode.
 
-30 identical grey box figures walk around a plaza. They differ **only** in how they walk. Six of them carry one trait each (from `LSW_WalkSystem.md`); everyone else walks normally at one of four base speeds (normal, brisk, stroll, heavy). The clips show the same 12 seconds through the CCTV filter (black-and-white, 320×180, grain) from 8 m and from 18 m.
+Thirty identical crowd bodies (the real rig and clips, no clothes) walk a 10 × 10 m plaza. They differ **only** in how
+they walk. Six carry one trait each at **0.5 weight** — the LOOKDEV §2 gate; everyone else walks plain at one of the
+four base walks. The three files show the same 12 seconds: through the CCTV filter (greyscale, 320×180, grain, scan
+lines) from a camera 6 m up at **8 m** and at **18 m**, then the raw key. Seed 2026; the log's answer key:
+limps left = Walker_10, limps right = Walker_00, hunched = Walker_22, bouncy = Walker_29, stiff arms = Walker_20,
+sways = Walker_16 (`WalkTestCrowd`).
+
+*Earlier art-side version (box figures, `lsw_walktest.py`): `LastSeenWearingArt/_Review/walktest/`.*
 
 ## Protocol (2 minutes per tester)
 

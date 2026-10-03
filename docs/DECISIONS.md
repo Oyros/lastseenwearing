@@ -293,3 +293,19 @@ twenty 150-NPC crowds: only 12 walks have no trait, so a crowd has 12 plain walk
 "limps left" therefore matches more NPCs than the odds suggest — for P1.07's find test and the P1.08
 review (more buckets, or height/build joining uniqueness, are the levers).
 **Reversing.** Dropping uniqueness restores the configured odds; GDD §05 would change with it.
+
+---
+
+### D-026 — The CCTV look is applied where a feed is shown; recordings come from Unity
+**Decision.** A `CctvCamera` renders into its own point-filtered feed at its `CctvFilterProfile`'s size
+(instance data, `Data/Cameras/`; default 320×180). The greyscale treatment — contrast, per-frame grain,
+scan lines, vignette, all per *feed* pixel — is the UI shader `LSW/UI/CctvFeed`, applied by
+`CctvFeedView` where the feed is shown; the same feed can be shown raw. The walk test is
+`Sandbox_WalkTest` (`WalkTestCrowd`: 30 bodies, six traits at 0.5, uniqueness off) recorded with
+Unity Recorder (`com.unity.recorder`, editor only) into `docs/walktest/`.
+**Why.** A per-camera look is what P1.14 needs (two cameras, two filters) and what the Watcher's wall
+(P1.13) is made of: feeds in UI. Filtering at display time keeps the answer key and any debug view
+honest — the same pixels, unfiltered. Recording in Unity tests the real rig, clips and filter, not
+box stand-ins; game time is locked to the video's frame rate, so the files play at real speed.
+**Reversing.** Cheap: a full-screen render feature could replace the UI shader if a feed must be
+filtered before it is shown; the profile and camera stay.

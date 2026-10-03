@@ -159,13 +159,13 @@ open Blender; never save a `.blend` unasked.
 |---|---|---|---|
 | [x] PL.20 | Greybox kit (16 pieces) on a 1 m grid | `Festival/_Ref` | `lsw_check` 15/15 pass; CCTV props lineup (D-013) |
 | [x] PL.21 | Layouts A–D with 5 targets, tents, exits, 4 cameras; coverage maps | `docs/LAYOUTS.md` | Coverage stats and target visibility recorded |
-| [ ] PL.22 | Export greybox kit and layouts to Unity | — | PL.04 done; layout A opens in Unity at scale |
+| [ ] PL.22 | Export greybox kit and layouts to Unity (art side done 2026-10-03: `_Export/Festival/Layouts/`; open layout A in Unity to close) | — | PL.04 done; layout A opens in Unity at scale |
 
 ### Track D — full crowd, dog, festival (v1)
 
 | ID | Task | Ref | Done when |
 |---|---|---|---|
-| [ ] PL.23 | Female base body + builds on the same armature | `Crowd/_Ref` F_* | Binds; walk clips play without retarget artefacts |
+| [x] PL.23 | Female base body + builds on the same armature | `Crowd/_Ref` F_* | Binds; walk clips play without retarget artefacts |
 | [ ] PL.24 | Every garment fitted to the female body | — | Garments × 2 sexes × 3 builds, no clipping |
 | [ ] PL.25 | Hair set complete (8 options incl. beard/moustache shells) | `LSW_Ref_HeadsHair.png` | 8 options distinct in a CCTV lineup |
 | [ ] PL.26 | Tops complete: trench (belted), open flannel over tee, puffer (big bands), sweater, vest | `LSW_Ref_Clothing.png` | No two tops confusable at 320×180 |

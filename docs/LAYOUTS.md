@@ -33,6 +33,10 @@ Every hidden target sits in a blind spot and every other target is seen by at le
     - In C a corner camera aimed diagonally hit a building wall; in alley layouts cameras must look *along* lanes.
 5. **Landmarks read well from every camera** (ferris wheel, stage, green exit gates). They give the watcher vocabulary: "between the wheel and the gate".
 
+## Unity export (PL.22)
+
+`LastSeenWearingArt/_Export/Festival/Layouts/LSW_Festival_Layout_<id>.fbx` (whole layout, centred, metres) and `.json` (placements of kit prefabs, targets by type, tents, exits, cameras, crowd spawn rects, bounds; Unity axes). Rebuild after any layout change: `lsw_layouts.py`, then `lsw_layout_export.export_all()` and `scale_check(id)`.
+
 ## Open level-design questions
 
 - [ ] Is 12 m the right "identifiable without zoom" distance? Test with real character models in the CCTV filter (art roadmap A2.08).
