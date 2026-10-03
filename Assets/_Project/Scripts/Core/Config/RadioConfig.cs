@@ -4,7 +4,7 @@ namespace LastSeenWearing.Core.Config
 {
     /// <summary>
     /// The voice channels (docs/DATA.md §3, GDD §04.2, D-032): the radio's codec rate, packet length,
-    /// playback buffer and radio sound. Stage noise, the proximity leak and the talk light join with P1.16.
+    /// playback buffer and radio sound; proximity, the leak and the talk light (P1.16). Stage noise joins with the layout.
     /// </summary>
     [CreateAssetMenu(fileName = "RadioConfig", menuName = "Last Seen Wearing/Config/Radio")]
     public sealed class RadioConfig : ScriptableObject
@@ -27,6 +27,23 @@ namespace LastSeenWearing.Core.Config
         [SerializeField, Range(50f, 1000f)] private float _radioLowCut = 300f;
         [Tooltip("Band-pass high edge, Hz.")]
         [SerializeField, Range(1000f, 8000f)] private float _radioHighCut = 3400f;
+
+        [Header("Proximity and leak (P1.16)")]
+        [Tooltip("Metres a body's voice carries. [PROVISIONAL]")]
+        [SerializeField, Range(2f, 40f)] private float _proximityRadius = 12f;
+        [Tooltip("Metres from an officer within which a non-officer overhears the radio. [PROVISIONAL]")]
+        [SerializeField, Range(1f, 20f)] private float _leakRadius = 5f;
+        [Tooltip("Volume of the overheard radio. [PROVISIONAL]")]
+        [SerializeField, Range(0f, 1f)] private float _leakVolume = 0.5f;
+        [SerializeField, Range(0f, 2f)] private float _proximityVolume = 1f;
+        [Tooltip("Seconds without a radio packet before the radio light goes off. [PROVISIONAL]")]
+        [SerializeField, Range(0.05f, 2f)] private float _onAirHoldSeconds = 0.3f;
+
+        public float ProximityRadius => _proximityRadius;
+        public float LeakRadius => _leakRadius;
+        public float LeakVolume => _leakVolume;
+        public float ProximityVolume => _proximityVolume;
+        public float OnAirHoldSeconds => _onAirHoldSeconds;
 
         public int SampleRate => _sampleRate;
         public int PacketSamples => _sampleRate * _packetMilliseconds / 1000;

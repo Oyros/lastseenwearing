@@ -39,6 +39,37 @@ namespace LastSeenWearing.Gameplay.Voice
             return playback;
         }
 
+        /// <summary>A body's voice, from the body: 3D, fading out at the proximity radius.</summary>
+        public static VoicePlayback CreateProximity(Transform body, string speakerName, RadioConfig config)
+        {
+            var playback = Create3D(body, $"Voice_{speakerName}", config, config.ProximityRadius, config.ProximityVolume);
+            return playback;
+        }
+
+        /// <summary>The radio overheard from an officer's belt: 3D, quieter, still sounding like a radio.</summary>
+        public static VoicePlayback CreateLeak(Transform officer, string officerName, RadioConfig config)
+        {
+            var playback = Create3D(officer, $"RadioLeak_{officerName}", config, config.LeakRadius * 2f, config.LeakVolume);
+            playback.gameObject.AddComponent<AudioHighPassFilter>().cutoffFrequency = config.RadioLowCut;
+            playback.gameObject.AddComponent<AudioLowPassFilter>().cutoffFrequency = config.RadioHighCut;
+            return playback;
+        }
+
+        private static VoicePlayback Create3D(Transform parent, string name, RadioConfig config, float maxDistance, float volume)
+        {
+            var go = new GameObject(name, typeof(AudioSource));
+            go.transform.SetParent(parent, false);
+            var source = go.GetComponent<AudioSource>();
+            source.spatialBlend = 1f;
+            source.rolloffMode = AudioRolloffMode.Linear;
+            source.minDistance = 1f;
+            source.maxDistance = maxDistance;
+            source.volume = volume;
+            var playback = go.AddComponent<VoicePlayback>();
+            playback.Begin(config);
+            return playback;
+        }
+
         public void Receive(byte[] packet, int count)
         {
             if (_decoded.Length < count)

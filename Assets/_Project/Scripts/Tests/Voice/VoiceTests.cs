@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using LastSeenWearing.Core.Config;
 using LastSeenWearing.Core.Roles;
 using LastSeenWearing.Core.Voice;
 using NUnit.Framework;
 using UnityEditor;
+using UnityEngine;
 
 namespace LastSeenWearing.Tests.Voice
 {
@@ -89,6 +91,53 @@ namespace LastSeenWearing.Tests.Voice
             }
 
             Assert.That(VoiceRouting.Hears(Role.Patrol, VoiceChannel.Radio, Role.Dog), Is.False, "no one else broadcasts");
+        }
+
+        [Test]
+        public void ProximityIsBodyToBodyInRange()
+        {
+            var here = Vector3.zero;
+            var near = new Vector3(0f, 0f, 11f);
+            var far = new Vector3(0f, 0f, 13f);
+            Assert.That(VoiceRouting.HearsProximity(Role.Patrol, here, Role.Fugitive, near, 12f), Is.True);
+            Assert.That(VoiceRouting.HearsProximity(Role.Fugitive, here, Role.Patrol, near, 12f), Is.True, "the fugitive's voice carries too");
+            Assert.That(VoiceRouting.HearsProximity(Role.Patrol, here, Role.Fugitive, far, 12f), Is.False, "out of range");
+            Assert.That(VoiceRouting.HearsProximity(Role.Patrol, here, Role.Watcher, near, 12f), Is.False, "the Watcher has no body");
+            Assert.That(VoiceRouting.MayTalk(Role.Watcher, VoiceChannel.Proximity), Is.False);
+            Assert.That(VoiceRouting.MayTalk(Role.Patrol, VoiceChannel.RadioLeak), Is.False, "a leak is overheard, never spoken");
+        }
+
+        [Test]
+        public void TheFugitiveOverhearsTheNearestOfficersRadio()
+        {
+            var officers = new List<Vector3> { new(10f, 0f, 0f), new(3f, 0f, 0f), new(0f, 0f, 4f) };
+            Assert.That(VoiceRouting.LeakSource(Role.Fugitive, Vector3.zero, officers, 5f), Is.EqualTo(1), "nearest within range");
+            Assert.That(VoiceRouting.LeakSource(Role.Fugitive, new Vector3(-20f, 0f, 0f), officers, 5f), Is.EqualTo(-1), "too far");
+            Assert.That(VoiceRouting.LeakSource(Role.Patrol, Vector3.zero, officers, 5f), Is.EqualTo(-1), "the field team hears the radio itself");
+            Assert.That(VoiceRouting.LeakSource(Role.Watcher, Vector3.zero, officers, 5f), Is.EqualTo(-1), "no body, nothing to overhear with");
+            Assert.That(VoiceRouting.LeakSource(Role.Fugitive, Vector3.zero, new List<Vector3>(), 5f), Is.EqualTo(-1));
+        }
+
+        [Test]
+        public void TheRadioIsOnAirUntilItGoesQuiet()
+        {
+            var air = new OnAir(0.3);
+            Assert.That(air.IsOnAir(0d), Is.False, "silent at the start");
+            air.Packet(10d);
+            Assert.That(air.IsOnAir(10.1d), Is.True);
+            Assert.That(air.IsOnAir(10.29d), Is.True);
+            Assert.That(air.IsOnAir(10.31d), Is.False);
+        }
+
+        [Test]
+        public void ThePatrolCarriesARadioLight()
+        {
+            var patrol = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/_Project/Prefabs/Characters/Patrol.prefab");
+            var light = patrol.GetComponentInChildren<LastSeenWearing.Gameplay.Voice.RadioLight>(true);
+            Assert.That(light, Is.Not.Null);
+            var lamp = new SerializedObject(light).FindProperty("_lamp").objectReferenceValue as Renderer;
+            Assert.That(lamp, Is.Not.Null);
+            Assert.That(lamp.name, Does.Contain("RadioLight"));
         }
 
         [Test]

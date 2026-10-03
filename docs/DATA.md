@@ -57,7 +57,7 @@ Values below are the GDD's first numbers; P1 tunes them.
 | `WatcherConfig` | **In use (P1.13): feed switch 1.5 s [PROVISIONAL].** Later: rewind 30 s; feed switch time; zoom range and pan speed; announcements 1/round; festival-control anger cost | §04.1, §07 |
 | `DisguiseConfig` | Tent uses per round 1; masked-NPC cluster radius at the mask stall | §05 |
 | `DogConfig` | Scent trail 10 s; bark radius, stamina cost, NPC anger; move speed | §03 |
-| `RadioConfig` | **In use (P1.15): 8 kHz µ-law, 100 ms packets, 200 ms prebuffer, 1 s max buffer, volume, radio band-pass 300–3400 Hz [PROVISIONAL].** Later: noise by distance to the stage; proximity leak radius; talk-light | §04.2 |
+| `RadioConfig` | **In use (P1.15): 8 kHz µ-law, 100 ms packets, 200 ms prebuffer, 1 s max buffer, volume, radio band-pass 300–3400 Hz; (P1.16) proximity radius 12 m, leak radius 5 m, leak volume 0.5, on-air hold 0.3 s [PROVISIONAL].** Later: noise by distance to the stage | §04.2 |
 | `MovementConfig` | **In use (P0.10, P1.11, P1.12): placeholder capsule walk; patrol walk 1.7 / run 4.2; fugitive run speed, acceleration, turn speed, mouse/stick look, interact range. The fugitive's walk speed is `CrowdConfig`'s (D-029).** Walk/run speeds per role (patrol fast, dog slow), acceleration, look sensitivity | §03 |
 | `CameraConfig` | **In use (P1.11, P1.12): fugitive third person — distance, pivot height, shoulder, damping, pitch range, FOV; field first person — eye height 1.68, horizontal FOV 90 (D-030), near clip, pitch range; aim range 30 m.** Per-role eye heights with the dog | §02 |
 | `InterrogationConfig` | Scene 10 s; expression choices | §07 |

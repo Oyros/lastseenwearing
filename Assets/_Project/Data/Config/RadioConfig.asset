@@ -19,3 +19,8 @@ MonoBehaviour:
   _radioVolume: 1
   _radioLowCut: 300
   _radioHighCut: 3400
+  _proximityRadius: 12
+  _leakRadius: 5
+  _leakVolume: 0.5
+  _proximityVolume: 1
+  _onAirHoldSeconds: 0.3

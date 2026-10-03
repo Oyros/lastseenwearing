@@ -65,6 +65,10 @@ namespace LastSeenWearing.Gameplay.Player
 
             if (IsOwner)
             {
+                // A client's body is created at the origin and then moved to its spawn point; the controller still
+                // holds the origin and its first Move would snap back there. Re-enabling it takes the real position.
+                _body.enabled = false;
+                _body.enabled = true;
                 _controls = new LastSeenWearingControls();
                 _controls.Field.Enable();
                 _yaw = transform.eulerAngles.y;

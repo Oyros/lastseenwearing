@@ -419,3 +419,21 @@ the patrol and were heard, the fugitive got none.
 may want a better rate; Opus (or Steam's codec) can replace µ-law behind `VoiceCapture`/`VoicePlayback`
 without touching routing.
 **Reversing.** Moderate: the codec is swappable; the routing should stay.
+
+---
+
+### D-033 — Proximity, the radio leak and the radio light
+**Decision.** Every body talks in proximity (Field PushToTalk): the server forwards it to every body within
+`RadioConfig.ProximityRadius` (12 m), played 3D from the speaker. The radio leaks: for each radio packet the
+server sends anyone with a body who is not on the field team — the fugitive — a `RadioLeak` copy if they are
+within `LeakRadius` (5 m) of an officer, played 3D from the *nearest* officer, quieter, through the radio
+band-pass. The radio light (`RadioLight` on PL.18's lamp) reads GDD §04.2's "talking officer" as *the officer's
+radio talking*: every officer's light is lit while the Watcher is on air (server-held, 0.3 s hold, broadcast to
+all), so the fugitive learns "the Watcher is describing someone now". The field team cannot talk on the radio,
+so this was the consistent reading; the alternative (lit while the officer talks in proximity) was offered and
+not taken.
+**Why.** Who hears what stays server truth (D-032): a fugitive far from every officer receives nothing, so no
+client can cheat the leak. Positions come from the player bodies the server already has.
+**Open.** Plainclothes will carry a radio too: a lit radio would expose them — a design question for when
+Plainclothes arrives. Stage noise on the radio waits for the layout.
+**Reversing.** Cheap: radii and volumes are config; the light's trigger is one call.

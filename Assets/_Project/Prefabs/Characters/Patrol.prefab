@@ -284,8 +284,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7822000257606814559, guid: d9d889663b616964ca00f6d41e277601, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7866045604662539193}
   m_SourcePrefab: {fileID: 100100000, guid: d9d889663b616964ca00f6d41e277601, type: 3}
+--- !u!1 &1558782951319611456 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7822000257606814559, guid: d9d889663b616964ca00f6d41e277601, type: 3}
+  m_PrefabInstance: {fileID: 8731559521479828255}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7866045604662539193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558782951319611456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78788888f1e5576428c61a235863c00d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LastSeenWearing.Gameplay::LastSeenWearing.Gameplay.Voice.RadioLight
+  _lamp: {fileID: 3354919758148049906}
+--- !u!137 &3354919758148049906 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6315078714437056749, guid: d9d889663b616964ca00f6d41e277601, type: 3}
+  m_PrefabInstance: {fileID: 8731559521479828255}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9125984314880771316 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d9d889663b616964ca00f6d41e277601, type: 3}
