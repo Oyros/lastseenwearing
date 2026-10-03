@@ -74,7 +74,7 @@ programme, sunset, case format, every tool in §07, replay, art, audio.
 | [x] P1.02 | Crowd netcode: host sends seed + only player-affected NPCs (D-005) | §04.1 | 7-min round, 2 clients, no visible desync; bandwidth logged |
 | [x] P1.03 | Crowd base body + armature + bone contract from the art track | ART_PIPELINE §3 | PL.08–PL.09 done; rig imports as Humanoid |
 | [x] P1.04 | Base walk clips on the crowd rig | ART_PIPELINE, `LSW_WalkSystem.md` | PL.11 done; blend tree switches without foot sliding |
-| [ ] P1.05 | Additive walk layers | `LSW_WalkSystem.md` §2 | PL.12 done; each layer reads at 0.5 weight |
+| [x] P1.05 | Additive walk layers | `LSW_WalkSystem.md` §2 | PL.12 done; each layer reads at 0.5 weight |
 | [ ] P1.06 | Gait signature from seed (quantised buckets, max 2 traits) | §05 | 30 NPCs show distinct walks; log prints each signature in words |
 | [ ] P1.07 | Black-and-white low-res camera filter | §04.1 | Crowd recorded through it; 2 testers find a named walk in under 20 s (`docs/WALKTEST.md`) |
 | [ ] P1.08 | Week-1 review: crowd model and walk system go / no-go | — | Decision recorded in DECISIONS |
