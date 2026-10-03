@@ -1,0 +1,21 @@
+{
+    "name": "LastSeenWearing.UI",
+    "rootNamespace": "LastSeenWearing.UI",
+    "references": [
+        "LastSeenWearing.Core",
+        "LastSeenWearing.Gameplay",
+        "Unity.InputSystem",
+        "Unity.Localization",
+        "Unity.TextMeshPro",
+        "UnityEngine.UI"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,62 @@
+{
+ "A": {
+  "walkable": 579,
+  "blind": 8.8,
+  "far_only": 50.6,
+  "near": 40.6,
+  "multi": 40.4,
+  "targets": {
+   "TargetWallet_open": "multi",
+   "TargetPoster_fixed": "far",
+   "TargetVendor_social": "multi",
+   "TargetSafe_hidden": "blind",
+   "TargetVendor_social2": "multi"
+  },
+  "image": "/home/claude/LastSeenWearing_staging/Art/_Review/layout_A_coverage.png"
+ },
+ "B": {
+  "walkable": 700,
+  "blind": 23.3,
+  "far_only": 38.0,
+  "near": 38.7,
+  "multi": 32.0,
+  "targets": {
+   "TargetWallet_open": "far",
+   "TargetPoster_fixed": "near",
+   "TargetVendor_social": "multi",
+   "TargetVendor_social2": "multi",
+   "TargetSafe_hidden": "blind"
+  },
+  "image": "/home/claude/LastSeenWearing_staging/Art/_Review/layout_B_coverage.png"
+ },
+ "C": {
+  "walkable": 1120,
+  "blind": 10.8,
+  "far_only": 65.9,
+  "near": 23.3,
+  "multi": 22.8,
+  "targets": {
+   "TargetWallet_open": "far",
+   "TargetPoster_fixed": "far",
+   "TargetVendor_social": "far",
+   "TargetSafe_hidden": "blind",
+   "TargetVendor_social2": "far"
+  },
+  "image": "/home/claude/LastSeenWearing_staging/Art/_Review/layout_C_coverage.png"
+ },
+ "D": {
+  "walkable": 1189,
+  "blind": 15.4,
+  "far_only": 63.2,
+  "near": 21.4,
+  "multi": 20.7,
+  "targets": {
+   "TargetVendor_social2": "far",
+   "TargetVendor_social": "far",
+   "TargetWallet_open": "far",
+   "TargetPoster_fixed": "far",
+   "TargetSafe_hidden": "blind"
+  },
+  "image": "/home/claude/LastSeenWearing_staging/Art/_Review/layout_D_coverage.png"
+ }
+}

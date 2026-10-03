@@ -1,0 +1,26 @@
+{
+    "name": "LastSeenWearing.Editor",
+    "rootNamespace": "LastSeenWearing.Editor",
+    "references": [
+        "LastSeenWearing.Core",
+        "LastSeenWearing.Gameplay",
+        "LastSeenWearing.UI",
+        "Unity.Localization",
+        "Unity.Localization.Editor",
+        "Unity.TextMeshPro",
+        "UnityEngine.UI",
+        "Unity.RenderPipelines.Core.Runtime",
+        "Unity.RenderPipelines.Universal.Runtime"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

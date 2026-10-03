@@ -1,0 +1,122 @@
+# ---------------------------------------------------------------
+# Last Seen Wearing — .gitattributes
+# See docs/WORKFLOW.md for the UnityYAMLMerge setup this relies on.
+# ---------------------------------------------------------------
+
+# Default: let git decide, normalise line endings in text files.
+# eol=lf is explicit on purpose: Git for Windows ships with core.autocrlf=true in its
+# SYSTEM config, so relying on per-machine settings gives two developers different
+# line endings and a repo full of phantom diffs. This overrides it for everyone.
+* text=auto eol=lf
+
+# ---------------------------------------------------------------
+# Unity YAML assets — text, but never merge them line-by-line.
+# UnityYAMLMerge understands Unity's YAML; a plain 3-way merge
+# silently corrupts scenes and prefabs.
+# ---------------------------------------------------------------
+*.unity           text merge=unityyamlmerge eol=lf
+*.prefab          text merge=unityyamlmerge eol=lf
+*.asset           text merge=unityyamlmerge eol=lf
+*.mat             text merge=unityyamlmerge eol=lf
+*.anim            text merge=unityyamlmerge eol=lf
+*.controller      text merge=unityyamlmerge eol=lf
+*.overrideController text merge=unityyamlmerge eol=lf
+*.physicMaterial  text merge=unityyamlmerge eol=lf
+*.physicsMaterial2D text merge=unityyamlmerge eol=lf
+*.playable        text merge=unityyamlmerge eol=lf
+*.mask            text merge=unityyamlmerge eol=lf
+*.brush           text merge=unityyamlmerge eol=lf
+*.flare           text merge=unityyamlmerge eol=lf
+*.fontsettings    text merge=unityyamlmerge eol=lf
+*.guiskin         text merge=unityyamlmerge eol=lf
+*.giparams        text merge=unityyamlmerge eol=lf
+*.renderTexture   text merge=unityyamlmerge eol=lf
+*.spriteatlas     text merge=unityyamlmerge eol=lf
+*.terrainlayer    text merge=unityyamlmerge eol=lf
+*.mixer           text merge=unityyamlmerge eol=lf
+*.shadervariants  text merge=unityyamlmerge eol=lf
+*.preset          text merge=unityyamlmerge eol=lf
+*.lighting        text merge=unityyamlmerge eol=lf
+
+# .meta files are text and MUST be committed, but never merged blindly.
+*.meta            text merge=unityyamlmerge eol=lf
+
+# ---------------------------------------------------------------
+# Plain text project files
+# ---------------------------------------------------------------
+*.cs              text diff=csharp eol=lf
+*.md              text eol=lf
+*.json            text eol=lf
+*.asmdef          text eol=lf
+*.asmref          text eol=lf
+*.shader          text eol=lf
+*.hlsl            text eol=lf
+*.cginc           text eol=lf
+*.shadergraph     text eol=lf
+*.uss             text eol=lf
+*.uxml            text eol=lf
+*.inputactions    text eol=lf
+*.csv             text eol=lf
+*.yml             text eol=lf
+*.editorconfig    text eol=lf
+*.gitattributes   text eol=lf
+*.gitignore       text eol=lf
+
+# ---------------------------------------------------------------
+# Git LFS — binary assets
+# NOTE: GitHub LFS free tier is 1 GB storage / 1 GB bandwidth per
+# month. Keep source art out of the repo; commit game-ready assets
+# only. See docs/WORKFLOW.md.
+# ---------------------------------------------------------------
+
+# Images
+*.png   filter=lfs diff=lfs merge=lfs -text
+*.jpg   filter=lfs diff=lfs merge=lfs -text
+*.jpeg  filter=lfs diff=lfs merge=lfs -text
+*.tga   filter=lfs diff=lfs merge=lfs -text
+*.tif   filter=lfs diff=lfs merge=lfs -text
+*.tiff  filter=lfs diff=lfs merge=lfs -text
+*.psd   filter=lfs diff=lfs merge=lfs -text
+*.exr   filter=lfs diff=lfs merge=lfs -text
+*.hdr   filter=lfs diff=lfs merge=lfs -text
+*.gif   filter=lfs diff=lfs merge=lfs -text
+*.bmp   filter=lfs diff=lfs merge=lfs -text
+*.cubemap filter=lfs diff=lfs merge=lfs -text
+
+# 3D
+*.fbx   filter=lfs diff=lfs merge=lfs -text
+*.obj   filter=lfs diff=lfs merge=lfs -text
+*.blend filter=lfs diff=lfs merge=lfs -text
+*.dae   filter=lfs diff=lfs merge=lfs -text
+*.3ds   filter=lfs diff=lfs merge=lfs -text
+*.glb   filter=lfs diff=lfs merge=lfs -text
+*.gltf  filter=lfs diff=lfs merge=lfs -text
+
+# Audio
+*.wav   filter=lfs diff=lfs merge=lfs -text
+*.mp3   filter=lfs diff=lfs merge=lfs -text
+*.ogg   filter=lfs diff=lfs merge=lfs -text
+*.aif   filter=lfs diff=lfs merge=lfs -text
+*.aiff  filter=lfs diff=lfs merge=lfs -text
+*.flac  filter=lfs diff=lfs merge=lfs -text
+
+# Video
+*.mp4   filter=lfs diff=lfs merge=lfs -text
+*.mov   filter=lfs diff=lfs merge=lfs -text
+*.webm  filter=lfs diff=lfs merge=lfs -text
+
+# Fonts
+*.ttf   filter=lfs diff=lfs merge=lfs -text
+*.otf   filter=lfs diff=lfs merge=lfs -text
+
+# Documents / archives
+*.pdf   filter=lfs diff=lfs merge=lfs -text
+*.zip   filter=lfs diff=lfs merge=lfs -text
+
+# Native libraries
+*.dll    filter=lfs diff=lfs merge=lfs -text
+*.so     filter=lfs diff=lfs merge=lfs -text
+*.dylib  filter=lfs diff=lfs merge=lfs -text
+*.a      filter=lfs diff=lfs merge=lfs -text
+*.bundle filter=lfs diff=lfs merge=lfs -text
+*.lib    filter=lfs diff=lfs merge=lfs -text

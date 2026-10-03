@@ -1,0 +1,32 @@
+{
+    "name": "LastSeenWearing.Tests",
+    "rootNamespace": "LastSeenWearing.Tests",
+    "references": [
+        "LastSeenWearing.Core",
+        "LastSeenWearing.Gameplay",
+        "LastSeenWearing.UI",
+        "LastSeenWearing.Editor",
+        "Unity.Netcode.Runtime",
+        "Unity.InputSystem",
+        "Unity.Localization",
+        "Unity.Localization.Editor",
+        "Unity.TextMeshPro",
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
