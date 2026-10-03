@@ -195,3 +195,19 @@ was 0 B/min untouched, 80 B for one bump; a client that left and rejoined mid-ro
 crowd with the bumped NPC in place.
 **Reversing.** NPCs react only once taken over; anything reactive (scatter, stop, NPC control) is a
 takeover. Removing the 50 ms offset is one line (add `ServerBufferSec` on clients) if it ever shows.
+
+---
+
+### D-020 — A-pose art, T-pose avatar; the shared Fingers chain drives the middle finger
+**Decision.** Rigged `LSW_*` models under `Art/Models/` — "rigged" is the export sidecar's
+`"kind": "rigged"` — import as Humanoid through `Editor/Import/HumanoidImportPostprocessor`, ported
+from Borrowed Crown (its D-030/D-031): an explicit bone table (`HumanoidBoneMap`, never auto-mapping),
+two-pass import, and an avatar skeleton that is `TPoseBuilder`'s T-pose built from the file's A-pose
+rest. The mesh and bind pose stay A-pose. D-012's shared `Fingers1/2` chain maps to Unity's middle
+finger; ring and little stay unmapped; thumb and index map to their own.
+**Why.** The contract (D-018) is fixed, so the map is a table, not a guess. Verified in P1.03: valid
+Humanoid, all 33 deform bones mapped, rest-pose muscles all inside ±1 and left/right symmetric,
+Humanoid round trip ≤ 0.1 mm at hands, feet, head and finger tips, and muscles bend the right way
+(arm up, knee back, fingers into the palm).
+**Reversing.** Adding full finger chains later is a table edit plus a reimport; clips made before
+then animate only the middle finger for the three shared fingers.
