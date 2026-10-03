@@ -41,7 +41,7 @@ instances join one lobby.
 | [x] P0.02 | Open in Unity 6000.5.7f1 | Packages resolve, console has zero errors, `.meta` files generated |
 | [x] P0.03 | `git init`, LFS for `*.fbx *.png *.wav *.exr *.mp4`, first commit | `git status` clean; `Library/` not tracked |
 | [x] P0.04 | `GameConfig` ScriptableObject root in `Data/Config/` | One asset every other config hangs from (`docs/DATA.md`) |
-| [ ] P0.05 | `Bootstrap.unity` and `Sandbox_Empty.unity`; Bootstrap first in build list | Build runs to an empty scene |
+| [x] P0.05 | `Bootstrap.unity` and `Sandbox_Empty.unity`; Bootstrap first in build list | Build runs to an empty scene |
 | [ ] P0.06 | Input Actions asset: `Field` map (patrol, plainclothes, dog, fugitive) and `Watcher` map; keyboard+mouse and gamepad | Both maps load; bindings listed in `docs/DATA.md` |
 | [ ] P0.07 | Localization settings, `en` locale, tables `UI`, `Roles`, `Festival` | A test key renders through TMP |
 | [ ] P0.08 | Test runner: one passing edit-mode test in `LastSeenWearing.Tests` | Test runner green |
