@@ -13,7 +13,7 @@ Keep it short. A snapshot, not a log; finished phases move to §4 as one line.
 |---|---|
 | **Phase** | **P0 — Scaffold** (`docs/ROADMAP.md`) — open, build, connect two players |
 | **In flight** | Nothing |
-| **Next** | `P0.09` — Windows build script (Editor menu), Addressables content included (`/next`) |
+| **Next** | `P0.10` — NGO + Facepunch transport, Steam lobby (app id 480), two players (`/next`) |
 | **Blocking** | Nothing — UnityMCP connected; Blender MCP timed out this session (only matters for PL work) |
 | **Parallel** | **PL — Look-dev & art**: `PL.00`, `PL.02`, `PL.03`, `PL.05`, `PL.20`, `PL.21` done (references, check/CCTV/ref-loader tools, greybox kit, layouts A–D). Next: `PL.06` self-test in this machine's Blender, then `PL.01` palette and `PL.04` export, then `PL.07` the male base body |
 | **Unity** | 6000.5.7f1 · URP · Netcode for GameObjects + Facepunch transport (listen server over Steam) |
@@ -29,6 +29,7 @@ Keep it short. A snapshot, not a log; finished phases move to §4 as one line.
 - `P0.06` — `Settings/LastSeenWearingControls.inputactions` (`Field` 10 actions, `Watcher` 12; KeyboardMouse + Gamepad) and the generated `Gameplay/Player/LastSeenWearingControls`; bindings fixed in DATA.md §7 (D-014).
 - `P0.07` — Localization settings, `en` (startup locale), tables `UI`/`Roles`/`Festival`, TMP Essentials; `ui.menu.title` rendered through TMP + `LocalizeStringEvent` in play mode (LOCALIZATION §6).
 - `P0.08` — `Tests/Project/`: GameConfig, build list, input maps, localization — 22 edit-mode tests green.
+- `P0.09` — `Editor/Tools/WindowsBuild.cs`: **Last Seen Wearing → Build → Windows (Development | Release | Playtest)**; Addressables build with the player (D-015); a dev build shows localized text.
 
 ## 3 · Open questions
 

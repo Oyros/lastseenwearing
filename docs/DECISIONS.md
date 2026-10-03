@@ -127,3 +127,14 @@ Watcher's push-to-talk, so the second-monitor modifier moved to RB and the annou
 Hold length is input feel, edited in the Input Actions editor; a config would split one binding
 across two assets.
 **Reversing.** Cheap: rebinding is an asset edit; moving holds to a config means a processor read.
+
+---
+
+### D-015 — Addressables build with the player, set per project
+**Decision.** `AddressableAssetSettings.BuildAddressablesWithPlayerBuild` is `BuildWithPlayer` in
+the committed asset, not left on "use preferences". `WindowsBuild` (P0.09) has no separate
+Addressables step.
+**Why.** Localization tables ship through Addressables. The default defers to a per-user editor
+preference, so one machine's build would carry the text and the other's would not. Verified in
+P0.09: a menu build logs `ui.menu.title` as "Last Seen Wearing" from the player.
+**Reversing.** Cheap: flip the setting and add a `BuildPlayerContent()` call to `WindowsBuild`.

@@ -179,7 +179,8 @@ Team-wide progress belongs in [`STATUS.md`](STATUS.md), which **is** committed.
 **Last Seen Wearing → Build → Windows (Development | Release | Playtest)** in the Unity menu bar. Output goes to
 `Builds/Windows_Dev/`, `Builds/Windows/` or `Builds/Windows_Playtest/` (gitignored), scenes come from the build list
 (`Bootstrap` first), and Localization's Addressables content is built with the player. Playtest is a release build
-compiled with `BC_PLAYTEST`: no debug keys or readouts, but the run log stays on (P1.15). Code:
+compiled with `LSW_PLAYTEST`: no debug keys or readouts; what else it keeps on is decided before the first
+playtest (P1.27). Code:
 `Scripts/Editor/Tools/WindowsBuild.cs`.
 
 ---
