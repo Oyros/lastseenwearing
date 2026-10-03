@@ -1,11 +1,9 @@
-using System;
-using System.Linq;
 using LastSeenWearing.Core.Crowd;
 using NUnit.Framework;
 
 namespace LastSeenWearing.Tests.Crowd
 {
-    /// <summary>P1.04: the walk cycle's clock (distance walked) and each NPC's base walk from the seed.</summary>
+    /// <summary>P1.04: the walk cycle's clock — distance walked.</summary>
     public sealed class GaitAndDistanceTests
     {
         // As NpcScheduleTests: 10 m legs at 2 m/s (5 s), 3 s dwell.
@@ -39,20 +37,6 @@ namespace LastSeenWearing.Tests.Crowd
             // 8 s: leg 0 done (10 m) + dwell; 9 s is 1 s into leg 1.
             Schedule().Evaluate(9d, out _, out var walked);
             Assert.That(walked, Is.EqualTo(12d).Within(1e-6));
-        }
-
-        [Test]
-        public void TheBaseWalkIsAFunctionOfSeedAndIndex()
-        {
-            Assert.That(Enumerable.Range(0, 50).Select(i => GaitPlanner.BaseWalkFor(9, i)),
-                Is.EqualTo(Enumerable.Range(0, 50).Select(i => GaitPlanner.BaseWalkFor(9, i))));
-        }
-
-        [Test]
-        public void TheCrowdWalksEveryBaseWalk()
-        {
-            var seen = Enumerable.Range(0, 150).Select(i => GaitPlanner.BaseWalkFor(9, i)).Distinct().Count();
-            Assert.That(seen, Is.EqualTo(Enum.GetValues(typeof(BaseWalk)).Length));
         }
     }
 }

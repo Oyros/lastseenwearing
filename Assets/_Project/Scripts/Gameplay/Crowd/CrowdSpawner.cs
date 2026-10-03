@@ -37,6 +37,9 @@ namespace LastSeenWearing.Gameplay.Crowd
 
         public int Seed => _seed.Value;
         public CrowdAgent[] Agents => _agents;
+
+        /// <summary>Each NPC's walk, by index; the same on every client.</summary>
+        public GaitSignature[] Signatures { get; private set; }
         public double CrowdTime => NetworkManager.ServerTime.Time - _startTime.Value;
         public long BytesLastMinute { get; private set; }
 
@@ -302,14 +305,30 @@ namespace LastSeenWearing.Gameplay.Crowd
                 _config.WaypointSpread, _config.DwellMin, _config.DwellMax);
             var plans = CrowdPlanner.Build(seed, settings);
 
+            // Every walk unique, from the same seed (GDD §05, D-025); the pace bucket scales the walking speed
+            // and the step follows, since the cycle runs on distance (D-022).
+            var gaits = GaitPlanner.SignaturesFor(seed, plans.Length, _config.Gait);
+            Signatures = gaits;
+
             _agents = new CrowdAgent[plans.Length];
+            var log = new System.Text.StringBuilder($"[CrowdSpawner] {plans.Length} walks (seed {seed}):");
             for (var i = 0; i < plans.Length; i++)
             {
-                var schedule = new NpcSchedule(plans[i], waypoints, _config.WalkSpeed, (from, to) => FindPath(from, to, groundY));
+                var gait = gaits[i];
+                var speed = _config.WalkSpeed * _config.TempoMultiplier(gait.Tempo);
+                var schedule = new NpcSchedule(plans[i], waypoints, speed, (from, to) => FindPath(from, to, groundY));
                 _agents[i] = Instantiate(_agentPrefab, transform);
                 _agents[i].name = $"Npc_{i:000}";
-                _agents[i].Begin(i, schedule, groundY, GaitPlanner.BaseWalkFor(seed, i), _config.StrideLength);
+                _agents[i].Begin(i, schedule, groundY, gait.Base, _config.StrideLength);
+                foreach (var trait in gait.Traits)
+                {
+                    _agents[i].SetTrait(trait.Trait, trait.Strength);
+                }
+
+                log.Append($"\n  Npc_{i:000}: {gait.Describe()}");
             }
+
+            Debug.Log(log.ToString());
         }
 
         // The NavMesh lays out each leg; the same mesh gives the same corners on every client (P1.01).

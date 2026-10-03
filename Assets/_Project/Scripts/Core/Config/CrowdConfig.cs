@@ -1,3 +1,4 @@
+using LastSeenWearing.Core.Crowd;
 using UnityEngine;
 
 namespace LastSeenWearing.Core.Config
@@ -29,6 +30,18 @@ namespace LastSeenWearing.Core.Config
                  "(LSW_WalkSystem.md §5) — a test checks it against the body's JSON. The cycle runs on distance (D-022).")]
         [SerializeField, Min(0.01f)] private float _strideLength = 1f;
 
+        [Header("Gait (LSW_WalkSystem.md §3)")]
+        [Tooltip("Relative odds of a walk with no trait, one trait and two traits. [PROVISIONAL]")]
+        [SerializeField, Min(0f)] private float _noTraitOdds = 0.25f;
+        [SerializeField, Min(0f)] private float _oneTraitOdds = 0.45f;
+        [SerializeField, Min(0f)] private float _twoTraitOdds = 0.30f;
+        [Tooltip("Chance a trait is strong rather than slight. [PROVISIONAL]")]
+        [SerializeField, Range(0f, 1f)] private float _strongTraitChance = 0.4f;
+        [Tooltip("Walking speed × this, per pace bucket: slow, mid, fast. [PROVISIONAL]")]
+        [SerializeField, Min(0.1f)] private float _slowTempo = 0.85f;
+        [SerializeField, Min(0.1f)] private float _midTempo = 1f;
+        [SerializeField, Min(0.1f)] private float _fastTempo = 1.15f;
+
         [Header("Taken-over NPCs (D-005, D-019)")]
         [Tooltip("Pose updates per second for NPCs the server has taken over from their schedule.")]
         [SerializeField, Range(1f, 30f)] private float _takenOverSyncRate = 10f;
@@ -44,6 +57,15 @@ namespace LastSeenWearing.Core.Config
         public float DwellMax => _dwellMax;
         public float WalkSpeed => _walkSpeed;
         public float StrideLength => _strideLength;
+
+        public GaitSettings Gait => new(_noTraitOdds, _oneTraitOdds, _twoTraitOdds, _strongTraitChance);
+
+        public float TempoMultiplier(Tempo tempo) => tempo switch
+        {
+            Tempo.Slow => _slowTempo,
+            Tempo.Fast => _fastTempo,
+            _ => _midTempo,
+        };
         public float TakenOverSyncRate => _takenOverSyncRate;
         public float BumpDistance => _bumpDistance;
         public float BumpDuration => _bumpDuration;

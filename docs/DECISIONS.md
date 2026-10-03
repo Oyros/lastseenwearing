@@ -276,3 +276,20 @@ no trait at full strength moves a planted foot beyond the base walk's 3.2 mm. Th
 art's spine pitch is inverted (`Walk_Brisk` leans back, `Add_Hunch` bends back — PL.12a), confirmed on
 a raw Generic import, so it is the clips and not Unity's muscle-space additive.
 **Reversing.** Cheap — layers are generated; a trait added to `WalkTrait` and the builder's clip table.
+
+---
+
+### D-025 — Every walk is unique, drawn in buckets; uniqueness bends the odds
+**Decision.** `Core/Crowd/GaitPlanner.SignaturesFor(seed, count, settings)` gives each character a
+`GaitSignature`: a base walk, a pace (`Tempo`: slow / mid / fast — speed × `CrowdConfig` multiplier; the
+step follows, D-022) and 0–2 traits in buckets (limp ±slight/±strong, hunch/sway/bounce slight/strong,
+arm swing ±1). NPC `i` draws on its own gait stream and redraws until its walk is not taken, so walks
+are unique (GDD §05) and the same on every client; a smaller crowd is a prefix of a larger one. There are
+828 walks (`GaitPlanner.Capacity`); asking for more throws. `CrowdSpawner` logs every walk in words.
+No `GaitCatalog` asset: the clips and traits are already `BaseWalk`/`WalkTrait` + the art JSON.
+**Why.** Buckets are what a player can say; uniqueness is the design. Its cost, measured in P1.06 over
+twenty 150-NPC crowds: only 12 walks have no trait, so a crowd has 12 plain walkers (config asks 25 %),
+71 with one trait and 67 with two (config asks 30 %); strong traits 53 % (asks 40 %). A trait like
+"limps left" therefore matches more NPCs than the odds suggest — for P1.07's find test and the P1.08
+review (more buckets, or height/build joining uniqueness, are the levers).
+**Reversing.** Dropping uniqueness restores the configured odds; GDD §05 would change with it.
