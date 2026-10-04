@@ -78,6 +78,18 @@ namespace LastSeenWearing.Gameplay.Round
         /// <summary>The host starts the case; it needs the roles locked (P1.09).</summary>
         public void StartCase() => StartCaseRpc();
 
+        /// <summary>Server, from <c>Objectives</c>: the fugitive is out of an exit — the round is theirs (GDD §06, P1.23).</summary>
+        public void ReportEscape()
+        {
+            if (!IsServer || _phase.Value is not (RoundPhase.Live or RoundPhase.LastCuff))
+            {
+                return;
+            }
+
+            _outcome.Value = RoundOutcome.Escaped;
+            Fire(RoundEvent.Outcome);
+        }
+
         [Rpc(SendTo.Server)]
         private void StartCaseRpc(RpcParams rpcParams = default)
         {

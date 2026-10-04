@@ -388,6 +388,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: LastSeenWearing.Gameplay::LastSeenWearing.Gameplay.Objective.Objectives
   ShowTopMostFoldoutHeaderGroup: 1
   _config: {fileID: 11400000, guid: 7c2d63a38822df34fb4ec1ec63a719da, type: 2}
+  _director: {fileID: 46670588}
   _targets: []
   _exits: []
   _exitNames: []

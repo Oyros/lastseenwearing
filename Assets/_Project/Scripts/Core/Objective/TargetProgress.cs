@@ -68,6 +68,30 @@ namespace LastSeenWearing.Core.Objective
             return true;
         }
 
+        /// <summary>
+        /// Whether a fugitive at <paramref name="at"/> is out (GDD §06, P1.23): within <paramref name="radius"/> of the
+        /// open exit — or, in the last-cuff chase (<paramref name="anyExit"/>, team), of any exit. Measured flat.
+        /// </summary>
+        public static bool Escapes(Vector3 at, Vector3[] exits, int openExit, bool anyExit, float radius)
+        {
+            for (var i = 0; i < exits.Length; i++)
+            {
+                if (!anyExit && i != openExit)
+                {
+                    continue;
+                }
+
+                var offset = exits[i] - at;
+                offset.y = 0f;
+                if (offset.sqrMagnitude <= radius * radius)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public static int ExitFor(Vector3 lastTarget, Vector3[] exits, ExitRule rule)
         {
             var best = NoExit;

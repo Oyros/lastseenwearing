@@ -590,3 +590,15 @@ seeing all five locations, NPCs doing the same jobs and the job clips wait for P
 **Why.** Standing still at a spot is what an NPC does too, so a job reads as normal behaviour on a feed. The
 farthest exit makes the last target a commitment rather than a short walk out.
 **Reversing.** Cheap: rule, times and drift are config; markers are one method in the HUD.
+
+---
+
+### D-042 — The escape: near the open exit after three targets; in the chase, any exit
+**Decision.** On the server, `Objectives` watches the fugitive's body: in Live with the targets done, being within
+`FugitiveConfig.ExitRadius` (2 m, flat) of the open exit is an escape; in the last-cuff chase **any exit** counts
+(team, P1.23 — GDD §06 says only "exit → fugitive" there). It tells `RoundDirector.ReportEscape()`, which sets
+`RoundOutcome.Escaped` and fires `Outcome` — the director stays the only thing that ends a round (rule 5). A
+fugitive inside a tent cannot escape. The fugitive's HUD marks the open exit (every exit in the chase).
+**Why.** A radius around the exit's spot needs no extra scene geometry and works for any layout's JSON. Any exit in
+the chase keeps a revealed fugitive's 45 s worth playing without targets to finish.
+**Reversing.** Cheap: one rule method and one config value.

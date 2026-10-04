@@ -1,7 +1,9 @@
 using System;
 using LastSeenWearing.Core.Config;
 using LastSeenWearing.Core.Objective;
+using LastSeenWearing.Core.Round;
 using LastSeenWearing.Gameplay.Player;
+using LastSeenWearing.Gameplay.Round;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -16,6 +18,7 @@ namespace LastSeenWearing.Gameplay.Objective
     public sealed class Objectives : NetworkBehaviour
     {
         [SerializeField] private FugitiveConfig _config;
+        [SerializeField] private RoundDirector _director;
         [Tooltip("The layout's targets, by index (Editor: Layouts › Place Targets In Open Scene).")]
         [SerializeField] private TargetSpot[] _targets = Array.Empty<TargetSpot>();
         [Tooltip("The layout's exits: where each stands and its name (objective.exit.<name> is its word).")]
@@ -48,8 +51,10 @@ namespace LastSeenWearing.Gameplay.Objective
         public double JobFrom { get; private set; }
         public double JobUntil { get; private set; }
 
-        /// <summary>Server only: where the open exit stands, for P1.23.</summary>
+        /// <summary>Where the open exit stands, where it is known (the server, the fugitive).</summary>
         public Vector3? OpenExitPosition => OpenExit >= 0 && OpenExit < _exits.Length ? _exits[OpenExit] : null;
+
+        public Vector3[] Exits => _exits;
 
         public bool IsDone(int target) => (DoneMask & (1 << target)) != 0;
 
@@ -83,7 +88,13 @@ namespace LastSeenWearing.Gameplay.Objective
 
         private void Update()
         {
-            if (!IsServer || _job == NoJob)
+            if (!IsServer)
+            {
+                return;
+            }
+
+            CheckEscape();
+            if (_job == NoJob)
             {
                 return;
             }
@@ -106,6 +117,25 @@ namespace LastSeenWearing.Gameplay.Objective
                 }
 
                 Send();
+            }
+        }
+
+        // Out of the open exit with the targets done — or, in the last-cuff chase, out of any exit (team, P1.23).
+        private void CheckEscape()
+        {
+            var phase = _director.Phase;
+            var chase = phase == RoundPhase.LastCuff;
+            if (_progress == null || _fugitive is not { } fugitive || !(chase || (phase == RoundPhase.Live && _progress.Complete))
+                || !NetworkManager.ConnectedClients.TryGetValue(fugitive, out var client) || client.PlayerObject == null
+                || !client.PlayerObject.TryGetComponent<FugitiveController>(out var body) || body.IsChanging)
+            {
+                return;
+            }
+
+            if (TargetProgress.Escapes(body.transform.position, _exits, _progress.OpenExit, chase, _config.ExitRadius))
+            {
+                Debug.Log($"[Objectives] The fugitive is out ({(chase ? "the chase" : OpenExitNameOf(_progress.OpenExit))}).");
+                _director.ReportEscape();
             }
         }
 

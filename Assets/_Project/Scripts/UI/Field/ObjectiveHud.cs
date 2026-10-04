@@ -15,7 +15,7 @@ namespace LastSeenWearing.UI.Field
     /// <summary>
     /// The fugitive's targets (GDD §04.4, P1.22): how many are done of how many, the five jobs and which are done,
     /// the job in hand as a bar, and the exit once it is open; over each target still to do, a marker with its job
-    /// and distance, held to the screen's edge when it is out of view. Only on the fugitive's screen — nobody else gets a
+    /// and distance, held to the screen's edge when it is out of view, and one over the open exit (P1.23). Only on the fugitive's screen — nobody else gets a
     /// meter. It renders <see cref="Objectives"/>; it decides nothing. P1 placeholder look, built in code.
     /// </summary>
     public sealed class ObjectiveHud : MonoBehaviour
@@ -42,6 +42,7 @@ namespace LastSeenWearing.UI.Field
         private GameObject _barFrame;
         private RectTransform _canvas;
         private TextMeshProUGUI[] _markers = new TextMeshProUGUI[0];
+        private TextMeshProUGUI[] _exitMarkers = new TextMeshProUGUI[0];
         private bool _dirty = true;
 
         private void Awake() => BuildFrame();
@@ -87,7 +88,13 @@ namespace LastSeenWearing.UI.Field
             var targets = _objectives.Targets;
             if (_markers.Length != targets.Length)
             {
-                BuildMarkers(targets.Length);
+                _markers = BuildMarkers(_markers, targets.Length);
+            }
+
+            var exits = _objectives.Exits;
+            if (_exitMarkers.Length != exits.Length)
+            {
+                _exitMarkers = BuildMarkers(_exitMarkers, exits.Length);
             }
 
             var camera = Camera.main;
@@ -97,35 +104,49 @@ namespace LastSeenWearing.UI.Field
             {
                 var target = targets[i];
                 var shown = visible && open && camera != null && body != null && target != null && !_objectives.IsDone(target.Index);
-                _markers[i].gameObject.SetActive(shown);
-                if (!shown)
-                {
-                    continue;
-                }
+                Place(_markers[i], shown, camera, body, shown ? target.InteractionPoint : Vector3.zero,
+                    shown ? $"objective.kind.{target.Kind.ToString().ToLowerInvariant()}" : null);
+            }
 
-                var viewport = camera.WorldToViewportPoint(target.InteractionPoint + Vector3.up * 2f);
-                if (viewport.z < 0f)
-                {
-                    viewport = new Vector3(1f - viewport.x, 0f, 0f); // behind: along the bottom, on the side it lies
-                }
-
-                viewport.x = Mathf.Clamp(viewport.x, EdgeMargin, 1f - EdgeMargin);
-                viewport.y = Mathf.Clamp(viewport.y, EdgeMargin, 1f - EdgeMargin);
-                var rect = _markers[i].rectTransform;
-                rect.anchorMin = rect.anchorMax = new Vector2(viewport.x, viewport.y);
-                var distance = Mathf.RoundToInt(Vector3.Distance(body.position, target.InteractionPoint));
-                _markers[i].text = Text("objective.marker", Text($"objective.kind.{target.Kind.ToString().ToLowerInvariant()}"), distance);
+            // The way out: the open exit — in the last-cuff chase, every exit (team, P1.23).
+            var chase = _director.IsSpawned && _director.Phase == RoundPhase.LastCuff;
+            for (var i = 0; i < exits.Length; i++)
+            {
+                var shown = visible && camera != null && body != null && (chase || i == _objectives.OpenExit);
+                Place(_exitMarkers[i], shown, camera, body, exits[i], "objective.exit_marker");
             }
         }
 
-        private void BuildMarkers(int count)
+        private void Place(TextMeshProUGUI marker, bool shown, Camera camera, Transform body, Vector3 at, string wordKey)
         {
-            foreach (var marker in _markers)
+            marker.gameObject.SetActive(shown);
+            if (!shown)
+            {
+                return;
+            }
+
+            var viewport = camera.WorldToViewportPoint(at + Vector3.up * 2f);
+            if (viewport.z < 0f)
+            {
+                viewport = new Vector3(1f - viewport.x, 0f, 0f); // behind: along the bottom, on the side it lies
+            }
+
+            viewport.x = Mathf.Clamp(viewport.x, EdgeMargin, 1f - EdgeMargin);
+            viewport.y = Mathf.Clamp(viewport.y, EdgeMargin, 1f - EdgeMargin);
+            var rect = marker.rectTransform;
+            rect.anchorMin = rect.anchorMax = new Vector2(viewport.x, viewport.y);
+            var distance = Mathf.RoundToInt(Vector3.Distance(body.position, at));
+            marker.text = Text("objective.marker", Text(wordKey), distance);
+        }
+
+        private TextMeshProUGUI[] BuildMarkers(TextMeshProUGUI[] old, int count)
+        {
+            foreach (var marker in old)
             {
                 Destroy(marker.gameObject);
             }
 
-            _markers = new TextMeshProUGUI[count];
+            var markers = new TextMeshProUGUI[count];
             for (var i = 0; i < count; i++)
             {
                 var markerObject = new GameObject("Marker", typeof(RectTransform), typeof(TextMeshProUGUI));
@@ -138,8 +159,10 @@ namespace LastSeenWearing.UI.Field
                 marker.raycastTarget = false;
                 marker.rectTransform.sizeDelta = new Vector2(MarkerWidth, MarkerFontSize * 3f);
                 markerObject.SetActive(false);
-                _markers[i] = marker;
+                markers[i] = marker;
             }
+
+            return markers;
         }
 
         private string Compose()

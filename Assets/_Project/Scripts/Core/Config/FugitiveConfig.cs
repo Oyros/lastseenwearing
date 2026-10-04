@@ -26,10 +26,13 @@ namespace LastSeenWearing.Core.Config
         [SerializeField, Min(0.05f)] private float _workDrift = 0.5f;
         [Tooltip("Which exit the last target opens (team: the farthest, so the escape crosses the cameras).")]
         [SerializeField] private ExitRule _exitRule = ExitRule.Farthest;
+        [Tooltip("Metres from an exit's spot that count as out (GDD §06). [PROVISIONAL]")]
+        [SerializeField, Min(0.1f)] private float _exitRadius = 2f;
 
         public int TargetsNeeded => _targetsNeeded;
         public float WorkDrift => _workDrift;
         public ExitRule ExitRule => _exitRule;
+        public float ExitRadius => _exitRadius;
 
         public float SecondsFor(TargetKind kind) => kind switch
         {

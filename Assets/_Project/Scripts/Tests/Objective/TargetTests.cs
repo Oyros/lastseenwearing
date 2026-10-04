@@ -2,6 +2,7 @@ using System.Linq;
 using LastSeenWearing.Core.Config;
 using LastSeenWearing.Core.Layouts;
 using LastSeenWearing.Core.Objective;
+using LastSeenWearing.Core.Round;
 using LastSeenWearing.Editor.Import;
 using NUnit.Framework;
 using UnityEditor;
@@ -60,6 +61,27 @@ namespace LastSeenWearing.Tests.Objective
             Assert.That(TargetProgress.ExitFor(byAlley, Exits, ExitRule.Farthest), Is.EqualTo(0));
             Assert.That(TargetProgress.ExitFor(byAlley, Exits, ExitRule.Nearest), Is.EqualTo(1));
             Assert.That(TargetProgress.ExitFor(byAlley, new Vector3[0], ExitRule.Farthest), Is.EqualTo(TargetProgress.NoExit));
+        }
+
+        [Test]
+        public void OnlyTheOpenExitLetsTheFugitiveOutExceptInTheChase()
+        {
+            var radius = Config.ExitRadius;
+            var atSouthGate = Exits[0] + new Vector3(radius * 0.5f, 1f, 0f);
+            Assert.That(TargetProgress.Escapes(atSouthGate, Exits, 0, false, radius), Is.True, "the open exit; height does not count");
+            Assert.That(TargetProgress.Escapes(atSouthGate, Exits, 1, false, radius), Is.False, "the alley is open, not the gate");
+            Assert.That(TargetProgress.Escapes(atSouthGate, Exits, TargetProgress.NoExit, false, radius), Is.False, "nothing open yet");
+            Assert.That(TargetProgress.Escapes(atSouthGate, Exits, TargetProgress.NoExit, true, radius), Is.True, "the chase: any exit (team)");
+            Assert.That(TargetProgress.Escapes(Exits[0] + Vector3.forward * (radius * 1.5f), Exits, 0, false, radius), Is.False, "not out yet");
+        }
+
+        [Test]
+        public void AnEscapeEndsTheRoundFromPlayOrTheChase()
+        {
+            Assert.That(RoundCycle.Next(RoundPhase.Live, RoundEvent.Outcome, 0, 3), Is.EqualTo(RoundPhase.Result));
+            Assert.That(RoundCycle.Next(RoundPhase.LastCuff, RoundEvent.Outcome, 0, 3), Is.EqualTo(RoundPhase.Result));
+            Assert.That(RoundCycle.Next(RoundPhase.Briefing, RoundEvent.Outcome, 0, 3), Is.EqualTo(RoundPhase.Briefing), "not before play");
+            Assert.That((byte)RoundOutcome.Escaped, Is.Not.EqualTo((byte)RoundOutcome.TimeUp));
         }
 
         [Test]

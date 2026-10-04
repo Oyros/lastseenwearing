@@ -315,6 +315,14 @@ MonoBehaviour:
     m_Key: objective.marker
     m_Metadata:
       m_Items: []
+  - m_Id: 299387816620032
+    m_Key: ui.round.result.escaped
+    m_Metadata:
+      m_Items: []
+  - m_Id: 299387929866240
+    m_Key: objective.exit_marker
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

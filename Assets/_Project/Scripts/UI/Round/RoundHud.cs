@@ -92,7 +92,12 @@ namespace LastSeenWearing.UI.Round
 
         private string OutcomeLine()
         {
-            return _director.Outcome == RoundOutcome.TimeUp ? Text(UiTable, "ui.round.result.time_up") : string.Empty;
+            return _director.Outcome switch
+            {
+                RoundOutcome.TimeUp => Text(UiTable, "ui.round.result.time_up"),
+                RoundOutcome.Escaped => Text(UiTable, "ui.round.result.escaped"),
+                _ => string.Empty,
+            };
         }
 
         private void OnPhaseChanged(RoundPhase phase)

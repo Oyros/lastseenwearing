@@ -7,5 +7,8 @@ namespace LastSeenWearing.Core.Round
 
         /// <summary>The programme ran out with the fugitive still inside (D-028: the police win).</summary>
         TimeUp = 1,
+
+        /// <summary>The fugitive walked out of an open exit (GDD §06, P1.23): the fugitive wins.</summary>
+        Escaped = 2,
     }
 }

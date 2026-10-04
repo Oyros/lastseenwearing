@@ -340,6 +340,14 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 3517454320335585380
+  - m_Id: 299387816620032
+    m_Localized: The fugitive got away.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 299387929866240
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
