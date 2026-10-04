@@ -557,3 +557,21 @@ server confirms (a stop's face check, P1.24) will feed the same `Sighting`.
 it changed. The witness gives every round a true starting point that goes stale as the fugitive changes in tents
 — the game's name.
 **Reversing.** Cheap: sources are calls into `CompositeSync`; the age and range are config.
+
+---
+
+### D-040 — Tents: a rail drawn from the crowd, checked by the server, the fugitive hidden while changing
+**Decision.** Each tent's rail is drawn per round from the crowd's seed (`TentStock`, stream 15): garments copied
+from what the round's crowd wears, so every client knows the rail without a message and a missing item fits
+many people (GDD §05). The server holds the rest: uses left, which rail items are gone, what was left behind.
+The fugitive interacts at the door; the choice (keep, or a rail item, per slot) is made on their screen and the
+server checks it (`TentChange`: a use left, the item on the rail and in its slot, no hat over a hood, no clash,
+at the door). The fugitive is then hidden — not drawn, no hitbox — and stands still for
+`DisguiseConfig.ChangeSeconds`, and comes out at the same door in the new clothes, synced as a network variable
+on the fugitive that every new round's seeds clear. The old clothes stay in the tent (server-side, for the dog).
+Shoes and accessories wait until they are worn; the enter/exit clips are P1.25. Tents sit at the door of the
+layout's tent spot (`TentPlacer`, re-runnable per layout).
+**Why.** The rail is public state that does not need sending, which keeps tents in line with D-005. Hiding instead
+of moving the fugitive inside keeps the network transform simple and makes "they went into that tent" something
+cameras and officers can actually see.
+**Reversing.** Cheap: the stock rule and the timing are config and one static class; the hide is one method.

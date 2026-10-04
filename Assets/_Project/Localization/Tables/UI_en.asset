@@ -232,6 +232,68 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 3517454320335585380
+  - m_Id: 289667437408256
+    m_Localized: Changing tent
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734848
+    m_Localized: Top
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734849
+    m_Localized: Bottom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734850
+    m_Localized: Hat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734851
+    m_Localized: Change
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734852
+    m_Localized: Leave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734853
+    m_Localized: Someone has used this tent.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734854
+    m_Localized: That is gone from the rail.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734855
+    m_Localized: That does not go there.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734856
+    m_Localized: Pick something to change into.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734857
+    m_Localized: A hat won't go over the hood.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734858
+    m_Localized: Those don't go together.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734859
+    m_Localized: Too far from the tent.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667642929152
+    m_Localized: '{0}: {1}'
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
+  - m_Id: 289667647123456
+    m_Localized: keep {0}
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
   references:
     version: 2
     RefIds:
@@ -253,3 +315,5 @@ MonoBehaviour:
         - id: 284538109800452
         - id: 284538126577664
         - id: 284538126577665
+        - id: 289667642929152
+        - id: 289667647123456

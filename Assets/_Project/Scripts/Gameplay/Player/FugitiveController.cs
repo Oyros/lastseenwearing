@@ -5,6 +5,7 @@ using LastSeenWearing.Core.Movement;
 using LastSeenWearing.Core.Wardrobe;
 using LastSeenWearing.Gameplay.Crowd;
 using LastSeenWearing.Gameplay.Interaction;
+using LastSeenWearing.Gameplay.Round;
 using Unity.Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
@@ -39,6 +40,10 @@ namespace LastSeenWearing.Gameplay.Player
         // client never dresses the case's body in another round's clothes.
         private readonly NetworkVariable<Vector2Int> _seeds = new();
 
+        // A tent change (P1.21): the clothes the fugitive came out in, and until when they are inside. Cleared with
+        // every new round's seeds.
+        private readonly NetworkVariable<Change> _change = new();
+
         private CharacterController _body;
         private WalkCycle _walk;
         private float _walkSpeed;
@@ -55,16 +60,35 @@ namespace LastSeenWearing.Gameplay.Player
         private float _pitch;
         private GroundPoint _velocity;
         private float _fall;
+        private bool _hidden;
 
         public GaitSignature Gait { get; private set; }
 
         /// <summary>The outfit the fugitive starts the round in (P1.18); tents change it later (P1.21).</summary>
         public Outfit Outfit { get; private set; }
 
+        /// <summary>Inside a tent, changing: unseen, and not moving.</summary>
+        public bool IsChanging => IsSpawned && NetworkManager.ServerTime.Time < _change.Value.InsideUntil;
+
+        /// <summary>The local fugitive's tent panel is open: the body stands still and the camera holds.</summary>
+        public bool Paused { get; set; }
+
         /// <summary>Server, right after spawning: the case, and the crowd this fugitive hides in this round.</summary>
         public void SetSeeds(int caseSeed, int crowdSeed)
         {
+            _change.Value = default;
             _seeds.Value = new Vector2Int(caseSeed, crowdSeed);
+        }
+
+        /// <summary>Server, from a tent: in for <paramref name="seconds"/>, out in <paramref name="outfit"/>'s clothes.</summary>
+        public void ChangeInto(Outfit outfit, float seconds)
+        {
+            _change.Value = new Change
+            {
+                Changed = true,
+                Clothes = CompositeSync.Clothes.Of(outfit),
+                InsideUntil = NetworkManager.ServerTime.Time + seconds,
+            };
         }
 
         public override void OnNetworkSpawn()
@@ -73,6 +97,7 @@ namespace LastSeenWearing.Gameplay.Player
             _walk = new WalkCycle(GetComponentInChildren<Animator>(), _crowd.StrideLength, _crowd.RunStrideLength);
             _lastPosition = transform.position;
             _seeds.OnValueChanged += OnSeedsChanged;
+            _change.OnValueChanged += OnChangeChanged;
             ApplyGait(_seeds.Value);
 
             if (IsOwner)
@@ -96,6 +121,7 @@ namespace LastSeenWearing.Gameplay.Player
         public override void OnNetworkDespawn()
         {
             _seeds.OnValueChanged -= OnSeedsChanged;
+            _change.OnValueChanged -= OnChangeChanged;
             _controls?.Dispose();
             _controls = null;
             if (_view != null)
@@ -105,6 +131,8 @@ namespace LastSeenWearing.Gameplay.Player
         }
 
         private void OnSeedsChanged(Vector2Int previous, Vector2Int current) => ApplyGait(current);
+
+        private void OnChangeChanged(Change previous, Change current) => ApplyGait(_seeds.Value);
 
         private void ApplyGait(Vector2Int seeds)
         {
@@ -117,6 +145,13 @@ namespace LastSeenWearing.Gameplay.Player
 
             // The case's body in clothes drawn after the round's crowd, unlike any NPC (GDD §05).
             Outfit = OutfitPlanner.CharacterOutfit(seeds.y, _crowd.NpcCount, OutfitSlot, view.Catalog, _wardrobeOdds, suspect.Body);
+            var change = _change.Value;
+            if (change.Changed)
+            {
+                Outfit = Outfit.WithClothesOf(new Outfit(Outfit.Sex, Outfit.Height, Outfit.Build, Outfit.Skin, Outfit.Hair, Outfit.HairColour,
+                    change.Clothes.Top.ToWorn(), change.Clothes.Bottom.ToWorn(), change.Clothes.Hat.ToWorn()));
+            }
+
             view.Apply(Outfit);
             _walk.SetScale(view.Scale);
             if (IsOwner)
@@ -128,7 +163,8 @@ namespace LastSeenWearing.Gameplay.Player
         // Latch input in Update, use it in FixedUpdate (CONVENTIONS.md §6).
         private void Update()
         {
-            if (IsOwner && _controls != null)
+            Hide(IsChanging);
+            if (IsOwner && _controls != null && !Paused)
             {
                 var field = _controls.Field;
                 _move = field.Move.ReadValue<Vector2>();
@@ -158,6 +194,12 @@ namespace LastSeenWearing.Gameplay.Player
             }
 
             var dt = Time.fixedDeltaTime;
+            if (Paused || IsChanging)
+            {
+                _move = Vector2.zero;
+                _interactQueued = false;
+            }
+
             var speed = _sprint ? _movement.FugitiveRunSpeed : _walkSpeed;
             var desired = GroundMotion.DesiredVelocity(_move.x, _move.y, _yaw, speed);
             _velocity = GroundMotion.StepToward(_velocity, desired, _movement.Acceleration * dt);
@@ -175,6 +217,26 @@ namespace LastSeenWearing.Gameplay.Player
             {
                 _interactQueued = false;
                 TryInteract();
+            }
+        }
+
+        // Inside the tent nobody sees the fugitive or can aim at them; the body waits at the door.
+        private void Hide(bool inside)
+        {
+            if (inside == _hidden)
+            {
+                return;
+            }
+
+            _hidden = inside;
+            foreach (var renderer in GetComponentsInChildren<Renderer>(true))
+            {
+                renderer.forceRenderingOff = inside;
+            }
+
+            foreach (var hitbox in GetComponentsInChildren<CharacterHitbox>(true))
+            {
+                hitbox.GetComponent<Collider>().enabled = !inside;
             }
         }
 
@@ -243,6 +305,20 @@ namespace LastSeenWearing.Gameplay.Player
             obstacles.IgnoreTag = SelfTag;
             obstacles.CameraRadius = _camera.ThirdPersonCollisionRadius;
             follow.AvoidObstacles = obstacles;
+        }
+
+        private struct Change : INetworkSerializable
+        {
+            public bool Changed;
+            public CompositeSync.Clothes Clothes;
+            public double InsideUntil;
+
+            public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+            {
+                serializer.SerializeValue(ref Changed);
+                serializer.SerializeValue(ref Clothes);
+                serializer.SerializeValue(ref InsideUntil);
+            }
         }
     }
 }

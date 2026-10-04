@@ -21,3 +21,4 @@ MonoBehaviour:
   _radio: {fileID: 11400000, guid: af6c31deba5ead0439296d0a0b3cf4ce, type: 2}
   _wardrobe: {fileID: 11400000, guid: 57c617fdcb613fd4b9d7b0d09d82de68, type: 2}
   _composite: {fileID: 11400000, guid: 87f5b9863f9fc6b49931be6325f15cf6, type: 2}
+  _disguise: {fileID: 11400000, guid: 957a9fb59b4e87747b267fa3545456de, type: 2}

@@ -215,6 +215,66 @@ MonoBehaviour:
     m_Key: lastseen.when
     m_Metadata:
       m_Items: []
+  - m_Id: 289667437408256
+    m_Key: tent.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734848
+    m_Key: tent.slot.top
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734849
+    m_Key: tent.slot.bottom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734850
+    m_Key: tent.slot.hat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734851
+    m_Key: tent.button.change
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734852
+    m_Key: tent.button.leave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734853
+    m_Key: tent.refused.tentused
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734854
+    m_Key: tent.refused.notinstock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734855
+    m_Key: tent.refused.wrongslot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734856
+    m_Key: tent.refused.nothingchosen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734857
+    m_Key: tent.refused.hatoverhood
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734858
+    m_Key: tent.refused.clash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667638734859
+    m_Key: tent.refused.toofar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667642929152
+    m_Key: tent.row
+    m_Metadata:
+      m_Items: []
+  - m_Id: 289667647123456
+    m_Key: tent.keep
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -5,6 +5,7 @@
         "LastSeenWearing.Core",
         "LastSeenWearing.Gameplay",
         "LastSeenWearing.UI",
+        "Unity.Netcode.Runtime",
         "Unity.Localization",
         "Unity.Localization.Editor",
         "Unity.TextMeshPro",

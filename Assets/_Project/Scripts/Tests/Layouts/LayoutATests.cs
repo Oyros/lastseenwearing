@@ -3,6 +3,7 @@ using System.Linq;
 using LastSeenWearing.Core.Layouts;
 using LastSeenWearing.Editor.Import;
 using LastSeenWearing.Gameplay.Cameras;
+using LastSeenWearing.Gameplay.Disguise;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -106,6 +107,25 @@ namespace LastSeenWearing.Tests.Layouts
                 Assert.That(Flat(pole.bounds.center - spot.Position), Is.LessThan(1f), $"{spot.Name} stands on a pole");
                 Assert.That(pole.bounds.max.y, Is.EqualTo(spot.Position.y).Within(0.5f), $"{spot.Name} at the pole's top");
             }
+        }
+
+        [Test]
+        public void EveryTentHasAChangingTentAtItsDoor()
+        {
+            WithScene(scene =>
+            {
+                var tents = scene.GetRootGameObjects().SelectMany(g => g.GetComponentsInChildren<ChangingTent>(true)).ToArray();
+                Assert.That(tents, Has.Length.EqualTo(Definition.Tents.Length), "P1.21");
+                foreach (var spot in Definition.Tents)
+                {
+                    var tent = tents.Single(t => t.name == $"Tent_{spot.Name}");
+                    var door = spot.Position + Quaternion.Euler(0f, spot.Yaw, 0f) * Vector3.forward * TentPlacer.DoorDistance;
+                    Assert.That(Vector3.Distance(tent.transform.position, door), Is.LessThan(0.01f), spot.Name);
+                    Assert.That(NavMesh.SamplePosition(tent.InteractionPoint, out _, 0.5f, NavMesh.AllAreas), Is.True,
+                        $"{spot.Name}: the door is walkable ground");
+                    Assert.That(tent.gameObject.layer, Is.EqualTo(LayerMask.NameToLayer("Ignore Raycast")), "never caught by an aim or a mark");
+                }
+            });
         }
 
         private static float Flat(Vector3 v) => new Vector2(v.x, v.z).magnitude;
