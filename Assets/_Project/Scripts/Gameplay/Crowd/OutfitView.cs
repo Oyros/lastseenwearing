@@ -27,6 +27,8 @@ namespace LastSeenWearing.Gameplay.Crowd
         private static readonly Dictionary<string, Material> Swatches = new();
 
         [SerializeField] private WardrobeCatalog _catalog;
+        [Tooltip("Height scales (P1.19).")]
+        [SerializeField] private WardrobeConfig _odds;
         [Tooltip("The face decal's material: the art's face atlas, alpha cut out (PL.32, D-010).")]
         [SerializeField] private Material _faceMaterial;
         [Tooltip("Keep every garment after dressing (the fugitive changes in tents); off, unworn parts are destroyed.")]
@@ -38,6 +40,9 @@ namespace LastSeenWearing.Gameplay.Crowd
 
         public WardrobeCatalog Catalog => _catalog;
 
+        /// <summary>The body's scale for its height (P1.19): the walk's stride scales with it.</summary>
+        public float Scale => _odds.ScaleOf(Outfit.Height);
+
         public void Apply(Outfit outfit)
         {
             Outfit = outfit;
@@ -45,6 +50,9 @@ namespace LastSeenWearing.Gameplay.Crowd
             {
                 Index();
             }
+
+            // Height is the whole body, rig and all: the animator's root is scaled, the controller is not.
+            GetComponentInChildren<Animator>().transform.localScale = Vector3.one * Scale;
 
             var dress = Dress(outfit);
             var dropped = new List<string>();

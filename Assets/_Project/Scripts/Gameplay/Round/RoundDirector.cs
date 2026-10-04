@@ -35,6 +35,7 @@ namespace LastSeenWearing.Gameplay.Round
         [SerializeField] private RoundConfig _config;
         [SerializeField] private RoleRosterSync _roster;
         [SerializeField] private CrowdSpawner _crowd;
+        [SerializeField] private CompositeSync _composite;
         [SerializeField] private NetworkObject _playerPrefab;
         [SerializeField] private RoleSpawn[] _spawns;
 
@@ -85,6 +86,7 @@ namespace LastSeenWearing.Gameplay.Round
 
             _caseSeed = Environment.TickCount;
             _round.Value = 0;
+            _composite.BeginCase(_caseSeed, _config.RoundsPerCase, ClientOf(Role.Watcher), ClientOf(Role.Fugitive));
             Fire(RoundEvent.StartCase);
         }
 
@@ -168,8 +170,9 @@ namespace LastSeenWearing.Gameplay.Round
             {
                 case RoundPhase.Briefing:
                     _outcome.Value = RoundOutcome.None;
-                    // A new crowd every round, from the case's seed and the round number.
-                    _crowd.Reseed(SeededRandom.Derive(_caseSeed, _round.Value));
+                    // A new crowd every round, from the case's seed and the round number, with the round's lookalikes
+                    // of what the composite has revealed so far (P1.19).
+                    _crowd.Reseed(SeededRandom.Derive(_caseSeed, _round.Value), _caseSeed, _composite.Revealed(_round.Value));
                     break;
                 case RoundPhase.Live:
                     _programmeClock = -1d;
@@ -202,10 +205,23 @@ namespace LastSeenWearing.Gameplay.Round
                 if (body.TryGetComponent<FugitiveController>(out var fugitive))
                 {
                     // After the spawn: a network variable written before it is not tied to the object yet.
-                    fugitive.SetCrowdSeed(_crowd.Seed); // its walk is drawn after this round's crowd
+                    fugitive.SetSeeds(_caseSeed, _crowd.Seed); // who they are is the case's; what they wear, the round's
                 }
                 _bodies.Add(body);
             }
+        }
+
+        private ulong? ClientOf(Role role)
+        {
+            for (var i = 0; i < _roster.Count; i++)
+            {
+                if (_roster[i].Role == role)
+                {
+                    return _roster[i].ClientId;
+                }
+            }
+
+            return null;
         }
 
         // The fugitive starts where an NPC stands, inside the crowd; everyone else at their role's point.

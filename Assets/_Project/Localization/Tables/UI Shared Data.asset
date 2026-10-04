@@ -123,6 +123,66 @@ MonoBehaviour:
     m_Key: ui.watcher.camera_zoom
     m_Metadata:
       m_Items: []
+  - m_Id: 278323560558592
+    m_Key: composite.title.watcher
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221888
+    m_Key: composite.title.fugitive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221889
+    m_Key: composite.trait.sex
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221890
+    m_Key: composite.trait.height
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221891
+    m_Key: composite.trait.build
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221892
+    m_Key: composite.trait.hairstyle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221893
+    m_Key: composite.trait.haircolour
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221894
+    m_Key: composite.trait.walk
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221895
+    m_Key: composite.trait.skin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221896
+    m_Key: composite.confidence.high
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221897
+    m_Key: composite.confidence.medium
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221898
+    m_Key: composite.confidence.low
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221899
+    m_Key: composite.right
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221900
+    m_Key: composite.line
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323665416192
+    m_Key: composite.wrong
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -17,6 +17,14 @@ namespace LastSeenWearing.Core.Wardrobe
         Heavy,
     }
 
+    /// <summary>A character's height bucket (GDD §05: a permanent trait, the composite's first clue with build).</summary>
+    public enum Height
+    {
+        Average,
+        Short,
+        Tall,
+    }
+
     /// <summary>A cloth colour's value: what the black-and-white camera reads of it (palette: light ≥ 0.60, dark ≤ 0.25 luma).</summary>
     public enum Tone
     {

@@ -16,5 +16,10 @@ MonoBehaviour:
   _averageOdds: 0.6
   _slimOdds: 0.2
   _heavyOdds: 0.2
+  _averageHeightOdds: 0.5
+  _shortOdds: 0.25
+  _tallOdds: 0.25
+  _shortScale: 0.94
+  _tallScale: 1.06
   _hatOdds: 0.35
   _lightShare: 0.5

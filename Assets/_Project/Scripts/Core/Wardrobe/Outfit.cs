@@ -30,13 +30,14 @@ namespace LastSeenWearing.Core.Wardrobe
     }
 
     /// <summary>
-    /// What one character looks like (GDD §05): the permanent body (sex, build, skin), the coverable head (hair and
+    /// What one character looks like (GDD §05): the permanent body (sex, height, build, skin), the coverable head (hair and
     /// its colour, a hat) and the changeable clothes (top, bottom). Indices into a <see cref="WardrobeCatalog"/>.
     /// The crowd's are drawn from the seed on every client (<see cref="OutfitPlanner"/>), never sent.
     /// </summary>
     public readonly struct Outfit : IEquatable<Outfit>
     {
         public readonly Sex Sex;
+        public readonly Height Height;
         public readonly Build Build;
         public readonly int Skin;
         public readonly int Hair;
@@ -45,9 +46,10 @@ namespace LastSeenWearing.Core.Wardrobe
         public readonly Worn Bottom;
         public readonly Worn Hat;
 
-        public Outfit(Sex sex, Build build, int skin, int hair, int hairColour, Worn top, Worn bottom, Worn hat)
+        public Outfit(Sex sex, Height height, Build build, int skin, int hair, int hairColour, Worn top, Worn bottom, Worn hat)
         {
             Sex = sex;
+            Height = height;
             Build = build;
             Skin = skin;
             Hair = hair;
@@ -61,7 +63,7 @@ namespace LastSeenWearing.Core.Wardrobe
         public string Describe(WardrobeCatalog catalog)
         {
             var hat = Hat.IsNone ? "no hat" : $"{Shade(Hat)} {catalog.Hats[Hat.Item].Id}";
-            return $"{Sex.ToString().ToLowerInvariant()}, {Build.ToString().ToLowerInvariant()}, {catalog.Skins[Skin].Name}; " +
+            return $"{Sex.ToString().ToLowerInvariant()}, {Height.ToString().ToLowerInvariant()}, {Build.ToString().ToLowerInvariant()}, {catalog.Skins[Skin].Name}; " +
                    $"{Shade(Top)} {catalog.Tops[Top.Item].Id}, {Shade(Bottom)} {catalog.Bottoms[Bottom.Item].Id}; " +
                    $"{catalog.HairStyles[Hair].Id} ({catalog.HairColours[HairColour].Name}); {hat}";
         }
@@ -69,12 +71,21 @@ namespace LastSeenWearing.Core.Wardrobe
         private static string Shade(Worn worn) => worn.Tone == Tone.Light ? "light" : "dark";
 
         public bool Equals(Outfit other) =>
-            Sex == other.Sex && Build == other.Build && Skin == other.Skin && Hair == other.Hair &&
+            Sex == other.Sex && Height == other.Height && Build == other.Build && Skin == other.Skin && Hair == other.Hair &&
             HairColour == other.HairColour && Top.Equals(other.Top) && Bottom.Equals(other.Bottom) && Hat.Equals(other.Hat);
 
         public override bool Equals(object obj) => obj is Outfit other && Equals(other);
 
         public override int GetHashCode() =>
-            HashCode.Combine(HashCode.Combine(Sex, Build, Skin, Hair, HairColour), Top, Bottom, Hat);
+            HashCode.Combine(HashCode.Combine(Sex, Height, Build, Skin, Hair, HairColour), Top, Bottom, Hat);
+
+        /// <summary>This outfit with some of its body changed (a lookalike, P1.19).</summary>
+        public Outfit WithBody(Sex? sex = null, Height? height = null, Build? build = null, int? skin = null, int? hair = null,
+            int? hairColour = null) =>
+            new(sex ?? Sex, height ?? Height, build ?? Build, skin ?? Skin, hair ?? Hair, hairColour ?? HairColour, Top, Bottom, Hat);
+
+        /// <summary>The same person in other clothes: this body, <paramref name="clothes"/>' top, bottom and hat.</summary>
+        public Outfit WithClothesOf(Outfit clothes) =>
+            new(Sex, Height, Build, Skin, Hair, HairColour, clothes.Top, clothes.Bottom, clothes.Hat);
     }
 }

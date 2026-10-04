@@ -518,3 +518,26 @@ parts each). Readability (PL.16): only heavy build and the light/dark of torso, 
 **Follow-up.** Our own LOD switching (one level active, picked from the nearest rendering camera) and the
 per-NPC mesh combine (D-027) are a performance task, not needed at 42 fps with three editors.
 **Reversing.** Moderate: the catalog shape is used by planner and view; odds and rules are cheap.
+
+---
+
+### D-038 — The composite: the case's suspect, a server-built sketch, role-filtered, with planted lookalikes
+**Decision.** Who the fugitive is — sex, height, build, skin, hair and its colour, walk — is drawn once per case
+from the case seed (`CompositeBuilder.SuspectFor`); only the clothes come from each round's crowd seed. Every
+round's crowd reserves the suspect's walk (`GaitPlanner.SignaturesFor(…, reserved)`), so it stays unique. The
+witness sketch (`CompositeBuilder.Build`) gives every trait with a confidence and gets 1–2 wrong
+(`CompositeConfig`), only on traits the case will reveal (a 3-round case never shows skin, so a mistake there
+would be wasted) and never sex when the suspect wears facial hair; a wrong hair style suits the claimed sex. It
+reveals per round as D-008 (round 1 sex + height + build — sex added by the team). The server builds it at case
+start (`CompositeSync`) and sends the Watcher the claims, the fugitive the claims + which are wrong + the truth,
+nobody else anything. Each round the server plants 2–3 partial lookalikes — NPCs matching every revealed claim
+(mistakes included) but one — and sends them as NPC body overrides (`LookalikeSet`), never the composite.
+Heights are three buckets at ±6 % body scale with the stride scaled to match (team). Shape-key curves are
+stripped from every imported clip: the export keyed all 564 at 0, which reset the build every frame (every
+"heavy" NPC drew average) and cost the animator 564 curves per body.
+**Why.** The composite only works if the person stays the same across a case; the information must be
+role-filtered (ARCHITECTURE); lookalikes make the sketch's mistakes bite (an innocent matches the wrong claim).
+**Open.** The fugitive's look and walk are derivable from seeds every client holds, and the lookalike overrides
+mark NPCs — a cheating client could use either; hiding them is post-prototype work. Panels are placeholders
+until P1.20.
+**Reversing.** Moderate: odds and reveal order are config; the suspect-per-case split is load-bearing.

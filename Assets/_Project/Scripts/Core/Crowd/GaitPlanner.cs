@@ -14,6 +14,9 @@ namespace LastSeenWearing.Core.Crowd
     public static class GaitPlanner
     {
         private const int GaitStream = 1;
+
+        // The fugitive's walk for a whole case (P1.19): its own stream of the case seed.
+        private const int CaseWalkStream = 11;
         private static readonly WalkTrait[] Traits = (WalkTrait[])Enum.GetValues(typeof(WalkTrait));
         private static readonly int BaseWalkCount = Enum.GetValues(typeof(BaseWalk)).Length;
         private static readonly int TempoCount = Enum.GetValues(typeof(Tempo)).Length;
@@ -46,7 +49,8 @@ namespace LastSeenWearing.Core.Crowd
             }
         }
 
-        public static GaitSignature[] SignaturesFor(int crowdSeed, int count, GaitSettings settings)
+        /// <param name="reserved">A walk no NPC may take — the fugitive's, fixed for the case (P1.19).</param>
+        public static GaitSignature[] SignaturesFor(int crowdSeed, int count, GaitSettings settings, GaitSignature reserved = null)
         {
             // Every walk is unique, so a crowd larger than the number of walks would redraw forever.
             if (count > Capacity)
@@ -55,6 +59,11 @@ namespace LastSeenWearing.Core.Crowd
             }
 
             var taken = new HashSet<GaitSignature>();
+            if (reserved != null)
+            {
+                taken.Add(reserved);
+            }
+
             var signatures = new GaitSignature[count];
             for (var i = 0; i < count; i++)
             {
@@ -81,7 +90,15 @@ namespace LastSeenWearing.Core.Crowd
             return SignaturesFor(crowdSeed, crowdSize + slot + 1, settings)[crowdSize + slot];
         }
 
-        private static GaitSignature Draw(SeededRandom random, GaitSettings settings)
+        /// <summary>
+        /// The fugitive's walk for a case (GDD §05: permanent) — every round's crowd reserves it
+        /// (<see cref="SignaturesFor"/>), so it stays unique however the crowd is redrawn. Every client gets the same.
+        /// </summary>
+        public static GaitSignature CaseWalk(int caseSeed, GaitSettings settings) =>
+            Draw(new SeededRandom(SeededRandom.Derive(caseSeed, CaseWalkStream)), settings);
+
+        /// <summary>One walk from a stream (the composite draws a wrong one this way).</summary>
+        public static GaitSignature Draw(SeededRandom random, GaitSettings settings)
         {
             var walk = (BaseWalk)random.Range(0, BaseWalkCount);
             var tempo = (Tempo)random.Range(0, TempoCount);

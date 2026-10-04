@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using LastSeenWearing.Core.Composite;
 using LastSeenWearing.Core.Config;
 using LastSeenWearing.Core.Crowd;
 using LastSeenWearing.Core.Wardrobe;
@@ -26,13 +28,20 @@ namespace LastSeenWearing.Gameplay.Crowd
         [SerializeField] private Transform _waypointRoot;
         [SerializeField] private WardrobeCatalog _wardrobe;
         [SerializeField] private WardrobeConfig _wardrobeOdds;
+        [SerializeField] private CompositeConfig _composite;
 
+        // Before the seed: a client rebuilding on the seed's change must already hold its lookalikes and case.
+        private readonly NetworkVariable<LookalikeSet> _lookalikes = new();
+        private readonly NetworkVariable<int> _caseSeed = new();
         private readonly NetworkVariable<int> _seed = new();
         private readonly NetworkVariable<double> _startTime = new();
         private readonly List<CrowdAgent> _dirty = new();
         private readonly List<ulong> _recipients = new();
 
         private CrowdAgent[] _agents;
+        private NpcPlan[] _plans;
+        private GroundPoint[] _waypoints;
+        private int _raisedSeed;
         private float _syncTimer;
         private float _logTimer;
         private int _logMinute;
@@ -78,6 +87,7 @@ namespace LastSeenWearing.Gameplay.Crowd
             }
 
             _seed.OnValueChanged += OnSeedChanged;
+            _lookalikes.OnValueChanged += OnLookalikesChanged;
             Raise(_seed.Value);
 
             if (!IsServer)
@@ -89,6 +99,7 @@ namespace LastSeenWearing.Gameplay.Crowd
         public override void OnNetworkDespawn()
         {
             _seed.OnValueChanged -= OnSeedChanged;
+            _lookalikes.OnValueChanged -= OnLookalikesChanged;
             if (!IsServer && NetworkManager.CustomMessagingManager != null)
             {
                 NetworkManager.CustomMessagingManager.UnregisterNamedMessageHandler(PosesMessage);
@@ -109,6 +120,28 @@ namespace LastSeenWearing.Gameplay.Crowd
             }
         }
 
+        /// <summary>
+        /// Server, each round of a case (P1.19): a new crowd that reserves the fugitive's walk (the case's) and
+        /// holds the round's partial lookalikes of what the composite has <paramref name="revealed"/> so far.
+        /// </summary>
+        public void Reseed(int seed, int caseSeed, IReadOnlyList<CompositeClaim> revealed)
+        {
+            if (!IsServer)
+            {
+                return;
+            }
+
+            var reserved = GaitPlanner.CaseWalk(caseSeed, _config.Gait);
+            var walks = GaitPlanner.SignaturesFor(seed, _config.NpcCount, _config.Gait, reserved);
+            var outfits = OutfitPlanner.OutfitsFor(seed, _config.NpcCount, _wardrobe, _wardrobeOdds);
+            var planted = LookalikePlanner.Plan(seed, outfits, walks, reserved, revealed, _wardrobe, _composite);
+            _lookalikes.Value = new LookalikeSet { Seed = seed, Entries = planted.Select(LookalikeSet.Entry.Of).ToArray() };
+            _caseSeed.Value = caseSeed;
+            SetSeed(seed);
+            Debug.Log($"[CrowdSpawner] {planted.Count} lookalike(s): " +
+                      string.Join(", ", planted.Select(l => $"Npc_{l.Npc:000}")));
+        }
+
         private void SetSeed(int seed)
         {
             // Start first: a client rebuilding on the seed's change must already read the new start.
@@ -126,6 +159,23 @@ namespace LastSeenWearing.Gameplay.Crowd
 
             ClearAgents();
             Raise(current);
+        }
+
+        // Lookalikes arriving after their crowd was raised: rebuild just those NPCs.
+        private void OnLookalikesChanged(LookalikeSet previous, LookalikeSet current)
+        {
+            if (_agents == null || current.Seed != _raisedSeed || current.Entries == null)
+            {
+                return;
+            }
+
+            foreach (var entry in current.Entries)
+            {
+                Destroy(_agents[entry.Npc].gameObject);
+                Outfits[entry.Npc] = entry.Apply(Outfits[entry.Npc]);
+                Signatures[entry.Npc] = entry.Apply(Signatures[entry.Npc]);
+                BuildAgent(entry.Npc);
+            }
         }
 
         private void ClearAgents()
@@ -335,45 +385,62 @@ namespace LastSeenWearing.Gameplay.Crowd
 
         private void Raise(int seed)
         {
-            var groundY = transform.position.y;
-            var waypoints = new GroundPoint[_waypointRoot.childCount];
-            for (var i = 0; i < waypoints.Length; i++)
+            _raisedSeed = seed;
+            _waypoints = new GroundPoint[_waypointRoot.childCount];
+            for (var i = 0; i < _waypoints.Length; i++)
             {
                 var position = _waypointRoot.GetChild(i).position;
-                waypoints[i] = new GroundPoint(position.x, position.z);
+                _waypoints[i] = new GroundPoint(position.x, position.z);
             }
 
-            var settings = new CrowdPlanSettings(_config.NpcCount, waypoints.Length, _config.RouteLength,
+            var settings = new CrowdPlanSettings(_config.NpcCount, _waypoints.Length, _config.RouteLength,
                 _config.WaypointSpread, _config.DwellMin, _config.DwellMax);
-            var plans = CrowdPlanner.Build(seed, settings);
+            _plans = CrowdPlanner.Build(seed, settings);
 
-            // Every walk unique, from the same seed (GDD §05, D-025); the pace bucket scales the walking speed
-            // and the step follows, since the cycle runs on distance (D-022).
-            var gaits = GaitPlanner.SignaturesFor(seed, plans.Length, _config.Gait);
-            Signatures = gaits;
-            var outfits = OutfitPlanner.OutfitsFor(seed, plans.Length, _wardrobe, _wardrobeOdds);
-            Outfits = outfits;
-
-            _agents = new CrowdAgent[plans.Length];
-            var log = new System.Text.StringBuilder($"[CrowdSpawner] {plans.Length} walks (seed {seed}):");
-            for (var i = 0; i < plans.Length; i++)
+            // Every walk unique, from the same seed (GDD §05, D-025), and never the fugitive's, which is the case's
+            // (P1.19); the pace bucket scales the walking speed and the step follows (D-022). Outfits from the seed
+            // too (P1.18), then the server's planted lookalikes for this round.
+            Signatures = GaitPlanner.SignaturesFor(seed, _plans.Length, _config.Gait, GaitPlanner.CaseWalk(_caseSeed.Value, _config.Gait));
+            Outfits = OutfitPlanner.OutfitsFor(seed, _plans.Length, _wardrobe, _wardrobeOdds);
+            var lookalikes = _lookalikes.Value;
+            if (lookalikes.Seed == seed && lookalikes.Entries != null)
             {
-                var gait = gaits[i];
-                var speed = _config.WalkSpeed * _config.TempoMultiplier(gait.Tempo);
-                var schedule = new NpcSchedule(plans[i], waypoints, speed, (from, to) => FindPath(from, to, groundY));
-                _agents[i] = Instantiate(_agentPrefab, transform);
-                _agents[i].name = $"Npc_{i:000}";
-                _agents[i].Begin(i, schedule, groundY, gait.Base, _config.StrideLength);
-                foreach (var trait in gait.Traits)
+                foreach (var entry in lookalikes.Entries)
                 {
-                    _agents[i].SetTrait(trait.Trait, trait.Strength);
+                    Outfits[entry.Npc] = entry.Apply(Outfits[entry.Npc]);
+                    Signatures[entry.Npc] = entry.Apply(Signatures[entry.Npc]);
                 }
+            }
 
-                _agents[i].GetComponent<OutfitView>().Apply(outfits[i]);
-                log.Append($"\n  Npc_{i:000}: {gait.Describe()} | {outfits[i].Describe(_wardrobe)}");
+            _agents = new CrowdAgent[_plans.Length];
+            var log = new System.Text.StringBuilder($"[CrowdSpawner] {_plans.Length} walks (seed {seed}):");
+            for (var i = 0; i < _plans.Length; i++)
+            {
+                BuildAgent(i);
+                log.Append($"\n  Npc_{i:000}: {Signatures[i].Describe()} | {Outfits[i].Describe(_wardrobe)}");
             }
 
             Debug.Log(log.ToString());
+        }
+
+        private void BuildAgent(int i)
+        {
+            var groundY = transform.position.y;
+            var gait = Signatures[i];
+            var outfit = Outfits[i];
+            var speed = _config.WalkSpeed * _config.TempoMultiplier(gait.Tempo);
+            var schedule = new NpcSchedule(_plans[i], _waypoints, speed, (from, to) => FindPath(from, to, groundY));
+            _agents[i] = Instantiate(_agentPrefab, transform);
+            _agents[i].name = $"Npc_{i:000}";
+
+            // A taller body takes a longer step (P1.19): the stride scales with the height.
+            _agents[i].Begin(i, schedule, groundY, gait.Base, _config.StrideLength * _wardrobeOdds.ScaleOf(outfit.Height));
+            foreach (var trait in gait.Traits)
+            {
+                _agents[i].SetTrait(trait.Trait, trait.Strength);
+            }
+
+            _agents[i].GetComponent<OutfitView>().Apply(outfit);
         }
 
         // The NavMesh lays out each leg; the same mesh gives the same corners on every client (P1.01).

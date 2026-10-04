@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab5fe9bbed7ad02438712a878a4615ec, type: 3}
+  m_Name: CompositeConfig
+  m_EditorClassIdentifier: LastSeenWearing.Core::LastSeenWearing.Core.Config.CompositeConfig
+  _twoErrorChance: 0.5
+  _highOdds: 0.4
+  _mediumOdds: 0.4
+  _lowOdds: 0.2
+  _reveals:
+  - Traits: 000102
+  - Traits: 0304
+  - Traits: 05
+  - Traits: 06
+  _lookalikesMin: 2
+  _lookalikesMax: 3
+  _lookalikeMisses: 1

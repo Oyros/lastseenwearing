@@ -19,6 +19,7 @@ namespace LastSeenWearing.Core.Config
         [SerializeField] private WatcherConfig _watcher;
         [SerializeField] private RadioConfig _radio;
         [SerializeField] private WardrobeConfig _wardrobe;
+        [SerializeField] private CompositeConfig _composite;
 
         public LobbyConfig Lobby => _lobby;
         public RoundConfig Round => _round;
@@ -26,6 +27,7 @@ namespace LastSeenWearing.Core.Config
         public WatcherConfig Watcher => _watcher;
         public RadioConfig Radio => _radio;
         public WardrobeConfig Wardrobe => _wardrobe;
+        public CompositeConfig Composite => _composite;
         public MovementConfig Movement => _movement;
         public CrowdConfig Crowd => _crowd;
     }

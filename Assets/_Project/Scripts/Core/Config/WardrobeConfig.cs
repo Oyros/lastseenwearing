@@ -1,3 +1,4 @@
+using LastSeenWearing.Core.Wardrobe;
 using UnityEngine;
 
 namespace LastSeenWearing.Core.Config
@@ -17,6 +18,14 @@ namespace LastSeenWearing.Core.Config
         [SerializeField, Min(0f)] private float _slimOdds = 0.2f;
         [SerializeField, Min(0f)] private float _heavyOdds = 0.2f;
 
+        [Tooltip("Relative odds of average, short and tall heights. [PROVISIONAL]")]
+        [SerializeField, Min(0f)] private float _averageHeightOdds = 0.5f;
+        [SerializeField, Min(0f)] private float _shortOdds = 0.25f;
+        [SerializeField, Min(0f)] private float _tallOdds = 0.25f;
+        [Tooltip("Body scale of a short and a tall character (average is 1). [PROVISIONAL] ±6 %")]
+        [SerializeField, Range(0.8f, 1f)] private float _shortScale = 0.94f;
+        [SerializeField, Range(1f, 1.2f)] private float _tallScale = 1.06f;
+
         [Header("Clothes")]
         [Tooltip("Chance of a hat — never with a hood, which covers the head (PL.16: 35 %). [PROVISIONAL]")]
         [SerializeField, Range(0f, 1f)] private float _hatOdds = 0.35f;
@@ -27,7 +36,12 @@ namespace LastSeenWearing.Core.Config
         public float AverageOdds => _averageOdds;
         public float SlimOdds => _slimOdds;
         public float HeavyOdds => _heavyOdds;
+        public float AverageHeightOdds => _averageHeightOdds;
+        public float ShortOdds => _shortOdds;
+        public float TallOdds => _tallOdds;
         public float HatOdds => _hatOdds;
         public float LightShare => _lightShare;
+
+        public float ScaleOf(Height height) => height == Height.Short ? _shortScale : height == Height.Tall ? _tallScale : 1f;
     }
 }

@@ -16,7 +16,7 @@ namespace LastSeenWearing.Editor.Import
     public sealed class BodyClipPostprocessor : AssetPostprocessor
     {
         // Bump with every change to what this writes (see HumanoidImportPostprocessor).
-        private const uint Version = 3; // 2: loop from the JSON (one-shot action clips, PL.17). 3: any rigged export, Generic too
+        private const uint Version = 4; // 2: loop from the JSON (one-shot action clips, PL.17). 3: any rigged export, Generic too. 4: no shape-key curves
 
         public override uint GetVersion()
         {
@@ -53,6 +53,27 @@ namespace LastSeenWearing.Editor.Import
             var sidecar = Load(assetPath);
             return sidecar?.clips != null && sidecar.clips.Length > 0;
         }
+
+        // The export keys every shape key (build, fit) at 0 in every clip: played, they would undo the build the
+        // dresser sets every frame (P1.19 — every heavy NPC drew average) and cost 564 curves per clip per body.
+        // A body's shape is the outfit's, never the clip's.
+        private void OnPostprocessAnimation(GameObject root, AnimationClip clip)
+        {
+            if (!HumanoidImportPostprocessor.IsRigged(assetPath))
+            {
+                return;
+            }
+
+            foreach (var binding in AnimationUtility.GetCurveBindings(clip))
+            {
+                if (binding.propertyName.StartsWith(ShapeKeyProperty))
+                {
+                    AnimationUtility.SetEditorCurve(clip, binding, null);
+                }
+            }
+        }
+
+        private const string ShapeKeyProperty = "blendShape.";
 
         private void OnPreprocessAnimation()
         {

@@ -1,3 +1,4 @@
+using LastSeenWearing.Core.Composite;
 using LastSeenWearing.Core.Config;
 using LastSeenWearing.Core.Crowd;
 using LastSeenWearing.Core.Movement;
@@ -13,16 +14,17 @@ namespace LastSeenWearing.Gameplay.Player
     /// <summary>
     /// The fugitive (GDD §03, P1.11): a crowd body that walks like the crowd — the crowd's speed × its own
     /// pace, the crowd's animator through the same <see cref="WalkCycle"/>, and a walk of its own that no NPC
-    /// shares (<see cref="GaitPlanner.CharacterSignature"/>). Sprint is faster, and the crowd will notice
-    /// (GDD §04.3). The owner steers relative to an over-the-shoulder camera; the owner-authority
-    /// <c>NetworkTransform</c> carries the body, and every client animates it from the distance it covers.
-    /// The walk is f(crowd seed), handed in by the server at spawn — never sent as a walk.
+    /// shares. Sprint is faster, and the crowd will notice (GDD §04.3). The owner steers relative to an
+    /// over-the-shoulder camera; the owner-authority <c>NetworkTransform</c> carries the body, and every client
+    /// animates it from the distance it covers. Who the fugitive is — body and walk — is the case's
+    /// (<see cref="CompositeBuilder.SuspectFor"/>, P1.19), the same every round; the clothes are the round's.
+    /// Both come from the seeds the server hands in at spawn — never sent as a walk or an outfit.
     /// </summary>
     [RequireComponent(typeof(CharacterController))]
     public sealed class FugitiveController : NetworkBehaviour
     {
-        // The fugitive's slot among the characters outside the crowd (GaitPlanner.CharacterSignature).
-        private const int GaitSlot = 0;
+        // The fugitive's slot among the characters outside the crowd (OutfitPlanner.CharacterOutfit).
+        private const int OutfitSlot = 0;
 
         // The local fugitive's root carries this tag so its own collider never blocks its camera.
         private const string SelfTag = "Player";
@@ -33,7 +35,9 @@ namespace LastSeenWearing.Gameplay.Player
         [SerializeField] private WardrobeConfig _wardrobeOdds;
         [SerializeField] private Transform _cameraPivot;
 
-        private readonly NetworkVariable<int> _crowdSeed = new();
+        // x: the case seed (who the fugitive is), y: the round's crowd seed (what they wear). One variable, so a
+        // client never dresses the case's body in another round's clothes.
+        private readonly NetworkVariable<Vector2Int> _seeds = new();
 
         private CharacterController _body;
         private WalkCycle _walk;
@@ -57,10 +61,10 @@ namespace LastSeenWearing.Gameplay.Player
         /// <summary>The outfit the fugitive starts the round in (P1.18); tents change it later (P1.21).</summary>
         public Outfit Outfit { get; private set; }
 
-        /// <summary>Server, right after spawning: the crowd this fugitive hides in this round.</summary>
-        public void SetCrowdSeed(int seed)
+        /// <summary>Server, right after spawning: the case, and the crowd this fugitive hides in this round.</summary>
+        public void SetSeeds(int caseSeed, int crowdSeed)
         {
-            _crowdSeed.Value = seed;
+            _seeds.Value = new Vector2Int(caseSeed, crowdSeed);
         }
 
         public override void OnNetworkSpawn()
@@ -68,8 +72,8 @@ namespace LastSeenWearing.Gameplay.Player
             _body = GetComponent<CharacterController>();
             _walk = new WalkCycle(GetComponentInChildren<Animator>(), _crowd.StrideLength, _crowd.RunStrideLength);
             _lastPosition = transform.position;
-            _crowdSeed.OnValueChanged += OnCrowdSeedChanged;
-            ApplyGait(_crowdSeed.Value);
+            _seeds.OnValueChanged += OnSeedsChanged;
+            ApplyGait(_seeds.Value);
 
             if (IsOwner)
             {
@@ -91,7 +95,7 @@ namespace LastSeenWearing.Gameplay.Player
 
         public override void OnNetworkDespawn()
         {
-            _crowdSeed.OnValueChanged -= OnCrowdSeedChanged;
+            _seeds.OnValueChanged -= OnSeedsChanged;
             _controls?.Dispose();
             _controls = null;
             if (_view != null)
@@ -100,19 +104,21 @@ namespace LastSeenWearing.Gameplay.Player
             }
         }
 
-        private void OnCrowdSeedChanged(int previous, int current) => ApplyGait(current);
+        private void OnSeedsChanged(Vector2Int previous, Vector2Int current) => ApplyGait(current);
 
-        private void ApplyGait(int crowdSeed)
+        private void ApplyGait(Vector2Int seeds)
         {
-            Gait = GaitPlanner.CharacterSignature(crowdSeed, _crowd.NpcCount, GaitSlot, _crowd.Gait);
+            var view = GetComponent<OutfitView>();
+            var suspect = CompositeBuilder.SuspectFor(seeds.x, view.Catalog, _wardrobeOdds, _crowd.Gait);
+            Gait = suspect.Walk; // every round's crowd reserves it (CrowdSpawner)
             _walk.Apply(Gait);
             _walkSpeed = _crowd.WalkSpeed * _crowd.TempoMultiplier(Gait.Tempo);
             _walk.SetRunSpeeds(_walkSpeed, _movement.FugitiveRunSpeed); // the sprint breaks into the Run clip (PL.11b)
 
-            // Dressed after the crowd and unlike any NPC (GDD §05) — from the same seed on every client.
-            var view = GetComponent<OutfitView>();
-            Outfit = OutfitPlanner.CharacterOutfit(crowdSeed, _crowd.NpcCount, GaitSlot, view.Catalog, _wardrobeOdds);
+            // The case's body in clothes drawn after the round's crowd, unlike any NPC (GDD §05).
+            Outfit = OutfitPlanner.CharacterOutfit(seeds.y, _crowd.NpcCount, OutfitSlot, view.Catalog, _wardrobeOdds, suspect.Body);
             view.Apply(Outfit);
+            _walk.SetScale(view.Scale);
             if (IsOwner)
             {
                 Debug.Log($"[Fugitive] Your walk: {Gait.Describe()}. You wear: {Outfit.Describe(view.Catalog)}.");

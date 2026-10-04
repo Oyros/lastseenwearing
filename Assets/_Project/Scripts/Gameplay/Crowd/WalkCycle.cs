@@ -51,6 +51,7 @@ namespace LastSeenWearing.Gameplay.Crowd
         private float _runSpeed;
         private float _stride;
         private double _phaseOffset;
+        private float _scale = 1f;
         private float _speed;
         private float _sinceMoved = float.PositiveInfinity;
 
@@ -90,6 +91,12 @@ namespace LastSeenWearing.Gameplay.Crowd
         /// Speeds between which the body blends from its walk into the run. Without them it only walks. Every
         /// client derives the blend from the speed it sees, so nothing about running is sent.
         /// </summary>
+        /// <summary>A taller or shorter body (P1.19): both strides scale with it, so the feet stay planted.</summary>
+        public void SetScale(float scale)
+        {
+            _scale = scale;
+        }
+
         public void SetRunSpeeds(float walkSpeed, float runSpeed)
         {
             _walkSpeed = walkSpeed;
@@ -157,7 +164,7 @@ namespace LastSeenWearing.Gameplay.Crowd
 
             // The stride follows the blend; the phase stays continuous when it changes (and is the plain
             // walked / stride of D-022 for a body that never runs).
-            var stride = Mathf.Lerp(_strideLength, _runStrideLength, Run);
+            var stride = Mathf.Lerp(_strideLength, _runStrideLength, Run) * _scale;
             if (!Mathf.Approximately(stride, _stride))
             {
                 _phaseOffset += walked / _stride - walked / stride;

@@ -135,6 +135,68 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 3517454320335585380
+  - m_Id: 278323560558592
+    m_Localized: Witness sketch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221888
+    m_Localized: What the witness says about you
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221889
+    m_Localized: Sex
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221890
+    m_Localized: Height
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221891
+    m_Localized: Build
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221892
+    m_Localized: Hair
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221893
+    m_Localized: Hair colour
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221894
+    m_Localized: Walk
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221895
+    m_Localized: Skin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221896
+    m_Localized: sure
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221897
+    m_Localized: fairly sure
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221898
+    m_Localized: unsure
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221899
+    m_Localized: right
+    m_Metadata:
+      m_Items: []
+  - m_Id: 278323661221900
+    m_Localized: '{0}: {1} ({2})'
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
+  - m_Id: 278323665416192
+    m_Localized: wrong, you are {0}
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
   references:
     version: 2
     RefIds:
@@ -151,3 +213,5 @@ MonoBehaviour:
         - id: 90279737929735
         - id: 101783560368128
         - id: 181227662716928
+        - id: 278323661221900
+        - id: 278323665416192

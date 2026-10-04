@@ -356,6 +356,7 @@ GameObject:
   - component: {fileID: 46670585}
   - component: {fileID: 46670588}
   - component: {fileID: 46670587}
+  - component: {fileID: 46670589}
   m_Layer: 0
   m_Name: Round
   m_TagString: Untagged
@@ -435,6 +436,7 @@ MonoBehaviour:
   _config: {fileID: 11400000, guid: 42e07275cc864c748ac925146444ed8a, type: 2}
   _roster: {fileID: 1375030074}
   _crowd: {fileID: 1113662437}
+  _composite: {fileID: 46670589}
   _playerPrefab: {fileID: 7433707422409190774, guid: bfdcf6ed084e6a54085704035984b947, type: 3}
   _spawns:
   - Role: 2
@@ -449,6 +451,23 @@ MonoBehaviour:
   - Role: 5
     Point: {fileID: 0}
     Prefab: {fileID: 3488747594059084906, guid: 72398ac4cf81ce54cb29f5e5de04293c, type: 3}
+--- !u!114 &46670589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46670584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90280fb64cfd70c428ff8ad31cd786db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LastSeenWearing.Gameplay::LastSeenWearing.Gameplay.Round.CompositeSync
+  ShowTopMostFoldoutHeaderGroup: 1
+  _catalog: {fileID: 11400000, guid: c990c1bc53d4dd24babc9a46681253eb, type: 2}
+  _wardrobeOdds: {fileID: 11400000, guid: 57c617fdcb613fd4b9d7b0d09d82de68, type: 2}
+  _crowd: {fileID: 11400000, guid: 121a58c0c85683542b4069daa63b0841, type: 2}
+  _config: {fileID: 11400000, guid: 87f5b9863f9fc6b49931be6325f15cf6, type: 2}
 --- !u!1 &78049861
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,6 +560,52 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 630626982}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &187120955
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 187120957}
+  - component: {fileID: 187120956}
+  m_Layer: 0
+  m_Name: CompositePanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &187120956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187120955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea627ce0d480a848a6cba20ffa9e9f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LastSeenWearing.UI::LastSeenWearing.UI.Round.CompositePanel
+  _composite: {fileID: 46670589}
+  _director: {fileID: 46670588}
+--- !u!4 &187120957
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187120955}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &223227232
 GameObject:
@@ -1675,6 +1740,7 @@ MonoBehaviour:
   _waypointRoot: {fileID: 630626982}
   _wardrobe: {fileID: 11400000, guid: c990c1bc53d4dd24babc9a46681253eb, type: 2}
   _wardrobeOdds: {fileID: 11400000, guid: 57c617fdcb613fd4b9d7b0d09d82de68, type: 2}
+  _composite: {fileID: 11400000, guid: 87f5b9863f9fc6b49931be6325f15cf6, type: 2}
 --- !u!114 &1113662438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3391,3 +3457,4 @@ SceneRoots:
   - {fileID: 1576854918}
   - {fileID: 728481492}
   - {fileID: 1457006213}
+  - {fileID: 187120957}

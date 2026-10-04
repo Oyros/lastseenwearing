@@ -95,13 +95,44 @@ namespace LastSeenWearing.Tests.Wardrobe
         }
 
         [Test]
+        public void TheBuildSurvivesTheAnimator()
+        {
+            // The export keys every shape key at 0 in every clip; played, they undid the build (P1.19).
+            foreach (var clip in AssetDatabase.LoadAllAssetsAtPath(CrowdAnimatorBuilder.BodyPath).OfType<AnimationClip>().Where(c => !c.name.StartsWith("__preview")))
+            {
+                Assert.That(AnimationUtility.GetCurveBindings(clip).Where(b => b.propertyName.StartsWith("blendShape.")), Is.Empty, clip.name);
+            }
+
+            var catalog = Catalog;
+            var outfit = new Outfit(Sex.Male, Height.Average, Build.Heavy, 0, 0, 0, new Worn(0, 0, Tone.Dark), new Worn(0, 0, Tone.Dark), Worn.Nothing);
+            var npc = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(NpcPath));
+            try
+            {
+                npc.GetComponent<OutfitView>().Apply(outfit);
+                var animator = npc.GetComponentInChildren<Animator>();
+                animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+                for (var i = 0; i < 5; i++)
+                {
+                    animator.Update(0.1f);
+                }
+
+                var top = npc.GetComponentsInChildren<SkinnedMeshRenderer>().Single(r => r.name == catalog.Tops[0].MaleMesh);
+                Assert.That(top.GetBlendShapeWeight(top.sharedMesh.GetBlendShapeIndex("Build_Heavy")), Is.EqualTo(100f), "still heavy after the animator ran");
+            }
+            finally
+            {
+                Object.DestroyImmediate(npc);
+            }
+        }
+
+        [Test]
         public void ADressedBodyShowsExactlyItsOutfit()
         {
             var catalog = Catalog;
             var raincoat = System.Array.FindIndex(catalog.Tops, t => t.Id == "Raincoat");
             var shorts = System.Array.FindIndex(catalog.Bottoms, b => b.Id == "Shorts");
             var crew = System.Array.FindIndex(catalog.HairStyles, h => h.Id == "Crew");
-            var outfit = new Outfit(Sex.Female, Build.Heavy, 2, crew, 1, new Worn(raincoat, 3, Tone.Dark), new Worn(shorts, 5, Tone.Light), Worn.Nothing);
+            var outfit = new Outfit(Sex.Female, Height.Tall, Build.Heavy, 2, crew, 1, new Worn(raincoat, 3, Tone.Dark), new Worn(shorts, 5, Tone.Light), Worn.Nothing);
 
             var npc = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(NpcPath));
             try

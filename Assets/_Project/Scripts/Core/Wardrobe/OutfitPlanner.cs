@@ -32,25 +32,40 @@ namespace LastSeenWearing.Core.Wardrobe
 
         /// <summary>
         /// The outfit of a character who is not in the crowd — the fugitive at the start of a round (slot 0) —
-        /// drawn after the crowd's and redrawn until no NPC wears exactly the same. Every client gets the same.
+        /// drawn after the crowd's and redrawn until no NPC wears exactly the same. With a <paramref name="body"/>
+        /// (the fugitive's, fixed for the case — P1.19) only the clothes are drawn. Every client gets the same.
         /// </summary>
-        public static Outfit CharacterOutfit(int crowdSeed, int crowdSize, int slot, WardrobeCatalog catalog, WardrobeConfig odds)
+        public static Outfit CharacterOutfit(int crowdSeed, int crowdSize, int slot, WardrobeCatalog catalog, WardrobeConfig odds,
+            Outfit? body = null)
         {
             var crowd = new HashSet<Outfit>(OutfitsFor(crowdSeed, crowdSize, catalog, odds));
             var random = new SeededRandom(SeededRandom.Derive(SeededRandom.Derive(crowdSeed, crowdSize + slot), OutfitStream));
-            Outfit outfit;
-            do
+            while (true)
             {
-                outfit = Draw(random, catalog, odds);
-            }
-            while (crowd.Contains(outfit));
+                var outfit = Draw(random, catalog, odds);
+                if (body is { } person)
+                {
+                    outfit = person.WithClothesOf(outfit); // the drawn clothes keep their own rules (hood, clash)
+                }
 
-            return outfit;
+                if (!crowd.Contains(outfit))
+                {
+                    return outfit;
+                }
+            }
         }
+
+        /// <summary>A whole person drawn from their own seed — the fugitive's body for a case (P1.19).</summary>
+        public static Outfit Person(int seed, WardrobeCatalog catalog, WardrobeConfig odds) =>
+            Draw(new SeededRandom(SeededRandom.Derive(seed, OutfitStream)), catalog, odds);
 
         private static Outfit Draw(SeededRandom random, WardrobeCatalog catalog, WardrobeConfig odds)
         {
             var sex = random.Value() < odds.FemaleShare ? Sex.Female : Sex.Male;
+            var heightRoll = random.Value() * (odds.AverageHeightOdds + odds.ShortOdds + odds.TallOdds);
+            var height = heightRoll < odds.AverageHeightOdds ? Height.Average
+                : heightRoll < odds.AverageHeightOdds + odds.ShortOdds ? Height.Short
+                : Height.Tall;
             var buildRoll = random.Value() * (odds.AverageOdds + odds.SlimOdds + odds.HeavyOdds);
             var build = buildRoll < odds.AverageOdds ? Build.Average
                 : buildRoll < odds.AverageOdds + odds.SlimOdds ? Build.Slim
@@ -85,7 +100,7 @@ namespace LastSeenWearing.Core.Wardrobe
                 hat = Worn.Nothing;
             }
 
-            return new Outfit(sex, build, skin, hair, hairColour, top, bottom, hat);
+            return new Outfit(sex, height, build, skin, hair, hairColour, top, bottom, hat);
         }
 
         public static bool Clash(string top, string bottom) => Array.Exists(Clashes, c => c.Top == top && c.Bottom == bottom);
