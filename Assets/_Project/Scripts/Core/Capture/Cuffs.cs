@@ -1,3 +1,6 @@
+using LastSeenWearing.Core.Roles;
+using LastSeenWearing.Core.Round;
+
 namespace LastSeenWearing.Core.Capture
 {
     /// <summary>What an arrest came to.</summary>
@@ -41,5 +44,12 @@ namespace LastSeenWearing.Core.Capture
             Left--;
             return Left == 0 ? ArrestResult.LastCuffSpent : ArrestResult.Wrong;
         }
+    }
+
+    /// <summary>Who may cuff, and when (GDD §03, §06).</summary>
+    public static class ArrestRules
+    {
+        /// <summary>Only the patrol holds the cuffs — never the plainclothes or the dog — and only in open play, not in the chase.</summary>
+        public static bool MayArrest(Role role, RoundPhase phase) => role == Role.Patrol && phase == RoundPhase.Live;
     }
 }

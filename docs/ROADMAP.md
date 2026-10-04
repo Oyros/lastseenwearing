@@ -190,6 +190,7 @@ open Blender; never save a `.blend` unasked.
 | [ ] PL.41 | CCTV pole (big emissive red lamp, `SOCKET_Lamp`, `SOCKET_Cam`), security booth + panel, barrier, PA, gate | `Festival/_Ref` | Lamp reads at 320×180 |
 | [ ] PL.42 | Ground kit, town backdrop (dusk palette) | `docs/lookdev/target_frame_mood.png` | — |
 | [ ] PL.43 | Layout test: one layout fully dressed with 150 characters, four camera renders at dusk | LOOKDEV §1 | Signed off against the target frames |
+| [ ] PL.44 | Plainclothes first-person arms: civilian sleeves (any two tops' colours), same rig, Camera bone, clips and markers as PL.19 | — | Arms read as a civilian's in a 90° FOV camera |
 
 ---
 
@@ -199,7 +200,7 @@ open Blender; never save a `.blend` unasked.
 
 | ID | Task | § | Done when |
 |---|---|---|---|
-| [ ] P2.01 | Plainclothes role (cannot arrest) | §03 | Plays a round as plainclothes |
+| [x] P2.01 | Plainclothes role (cannot arrest) | §03 | Plays a round as plainclothes |
 | [ ] P2.02 | Tent inventories public; missing-item view on entry | §05 | Missing items shown to the plainclothes |
 | [ ] P2.03 | Witness memory + questioning (short, vague, may contradict) | §04.3 | Tests: only recent sightings produce a description |
 | [ ] P2.04 | Dog role: first person, sniff → 10 s trail from tent clothes; bark → NPC step back, stamina, anger | §03, D-011 | Trail leads to the fugitive's path |

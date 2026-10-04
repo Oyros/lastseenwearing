@@ -31,7 +31,7 @@ namespace LastSeenWearing.Tests.Art
             Assert.That(patrol.GetComponent<NetworkTransform>().AuthorityMode, Is.EqualTo(NetworkTransform.AuthorityModes.Owner));
             Assert.That(patrol.GetComponent<CharacterController>(), Is.Not.Null);
 
-            var serialized = new SerializedObject(patrol.GetComponent<PatrolController>());
+            var serialized = new SerializedObject(patrol.GetComponent<FieldOfficerController>());
             foreach (var field in new[] { "_movement", "_camera", "_crowd", "_fpArmsPrefab" })
             {
                 Assert.That(serialized.FindProperty(field).objectReferenceValue, Is.Not.Null, field);
@@ -76,7 +76,7 @@ namespace LastSeenWearing.Tests.Art
             {
                 eye.transform.SetPositionAndRotation(new Vector3(3f, 1.68f, -2f), Quaternion.Euler(10f, 40f, 0f));
                 var arms = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(ArmsPrefabPath), eye.transform, false);
-                PatrolController.SeatArmsAtTheEye(arms.transform);
+                FieldOfficerController.SeatArmsAtTheEye(arms.transform);
                 var bone = arms.GetComponentsInChildren<Transform>().Single(t => t.name == "Camera");
                 Assert.That(Vector3.Distance(bone.position, eye.transform.position), Is.LessThan(1e-4f));
                 foreach (var hand in arms.GetComponentsInChildren<Renderer>().Where(r => r.name.Contains("Hand")))

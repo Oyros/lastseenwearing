@@ -28,6 +28,12 @@ namespace LastSeenWearing.Core.Config
         [Tooltip("Metres per second sprinting — faster than the fugitive's sprint. [PROVISIONAL]")]
         [SerializeField, Min(0f)] private float _patrolRunSpeed = 4.2f;
 
+        [Header("Plainclothes")]
+        [Tooltip("Metres per second walking — the crowd's pace, so they pass for one of it (GDD §03). [PROVISIONAL]")]
+        [SerializeField, Min(0f)] private float _plainclothesWalkSpeed = 1.4f;
+        [Tooltip("Metres per second sprinting — the fugitive's sprint, slower than the patrol's. [PROVISIONAL]")]
+        [SerializeField, Min(0f)] private float _plainclothesRunSpeed = 3.6f;
+
         [Header("Look")]
         [Tooltip("Degrees per mouse count.")]
         [SerializeField, Min(0.001f)] private float _mouseSensitivity = 0.12f;
@@ -42,6 +48,8 @@ namespace LastSeenWearing.Core.Config
         public float FugitiveRunSpeed => _fugitiveRunSpeed;
         public float PatrolWalkSpeed => _patrolWalkSpeed;
         public float PatrolRunSpeed => _patrolRunSpeed;
+        public float PlainclothesWalkSpeed => _plainclothesWalkSpeed;
+        public float PlainclothesRunSpeed => _plainclothesRunSpeed;
         public float Acceleration => _acceleration;
         public float TurnSpeed => _turnSpeed;
         public float MouseSensitivity => _mouseSensitivity;

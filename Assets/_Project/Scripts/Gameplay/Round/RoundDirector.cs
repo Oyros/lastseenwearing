@@ -317,6 +317,10 @@ namespace LastSeenWearing.Gameplay.Round
                     // After the spawn: a network variable written before it is not tied to the object yet.
                     fugitive.SetSeeds(_caseSeed, _crowd.Seed); // who they are is the case's; what they wear, the round's
                 }
+                else if (body.TryGetComponent<FieldOfficerController>(out var officer))
+                {
+                    officer.SetCrowdSeed(_crowd.Seed); // a plainclothes dresses after the round's crowd (P2.01)
+                }
                 _bodies.Add(body);
             }
         }

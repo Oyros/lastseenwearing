@@ -661,3 +661,16 @@ answer. The current game has never run as a Steam build between machines (only P
 voice, composite, tents, targets, arrests and results have run in the editor only.
 **Reversing.** Sessions can be held at any time; if they fail the gate, ROADMAP's rule applies (one more week on
 the camera filter, composite and radio; fail twice → stop knowingly).
+
+---
+
+### D-047 — The plainclothes is the patrol's controller with another role
+**Decision.** `PatrolController` was renamed `FieldOfficerController` (its `.meta` kept, so prefabs keep their
+reference) and given a `Role`: Patrol — fast, in uniform, holds the cuffs — or Plainclothes — the crowd's walking
+pace, the fugitive's sprint, never arrests. Who may cuff is `ArrestRules.MayArrest` in Core (the patrol, in Live),
+which the server's `Arrests` uses. `Plainclothes.prefab` is the fugitive's crowd body without its camera pivot,
+dressed at spawn from the round's crowd seed in character slot 1 (the fugitive is slot 0), so it looks like no NPC
+and like a stranger to the Watcher. Its first-person arms are the patrol's until PL.44.
+**Why.** The two roles share everything in first person — look, move, aim, arms; only speed, the cuffs and the
+body differ. One controller keeps stop, questioning and tents (P2.02–P2.06) in one place.
+**Reversing.** Moderate: split the class again; prefabs reference it by GUID.

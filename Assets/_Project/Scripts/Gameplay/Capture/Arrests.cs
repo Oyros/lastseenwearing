@@ -61,7 +61,7 @@ namespace LastSeenWearing.Gameplay.Capture
         private void ArrestRpc(NetworkObjectReference fugitiveBody, int npc, RpcParams rpcParams = default)
         {
             var sender = rpcParams.Receive.SenderClientId;
-            if (_cuffs == null || _director.Phase != RoundPhase.Live || _roster.RoleOf(sender) != Role.Patrol
+            if (_cuffs == null || !ArrestRules.MayArrest(_roster.RoleOf(sender), _director.Phase)
                 || !NetworkManager.ConnectedClients.TryGetValue(sender, out var client) || client.PlayerObject == null)
             {
                 return;
@@ -102,7 +102,7 @@ namespace LastSeenWearing.Gameplay.Capture
             if (result != ArrestResult.Refused)
             {
                 // The pair on every screen (PL.17, P1.25): the officer cuffs, the one cuffed stands for it.
-                if (client.PlayerObject.TryGetComponent<PatrolController>(out var patrol))
+                if (client.PlayerObject.TryGetComponent<FieldOfficerController>(out var patrol))
                 {
                     patrol.Act(BodyAction.ArrestOfficer);
                 }

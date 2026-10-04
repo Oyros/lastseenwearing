@@ -353,7 +353,7 @@ MonoBehaviour:
     Prefab: {fileID: 4168503129245975310, guid: 5576dddd71f04da49b908b11be807a18, type: 3}
   - Role: 3
     Point: {fileID: 2060801223}
-    Prefab: {fileID: 0}
+    Prefab: {fileID: 3488747594059084906, guid: aaa184d42478b4744842eef4c2200861, type: 3}
   - Role: 4
     Point: {fileID: 1757386540}
     Prefab: {fileID: 0}

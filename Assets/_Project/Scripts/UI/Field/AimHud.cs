@@ -35,7 +35,7 @@ namespace LastSeenWearing.UI.Field
 
         private void Update()
         {
-            var patrol = PatrolController.Local;
+            var patrol = FieldOfficerController.Local;
             _frame.SetActive(patrol != null);
             if (patrol == null)
             {
