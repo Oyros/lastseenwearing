@@ -648,3 +648,16 @@ left until P1.27's playtest says whether the reveal is wanted.
 **Why.** The end of a round is where the hidden half of the game can be told; everything it shows is state the
 server already had, sent once.
 **Reversing.** Cheap: one struct and one screen.
+
+---
+
+### D-046 — P1's exit gate counted as passed without the outside playtest
+**Decision.** On 2026-10-04 the team counted P1.27 and the P1 exit gate as passed and moved to P2, without the
+≥ 5 sessions with people outside the team. None of the four exit criteria was measured; there are no recordings.
+`docs/playtests/P1.md` says so.
+**Why.** Team's call (P1.27: "count the test as passed").
+**Known risks carried into P2.** Whether the loop is fun for strangers is unproven — the question P1 existed to
+answer. The current game has never run as a Steam build between machines (only P0's capsules, D-016): crowd,
+voice, composite, tents, targets, arrests and results have run in the editor only.
+**Reversing.** Sessions can be held at any time; if they fail the gate, ROADMAP's rule applies (one more week on
+the camera filter, composite and radio; fail twice → stop knowingly).

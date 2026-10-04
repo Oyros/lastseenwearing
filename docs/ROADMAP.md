@@ -97,7 +97,7 @@ programme, sunset, case format, every tool in §07, replay, art, audio.
 | [x] P1.24 | Arrest, 3 cuffs, police win / out-of-cuffs loss | §04.3 | All three outcomes reachable |
 | [x] P1.25 | Greybox animations: target action, arrest, tent enter/exit | — | PL.17 done; clips play |
 | [x] P1.26 | Round results screen | §06 | Winner and reason shown |
-| [ ] P1.27 | Playtest with ≥ 5 sessions of people outside the team; record screen + voice | — | Recordings saved; notes in `docs/playtests/P1.md` |
+| [x] P1.27 | Playtest with ≥ 5 sessions of people outside the team; record screen + voice | — | Recordings saved; notes in `docs/playtests/P1.md` — **waived by the team, no sessions held (D-046)** |
 
 **Exit — pass (all):**
 1. Players ask for "one more round" without being prompted.
