@@ -90,7 +90,7 @@ programme, sunset, case format, every tool in §07, replay, art, audio.
 | [x] P1.17a | Zoom cameras: every camera slowly pans and zooms, as far as its profile allows (D-036); the Watcher's `Pan` / `Zoom` act on the active monitor's camera (rates in `WatcherConfig`) | §04.1, LAYOUTS.md | The Watcher picks out a figure in a "far only" zone of layout A on the zoom camera |
 | [x] P1.18 | Modular NPC with 3–4 clothing slots on the base body | §05 | PL.13–PL.15 done; crowd dressed from the seed |
 | [x] P1.19 | Composite generation: traits + 1–2 errors; fugitive sees which | §04.1 | Watcher and fugitive panels show the right versions |
-| [ ] P1.20 | Watcher UI: composite panel, last-seen clothing with age timer | §04.1 | Timer counts from the last confirmed sighting |
+| [x] P1.20 | Watcher UI: composite panel, last-seen clothing with age timer | §04.1 | Timer counts from the last confirmed sighting |
 | [ ] P1.21 | Tent outfit change | §05 | Fugitive enters, picks items, exits changed |
 | [ ] P1.22 | Targets: 3 spots, timed interaction, completion state | §04.4 | Three done → exit opens |
 | [ ] P1.23 | Exit and fugitive win | §06 | Reaching the open exit ends the round |
@@ -181,8 +181,8 @@ open Blender; never save a `.blend` unasked.
 | [x] PL.32 | Face decal for close-ups (neutral, surprise, anger, panic, blink) — `LSW_Crowd_FaceDecal_M/_F` (slot `face_decal`, `lod0_only`), atlas `_Export/Crowd/LSW_FaceAtlas.png` + `.json` (cell UV offsets) | D-010 | Flush on all heads and builds; hidden at LOD1+ |
 | [x] PL.33 | Crowd LODs — `_LOD1` / `_LOD2` for every crowd mesh (`Scripts/lsw_lod.py`), same FBX | ART_PIPELINE §2 | 150-character scene within budget at each LOD |
 | [x] PL.34 | Full crowd review: 30 random characters (signed off by Gokhan 2026-10-03: `_Review/PL.34_Crowd30_*`, `Scripts/lsw_crowdreview.py`) | LOOKDEV §2 | Signed off by eye |
-| [x] PL.35 | Dog mesh (mouth closed, vest separate) — done 2026-10-03: `Scripts/lsw_dog.py`, `LSW_Dog_Body` 1,432 tris (separate lower jaw that opens: tongue, canines, mouth interior) + `LSW_Dog_Vest` 276 tris in the work file (reworked 2026-10-04 to match the reference) (not exported until PL.36 rigs it) | `Dog/_Ref` | Vest clearly lighter than the body on camera |
-| [ ] PL.36 | Dog armature + skin + clips (walk, trot, sniff, bark, sit, pant, turn); first-person `SOCKET_Eye` | D-011 | Clips in JSON with contact frames |
+| [x] PL.35 | Dog mesh (mouth closed, vest separate) — done 2026-10-03: `Scripts/lsw_dog.py`, `LSW_Dog_Body` 1,432 tris (separate lower jaw that opens: tongue, canines, mouth interior) + `LSW_Dog_Vest` 276 tris in the work file (reworked 2026-10-04 to match the reference) (exported with the PL.36 rig) | `Dog/_Ref` | Vest clearly lighter than the body on camera |
+| [x] PL.36 | Dog armature + skin + clips (walk, trot, sniff, bark, sit, pant, turn); first-person `SOCKET_Eye` — done 2026-10-04: `Scripts/lsw_dogrig.py`, `_Export/Dog/LSW_Dog.fbx` + `.json` (35 bones, 12 clips) | D-011 | Clips in JSON with contact frames |
 | [ ] PL.37 | Crowd idles, reactions (head turn, step back, look up, scatter, flinch) | — | Read in the CCTV render |
 | [ ] PL.38 | Target actions shared with NPCs; police stop/arrest/signals/questioning; fight pair; chase set; FP clips | — | No foot sliding; listed in JSON |
 | [ ] PL.39 | Stall frame + one roof shape per stall type + dressing | `Festival/_Ref` | Four roofs nameable from the CCTV angle |

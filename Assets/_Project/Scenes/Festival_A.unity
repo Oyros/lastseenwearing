@@ -468,6 +468,7 @@ MonoBehaviour:
   _wardrobeOdds: {fileID: 11400000, guid: 57c617fdcb613fd4b9d7b0d09d82de68, type: 2}
   _crowd: {fileID: 11400000, guid: 121a58c0c85683542b4069daa63b0841, type: 2}
   _config: {fileID: 11400000, guid: 87f5b9863f9fc6b49931be6325f15cf6, type: 2}
+  _watcher: {fileID: 11400000, guid: 37202be0176ede24aa5781b983117f78, type: 2}
 --- !u!1 &78049861
 GameObject:
   m_ObjectHideFlags: 0
@@ -2266,6 +2267,7 @@ MonoBehaviour:
   - {fileID: 1612013604}
   - {fileID: 18497612}
   - {fileID: 593470869}
+  _composite: {fileID: 46670589}
 --- !u!4 &1438070487
 Transform:
   m_ObjectHideFlags: 0

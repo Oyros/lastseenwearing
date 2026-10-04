@@ -303,6 +303,14 @@ MonoBehaviour:
     m_Key: gait.armswing.big
     m_Metadata:
       m_Items: []
+  - m_Id: 284536159449088
+    m_Key: person.tone.light
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284536260112384
+    m_Key: person.tone.dark
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

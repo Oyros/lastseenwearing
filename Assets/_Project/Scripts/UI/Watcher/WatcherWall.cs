@@ -3,6 +3,7 @@ using LastSeenWearing.Core.Roles;
 using LastSeenWearing.Core.Round;
 using LastSeenWearing.Core.Watcher;
 using LastSeenWearing.Gameplay.Cameras;
+using LastSeenWearing.Gameplay.Crowd;
 using LastSeenWearing.Gameplay.Player;
 using LastSeenWearing.Gameplay.Roles;
 using LastSeenWearing.Gameplay.Round;
@@ -30,6 +31,9 @@ namespace LastSeenWearing.UI.Watcher
 
         // Placeholder layout, not tuning.
         private const float Margin = 12f;
+
+        /// <summary>The share of the screen's width the Watcher's dossier (composite, last seen) keeps on the right.</summary>
+        public const float DossierShare = 0.3f;
         private const float ListHeight = 56f;
         private const float FontSize = 20f;
         private const int StaticWidth = 96;
@@ -52,6 +56,8 @@ namespace LastSeenWearing.UI.Watcher
         [SerializeField] private Material _feedMaterial;
         [Tooltip("CAM 1, CAM 2, … in this order.")]
         [SerializeField] private CctvCamera[] _cameras;
+        [Tooltip("Where a mark on a feed goes (P1.20): the Watcher's own last seen.")]
+        [SerializeField] private CompositeSync _composite;
 
         private FeedSwitcher _switcher;
         private LastSeenWearingControls _controls;
@@ -69,6 +75,9 @@ namespace LastSeenWearing.UI.Watcher
 
         // The monitor pan and zoom act on: the one under the pointer, else the one last given a camera.
         private int _activeMonitor;
+
+        // Per monitor: until when the "marked" note shows.
+        private readonly double[] _markNoteUntil = new double[FeedSwitcher.MonitorCount];
 
         private void Awake()
         {
@@ -111,6 +120,7 @@ namespace LastSeenWearing.UI.Watcher
             }
 
             ReadInput();
+            ReadMark(Time.timeAsDouble);
             AimCameras(Time.deltaTime);
             Refresh(Time.timeAsDouble);
         }
@@ -143,6 +153,46 @@ namespace LastSeenWearing.UI.Watcher
             if (_mainCamera != null)
             {
                 _mainCamera.enabled = !up;
+            }
+        }
+
+        // A click on a feed marks whoever stands there (P1.20): the Watcher's own "last seen", never checked by the
+        // server (GDD §04.2: marks are private to the Watcher's screen).
+        private void ReadMark(double now)
+        {
+            var watcher = _controls.Watcher;
+            if (!watcher.Mark.WasPressedThisFrame() || _composite == null)
+            {
+                return;
+            }
+
+            var pointer = watcher.Point.ReadValue<Vector2>();
+            for (var m = 0; m < _monitors.Length; m++)
+            {
+                var rect = (RectTransform)_monitors[m].Feed.transform;
+                var showing = _switcher.Showing(m, now);
+                if (showing == FeedSwitcher.NoCamera
+                    || !RectTransformUtility.ScreenPointToLocalPointInRectangle(rect, pointer, null, out var local))
+                {
+                    continue;
+                }
+
+                var frame = rect.rect;
+                var viewport = new Vector2((local.x - frame.x) / frame.width, (local.y - frame.y) / frame.height);
+                if (viewport.x < 0f || viewport.x > 1f || viewport.y < 0f || viewport.y > 1f)
+                {
+                    continue;
+                }
+
+                var ray = _cameras[showing].GetComponent<Camera>().ViewportPointToRay(viewport);
+                var hit = AimProbe.Find(ray.origin, ray.direction, _config.MarkRange, null);
+                if (hit != null && hit.Character.TryGetComponent<OutfitView>(out var view))
+                {
+                    _composite.Mark(view.Outfit);
+                    _markNoteUntil[m] = now + _config.MarkNoteSeconds;
+                }
+
+                return;
             }
         }
 
@@ -230,7 +280,9 @@ namespace LastSeenWearing.UI.Watcher
                 var switching = _switcher.IsSwitching(m, now);
                 anySwitching |= switching;
                 monitor.Static.gameObject.SetActive(switching || showing == FeedSwitcher.NoCamera);
-                monitor.Status.text = switching ? Text("ui.watcher.switching") : string.Empty;
+                monitor.Status.text = switching ? Text("ui.watcher.switching")
+                    : now < _markNoteUntil[m] ? Text("ui.watcher.marked")
+                    : string.Empty;
                 if (showing != FeedSwitcher.NoCamera && monitor.Feed.Showing != _cameras[showing])
                 {
                     monitor.Feed.Show(_cameras[showing]); // the new camera's own filter (P1.14)
@@ -289,8 +341,8 @@ namespace LastSeenWearing.UI.Watcher
 
             for (var m = 0; m < _monitors.Length; m++)
             {
-                var left = m / (float)_monitors.Length;
-                var right = (m + 1) / (float)_monitors.Length;
+                var left = m / (float)_monitors.Length * (1f - DossierShare);
+                var right = (m + 1) / (float)_monitors.Length * (1f - DossierShare);
                 // A half-screen column, and the 16:9 monitor fitted inside it (the fitter takes over its own anchors).
                 var column = NewRect($"Column{m + 1}", canvasObject.transform, new Vector2(left, 0f), new Vector2(right, 1f));
                 column.offsetMin = new Vector2(Margin, ListHeight + Margin * 2f);

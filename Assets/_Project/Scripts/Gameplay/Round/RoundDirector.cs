@@ -177,6 +177,7 @@ namespace LastSeenWearing.Gameplay.Round
                 case RoundPhase.Live:
                     _programmeClock = -1d;
                     SpawnBodies();
+                    _composite.ReportWitness(_caseSeed, _crowd.Seed, ClientOf(Role.Watcher)); // last seen, P1.20
                     break;
                 case RoundPhase.Result:
                     // Bodies stay through a last-cuff chase and go when the round is decided.

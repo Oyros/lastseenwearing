@@ -197,6 +197,41 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 3517454320335585380
+  - m_Id: 284537891696640
+    m_Localized: Last seen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284538109800448
+    m_Localized: no hat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284538109800449
+    m_Localized: the witness
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284538109800450
+    m_Localized: your mark
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284538109800451
+    m_Localized: Marked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284538109800452
+    m_Localized: '{0}, {1}, {2}'
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
+  - m_Id: 284538126577664
+    m_Localized: '{0} {1}'
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
+  - m_Id: 284538126577665
+    m_Localized: '{0}, {1}:{2:00} ago'
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
   references:
     version: 2
     RefIds:
@@ -215,3 +250,6 @@ MonoBehaviour:
         - id: 181227662716928
         - id: 278323661221900
         - id: 278323665416192
+        - id: 284538109800452
+        - id: 284538126577664
+        - id: 284538126577665

@@ -4,6 +4,7 @@ using LastSeenWearing.Core.Composite;
 using LastSeenWearing.Core.Crowd;
 using LastSeenWearing.Core.Round;
 using LastSeenWearing.Core.Wardrobe;
+using LastSeenWearing.Core.Watcher;
 using LastSeenWearing.Gameplay.Round;
 using TMPro;
 using UnityEngine;
@@ -15,8 +16,9 @@ namespace LastSeenWearing.UI.Round
     /// <summary>
     /// The composite on the two screens that get one (GDD §04.1, P1.19): the Watcher reads the witness's claims
     /// and how sure the witness is; the fugitive reads the same and sees which claims are wrong and what is true.
-    /// Only what this round has revealed (D-008). It renders <see cref="CompositeSync"/>; it decides nothing. P1
-    /// placeholder look in code like <c>RoundHud</c> — the Watcher's proper panel is P1.20.
+    /// Only what this round has revealed (D-008). Under it the Watcher reads "last seen" (P1.20): the clothes, where
+    /// the sighting came from (the witness, or their own mark) and its age, counting up. It renders
+    /// <see cref="CompositeSync"/>; it decides nothing. Built in code like <c>RoundHud</c>.
     /// </summary>
     public sealed class CompositePanel : MonoBehaviour
     {
@@ -34,6 +36,7 @@ namespace LastSeenWearing.UI.Round
         private GameObject _panel;
         private TextMeshProUGUI _text;
         private int _shownRound = -1;
+        private int _shownSecond = -1;
         private bool _dirty = true;
 
         private void Awake()
@@ -53,14 +56,23 @@ namespace LastSeenWearing.UI.Round
             var phase = _director.IsSpawned ? _director.Phase : RoundPhase.Lobby;
             var visible = _composite.Sketch != null && phase is RoundPhase.Briefing or RoundPhase.Live or RoundPhase.LastCuff;
             _panel.SetActive(visible);
-            if (!visible || (!_dirty && _shownRound == _director.Round))
+            var second = _composite.LastSeen is { } seen ? (int)seen.Age(_composite.NetworkManager.ServerTime.Time) : -1;
+            if (!visible || (!_dirty && _shownRound == _director.Round && _shownSecond == second))
             {
                 return;
             }
 
             _dirty = false;
             _shownRound = _director.Round;
-            _text.text = Compose(_composite.Sketch.Revealed(_director.Round, _composite.Config.Schedule), _composite.SeesErrors);
+            _shownSecond = second;
+            Dock(!_composite.SeesErrors);
+            var text = Compose(_composite.Sketch.Revealed(_director.Round, _composite.Config.Schedule), _composite.SeesErrors);
+            if (!_composite.SeesErrors && _composite.LastSeen is { } sighting)
+            {
+                text += LastSeen(sighting, sighting.Age(_composite.NetworkManager.ServerTime.Time));
+            }
+
+            _text.text = text;
         }
 
         private string Compose(List<CompositeClaim> claims, bool seesErrors)
@@ -84,6 +96,41 @@ namespace LastSeenWearing.UI.Round
 
             return text.ToString();
         }
+
+        // The Watcher's copy fills the dossier column beside the monitors; the fugitive's sits in a corner.
+        private void Dock(bool besideTheWall)
+        {
+            var rect = (RectTransform)_panel.transform;
+            if (besideTheWall)
+            {
+                rect.anchorMin = new Vector2(1f - Watcher.WatcherWall.DossierShare, 1f);
+                rect.anchorMax = rect.pivot = new Vector2(1f, 1f);
+                rect.sizeDelta = new Vector2(-Margin, 0f);
+            }
+            else
+            {
+                rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(1f, 1f);
+                rect.sizeDelta = new Vector2(Width, 0f);
+            }
+        }
+
+        private string LastSeen(Sighting sighting, double age)
+        {
+            var catalog = _composite.Catalog;
+            var (minutes, seconds) = Sighting.Clock(age);
+            var text = new StringBuilder();
+            text.AppendLine();
+            text.AppendLine($"<b>{Text(UiTable, "lastseen.title")}</b>");
+            text.AppendLine(Text(UiTable, "lastseen.clothes", Garment(sighting.Top, catalog.Tops), Garment(sighting.Bottom, catalog.Bottoms),
+                sighting.Hat.IsNone ? Text(UiTable, "lastseen.nohat") : Garment(sighting.Hat, catalog.Hats)));
+            text.AppendLine(Text(UiTable, "lastseen.when", Text(UiTable, $"lastseen.source.{sighting.Source.ToString().ToLowerInvariant()}"), minutes, seconds));
+            return text.ToString();
+        }
+
+        // What the Watcher can say of a garment on a black-and-white feed: light or dark, and what it is.
+        private static string Garment(Worn worn, WardrobeCatalog.Garment[] items) =>
+            Text(UiTable, "lastseen.garment", Text(FestivalTable, $"person.tone.{worn.Tone.ToString().ToLowerInvariant()}"),
+                Text(FestivalTable, items[worn.Item].NameKey));
 
         private string Value(CompositeTrait trait, int value, GaitSignature walk)
         {

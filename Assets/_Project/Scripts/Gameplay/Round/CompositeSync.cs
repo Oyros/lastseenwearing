@@ -4,6 +4,7 @@ using LastSeenWearing.Core.Composite;
 using LastSeenWearing.Core.Config;
 using LastSeenWearing.Core.Crowd;
 using LastSeenWearing.Core.Wardrobe;
+using LastSeenWearing.Core.Watcher;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -13,7 +14,9 @@ namespace LastSeenWearing.Gameplay.Round
     /// The composite on the network (GDD §04.1, ARCHITECTURE: role-filtered, P1.19). The server builds it when a
     /// case starts and sends each role its copy: the Watcher the claims and their confidence, the fugitive the same
     /// plus which claims are wrong and what is true; nobody else gets anything — the field team hears it over the
-    /// radio. Each client keeps only what it was sent.
+    /// radio. Each client keeps only what it was sent. It also holds the Watcher's "last seen" (P1.20): the
+    /// witness's report at the start of each round — sent to the Watcher alone — and the Watcher's own marks, which
+    /// stay on their screen and are never checked.
     /// </summary>
     public sealed class CompositeSync : NetworkBehaviour
     {
@@ -21,6 +24,7 @@ namespace LastSeenWearing.Gameplay.Round
         [SerializeField] private WardrobeConfig _wardrobeOdds;
         [SerializeField] private CrowdConfig _crowd;
         [SerializeField] private CompositeConfig _config;
+        [SerializeField] private WatcherConfig _watcher;
 
         private CompositeSketch _full; // server only
 
@@ -33,8 +37,42 @@ namespace LastSeenWearing.Gameplay.Round
         public CompositeConfig Config => _config;
         public WardrobeCatalog Catalog => _catalog;
 
-        /// <summary>Every client, when its copy arrives or is cleared.</summary>
+        /// <summary>The Watcher's latest sighting of the fugitive's clothes, or none.</summary>
+        public Sighting? LastSeen { get; private set; }
+
+        /// <summary>Every client, when its copy or its last seen arrives or is cleared.</summary>
         public event Action Changed;
+
+        /// <summary>
+        /// Server, when a round goes live: the witness tells the Watcher what the fugitive wears now — true, and
+        /// <see cref="WatcherConfig.WitnessReportAge"/> old already. The fugitive's clothes are the round's.
+        /// </summary>
+        public void ReportWitness(int caseSeed, int crowdSeed, ulong? watcher)
+        {
+            if (!IsServer || watcher is not { } w)
+            {
+                return;
+            }
+
+            var suspect = CompositeBuilder.SuspectFor(caseSeed, _catalog, _wardrobeOdds, _crowd.Gait);
+            var outfit = OutfitPlanner.CharacterOutfit(crowdSeed, _crowd.NpcCount, 0, _catalog, _wardrobeOdds, suspect.Body);
+            var at = NetworkManager.ServerTime.Time - _watcher.WitnessReportAge;
+            WitnessRpc(Clothes.Of(outfit), at, RpcTarget.Single(w, RpcTargetUse.Temp));
+        }
+
+        /// <summary>The Watcher's own mark: this person's clothes, now. Local — the server never hears of it.</summary>
+        public void Mark(Outfit outfit)
+        {
+            LastSeen = Sighting.Of(outfit, NetworkManager.ServerTime.Time, SightingSource.Mark);
+            Changed?.Invoke();
+        }
+
+        [Rpc(SendTo.SpecifiedInParams)]
+        private void WitnessRpc(Clothes clothes, double at, RpcParams rpcParams)
+        {
+            LastSeen = new Sighting(clothes.Top.ToWorn(), clothes.Bottom.ToWorn(), clothes.Hat.ToWorn(), at, SightingSource.Witness);
+            Changed?.Invoke();
+        }
 
         /// <summary>Server: build the case's composite and hand each role its copy.</summary>
         public void BeginCase(int caseSeed, int rounds, ulong? watcher, ulong? fugitive)
@@ -68,6 +106,7 @@ namespace LastSeenWearing.Gameplay.Round
         private void ClearRpc()
         {
             Sketch = null;
+            LastSeen = null;
             SeesErrors = false;
             Changed?.Invoke();
         }
@@ -143,6 +182,42 @@ namespace LastSeenWearing.Gameplay.Round
                 {
                     serializer.SerializeValue(ref _claims[i]);
                 }
+            }
+        }
+
+        /// <summary>A top, bottom and hat on the wire.</summary>
+        public struct Clothes : INetworkSerializable
+        {
+            public Garment Top;
+            public Garment Bottom;
+            public Garment Hat;
+
+            public static Clothes Of(Outfit outfit) =>
+                new() { Top = Garment.Of(outfit.Top), Bottom = Garment.Of(outfit.Bottom), Hat = Garment.Of(outfit.Hat) };
+
+            public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+            {
+                serializer.SerializeValue(ref Top);
+                serializer.SerializeValue(ref Bottom);
+                serializer.SerializeValue(ref Hat);
+            }
+        }
+
+        public struct Garment : INetworkSerializable
+        {
+            public short Item;
+            public byte Hue;
+            public byte Tone;
+
+            public static Garment Of(Worn worn) => new() { Item = (short)worn.Item, Hue = (byte)worn.Hue, Tone = (byte)worn.Tone };
+
+            public Worn ToWorn() => new(Item, Hue, (Tone)Tone);
+
+            public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+            {
+                serializer.SerializeValue(ref Item);
+                serializer.SerializeValue(ref Hue);
+                serializer.SerializeValue(ref Tone);
             }
         }
 

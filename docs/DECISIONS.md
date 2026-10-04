@@ -541,3 +541,19 @@ role-filtered (ARCHITECTURE); lookalikes make the sketch's mistakes bite (an inn
 mark NPCs — a cheating client could use either; hiding them is post-prototype work. Panels are placeholders
 until P1.20.
 **Reversing.** Moderate: odds and reveal order are config; the suspect-per-case split is load-bearing.
+
+---
+
+### D-039 — "Last seen" is the witness at round start, then the Watcher's own marks
+**Decision.** GDD §04.1 gives the Watcher "last-seen clothing (with age timer)" but does not say what confirms
+a sighting. Two sources (team): **the witness** — when a round goes live the server sends the Watcher alone the
+fugitive's clothes, already `WatcherConfig.WitnessReportAge` (20 s) old — and **the Watcher's own mark** — a
+click on a feed casts the camera's ray through that pixel, finds the character's hitbox and takes that person's
+clothes, now. Marks stay on the Watcher's client (GDD §04.2: marks are private); the server never checks them,
+so a wrong mark is the Watcher's own mistake. The dossier shows clothes as the Watcher can name them on a
+black-and-white feed — light or dark, and the garment — with the source and the age counting up. Sightings the
+server confirms (a stop's face check, P1.24) will feed the same `Sighting`.
+**Why.** An automatic "the cameras saw the fugitive" update would tell the Watcher who the fugitive is the moment
+it changed. The witness gives every round a true starting point that goes stale as the fugitive changes in tents
+— the game's name.
+**Reversing.** Cheap: sources are calls into `CompositeSync`; the age and range are config.

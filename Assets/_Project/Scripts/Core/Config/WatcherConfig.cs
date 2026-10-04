@@ -27,7 +27,18 @@ namespace LastSeenWearing.Core.Config
         [Tooltip("Degrees one pixel of right-drag asks for, unzoomed.")]
         [SerializeField, Range(0.01f, 1f)] private float _panDegreesPerPixel = 0.1f;
 
+        [Header("Last seen (P1.20)")]
+        [Tooltip("How old the witness's report already is when the round starts, seconds. [PROVISIONAL]")]
+        [SerializeField, Min(0f)] private float _witnessReportAge = 20f;
+        [Tooltip("Metres a mark on a feed reaches into the festival.")]
+        [SerializeField, Min(1f)] private float _markRange = 80f;
+        [Tooltip("Seconds the \"marked\" note stays on the monitor.")]
+        [SerializeField, Min(0f)] private float _markNoteSeconds = 1.5f;
+
         public float FeedSwitchSeconds => _feedSwitchSeconds;
+        public float WitnessReportAge => _witnessReportAge;
+        public float MarkRange => _markRange;
+        public float MarkNoteSeconds => _markNoteSeconds;
         public float ZoomOctavesPerSecond => _zoomOctavesPerSecond;
         public float ZoomOctavesPerNotch => _zoomOctavesPerNotch;
         public float PanYawRange => _panYawRange;

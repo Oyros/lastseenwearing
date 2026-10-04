@@ -19,3 +19,6 @@ MonoBehaviour:
   _panPitchRange: 15
   _panDegreesPerSecond: 20
   _panDegreesPerPixel: 0.1
+  _witnessReportAge: 20
+  _markRange: 80
+  _markNoteSeconds: 1.5
