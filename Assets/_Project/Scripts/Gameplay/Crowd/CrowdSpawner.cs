@@ -196,6 +196,33 @@ namespace LastSeenWearing.Gameplay.Crowd
             _agents = null;
         }
 
+        /// <summary>
+        /// Server: NPC <paramref name="npc"/> stops where it stands and every client sees it play
+        /// <paramref name="action"/> (P1.25 — someone cuffed by mistake). It stays off its schedule after, like a
+        /// bumped NPC.
+        /// </summary>
+        public void HoldAndAct(int npc, BodyAction action)
+        {
+            if (!IsServer || _agents == null || npc < 0 || npc >= _agents.Length)
+            {
+                return;
+            }
+
+            var agent = _agents[npc];
+            agent.Bump(agent.transform.position, 0f, Mathf.Max(agent.ActionLength(action), 0.1f));
+            agent.PoseDirty = true;
+            ActRpc(npc, action);
+        }
+
+        [Rpc(SendTo.Everyone)]
+        private void ActRpc(int npc, BodyAction action)
+        {
+            if (_agents != null && npc < _agents.Length)
+            {
+                _agents[npc].Act(action);
+            }
+        }
+
         /// <summary>Shove the NPC nearest to <paramref name="from"/>. Any client may ask; the server decides.</summary>
         public void BumpNearest(Vector3 from)
         {

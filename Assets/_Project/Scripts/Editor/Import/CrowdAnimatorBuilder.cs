@@ -48,6 +48,10 @@ namespace LastSeenWearing.Editor.Import
 
         public static string ClipName(BaseWalk walk) => ClipPrefix + walk;
 
+        /// <summary>The body's one-shot clips, one per <see cref="BodyAction"/> but None.</summary>
+        public static string[] ActionClips => Enum.GetValues(typeof(BodyAction)).Cast<BodyAction>()
+            .Where(a => a != BodyAction.None).Select(BodyActions.ClipName).ToArray();
+
         [MenuItem("Last Seen Wearing/Art/Build Crowd Animator")]
         public static void BuildFromMenu()
         {
@@ -143,6 +147,9 @@ namespace LastSeenWearing.Editor.Import
             {
                 AddTraitLayer(controller, trait, clips);
             }
+
+            // One-shots over everything (PL.17, P1.25): target jobs, tent, arrest.
+            ActionLayerBuilder.Add(controller, BodyPath, clips, ActionClips);
 
             EditorUtility.SetDirty(controller);
             AssetDatabase.SaveAssets();

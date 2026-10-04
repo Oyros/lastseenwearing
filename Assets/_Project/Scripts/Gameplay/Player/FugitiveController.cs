@@ -61,14 +61,54 @@ namespace LastSeenWearing.Gameplay.Player
         private GroundPoint _velocity;
         private float _fall;
         private bool _hidden;
+        private TentStage _tentStage;
+        private float _heldUntil;
 
         public GaitSignature Gait { get; private set; }
 
         /// <summary>The outfit the fugitive starts the round in (P1.18); tents change it later (P1.21).</summary>
         public Outfit Outfit { get; private set; }
 
-        /// <summary>Inside a tent, changing: unseen, and not moving.</summary>
+        /// <summary>At or inside a tent, changing (P1.21, P1.25): not moving, and no job, no escape, no arrest.</summary>
         public bool IsChanging => IsSpawned && NetworkManager.ServerTime.Time < _change.Value.InsideUntil;
+
+        // The change on every client's clock (P1.25): Tent_Enter at the door, unseen inside — when the clothes swap —
+        // then Tent_Exit in the new ones.
+        private enum TentStage
+        {
+            Out,
+            Entering,
+            Inside,
+            Exiting,
+        }
+
+        private TentStage StageAt(double now)
+        {
+            var change = _change.Value;
+            if (!change.Changed || now >= change.InsideUntil || now < change.From)
+            {
+                return TentStage.Out;
+            }
+
+            var enter = _walk.ActionLength(BodyAction.TentEnter);
+            var exit = _walk.ActionLength(BodyAction.TentExit);
+            return now < change.From + enter ? TentStage.Entering
+                : now < change.InsideUntil - exit ? TentStage.Inside
+                : TentStage.Exiting;
+        }
+
+        /// <summary>Server: a one-shot every client sees this body play (P1.25) — a target job, being cuffed.</summary>
+        public void Act(BodyAction action) => ActRpc(action);
+
+        [Rpc(SendTo.Everyone)]
+        private void ActRpc(BodyAction action)
+        {
+            _walk.PlayAction(action);
+            if (action == BodyAction.ArrestSuspect)
+            {
+                _heldUntil = Time.time + _walk.ActionLength(action); // cuffed: no walking off mid-clip
+            }
+        }
 
         /// <summary>The local fugitive's tent panel is open: the body stands still and the camera holds.</summary>
         public bool Paused { get; set; }
@@ -86,7 +126,9 @@ namespace LastSeenWearing.Gameplay.Player
             _change.Value = new Change
             {
                 Changed = true,
+                Before = CompositeSync.Clothes.Of(Outfit),
                 Clothes = CompositeSync.Clothes.Of(outfit),
+                From = NetworkManager.ServerTime.Time,
                 InsideUntil = NetworkManager.ServerTime.Time + seconds,
             };
         }
@@ -148,8 +190,11 @@ namespace LastSeenWearing.Gameplay.Player
             var change = _change.Value;
             if (change.Changed)
             {
+                // Until the fugitive is out of sight the old clothes are what everyone sees.
+                var stage = StageAt(NetworkManager.ServerTime.Time);
+                var clothes = stage == TentStage.Entering ? change.Before : change.Clothes;
                 Outfit = Outfit.WithClothesOf(new Outfit(Outfit.Sex, Outfit.Height, Outfit.Build, Outfit.Skin, Outfit.Hair, Outfit.HairColour,
-                    change.Clothes.Top.ToWorn(), change.Clothes.Bottom.ToWorn(), change.Clothes.Hat.ToWorn()));
+                    clothes.Top.ToWorn(), clothes.Bottom.ToWorn(), clothes.Hat.ToWorn()));
             }
 
             view.Apply(Outfit);
@@ -163,7 +208,7 @@ namespace LastSeenWearing.Gameplay.Player
         // Latch input in Update, use it in FixedUpdate (CONVENTIONS.md §6).
         private void Update()
         {
-            Hide(IsChanging);
+            StepTent();
             if (IsOwner && _controls != null && !Paused)
             {
                 var field = _controls.Field;
@@ -194,7 +239,7 @@ namespace LastSeenWearing.Gameplay.Player
             }
 
             var dt = Time.fixedDeltaTime;
-            if (Paused || IsChanging)
+            if (Paused || IsChanging || Time.time < _heldUntil)
             {
                 _move = Vector2.zero;
                 _interactQueued = false;
@@ -218,6 +263,39 @@ namespace LastSeenWearing.Gameplay.Player
                 _interactQueued = false;
                 TryInteract();
             }
+        }
+
+        // Every client walks the change's stages on the server clock: into the tent, out of sight (and into the new
+        // clothes), out of the tent.
+        private void StepTent()
+        {
+            var stage = IsSpawned ? StageAt(NetworkManager.ServerTime.Time) : TentStage.Out;
+            if (stage == _tentStage)
+            {
+                return;
+            }
+
+            var from = _tentStage;
+            _tentStage = stage;
+            switch (stage)
+            {
+                case TentStage.Entering:
+                    _walk.PlayAction(BodyAction.TentEnter);
+                    break;
+                case TentStage.Inside:
+                    ApplyGait(_seeds.Value); // the swap, unseen
+                    break;
+                case TentStage.Exiting:
+                    if (from == TentStage.Entering)
+                    {
+                        ApplyGait(_seeds.Value);
+                    }
+
+                    _walk.PlayAction(BodyAction.TentExit);
+                    break;
+            }
+
+            Hide(stage == TentStage.Inside);
         }
 
         // Inside the tent nobody sees the fugitive or can aim at them; the body waits at the door.
@@ -310,13 +388,17 @@ namespace LastSeenWearing.Gameplay.Player
         private struct Change : INetworkSerializable
         {
             public bool Changed;
+            public CompositeSync.Clothes Before;
             public CompositeSync.Clothes Clothes;
+            public double From;
             public double InsideUntil;
 
             public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
             {
                 serializer.SerializeValue(ref Changed);
+                serializer.SerializeValue(ref Before);
                 serializer.SerializeValue(ref Clothes);
+                serializer.SerializeValue(ref From);
                 serializer.SerializeValue(ref InsideUntil);
             }
         }

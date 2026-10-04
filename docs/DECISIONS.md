@@ -618,3 +618,20 @@ the arrest clip (P1.25).
 **Why.** P1 asks whether the loop is fun; an arrest anyone can attempt makes the cost of a wrong guess the thing
 being tested. The cuff count is public because an officer cuffing a stranger is seen.
 **Reversing.** Cheap: heat becomes one more check in `Arrests`; the numbers are config.
+
+---
+
+### D-044 — One-shots on an Action layer; the tent on everyone's clock; bodies stay through the result
+**Decision.** The crowd's and the arms' animators get a generated **Action** layer on top (override, weight 1)
+resting in an empty `None` state, with one state per one-shot clip named after it (`ActionLayerBuilder`);
+`WalkCycle.PlayAction` cross-fades in and the state blends back at its end. Which one-shot a body plays is a
+`BodyAction` the server sends to everyone — a target job's look (`BodyActions.ForTarget`: wallet lift, poster
+swap; social and hidden stand until PL.38), the arrest pair. The tent change is a timeline every client reads
+from the change's server times: `Tent_Enter` at the door in the old clothes, unseen, the swap, `Tent_Exit` in the
+new ones; clip lengths come from the animator, so `DisguiseConfig.ChangeSeconds` only has to exceed enter + exit
+(test-checked). A cuffed NPC is held where it stands for its clip. **Bodies now stay through the Result phase**
+and are despawned at the next briefing or at case end (team), so the arrest or escape that decided a round plays
+out on screen.
+**Why.** A one-shot is something cameras must see, so it is public even when the job behind it is the fugitive's
+secret. Driving the tent from shared times needs no extra messages and keeps every screen in step.
+**Reversing.** Cheap: the layer is regenerated from the menu; despawn timing is one line in `RoundDirector.Enter`.

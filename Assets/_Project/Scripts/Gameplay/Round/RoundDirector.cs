@@ -222,6 +222,7 @@ namespace LastSeenWearing.Gameplay.Round
             switch (phase)
             {
                 case RoundPhase.Briefing:
+                    DespawnBodies(); // last round's, kept through its result (P1.25)
                     _outcome.Value = RoundOutcome.None;
                     _bonusSeconds.Value = 0f;
                     // A new crowd every round, from the case's seed and the round number, with the round's lookalikes
@@ -235,8 +236,8 @@ namespace LastSeenWearing.Gameplay.Round
                     _objectives.BeginRound(ClientOf(Role.Fugitive)); // targets, P1.22
                     _arrests.BeginRound(); // cuffs, P1.24
                     break;
-                case RoundPhase.Result:
-                    // Bodies stay through a last-cuff chase and go when the round is decided.
+                case RoundPhase.CaseEnd:
+                    // Bodies stay through the result, so the arrest or the escape that decided it plays out (P1.25).
                     DespawnBodies();
                     break;
                 case RoundPhase.Lobby:

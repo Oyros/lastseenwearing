@@ -1,5 +1,6 @@
 using System;
 using LastSeenWearing.Core.Config;
+using LastSeenWearing.Core.Crowd;
 using LastSeenWearing.Core.Objective;
 using LastSeenWearing.Core.Round;
 using LastSeenWearing.Gameplay.Player;
@@ -83,6 +84,7 @@ namespace LastSeenWearing.Gameplay.Objective
             _jobFrom = _worker.transform.position;
             var now = NetworkManager.ServerTime.Time;
             _jobUntil = now + _config.SecondsFor(target.Kind);
+            _worker.Act(BodyActions.ForTarget(target.Kind)); // what a camera sees (P1.25)
             Send(now);
         }
 
@@ -102,6 +104,11 @@ namespace LastSeenWearing.Gameplay.Objective
             if (_worker == null || _worker.IsChanging || (_worker.transform.position - _jobFrom).sqrMagnitude > _config.WorkDrift * _config.WorkDrift)
             {
                 _job = NoJob; // walked off, or gone: the job is dropped
+                if (_worker != null)
+                {
+                    _worker.Act(BodyAction.None);
+                }
+
                 Send();
                 return;
             }
@@ -110,6 +117,7 @@ namespace LastSeenWearing.Gameplay.Objective
             {
                 var target = _targets[_job];
                 _job = NoJob;
+                _worker.Act(BodyAction.None);
                 _progress.Finish(target.Index, target.transform.position, _exits, _config.ExitRule);
                 if (_progress.Complete)
                 {

@@ -21,6 +21,9 @@ namespace LastSeenWearing.Editor.Import
         public const string IdleClip = "FP_Idle";
         public const string WalkClip = "FP_Walk";
 
+        /// <summary>The arms' one-shot when the patrol cuffs someone (PL.19, P1.25).</summary>
+        public const string CuffsClip = "FP_Cuffs";
+
         [MenuItem("Last Seen Wearing/Art/Build First-Person Arms Animator")]
         public static void BuildFromMenu()
         {
@@ -45,7 +48,24 @@ namespace LastSeenWearing.Editor.Import
                 controller.RemoveParameter(parameter);
             }
 
+            while (controller.layers.Length > 1)
+            {
+                controller.RemoveLayer(controller.layers.Length - 1);
+            }
+
             var machine = controller.layers[0].stateMachine;
+            foreach (var orphan in AssetDatabase.LoadAllAssetsAtPath(ControllerPath).OfType<AnimatorStateMachine>().Where(m => m != machine))
+            {
+                foreach (var child in orphan.states)
+                {
+                    AssetDatabase.RemoveObjectFromAsset(child.state);
+                    UnityEngine.Object.DestroyImmediate(child.state, true);
+                }
+
+                AssetDatabase.RemoveObjectFromAsset(orphan);
+                UnityEngine.Object.DestroyImmediate(orphan, true);
+            }
+
             foreach (var child in machine.states)
             {
                 machine.RemoveState(child.state);
@@ -64,6 +84,7 @@ namespace LastSeenWearing.Editor.Import
 
             Connect(idle, walk, AnimatorConditionMode.If);
             Connect(walk, idle, AnimatorConditionMode.IfNot);
+            ActionLayerBuilder.Add(controller, ArmsPath, clips, new[] { CuffsClip });
 
             EditorUtility.SetDirty(controller);
             AssetDatabase.SaveAssets();

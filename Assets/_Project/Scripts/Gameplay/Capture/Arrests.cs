@@ -1,6 +1,7 @@
 using System;
 using LastSeenWearing.Core.Capture;
 using LastSeenWearing.Core.Config;
+using LastSeenWearing.Core.Crowd;
 using LastSeenWearing.Core.Roles;
 using LastSeenWearing.Core.Round;
 using LastSeenWearing.Gameplay.Crowd;
@@ -98,6 +99,24 @@ namespace LastSeenWearing.Gameplay.Capture
 
             var result = _cuffs.Arrest(isFugitive);
             _cuffsLeft.Value = _cuffs.Left;
+            if (result != ArrestResult.Refused)
+            {
+                // The pair on every screen (PL.17, P1.25): the officer cuffs, the one cuffed stands for it.
+                if (client.PlayerObject.TryGetComponent<PatrolController>(out var patrol))
+                {
+                    patrol.Act(BodyAction.ArrestOfficer);
+                }
+
+                if (isFugitive && fugitiveBody.TryGet(out var cuffed) && cuffed.TryGetComponent<FugitiveController>(out var suspect))
+                {
+                    suspect.Act(BodyAction.ArrestSuspect);
+                }
+                else if (!isFugitive)
+                {
+                    _crowd.HoldAndAct(npc, BodyAction.ArrestSuspect);
+                }
+            }
+
             Debug.Log($"[Arrests] Patrol arrested {(isFugitive ? "the fugitive" : $"Npc_{npc:000}")}: {result}, {_cuffs.Left} cuffs left.");
             switch (result)
             {

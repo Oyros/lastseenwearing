@@ -26,6 +26,9 @@ namespace LastSeenWearing.Gameplay.Player
         // PL.19's arms rig carries a non-deforming bone at the eye the arms were framed from.
         private const string ArmsEyeBone = "Camera";
 
+        // The arms' cuffing one-shot (PL.19): its state in the arms animator's Action layer is named after the clip.
+        private const string ArmsCuffsState = "FP_Cuffs";
+
         [SerializeField] private MovementConfig _movement;
         [SerializeField] private CameraConfig _camera;
         [SerializeField] private CrowdConfig _crowd;
@@ -60,6 +63,7 @@ namespace LastSeenWearing.Gameplay.Player
         public bool InArrestRange { get; private set; }
 
         private Arrests _arrests;
+        private float _heldUntil;
 
         public override void OnNetworkSpawn()
         {
@@ -141,7 +145,8 @@ namespace LastSeenWearing.Gameplay.Player
 
             var dt = Time.fixedDeltaTime;
             var speed = _sprint ? _movement.PatrolRunSpeed : _movement.PatrolWalkSpeed;
-            var desired = GroundMotion.DesiredVelocity(_move.x, _move.y, _yaw, speed);
+            var move = Time.time < _heldUntil ? Vector2.zero : _move;
+            var desired = GroundMotion.DesiredVelocity(move.x, move.y, _yaw, speed);
             _velocity = GroundMotion.StepToward(_velocity, desired, _movement.Acceleration * dt);
 
             _fall = _body.isGrounded ? 0f : _fall + Physics.gravity.y * dt;
@@ -161,6 +166,23 @@ namespace LastSeenWearing.Gameplay.Player
                 Quaternion.Euler(_pitch, _yaw, 0f));
             _eye.fieldOfView = Camera.HorizontalToVerticalFieldOfView(_camera.FirstPersonFieldOfView, _eye.aspect);
             AimTarget = AimProbe.Find(_eye.transform.position, _eye.transform.forward, _camera.AimRange, gameObject);
+        }
+
+        /// <summary>Server: a one-shot every client sees this patrol play (P1.25) — cuffing someone.</summary>
+        public void Act(BodyAction action) => ActRpc(action);
+
+        [Rpc(SendTo.Everyone)]
+        private void ActRpc(BodyAction action)
+        {
+            _walk.PlayAction(action);
+            if (IsOwner && action == BodyAction.ArrestOfficer)
+            {
+                _heldUntil = Time.time + _walk.ActionLength(action); // the officer stands for the cuffing
+                if (_arms != null)
+                {
+                    _arms.CrossFadeInFixedTime(ArmsCuffsState, WalkCycle.ActionBlendSeconds, _arms.GetLayerIndex(WalkCycle.ActionLayer), 0f);
+                }
+            }
         }
 
         // Hold Arrest on someone close (DATA §7: F, 0.5 s). The server decides who it was and what it cost.

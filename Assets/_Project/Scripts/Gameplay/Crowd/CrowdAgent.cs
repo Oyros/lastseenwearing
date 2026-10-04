@@ -65,6 +65,12 @@ namespace LastSeenWearing.Gameplay.Crowd
             _walk.Advance(walked, deltaTime);
         }
 
+        /// <summary>A one-shot over the walk (P1.25): an NPC cuffed by mistake, for now.</summary>
+        public void Act(BodyAction action) => _walk.PlayAction(action);
+
+        /// <summary>How long a one-shot runs on this body.</summary>
+        public float ActionLength(BodyAction action) => _walk.ActionLength(action);
+
         /// <summary>Server: take the NPC off its schedule and shove it away from <paramref name="from"/>.</summary>
         public void Bump(Vector3 from, float distance, float duration)
         {

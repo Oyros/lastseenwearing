@@ -45,6 +45,7 @@ namespace LastSeenWearing.Gameplay.Crowd
         private readonly float _runStrideLength;
         private readonly float[] _traits = new float[Traits.Length];
         private readonly int[] _traitLayers = new int[Traits.Length];
+        private readonly int _actionLayer = -1;
         private double _lastWalked = -1d;
         private float _walkPresence = 1f;
         private float _walkSpeed;
@@ -74,6 +75,49 @@ namespace LastSeenWearing.Gameplay.Crowd
             {
                 _traitLayers[(int)trait] = _animator.GetLayerIndex(trait.ToString());
             }
+
+            _actionLayer = _animator.GetLayerIndex(ActionLayer);
+        }
+
+        /// <summary>The animator layer that plays <see cref="BodyAction"/> one-shots over the walk (P1.25).</summary>
+        public const string ActionLayer = "Action";
+
+        /// <summary>The Action layer's resting state: nothing over the walk.</summary>
+        public const string NoActionState = "None";
+
+        /// <summary>Seconds into and out of a one-shot.</summary>
+        public const float ActionBlendSeconds = 0.2f;
+
+        /// <summary>Play a one-shot over the walk, from its start; <see cref="BodyAction.None"/> blends back to the walk.</summary>
+        public void PlayAction(BodyAction action)
+        {
+            if (_animator == null || _actionLayer < 0)
+            {
+                return;
+            }
+
+            var state = action == BodyAction.None ? NoActionState : BodyActions.ClipName(action);
+            _animator.CrossFadeInFixedTime(state, ActionBlendSeconds, _actionLayer, 0f);
+        }
+
+        /// <summary>The clip's length in seconds, as the body's animator holds it; 0 when there is none.</summary>
+        public float ActionLength(BodyAction action)
+        {
+            var name = BodyActions.ClipName(action);
+            if (_animator == null || _animator.runtimeAnimatorController == null || name == null)
+            {
+                return 0f;
+            }
+
+            foreach (var clip in _animator.runtimeAnimatorController.animationClips)
+            {
+                if (clip.name == name)
+                {
+                    return clip.length;
+                }
+            }
+
+            return 0f;
         }
 
         public bool IsWalking { get; private set; }
@@ -87,16 +131,16 @@ namespace LastSeenWearing.Gameplay.Crowd
         /// <summary>The cycle's phase, 0–1 (contact_L at 0, contact_R at 0.5).</summary>
         public float Phase { get; private set; }
 
-        /// <summary>
-        /// Speeds between which the body blends from its walk into the run. Without them it only walks. Every
-        /// client derives the blend from the speed it sees, so nothing about running is sent.
-        /// </summary>
         /// <summary>A taller or shorter body (P1.19): both strides scale with it, so the feet stay planted.</summary>
         public void SetScale(float scale)
         {
             _scale = scale;
         }
 
+        /// <summary>
+        /// Speeds between which the body blends from its walk into the run. Without them it only walks. Every
+        /// client derives the blend from the speed it sees, so nothing about running is sent.
+        /// </summary>
         public void SetRunSpeeds(float walkSpeed, float runSpeed)
         {
             _walkSpeed = walkSpeed;
