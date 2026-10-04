@@ -275,6 +275,46 @@ MonoBehaviour:
     m_Key: tent.keep
     m_Metadata:
       m_Items: []
+  - m_Id: 294043660955648
+    m_Key: objective.kind.open
+    m_Metadata:
+      m_Items: []
+  - m_Id: 294043874865152
+    m_Key: objective.kind.fixed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 294043874865153
+    m_Key: objective.kind.social
+    m_Metadata:
+      m_Items: []
+  - m_Id: 294043874865154
+    m_Key: objective.kind.hidden
+    m_Metadata:
+      m_Items: []
+  - m_Id: 294043874865155
+    m_Key: objective.exit.exit_south
+    m_Metadata:
+      m_Items: []
+  - m_Id: 294043874865156
+    m_Key: objective.exit.exit_alley
+    m_Metadata:
+      m_Items: []
+  - m_Id: 294043879059456
+    m_Key: objective.count
+    m_Metadata:
+      m_Items: []
+  - m_Id: 294043887448064
+    m_Key: objective.done
+    m_Metadata:
+      m_Items: []
+  - m_Id: 294043887448065
+    m_Key: objective.exit_open
+    m_Metadata:
+      m_Items: []
+  - m_Id: 296933171507200
+    m_Key: objective.marker
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

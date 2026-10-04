@@ -575,3 +575,18 @@ layout's tent spot (`TentPlacer`, re-runnable per layout).
 of moving the fugitive inside keeps the network transform simple and makes "they went into that tent" something
 cameras and officers can actually see.
 **Reversing.** Cheap: the stock rule and the timing are config and one static class; the hide is one method.
+
+---
+
+### D-041 — Targets: stand still for the job, the fugitive alone keeps the score, the farthest exit opens
+**Decision.** Each layout target gets a `TargetSpot` on the walkable ground beside its prop (`TargetPlacer`). The
+fugitive presses Interact and the job runs on the server for `FugitiveConfig.SecondsFor(kind)`; drifting more than
+`WorkDrift` from where it started (or entering a tent) drops it. Any target counts once; the one that makes
+`TargetsNeeded` opens an exit by `ExitRule` — **Farthest** from that last target (team, P1.22), so the escape
+crosses the cameras. The progress, the job in hand and the open exit go to the fugitive's client only; police
+get no meter (GDD §04.4). The fugitive's HUD lists the jobs, shows the bar and the open exit, and puts a marker
+with the distance over every target still to do (team asked: the props alone were too hard to find). Police
+seeing all five locations, NPCs doing the same jobs and the job clips wait for P1.24–P1.25.
+**Why.** Standing still at a spot is what an NPC does too, so a job reads as normal behaviour on a feed. The
+farthest exit makes the last target a commitment rather than a short walk out.
+**Reversing.** Cheap: rule, times and drift are config; markers are one method in the HUD.

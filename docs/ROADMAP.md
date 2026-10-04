@@ -92,7 +92,7 @@ programme, sunset, case format, every tool in §07, replay, art, audio.
 | [x] P1.19 | Composite generation: traits + 1–2 errors; fugitive sees which | §04.1 | Watcher and fugitive panels show the right versions |
 | [x] P1.20 | Watcher UI: composite panel, last-seen clothing with age timer | §04.1 | Timer counts from the last confirmed sighting |
 | [x] P1.21 | Tent outfit change | §05 | Fugitive enters, picks items, exits changed |
-| [ ] P1.22 | Targets: 3 spots, timed interaction, completion state | §04.4 | Three done → exit opens |
+| [x] P1.22 | Targets: 3 spots, timed interaction, completion state | §04.4 | Three done → exit opens |
 | [ ] P1.23 | Exit and fugitive win | §06 | Reaching the open exit ends the round |
 | [ ] P1.24 | Arrest, 3 cuffs, police win / out-of-cuffs loss | §04.3 | All three outcomes reachable |
 | [ ] P1.25 | Greybox animations: target action, arrest, tent enter/exit | — | PL.17 done; clips play |

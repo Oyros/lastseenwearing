@@ -98,7 +98,7 @@ namespace LastSeenWearing.Editor.Import
         }
 
         // Festival_<id> plays Layout_<id> (D-035).
-        private static LayoutDefinition FindLayout()
+        public static LayoutDefinition FindLayout()
         {
             var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
             var id = scene.StartsWith("Festival_") ? scene.Substring("Festival_".Length) : null;

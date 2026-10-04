@@ -4,6 +4,7 @@ using LastSeenWearing.Core.Layouts;
 using LastSeenWearing.Editor.Import;
 using LastSeenWearing.Gameplay.Cameras;
 using LastSeenWearing.Gameplay.Disguise;
+using LastSeenWearing.Gameplay.Objective;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -125,6 +126,30 @@ namespace LastSeenWearing.Tests.Layouts
                         $"{spot.Name}: the door is walkable ground");
                     Assert.That(tent.gameObject.layer, Is.EqualTo(LayerMask.NameToLayer("Ignore Raycast")), "never caught by an aim or a mark");
                 }
+            });
+        }
+
+        [Test]
+        public void EveryTargetHasASpotOnTheGroundBesideItAndTheObjectiveKnowsTheExits()
+        {
+            WithScene(scene =>
+            {
+                var objectives = scene.GetRootGameObjects().SelectMany(g => g.GetComponentsInChildren<Objectives>(true)).Single();
+                Assert.That(objectives.Config, Is.Not.Null);
+                Assert.That(objectives.Targets, Has.Length.EqualTo(Definition.Targets.Length), "P1.22");
+                for (var i = 0; i < Definition.Targets.Length; i++)
+                {
+                    var target = Definition.Targets[i];
+                    var spot = objectives.Targets[i];
+                    Assert.That(spot.Index, Is.EqualTo(i));
+                    Assert.That(spot.Kind, Is.EqualTo(target.Kind), target.Tag);
+                    Assert.That(Flat(spot.transform.position - target.Position), Is.LessThan(TargetPlacer.GroundReach), target.Tag);
+                    Assert.That(NavMesh.SamplePosition(spot.InteractionPoint, out _, 0.5f, NavMesh.AllAreas), Is.True, $"{target.Tag}: walkable");
+                    Assert.That(spot.gameObject.layer, Is.EqualTo(LayerMask.NameToLayer("Ignore Raycast")));
+                }
+
+                var exits = new SerializedObject(objectives).FindProperty("_exitNames");
+                Assert.That(exits.arraySize, Is.EqualTo(Definition.Exits.Length));
             });
         }
 

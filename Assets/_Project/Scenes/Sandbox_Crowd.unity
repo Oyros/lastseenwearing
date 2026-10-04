@@ -260,6 +260,7 @@ GameObject:
   - component: {fileID: 46670588}
   - component: {fileID: 46670587}
   - component: {fileID: 46670589}
+  - component: {fileID: 46670590}
   m_Layer: 0
   m_Name: Round
   m_TagString: Untagged
@@ -340,6 +341,7 @@ MonoBehaviour:
   _roster: {fileID: 1375030074}
   _crowd: {fileID: 1113662437}
   _composite: {fileID: 46670589}
+  _objectives: {fileID: 46670590}
   _playerPrefab: {fileID: 7433707422409190774, guid: bfdcf6ed084e6a54085704035984b947, type: 3}
   _spawns:
   - Role: 2
@@ -372,6 +374,23 @@ MonoBehaviour:
   _crowd: {fileID: 11400000, guid: 121a58c0c85683542b4069daa63b0841, type: 2}
   _config: {fileID: 11400000, guid: 87f5b9863f9fc6b49931be6325f15cf6, type: 2}
   _watcher: {fileID: 11400000, guid: 37202be0176ede24aa5781b983117f78, type: 2}
+--- !u!114 &46670590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46670584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f10c388feb531ef4094a15cedb29f524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LastSeenWearing.Gameplay::LastSeenWearing.Gameplay.Objective.Objectives
+  ShowTopMostFoldoutHeaderGroup: 1
+  _config: {fileID: 11400000, guid: 7c2d63a38822df34fb4ec1ec63a719da, type: 2}
+  _targets: []
+  _exits: []
+  _exitNames: []
 --- !u!1 &296813888
 GameObject:
   m_ObjectHideFlags: 0

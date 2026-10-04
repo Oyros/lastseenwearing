@@ -294,6 +294,52 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 3517454320335585380
+  - m_Id: 294043660955648
+    m_Localized: Lift a wallet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 294043874865152
+    m_Localized: Swap a poster
+    m_Metadata:
+      m_Items: []
+  - m_Id: 294043874865153
+    m_Localized: Talk to a vendor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 294043874865154
+    m_Localized: Pick a safe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 294043874865155
+    m_Localized: the south gate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 294043874865156
+    m_Localized: the alley
+    m_Metadata:
+      m_Items: []
+  - m_Id: 294043879059456
+    m_Localized: Targets {0}/{1}
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
+  - m_Id: 294043887448064
+    m_Localized: <s>{0}</s>  done
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
+  - m_Id: 294043887448065
+    m_Localized: 'Exit open: {0}'
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
+  - m_Id: 296933171507200
+    m_Localized: '{0}
+
+      {1} m'
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
   references:
     version: 2
     RefIds:
@@ -317,3 +363,7 @@ MonoBehaviour:
         - id: 284538126577665
         - id: 289667642929152
         - id: 289667647123456
+        - id: 294043879059456
+        - id: 294043887448064
+        - id: 294043887448065
+        - id: 296933171507200

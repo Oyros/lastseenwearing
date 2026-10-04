@@ -5,6 +5,7 @@ using LastSeenWearing.Core.Randomness;
 using LastSeenWearing.Core.Roles;
 using LastSeenWearing.Core.Round;
 using LastSeenWearing.Gameplay.Crowd;
+using LastSeenWearing.Gameplay.Objective;
 using LastSeenWearing.Gameplay.Player;
 using LastSeenWearing.Gameplay.Roles;
 using Unity.Netcode;
@@ -36,6 +37,7 @@ namespace LastSeenWearing.Gameplay.Round
         [SerializeField] private RoleRosterSync _roster;
         [SerializeField] private CrowdSpawner _crowd;
         [SerializeField] private CompositeSync _composite;
+        [SerializeField] private Objectives _objectives;
         [SerializeField] private NetworkObject _playerPrefab;
         [SerializeField] private RoleSpawn[] _spawns;
 
@@ -178,6 +180,7 @@ namespace LastSeenWearing.Gameplay.Round
                     _programmeClock = -1d;
                     SpawnBodies();
                     _composite.ReportWitness(_caseSeed, _crowd.Seed, ClientOf(Role.Watcher)); // last seen, P1.20
+                    _objectives.BeginRound(ClientOf(Role.Fugitive)); // targets, P1.22
                     break;
                 case RoundPhase.Result:
                     // Bodies stay through a last-cuff chase and go when the round is decided.

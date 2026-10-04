@@ -21,6 +21,7 @@ namespace LastSeenWearing.Core.Config
         [SerializeField] private WardrobeConfig _wardrobe;
         [SerializeField] private CompositeConfig _composite;
         [SerializeField] private DisguiseConfig _disguise;
+        [SerializeField] private FugitiveConfig _fugitive;
 
         public LobbyConfig Lobby => _lobby;
         public RoundConfig Round => _round;
@@ -30,6 +31,7 @@ namespace LastSeenWearing.Core.Config
         public WardrobeConfig Wardrobe => _wardrobe;
         public CompositeConfig Composite => _composite;
         public DisguiseConfig Disguise => _disguise;
+        public FugitiveConfig Fugitive => _fugitive;
         public MovementConfig Movement => _movement;
         public CrowdConfig Crowd => _crowd;
     }
