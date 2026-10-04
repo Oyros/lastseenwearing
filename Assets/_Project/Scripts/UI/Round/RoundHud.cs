@@ -1,4 +1,5 @@
 using LastSeenWearing.Core.Round;
+using LastSeenWearing.Gameplay.Capture;
 using LastSeenWearing.Gameplay.Round;
 using TMPro;
 using UnityEngine;
@@ -25,12 +26,15 @@ namespace LastSeenWearing.UI.Round
         private const float BannerSeconds = 4f;
 
         [SerializeField] private RoundDirector _director;
+        [Tooltip("The cuffs left this round (P1.24) — everyone sees them; an arrest is public.")]
+        [SerializeField] private Arrests _arrests;
 
         private GameObject _panel;
         private TextMeshProUGUI _phase;
         private TextMeshProUGUI _clock;
         private TextMeshProUGUI _round;
         private TextMeshProUGUI _line;
+        private TextMeshProUGUI _cuffs;
         private float _bannerUntil;
         private int _shownSeconds = -1;
 
@@ -43,12 +47,20 @@ namespace LastSeenWearing.UI.Round
         {
             _director.PhaseChanged += OnPhaseChanged;
             _director.FestivalEventRaised += OnFestivalEvent;
+            if (_arrests != null)
+            {
+                _arrests.WrongArrest += OnWrongArrest;
+            }
         }
 
         private void OnDisable()
         {
             _director.PhaseChanged -= OnPhaseChanged;
             _director.FestivalEventRaised -= OnFestivalEvent;
+            if (_arrests != null)
+            {
+                _arrests.WrongArrest -= OnWrongArrest;
+            }
         }
 
         private void Update()
@@ -70,6 +82,12 @@ namespace LastSeenWearing.UI.Round
             _clock.text = $"{seconds / 60}:{seconds % 60:00}";
             _phase.text = Text(UiTable, PhaseKey(_director.Phase));
             _round.text = Text(UiTable, "ui.round.round_of", _director.Round + 1, _director.RoundsPerCase);
+            var inPlay = _director.Phase is RoundPhase.Live or RoundPhase.LastCuff;
+            _cuffs.gameObject.SetActive(inPlay && _arrests != null);
+            if (inPlay && _arrests != null)
+            {
+                _cuffs.text = Text(UiTable, "capture.cuffs", _arrests.CuffsLeft, _arrests.CuffsPerRound);
+            }
 
             switch (_director.Phase)
             {
@@ -96,6 +114,8 @@ namespace LastSeenWearing.UI.Round
             {
                 RoundOutcome.TimeUp => Text(UiTable, "ui.round.result.time_up"),
                 RoundOutcome.Escaped => Text(UiTable, "ui.round.result.escaped"),
+                RoundOutcome.Arrested => Text(UiTable, "ui.round.result.arrested"),
+                RoundOutcome.OutOfCuffs => Text(UiTable, "ui.round.result.out_of_cuffs"),
                 _ => string.Empty,
             };
         }
@@ -110,6 +130,13 @@ namespace LastSeenWearing.UI.Round
         {
             _line.text = Text(FestivalTable, $"festival.event.{festivalEvent.ToString().ToLowerInvariant()}");
             _bannerUntil = Time.time + BannerSeconds;
+        }
+
+        private void OnWrongArrest()
+        {
+            _line.text = Text(UiTable, "capture.wrong_arrest");
+            _bannerUntil = Time.time + BannerSeconds;
+            _shownSeconds = -1;
         }
 
         private static string PhaseKey(RoundPhase phase) => phase switch
@@ -149,6 +176,7 @@ namespace LastSeenWearing.UI.Round
             _clock = NewText(FontStyles.Bold);
             _clock.fontSize = FontSize * 1.6f;
             _round = NewText(FontStyles.Normal);
+            _cuffs = NewText(FontStyles.Normal);
             _line = NewText(FontStyles.Italic);
         }
 

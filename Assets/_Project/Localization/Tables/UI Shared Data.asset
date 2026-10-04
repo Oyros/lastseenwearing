@@ -323,6 +323,22 @@ MonoBehaviour:
     m_Key: objective.exit_marker
     m_Metadata:
       m_Items: []
+  - m_Id: 302276945489920
+    m_Key: capture.cuffs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 302277218119680
+    m_Key: capture.wrong_arrest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 302277222313984
+    m_Key: ui.round.result.arrested
+    m_Metadata:
+      m_Items: []
+  - m_Id: 302277222313985
+    m_Key: ui.round.result.out_of_cuffs
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

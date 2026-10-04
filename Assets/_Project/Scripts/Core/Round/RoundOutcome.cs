@@ -10,5 +10,11 @@ namespace LastSeenWearing.Core.Round
 
         /// <summary>The fugitive walked out of an open exit (GDD §06, P1.23): the fugitive wins.</summary>
         Escaped = 2,
+
+        /// <summary>The patrol cuffed the fugitive (GDD §06, P1.24): the police win.</summary>
+        Arrested = 3,
+
+        /// <summary>Every cuff went on someone else and the chase ran out (GDD §06, P1.24): the fugitive wins.</summary>
+        OutOfCuffs = 4,
     }
 }

@@ -348,6 +348,23 @@ MonoBehaviour:
     m_Localized: Exit
     m_Metadata:
       m_Items: []
+  - m_Id: 302276945489920
+    m_Localized: Cuffs {0}/{1}
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
+  - m_Id: 302277218119680
+    m_Localized: Wrong arrest! A cuff is gone.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 302277222313984
+    m_Localized: The fugitive was arrested.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 302277222313985
+    m_Localized: The cuffs ran out. The fugitive got away.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
@@ -375,3 +392,4 @@ MonoBehaviour:
         - id: 294043887448064
         - id: 294043887448065
         - id: 296933171507200
+        - id: 302276945489920

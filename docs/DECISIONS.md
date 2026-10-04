@@ -602,3 +602,19 @@ fugitive inside a tent cannot escape. The fugitive's HUD marks the open exit (ev
 **Why.** A radius around the exit's spot needs no extra scene geometry and works for any layout's JSON. Any exit in
 the chase keeps a revealed fugitive's 45 s worth playing without targets to finish.
 **Reversing.** Cheap: one rule method and one config value.
+
+---
+
+### D-043 — Arrests in P1: no heat yet, a public cuff count, the chase that runs out is the fugitive's
+**Decision.** The patrol holds Arrest (F, 0.5 s — DATA §7) on the character under the crosshair within
+`CaptureConfig.ArrestRange`; the server re-checks role, phase (Live only), reach (+ `ArrestRangeSlack` for a moving
+target) and who it was — the fugitive by their network object, an NPC by its seed index — and keeps the cuffs
+(`Core/Capture/Cuffs`). The fugitive cuffed → `RoundOutcome.Arrested`. Anyone else → a cuff gone, the round's Live
+time grows by `WrongArrestBonusSeconds` (the fugitive's bonus, GDD §04.3), and everyone hears "wrong arrest". The
+third wasted cuff fires `CuffsSpent`: the last-cuff chase (no arrests; any exit escapes, D-042); when it runs out
+the round is `OutOfCuffs`, the fugitive's. `RoundDirector` alone ends the round. **Not yet:** heat as an arrest
+condition (P2.05), stops and complaints (P2.06), NPC panic, identity reveal and cornering in the chase (P3.06),
+the arrest clip (P1.25).
+**Why.** P1 asks whether the loop is fun; an arrest anyone can attempt makes the cost of a wrong guess the thing
+being tested. The cuff count is public because an officer cuffing a stranger is seen.
+**Reversing.** Cheap: heat becomes one more check in `Arrests`; the numbers are config.

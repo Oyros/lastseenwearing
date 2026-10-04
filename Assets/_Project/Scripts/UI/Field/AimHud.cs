@@ -7,8 +7,9 @@ namespace LastSeenWearing.UI.Field
 {
     /// <summary>
     /// The field officer's crosshair (P1.12): a dot in the middle of the screen while this client plays the
-    /// patrol, brighter when it rests on a character. In development builds the character's name shows under
-    /// it — a debug readout until stop and arrest give aiming its real feedback (P1.24). P1 placeholder look,
+    /// patrol, brighter when it rests on a character and amber when that one is close enough to cuff, with the
+    /// Arrest hold filling a bar over it (P1.24). In development builds the character's name shows under
+    /// it — a debug readout until stops give aiming their own feedback (P2.06). P1 placeholder look,
     /// built in code like <c>RoundHud</c>.
     /// </summary>
     public sealed class AimHud : MonoBehaviour
@@ -22,6 +23,10 @@ namespace LastSeenWearing.UI.Field
         private GameObject _frame;
         private Image _dot;
         private TextMeshProUGUI _debugName;
+        private RectTransform _holdBar;
+        private const float HoldBarWidth = 48f;
+        private const float HoldBarHeight = 4f;
+        private static readonly Color InReach = new(1f, 0.85f, 0.2f, 1f);
 
         private void Awake()
         {
@@ -38,7 +43,9 @@ namespace LastSeenWearing.UI.Field
             }
 
             var target = patrol.AimTarget;
-            _dot.color = target != null ? OnCharacter : Idle;
+            _dot.color = patrol.InArrestRange ? InReach : target != null ? OnCharacter : Idle;
+            _holdBar.gameObject.SetActive(patrol.ArrestHold > 0f);
+            _holdBar.sizeDelta = new Vector2(HoldBarWidth * patrol.ArrestHold, HoldBarHeight); // the Arrest hold (P1.24)
             _debugName.text = Debug.isDebugBuild && target != null ? target.Character.name : string.Empty;
         }
 
@@ -56,6 +63,16 @@ namespace LastSeenWearing.UI.Field
             dotRect.sizeDelta = new Vector2(DotSize, DotSize);
             _dot = dotObject.GetComponent<Image>();
             _dot.raycastTarget = false;
+
+            var barObject = new GameObject("ArrestHold", typeof(RectTransform), typeof(Image));
+            barObject.transform.SetParent(canvasObject.transform, false);
+            _holdBar = (RectTransform)barObject.transform;
+            _holdBar.anchorMin = _holdBar.anchorMax = new Vector2(0.5f, 0.5f);
+            _holdBar.pivot = new Vector2(0.5f, 0.5f);
+            _holdBar.anchoredPosition = new Vector2(0f, DotSize * 2f); // above the dot; the debug name sits below
+            barObject.GetComponent<Image>().color = InReach;
+            barObject.GetComponent<Image>().raycastTarget = false;
+            barObject.SetActive(false);
 
             var nameObject = new GameObject("DebugName", typeof(RectTransform), typeof(TextMeshProUGUI));
             nameObject.transform.SetParent(canvasObject.transform, false);

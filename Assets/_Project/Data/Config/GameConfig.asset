@@ -23,3 +23,4 @@ MonoBehaviour:
   _composite: {fileID: 11400000, guid: 87f5b9863f9fc6b49931be6325f15cf6, type: 2}
   _disguise: {fileID: 11400000, guid: 957a9fb59b4e87747b267fa3545456de, type: 2}
   _fugitive: {fileID: 11400000, guid: 7c2d63a38822df34fb4ec1ec63a719da, type: 2}
+  _capture: {fileID: 11400000, guid: 2cbcc632f52028b4fa9b788e24e94fdc, type: 2}

@@ -1,6 +1,7 @@
 using LastSeenWearing.Core.Config;
 using LastSeenWearing.Core.Crowd;
 using LastSeenWearing.Core.Movement;
+using LastSeenWearing.Gameplay.Capture;
 using LastSeenWearing.Gameplay.Crowd;
 using Unity.Cinemachine;
 using Unity.Netcode;
@@ -52,6 +53,14 @@ namespace LastSeenWearing.Gameplay.Player
         /// <summary>Owner only: the character under the crosshair, or none.</summary>
         public CharacterHitbox AimTarget { get; private set; }
 
+        /// <summary>Owner only: how far the Arrest hold has got, 0–1 (P1.24); 0 when not held.</summary>
+        public float ArrestHold { get; private set; }
+
+        /// <summary>Owner only: the one under the crosshair is close enough to cuff.</summary>
+        public bool InArrestRange { get; private set; }
+
+        private Arrests _arrests;
+
         public override void OnNetworkSpawn()
         {
             _body = GetComponent<CharacterController>();
@@ -73,6 +82,7 @@ namespace LastSeenWearing.Gameplay.Player
             _controls = new LastSeenWearingControls();
             _controls.Field.Enable();
             _yaw = transform.eulerAngles.y;
+            _arrests = FindFirstObjectByType<Arrests>();
             Local = this;
             TakeTheCamera();
         }
@@ -106,6 +116,7 @@ namespace LastSeenWearing.Gameplay.Player
                 var scale = isMouse ? _movement.MouseSensitivity : _movement.StickSensitivity * Time.deltaTime;
                 _yaw += look.x * scale;
                 _pitch = Mathf.Clamp(_pitch - look.y * scale, _camera.FirstPersonPitchMin, _camera.FirstPersonPitchMax);
+                ReadArrest(field);
             }
 
             // Every client: the walk runs on the ground this body covered (D-022); the owner's arms walk with it.
@@ -150,6 +161,19 @@ namespace LastSeenWearing.Gameplay.Player
                 Quaternion.Euler(_pitch, _yaw, 0f));
             _eye.fieldOfView = Camera.HorizontalToVerticalFieldOfView(_camera.FirstPersonFieldOfView, _eye.aspect);
             AimTarget = AimProbe.Find(_eye.transform.position, _eye.transform.forward, _camera.AimRange, gameObject);
+        }
+
+        // Hold Arrest on someone close (DATA §7: F, 0.5 s). The server decides who it was and what it cost.
+        private void ReadArrest(LastSeenWearingControls.FieldActions field)
+        {
+            var arrest = field.Arrest;
+            ArrestHold = arrest.IsInProgress() ? arrest.GetTimeoutCompletionPercentage() : 0f;
+            var range = _arrests != null ? _arrests.Config.ArrestRange : 0f;
+            InArrestRange = AimTarget != null && Vector3.Distance(AimTarget.Character.transform.position, transform.position) <= range;
+            if (arrest.WasPerformedThisFrame() && InArrestRange)
+            {
+                _arrests.Request(AimTarget);
+            }
         }
 
         private void TakeTheCamera()

@@ -5,6 +5,7 @@ using LastSeenWearing.Core.Randomness;
 using LastSeenWearing.Core.Roles;
 using LastSeenWearing.Core.Round;
 using LastSeenWearing.Gameplay.Crowd;
+using LastSeenWearing.Gameplay.Capture;
 using LastSeenWearing.Gameplay.Objective;
 using LastSeenWearing.Gameplay.Player;
 using LastSeenWearing.Gameplay.Roles;
@@ -38,6 +39,7 @@ namespace LastSeenWearing.Gameplay.Round
         [SerializeField] private CrowdSpawner _crowd;
         [SerializeField] private CompositeSync _composite;
         [SerializeField] private Objectives _objectives;
+        [SerializeField] private Arrests _arrests;
         [SerializeField] private NetworkObject _playerPrefab;
         [SerializeField] private RoleSpawn[] _spawns;
 
@@ -45,6 +47,7 @@ namespace LastSeenWearing.Gameplay.Round
         private readonly NetworkVariable<double> _phaseStart = new();
         private readonly NetworkVariable<int> _round = new();
         private readonly NetworkVariable<RoundOutcome> _outcome = new();
+        private readonly NetworkVariable<float> _bonusSeconds = new(); // wrong arrests' time for the fugitive (P1.24)
 
         private readonly List<NetworkObject> _bodies = new();
         private double _programmeClock = -1d;
@@ -63,7 +66,9 @@ namespace LastSeenWearing.Gameplay.Round
         public double PhaseElapsed => NetworkManager.ServerTime.Time - _phaseStart.Value;
 
         /// <summary>Seconds left in a timed phase; 0 in one that waits (Lobby).</summary>
-        public double PhaseRemaining => Math.Max(0d, _config.SecondsOf(_phase.Value) - PhaseElapsed);
+        public double PhaseRemaining => Math.Max(0d, LengthOf(_phase.Value) - PhaseElapsed);
+
+        private double LengthOf(RoundPhase phase) => _config.SecondsOf(phase) + (phase == RoundPhase.Live ? _bonusSeconds.Value : 0f);
 
         public override void OnNetworkSpawn()
         {
@@ -77,6 +82,39 @@ namespace LastSeenWearing.Gameplay.Round
 
         /// <summary>The host starts the case; it needs the roles locked (P1.09).</summary>
         public void StartCase() => StartCaseRpc();
+
+        /// <summary>Server, from <see cref="Arrests"/>: the patrol cuffed the fugitive — the police win (GDD §06).</summary>
+        public void ReportArrest()
+        {
+            if (!IsServer || _phase.Value != RoundPhase.Live)
+            {
+                return;
+            }
+
+            _outcome.Value = RoundOutcome.Arrested;
+            Fire(RoundEvent.Outcome);
+        }
+
+        /// <summary>
+        /// Server, from <see cref="Arrests"/>: a wrong arrest. The fugitive gains <paramref name="bonusSeconds"/>; with the
+        /// last cuff gone the last-cuff chase begins (GDD §04.3, §06).
+        /// </summary>
+        public void ReportWrongArrest(float bonusSeconds, bool lastCuff)
+        {
+            if (!IsServer || _phase.Value != RoundPhase.Live)
+            {
+                return;
+            }
+
+            if (lastCuff)
+            {
+                Fire(RoundEvent.CuffsSpent);
+            }
+            else
+            {
+                _bonusSeconds.Value += bonusSeconds;
+            }
+        }
 
         /// <summary>Server, from <c>Objectives</c>: the fugitive is out of an exit — the round is theirs (GDD §06, P1.23).</summary>
         public void ReportEscape()
@@ -130,8 +168,8 @@ namespace LastSeenWearing.Gameplay.Round
                 _programmeClock = elapsed;
             }
 
-            var length = _config.SecondsOf(phase);
-            if (length <= 0f || elapsed < length)
+            var length = LengthOf(phase);
+            if (length <= 0d || elapsed < length)
             {
                 return;
             }
@@ -146,6 +184,7 @@ namespace LastSeenWearing.Gameplay.Round
                     Fire(RoundEvent.TimeUp);
                     break;
                 case RoundPhase.LastCuff:
+                    _outcome.Value = RoundOutcome.OutOfCuffs; // the chase ran out: the fugitive's (P1.24; cornering is P3.06)
                     Fire(RoundEvent.ChaseOver);
                     break;
                 case RoundPhase.Result:
@@ -184,6 +223,7 @@ namespace LastSeenWearing.Gameplay.Round
             {
                 case RoundPhase.Briefing:
                     _outcome.Value = RoundOutcome.None;
+                    _bonusSeconds.Value = 0f;
                     // A new crowd every round, from the case's seed and the round number, with the round's lookalikes
                     // of what the composite has revealed so far (P1.19).
                     _crowd.Reseed(SeededRandom.Derive(_caseSeed, _round.Value), _caseSeed, _composite.Revealed(_round.Value));
@@ -193,6 +233,7 @@ namespace LastSeenWearing.Gameplay.Round
                     SpawnBodies();
                     _composite.ReportWitness(_caseSeed, _crowd.Seed, ClientOf(Role.Watcher)); // last seen, P1.20
                     _objectives.BeginRound(ClientOf(Role.Fugitive)); // targets, P1.22
+                    _arrests.BeginRound(); // cuffs, P1.24
                     break;
                 case RoundPhase.Result:
                     // Bodies stay through a last-cuff chase and go when the round is decided.
