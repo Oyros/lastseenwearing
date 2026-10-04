@@ -34,6 +34,118 @@ MonoBehaviour:
     m_Localized: 'Closing time: everyone to the exits'
     m_Metadata:
       m_Items: []
+  - m_Id: 188158129319936
+    m_Localized: flannel shirt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845888
+    m_Localized: hoodie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845889
+    m_Localized: puffer jacket
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845890
+    m_Localized: hooded raincoat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845891
+    m_Localized: sweater
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845892
+    m_Localized: trench coat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845893
+    m_Localized: T-shirt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845894
+    m_Localized: vest top
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845895
+    m_Localized: jeans
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845896
+    m_Localized: overalls
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845897
+    m_Localized: shorts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845898
+    m_Localized: skirt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845899
+    m_Localized: trousers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845900
+    m_Localized: wide-leg trousers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845901
+    m_Localized: beanie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845902
+    m_Localized: bucket hat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845903
+    m_Localized: baseball cap
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845904
+    m_Localized: paper crown
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845905
+    m_Localized: straw hat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845906
+    m_Localized: afro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845907
+    m_Localized: bald
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845908
+    m_Localized: balding
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845909
+    m_Localized: balding, with a moustache
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845910
+    m_Localized: bob
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845911
+    m_Localized: crew cut
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845912
+    m_Localized: crew cut and a beard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845913
+    m_Localized: long hair
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845914
+    m_Localized: ponytail
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

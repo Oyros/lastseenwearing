@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using LastSeenWearing.Core.Config;
 using LastSeenWearing.Core.Crowd;
+using LastSeenWearing.Core.Wardrobe;
 using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
@@ -23,6 +24,8 @@ namespace LastSeenWearing.Gameplay.Crowd
         [SerializeField] private CrowdConfig _config;
         [SerializeField] private CrowdAgent _agentPrefab;
         [SerializeField] private Transform _waypointRoot;
+        [SerializeField] private WardrobeCatalog _wardrobe;
+        [SerializeField] private WardrobeConfig _wardrobeOdds;
 
         private readonly NetworkVariable<int> _seed = new();
         private readonly NetworkVariable<double> _startTime = new();
@@ -40,6 +43,9 @@ namespace LastSeenWearing.Gameplay.Crowd
 
         /// <summary>Each NPC's walk, by index; the same on every client.</summary>
         public GaitSignature[] Signatures { get; private set; }
+
+        /// <summary>Each NPC's outfit, by index; the same on every client (P1.18).</summary>
+        public Outfit[] Outfits { get; private set; }
         public double CrowdTime => NetworkManager.ServerTime.Time - _startTime.Value;
         public long BytesLastMinute { get; private set; }
 
@@ -345,6 +351,8 @@ namespace LastSeenWearing.Gameplay.Crowd
             // and the step follows, since the cycle runs on distance (D-022).
             var gaits = GaitPlanner.SignaturesFor(seed, plans.Length, _config.Gait);
             Signatures = gaits;
+            var outfits = OutfitPlanner.OutfitsFor(seed, plans.Length, _wardrobe, _wardrobeOdds);
+            Outfits = outfits;
 
             _agents = new CrowdAgent[plans.Length];
             var log = new System.Text.StringBuilder($"[CrowdSpawner] {plans.Length} walks (seed {seed}):");
@@ -361,7 +369,8 @@ namespace LastSeenWearing.Gameplay.Crowd
                     _agents[i].SetTrait(trait.Trait, trait.Strength);
                 }
 
-                log.Append($"\n  Npc_{i:000}: {gait.Describe()}");
+                _agents[i].GetComponent<OutfitView>().Apply(outfits[i]);
+                log.Append($"\n  Npc_{i:000}: {gait.Describe()} | {outfits[i].Describe(_wardrobe)}");
             }
 
             Debug.Log(log.ToString());

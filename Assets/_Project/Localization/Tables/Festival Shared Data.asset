@@ -31,6 +31,118 @@ MonoBehaviour:
     m_Key: festival.event.closing
     m_Metadata:
       m_Items: []
+  - m_Id: 188158129319936
+    m_Key: wardrobe.flannel.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845888
+    m_Key: wardrobe.hoodie.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845889
+    m_Key: wardrobe.puffer.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845890
+    m_Key: wardrobe.raincoat.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845891
+    m_Key: wardrobe.sweater.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845892
+    m_Key: wardrobe.trench.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845893
+    m_Key: wardrobe.tshirt.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845894
+    m_Key: wardrobe.vest.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845895
+    m_Key: wardrobe.jeans.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845896
+    m_Key: wardrobe.overalls.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845897
+    m_Key: wardrobe.shorts.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845898
+    m_Key: wardrobe.skirt.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845899
+    m_Key: wardrobe.trousers.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845900
+    m_Key: wardrobe.wideleg.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845901
+    m_Key: wardrobe.beanie.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845902
+    m_Key: wardrobe.bucket.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845903
+    m_Key: wardrobe.cap.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845904
+    m_Key: wardrobe.crown.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845905
+    m_Key: wardrobe.straw.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845906
+    m_Key: wardrobe.afro.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845907
+    m_Key: wardrobe.bald.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845908
+    m_Key: wardrobe.balding.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845909
+    m_Key: wardrobe.baldingmoustache.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845910
+    m_Key: wardrobe.bob.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845911
+    m_Key: wardrobe.crew.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845912
+    m_Key: wardrobe.crewbeard.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845913
+    m_Key: wardrobe.long.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 188158183845914
+    m_Key: wardrobe.ponytail.name
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

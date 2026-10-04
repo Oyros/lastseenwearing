@@ -19,3 +19,4 @@ MonoBehaviour:
   _camera: {fileID: 11400000, guid: 37291f18641088948bb382695dc838e8, type: 2}
   _watcher: {fileID: 11400000, guid: 37202be0176ede24aa5781b983117f78, type: 2}
   _radio: {fileID: 11400000, guid: af6c31deba5ead0439296d0a0b3cf4ce, type: 2}
+  _wardrobe: {fileID: 11400000, guid: 57c617fdcb613fd4b9d7b0d09d82de68, type: 2}

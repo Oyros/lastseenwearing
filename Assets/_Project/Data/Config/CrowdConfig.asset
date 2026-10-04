@@ -20,6 +20,9 @@ MonoBehaviour:
   _walkSpeed: 1.3
   _strideLength: 1
   _runStrideLength: 2.5
+  _lod1Below: 0.15
+  _lod2Below: 0.06
+  _cullBelow: 0.005
   _noTraitOdds: 0.25
   _oneTraitOdds: 0.45
   _twoTraitOdds: 0.3

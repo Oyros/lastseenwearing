@@ -493,3 +493,28 @@ everyone watches and the fugitive avoids. Zooming costs the rest of that camera'
 monitors, so zoom everywhere balances itself; quality keeps a choice in it. Agreed with the team after the
 first cut.
 **Reversing.** Cheap: max zoom per profile and rates are config.
+
+---
+
+### D-037 — The crowd is dressed from the seed, from a generated wardrobe, LOD0 only
+**Decision.** The wardrobe is one generated asset, `Data/Wardrobe/WardrobeCatalog` (not an asset per item, as
+DATA.md first planned): garments by slot with male/female meshes and the regions they cover, hair styles, body
+parts, skin/hair colours and the 12 cloth hues as light/dark pairs — from the art's body JSON, hair options and
+palette (`WardrobeImporter`). Every NPC's outfit is drawn from its own stream of the crowd seed
+(`OutfitPlanner`, stream 2 beside gait 1), never sent; the fugitive's start outfit is drawn after the crowd's
+and redrawn until no NPC wears the same. Rules from the art: a hood covers the head (no hat), the facial-hair
+styles are men's, no skirt under the trench (PL.33). Odds are `WardrobeConfig` (women 50 %, team). `OutfitView`
+shows the sex's body parts the clothes leave bare, the face decal (the art's atlas, alpha cut out — D-010), the
+hair unless hooded, top, bottom and hat; colours the first material slot from a shared swatch material per
+palette colour (second slots are the garment's accent); sets the build shape key. NPCs destroy every part they
+do not wear and wear **LOD0 only**; the fugitive keeps its whole wardrobe for the tent (P1.21). Masks, glasses
+and accessories are in the export but not dressed yet (close-range clues and stops come later; the mask colour
+rule `mask_for_skin` is not in the export yet).
+**Why.** Generated data cannot drift from the art; one asset for ~30 generated items is simpler than 30.
+Measured: a LOD group culls drawing but its hidden skinned meshes are still skinned every frame — with the art's
+`_LOD1`/`_LOD2` copies active, 150 dressed NPCs ran at 9 fps; with LOD0 only, 42 fps (vs 28 undressed with 16
+parts each). Readability (PL.16): only heavy build and the light/dark of torso, thighs and shins read on camera
+— the outfit keeps those as data for the lookalikes of P1.19.
+**Follow-up.** Our own LOD switching (one level active, picked from the nearest rendering camera) and the
+per-NPC mesh combine (D-027) are a performance task, not needed at 42 fps with three editors.
+**Reversing.** Moderate: the catalog shape is used by planner and view; odds and rules are cheap.

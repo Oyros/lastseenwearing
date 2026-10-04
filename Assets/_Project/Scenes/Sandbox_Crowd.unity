@@ -1722,6 +1722,8 @@ MonoBehaviour:
   _config: {fileID: 11400000, guid: 121a58c0c85683542b4069daa63b0841, type: 2}
   _agentPrefab: {fileID: 5142075122311944539, guid: 97e1e1423810ce44f80abea1eeda293c, type: 3}
   _waypointRoot: {fileID: 630626982}
+  _wardrobe: {fileID: 11400000, guid: c990c1bc53d4dd24babc9a46681253eb, type: 2}
+  _wardrobeOdds: {fileID: 11400000, guid: 57c617fdcb613fd4b9d7b0d09d82de68, type: 2}
 --- !u!114 &1113662438
 MonoBehaviour:
   m_ObjectHideFlags: 0

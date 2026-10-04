@@ -18,12 +18,14 @@ namespace LastSeenWearing.Core.Config
         [SerializeField] private CameraConfig _camera;
         [SerializeField] private WatcherConfig _watcher;
         [SerializeField] private RadioConfig _radio;
+        [SerializeField] private WardrobeConfig _wardrobe;
 
         public LobbyConfig Lobby => _lobby;
         public RoundConfig Round => _round;
         public CameraConfig Camera => _camera;
         public WatcherConfig Watcher => _watcher;
         public RadioConfig Radio => _radio;
+        public WardrobeConfig Wardrobe => _wardrobe;
         public MovementConfig Movement => _movement;
         public CrowdConfig Crowd => _crowd;
     }

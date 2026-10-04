@@ -1,0 +1,102 @@
+{
+ "kind": "hair_options",
+ "options": {
+  "Bald": {
+   "hair": null,
+   "facial": null,
+   "meshes": {
+    "M": [],
+    "F": []
+   },
+   "default_colour": null
+  },
+  "Crew": {
+   "hair": "Crew",
+   "facial": null,
+   "meshes": {
+    "M": [
+     "LSW_Crowd_Hair_Crew_M"
+    ],
+    "F": [
+     "LSW_Crowd_Hair_Crew_F"
+    ]
+   },
+   "default_colour": "HairDarkBrown"
+  },
+  "Long": {
+   "hair": "Long",
+   "facial": null,
+   "meshes": {
+    "M": [
+     "LSW_Crowd_Hair_Long_M"
+    ],
+    "F": [
+     "LSW_Crowd_Hair_Long_F"
+    ]
+   },
+   "default_colour": "HairBrown"
+  },
+  "Ponytail": {
+   "hair": "Ponytail",
+   "facial": null,
+   "meshes": {
+    "M": [
+     "LSW_Crowd_Hair_Ponytail_M"
+    ],
+    "F": [
+     "LSW_Crowd_Hair_Ponytail_F"
+    ]
+   },
+   "default_colour": "HairBlack"
+  },
+  "Afro": {
+   "hair": "Afro",
+   "facial": null,
+   "meshes": {
+    "M": [
+     "LSW_Crowd_Hair_Afro_M"
+    ],
+    "F": [
+     "LSW_Crowd_Hair_Afro_F"
+    ]
+   },
+   "default_colour": "HairBlack"
+  },
+  "Bob": {
+   "hair": "Bob",
+   "facial": null,
+   "meshes": {
+    "M": [
+     "LSW_Crowd_Hair_Bob_M"
+    ],
+    "F": [
+     "LSW_Crowd_Hair_Bob_F"
+    ]
+   },
+   "default_colour": "HairAuburn"
+  },
+  "CrewBeard": {
+   "hair": "Crew",
+   "facial": "Beard",
+   "meshes": {
+    "M": [
+     "LSW_Crowd_Hair_Crew_M",
+     "LSW_Crowd_Beard_M"
+    ]
+   },
+   "default_colour": "HairDarkBrown"
+  },
+  "BaldingMoustache": {
+   "hair": "Balding",
+   "facial": "Moustache",
+   "meshes": {
+    "M": [
+     "LSW_Crowd_Hair_Balding_M",
+     "LSW_Crowd_Moustache_M"
+    ]
+   },
+   "default_colour": "HairGrey"
+  }
+ },
+ "note": "Bald = no hair mesh; colours come from MAT_LSW_Hair* (any style can take any hair colour)"
+}

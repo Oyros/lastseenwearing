@@ -1,0 +1,1366 @@
+{
+ "light_min": 0.6,
+ "dark_max": 0.25,
+ "materials": [
+  {
+   "name": "MAT_LSW_SkinPale",
+   "short": "SkinPale",
+   "hex": "#F2D3BE",
+   "group": "Skin",
+   "linear": [
+    0.88792,
+    0.65141,
+    0.51492
+   ],
+   "luma": 0.847,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_SkinLight",
+   "short": "SkinLight",
+   "hex": "#E3B796",
+   "group": "Skin",
+   "linear": [
+    0.76815,
+    0.47353,
+    0.30499
+   ],
+   "luma": 0.745,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_SkinMid",
+   "short": "SkinMid",
+   "hex": "#C8936B",
+   "group": "Skin",
+   "linear": [
+    0.57758,
+    0.29177,
+    0.14703
+   ],
+   "luma": 0.609,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_SkinTan",
+   "short": "SkinTan",
+   "hex": "#A86F4A",
+   "group": "Skin",
+   "linear": [
+    0.39157,
+    0.15896,
+    0.06848
+   ],
+   "luma": 0.472,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_SkinBrown",
+   "short": "SkinBrown",
+   "hex": "#7C4D30",
+   "group": "Skin",
+   "linear": [
+    0.20156,
+    0.07421,
+    0.02956
+   ],
+   "luma": 0.333,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_SkinDeep",
+   "short": "SkinDeep",
+   "hex": "#4E2E1E",
+   "group": "Skin",
+   "linear": [
+    0.07619,
+    0.02732,
+    0.01298
+   ],
+   "luma": 0.203,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_HairBlack",
+   "short": "HairBlack",
+   "hex": "#1A1716",
+   "group": "Hair",
+   "linear": [
+    0.01033,
+    0.00857,
+    0.00802
+   ],
+   "luma": 0.092,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_HairDarkBrown",
+   "short": "HairDarkBrown",
+   "hex": "#3B2619",
+   "group": "Hair",
+   "linear": [
+    0.04374,
+    0.01938,
+    0.00972
+   ],
+   "luma": 0.163,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_HairBrown",
+   "short": "HairBrown",
+   "hex": "#6A4429",
+   "group": "Hair",
+   "linear": [
+    0.14413,
+    0.05781,
+    0.02217
+   ],
+   "luma": 0.291,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_HairAuburn",
+   "short": "HairAuburn",
+   "hex": "#8E3B22",
+   "group": "Hair",
+   "linear": [
+    0.2705,
+    0.04374,
+    0.016
+   ],
+   "luma": 0.293,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_HairBlonde",
+   "short": "HairBlonde",
+   "hex": "#D8B66E",
+   "group": "Hair",
+   "linear": [
+    0.68669,
+    0.46778,
+    0.15593
+   ],
+   "luma": 0.722,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_HairGrey",
+   "short": "HairGrey",
+   "hex": "#9C9894",
+   "group": "Hair",
+   "linear": [
+    0.33245,
+    0.31399,
+    0.29614
+   ],
+   "luma": 0.598,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_HairWhite",
+   "short": "HairWhite",
+   "hex": "#E8E4DC",
+   "group": "Hair",
+   "linear": [
+    0.80695,
+    0.77582,
+    0.71569
+   ],
+   "luma": 0.895,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothRedLight",
+   "short": "ClothRedLight",
+   "hex": "#F28C84",
+   "group": "Cloth",
+   "linear": [
+    0.88792,
+    0.26225,
+    0.23074
+   ],
+   "luma": 0.632,
+   "value": "Light",
+   "hue": "Red",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothRedDark",
+   "short": "ClothRedDark",
+   "hex": "#6E1C20",
+   "group": "Cloth",
+   "linear": [
+    0.15593,
+    0.01161,
+    0.01444
+   ],
+   "luma": 0.179,
+   "value": "Dark",
+   "hue": "Red",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothOrangeLight",
+   "short": "ClothOrangeLight",
+   "hex": "#F4A862",
+   "group": "Cloth",
+   "linear": [
+    0.90466,
+    0.39157,
+    0.12214
+   ],
+   "luma": 0.702,
+   "value": "Light",
+   "hue": "Orange",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothOrangeDark",
+   "short": "ClothOrangeDark",
+   "hex": "#6A3112",
+   "group": "Cloth",
+   "linear": [
+    0.14413,
+    0.03071,
+    0.00605
+   ],
+   "luma": 0.231,
+   "value": "Dark",
+   "hue": "Orange",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothMustardLight",
+   "short": "ClothMustardLight",
+   "hex": "#EACB64",
+   "group": "Cloth",
+   "linear": [
+    0.82279,
+    0.5972,
+    0.12744
+   ],
+   "luma": 0.793,
+   "value": "Light",
+   "hue": "Mustard",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothMustardDark",
+   "short": "ClothMustardDark",
+   "hex": "#4E3A0C",
+   "group": "Cloth",
+   "linear": [
+    0.07619,
+    0.04231,
+    0.00368
+   ],
+   "luma": 0.231,
+   "value": "Dark",
+   "hue": "Mustard",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothGreenLight",
+   "short": "ClothGreenLight",
+   "hex": "#A2CF84",
+   "group": "Cloth",
+   "linear": [
+    0.36131,
+    0.62396,
+    0.23074
+   ],
+   "luma": 0.753,
+   "value": "Light",
+   "hue": "Green",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothGreenDark",
+   "short": "ClothGreenDark",
+   "hex": "#234620",
+   "group": "Cloth",
+   "linear": [
+    0.01681,
+    0.06125,
+    0.01444
+   ],
+   "luma": 0.235,
+   "value": "Dark",
+   "hue": "Green",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothTealLight",
+   "short": "ClothTealLight",
+   "hex": "#86CEC4",
+   "group": "Cloth",
+   "linear": [
+    0.2384,
+    0.61721,
+    0.55201
+   ],
+   "luma": 0.745,
+   "value": "Light",
+   "hue": "Teal",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothTealDark",
+   "short": "ClothTealDark",
+   "hex": "#164240",
+   "group": "Cloth",
+   "linear": [
+    0.00802,
+    0.05448,
+    0.05127
+   ],
+   "luma": 0.222,
+   "value": "Dark",
+   "hue": "Teal",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothBlueLight",
+   "short": "ClothBlueLight",
+   "hex": "#93BAEA",
+   "group": "Cloth",
+   "linear": [
+    0.29177,
+    0.49102,
+    0.82279
+   ],
+   "luma": 0.71,
+   "value": "Light",
+   "hue": "Blue",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothBlueDark",
+   "short": "ClothBlueDark",
+   "hex": "#1D3768",
+   "group": "Cloth",
+   "linear": [
+    0.01229,
+    0.0382,
+    0.13843
+   ],
+   "luma": 0.208,
+   "value": "Dark",
+   "hue": "Blue",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothDenimLight",
+   "short": "ClothDenimLight",
+   "hex": "#A3B9D2",
+   "group": "Cloth",
+   "linear": [
+    0.36625,
+    0.48515,
+    0.64448
+   ],
+   "luma": 0.714,
+   "value": "Light",
+   "hue": "Denim",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothDenimDark",
+   "short": "ClothDenimDark",
+   "hex": "#263958",
+   "group": "Cloth",
+   "linear": [
+    0.01938,
+    0.04092,
+    0.09759
+   ],
+   "luma": 0.216,
+   "value": "Dark",
+   "hue": "Denim",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothPurpleLight",
+   "short": "ClothPurpleLight",
+   "hex": "#BEA2DC",
+   "group": "Cloth",
+   "linear": [
+    0.51492,
+    0.36131,
+    0.71569
+   ],
+   "luma": 0.675,
+   "value": "Light",
+   "hue": "Purple",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothPurpleDark",
+   "short": "ClothPurpleDark",
+   "hex": "#432759",
+   "group": "Cloth",
+   "linear": [
+    0.05613,
+    0.02029,
+    0.0999
+   ],
+   "luma": 0.19,
+   "value": "Dark",
+   "hue": "Purple",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothPinkLight",
+   "short": "ClothPinkLight",
+   "hex": "#F4B0C8",
+   "group": "Cloth",
+   "linear": [
+    0.90466,
+    0.43415,
+    0.57758
+   ],
+   "luma": 0.754,
+   "value": "Light",
+   "hue": "Pink",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothPinkDark",
+   "short": "ClothPinkDark",
+   "hex": "#6A2244",
+   "group": "Cloth",
+   "linear": [
+    0.14413,
+    0.016,
+    0.05781
+   ],
+   "luma": 0.203,
+   "value": "Dark",
+   "hue": "Pink",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothBrownLight",
+   "short": "ClothBrownLight",
+   "hex": "#D6B98F",
+   "group": "Cloth",
+   "linear": [
+    0.67244,
+    0.48515,
+    0.27468
+   ],
+   "luma": 0.738,
+   "value": "Light",
+   "hue": "Brown",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothBrownDark",
+   "short": "ClothBrownDark",
+   "hex": "#4A3020",
+   "group": "Cloth",
+   "linear": [
+    0.06848,
+    0.02956,
+    0.01444
+   ],
+   "luma": 0.205,
+   "value": "Dark",
+   "hue": "Brown",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothOliveLight",
+   "short": "ClothOliveLight",
+   "hex": "#C6C88E",
+   "group": "Cloth",
+   "linear": [
+    0.56471,
+    0.57758,
+    0.2705
+   ],
+   "luma": 0.766,
+   "value": "Light",
+   "hue": "Olive",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothOliveDark",
+   "short": "ClothOliveDark",
+   "hex": "#383A20",
+   "group": "Cloth",
+   "linear": [
+    0.03955,
+    0.04231,
+    0.01444
+   ],
+   "luma": 0.218,
+   "value": "Dark",
+   "hue": "Olive",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothMonoLight",
+   "short": "ClothMonoLight",
+   "hex": "#ECE9E3",
+   "group": "Cloth",
+   "linear": [
+    0.8388,
+    0.81485,
+    0.76815
+   ],
+   "luma": 0.915,
+   "value": "Light",
+   "hue": "Mono",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_ClothMonoDark",
+   "short": "ClothMonoDark",
+   "hex": "#2A2A30",
+   "group": "Cloth",
+   "linear": [
+    0.02315,
+    0.02315,
+    0.02956
+   ],
+   "luma": 0.166,
+   "value": "Dark",
+   "hue": "Mono",
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_MaskWhite",
+   "short": "MaskWhite",
+   "hex": "#F6F3EA",
+   "group": "Mask",
+   "linear": [
+    0.92158,
+    0.89627,
+    0.82279
+   ],
+   "luma": 0.953,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_MaskBlack",
+   "short": "MaskBlack",
+   "hex": "#141316",
+   "group": "Mask",
+   "linear": [
+    0.007,
+    0.00651,
+    0.00802
+   ],
+   "luma": 0.076,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_MaskFox",
+   "short": "MaskFox",
+   "hex": "#E8742E",
+   "group": "Mask",
+   "linear": [
+    0.80695,
+    0.17465,
+    0.02732
+   ],
+   "luma": 0.532,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_MaskGold",
+   "short": "MaskGold",
+   "hex": "#E2B84A",
+   "group": "Mask",
+   "linear": [
+    0.76052,
+    0.47932,
+    0.06848
+   ],
+   "luma": 0.725,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_UniformDark",
+   "short": "UniformDark",
+   "hex": "#1C2230",
+   "group": "Uniform",
+   "linear": [
+    0.01161,
+    0.016,
+    0.02956
+   ],
+   "luma": 0.132,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_UniformHiVis",
+   "short": "UniformHiVis",
+   "hex": "#D8EE5A",
+   "group": "Uniform",
+   "linear": [
+    0.68669,
+    0.85499,
+    0.10224
+   ],
+   "luma": 0.873,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_UniformCapBand",
+   "short": "UniformCapBand",
+   "hex": "#F2F2EE",
+   "group": "Uniform",
+   "linear": [
+    0.88792,
+    0.88792,
+    0.85499
+   ],
+   "luma": 0.948,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_UniformBelt",
+   "short": "UniformBelt",
+   "hex": "#16161A",
+   "group": "Uniform",
+   "linear": [
+    0.00802,
+    0.00802,
+    0.01033
+   ],
+   "luma": 0.087,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_DogTan",
+   "short": "DogTan",
+   "hex": "#B07A45",
+   "group": "Dog",
+   "linear": [
+    0.43415,
+    0.19462,
+    0.05951
+   ],
+   "luma": 0.508,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_DogDark",
+   "short": "DogDark",
+   "hex": "#2E241D",
+   "group": "Dog",
+   "linear": [
+    0.02732,
+    0.01764,
+    0.01229
+   ],
+   "luma": 0.148,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_DogVest",
+   "short": "DogVest",
+   "hex": "#E6EA9A",
+   "group": "Dog",
+   "linear": [
+    0.7913,
+    0.82279,
+    0.32314
+   ],
+   "luma": 0.892,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_BalloonRed",
+   "short": "BalloonRed",
+   "hex": "#EE4B4B",
+   "group": "Accessory",
+   "linear": [
+    0.85499,
+    0.07036,
+    0.07036
+   ],
+   "luma": 0.43,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_BalloonBlue",
+   "short": "BalloonBlue",
+   "hex": "#4B8BEE",
+   "group": "Accessory",
+   "linear": [
+    0.07036,
+    0.25818,
+    0.85499
+   ],
+   "luma": 0.52,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_BalloonYellow",
+   "short": "BalloonYellow",
+   "hex": "#F2D24B",
+   "group": "Accessory",
+   "linear": [
+    0.88792,
+    0.64448,
+    0.07036
+   ],
+   "luma": 0.812,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_LensDark",
+   "short": "LensDark",
+   "hex": "#101114",
+   "group": "Accessory",
+   "linear": [
+    0.00518,
+    0.00561,
+    0.007
+   ],
+   "luma": 0.067,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_StrapDark",
+   "short": "StrapDark",
+   "hex": "#2A2420",
+   "group": "Accessory",
+   "linear": [
+    0.02315,
+    0.01764,
+    0.01444
+   ],
+   "luma": 0.145,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_StallWood",
+   "short": "StallWood",
+   "hex": "#9A6A44",
+   "group": "Festival",
+   "linear": [
+    0.32314,
+    0.14413,
+    0.05781
+   ],
+   "luma": 0.445,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_StallWoodDark",
+   "short": "StallWoodDark",
+   "hex": "#5A3C26",
+   "group": "Festival",
+   "linear": [
+    0.10224,
+    0.04519,
+    0.01938
+   ],
+   "luma": 0.254,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_CanvasRed",
+   "short": "CanvasRed",
+   "hex": "#C8383A",
+   "group": "Festival",
+   "linear": [
+    0.57758,
+    0.03955,
+    0.04231
+   ],
+   "luma": 0.34,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_CanvasBlue",
+   "short": "CanvasBlue",
+   "hex": "#3A62B8",
+   "group": "Festival",
+   "linear": [
+    0.04231,
+    0.12214,
+    0.47932
+   ],
+   "luma": 0.375,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_CanvasGreen",
+   "short": "CanvasGreen",
+   "hex": "#3E9A5A",
+   "group": "Festival",
+   "linear": [
+    0.04817,
+    0.32314,
+    0.10224
+   ],
+   "luma": 0.509,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_CanvasYellow",
+   "short": "CanvasYellow",
+   "hex": "#E8C24A",
+   "group": "Festival",
+   "linear": [
+    0.80695,
+    0.53948,
+    0.06848
+   ],
+   "luma": 0.758,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_CanvasWhite",
+   "short": "CanvasWhite",
+   "hex": "#EEE8DC",
+   "group": "Festival",
+   "linear": [
+    0.85499,
+    0.80695,
+    0.71569
+   ],
+   "luma": 0.911,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_TentFabric",
+   "short": "TentFabric",
+   "hex": "#7A4E8E",
+   "group": "Festival",
+   "linear": [
+    0.19462,
+    0.07619,
+    0.2705
+   ],
+   "luma": 0.361,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_PavingLight",
+   "short": "PavingLight",
+   "hex": "#B7A894",
+   "group": "Festival",
+   "linear": [
+    0.47353,
+    0.39157,
+    0.29614
+   ],
+   "luma": 0.666,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_PavingDark",
+   "short": "PavingDark",
+   "hex": "#6E6458",
+   "group": "Festival",
+   "linear": [
+    0.15593,
+    0.12744,
+    0.09759
+   ],
+   "luma": 0.397,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_Grass",
+   "short": "Grass",
+   "hex": "#5E8A44",
+   "group": "Festival",
+   "linear": [
+    0.11193,
+    0.25415,
+    0.05781
+   ],
+   "luma": 0.485,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_Soil",
+   "short": "Soil",
+   "hex": "#6A5038",
+   "group": "Festival",
+   "linear": [
+    0.14413,
+    0.08022,
+    0.03955
+   ],
+   "luma": 0.329,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_WallPlaster",
+   "short": "WallPlaster",
+   "hex": "#C9B49A",
+   "group": "Festival",
+   "linear": [
+    0.58408,
+    0.45641,
+    0.32314
+   ],
+   "luma": 0.716,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_WallBrick",
+   "short": "WallBrick",
+   "hex": "#8A4A38",
+   "group": "Festival",
+   "linear": [
+    0.25415,
+    0.06848,
+    0.03955
+   ],
+   "luma": 0.338,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_Roof",
+   "short": "Roof",
+   "hex": "#4A3A44",
+   "group": "Festival",
+   "linear": [
+    0.06848,
+    0.04231,
+    0.05781
+   ],
+   "luma": 0.244,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_Window",
+   "short": "Window",
+   "hex": "#2A3046",
+   "group": "Festival",
+   "linear": [
+    0.02315,
+    0.02956,
+    0.06125
+   ],
+   "luma": 0.189,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_StageDeck",
+   "short": "StageDeck",
+   "hex": "#2C2A30",
+   "group": "Festival",
+   "linear": [
+    0.02519,
+    0.02315,
+    0.02956
+   ],
+   "luma": 0.168,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_Barrier",
+   "short": "Barrier",
+   "hex": "#C9CCD2",
+   "group": "Festival",
+   "linear": [
+    0.58408,
+    0.60383,
+    0.64448
+   ],
+   "luma": 0.799,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_BoothPanel",
+   "short": "BoothPanel",
+   "hex": "#3E4650",
+   "group": "Festival",
+   "linear": [
+    0.04817,
+    0.06125,
+    0.08022
+   ],
+   "luma": 0.271,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_MetalSteel",
+   "short": "MetalSteel",
+   "hex": "#8E949C",
+   "group": "Metal",
+   "linear": [
+    0.2705,
+    0.29614,
+    0.33245
+   ],
+   "luma": 0.578,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": true
+  },
+  {
+   "name": "MAT_LSW_MetalDark",
+   "short": "MetalDark",
+   "hex": "#3A3E44",
+   "group": "Metal",
+   "linear": [
+    0.04231,
+    0.04817,
+    0.05781
+   ],
+   "luma": 0.242,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": true
+  },
+  {
+   "name": "MAT_LSW_MetalCuffs",
+   "short": "MetalCuffs",
+   "hex": "#B8BEC6",
+   "group": "Metal",
+   "linear": [
+    0.47932,
+    0.51492,
+    0.56471
+   ],
+   "luma": 0.742,
+   "value": null,
+   "hue": null,
+   "emit": 0.0,
+   "metal": true
+  },
+  {
+   "name": "MAT_LSW_EmitLampAmber",
+   "short": "EmitLampAmber",
+   "hex": "#FFB45A",
+   "group": "Emit",
+   "linear": [
+    1.0,
+    0.45641,
+    0.10224
+   ],
+   "luma": 0.743,
+   "value": null,
+   "hue": null,
+   "emit": 6.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_EmitStringRed",
+   "short": "EmitStringRed",
+   "hex": "#FF5A4A",
+   "group": "Emit",
+   "linear": [
+    1.0,
+    0.10224,
+    0.06848
+   ],
+   "luma": 0.486,
+   "value": null,
+   "hue": null,
+   "emit": 4.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_EmitStringGreen",
+   "short": "EmitStringGreen",
+   "hex": "#6AF07A",
+   "group": "Emit",
+   "linear": [
+    0.14413,
+    0.87137,
+    0.19462
+   ],
+   "luma": 0.796,
+   "value": null,
+   "hue": null,
+   "emit": 4.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_EmitStringBlue",
+   "short": "EmitStringBlue",
+   "hex": "#5A9AFF",
+   "group": "Emit",
+   "linear": [
+    0.10224,
+    0.32314,
+    1.0
+   ],
+   "luma": 0.579,
+   "value": null,
+   "hue": null,
+   "emit": 4.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_EmitStringYellow",
+   "short": "EmitStringYellow",
+   "hex": "#FFE06A",
+   "group": "Emit",
+   "linear": [
+    1.0,
+    0.7454,
+    0.14413
+   ],
+   "luma": 0.871,
+   "value": null,
+   "hue": null,
+   "emit": 4.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_EmitStringPink",
+   "short": "EmitStringPink",
+   "hex": "#FF7AC8",
+   "group": "Emit",
+   "linear": [
+    1.0,
+    0.19462,
+    0.57758
+   ],
+   "luma": 0.611,
+   "value": null,
+   "hue": null,
+   "emit": 4.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_EmitWheel",
+   "short": "EmitWheel",
+   "hex": "#FFD68A",
+   "group": "Emit",
+   "linear": [
+    1.0,
+    0.67244,
+    0.25415
+   ],
+   "luma": 0.852,
+   "value": null,
+   "hue": null,
+   "emit": 5.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_EmitStage",
+   "short": "EmitStage",
+   "hex": "#B47AFF",
+   "group": "Emit",
+   "linear": [
+    0.45641,
+    0.19462,
+    1.0
+   ],
+   "luma": 0.564,
+   "value": null,
+   "hue": null,
+   "emit": 5.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_EmitCCTVRed",
+   "short": "EmitCCTVRed",
+   "hex": "#FF2A1E",
+   "group": "Emit",
+   "linear": [
+    1.0,
+    0.02315,
+    0.01298
+   ],
+   "luma": 0.339,
+   "value": null,
+   "hue": null,
+   "emit": 8.0,
+   "metal": false
+  },
+  {
+   "name": "MAT_LSW_EmitRadioTalk",
+   "short": "EmitRadioTalk",
+   "hex": "#4AFF6A",
+   "group": "Emit",
+   "linear": [
+    0.06848,
+    1.0,
+    0.14413
+   ],
+   "luma": 0.807,
+   "value": null,
+   "hue": null,
+   "emit": 6.0,
+   "metal": false
+  }
+ ]
+}

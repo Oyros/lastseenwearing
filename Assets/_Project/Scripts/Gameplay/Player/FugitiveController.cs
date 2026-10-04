@@ -1,6 +1,7 @@
 using LastSeenWearing.Core.Config;
 using LastSeenWearing.Core.Crowd;
 using LastSeenWearing.Core.Movement;
+using LastSeenWearing.Core.Wardrobe;
 using LastSeenWearing.Gameplay.Crowd;
 using LastSeenWearing.Gameplay.Interaction;
 using Unity.Cinemachine;
@@ -29,6 +30,7 @@ namespace LastSeenWearing.Gameplay.Player
         [SerializeField] private MovementConfig _movement;
         [SerializeField] private CameraConfig _camera;
         [SerializeField] private CrowdConfig _crowd;
+        [SerializeField] private WardrobeConfig _wardrobeOdds;
         [SerializeField] private Transform _cameraPivot;
 
         private readonly NetworkVariable<int> _crowdSeed = new();
@@ -51,6 +53,9 @@ namespace LastSeenWearing.Gameplay.Player
         private float _fall;
 
         public GaitSignature Gait { get; private set; }
+
+        /// <summary>The outfit the fugitive starts the round in (P1.18); tents change it later (P1.21).</summary>
+        public Outfit Outfit { get; private set; }
 
         /// <summary>Server, right after spawning: the crowd this fugitive hides in this round.</summary>
         public void SetCrowdSeed(int seed)
@@ -103,9 +108,14 @@ namespace LastSeenWearing.Gameplay.Player
             _walk.Apply(Gait);
             _walkSpeed = _crowd.WalkSpeed * _crowd.TempoMultiplier(Gait.Tempo);
             _walk.SetRunSpeeds(_walkSpeed, _movement.FugitiveRunSpeed); // the sprint breaks into the Run clip (PL.11b)
+
+            // Dressed after the crowd and unlike any NPC (GDD §05) — from the same seed on every client.
+            var view = GetComponent<OutfitView>();
+            Outfit = OutfitPlanner.CharacterOutfit(crowdSeed, _crowd.NpcCount, GaitSlot, view.Catalog, _wardrobeOdds);
+            view.Apply(Outfit);
             if (IsOwner)
             {
-                Debug.Log($"[Fugitive] Your walk: {Gait.Describe()}.");
+                Debug.Log($"[Fugitive] Your walk: {Gait.Describe()}. You wear: {Outfit.Describe(view.Catalog)}.");
             }
         }
 

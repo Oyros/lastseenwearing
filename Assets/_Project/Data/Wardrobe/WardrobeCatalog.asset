@@ -1,0 +1,444 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a726653a0cae535418f3d39ecc362797, type: 3}
+  m_Name: WardrobeCatalog
+  m_EditorClassIdentifier: LastSeenWearing.Core::LastSeenWearing.Core.Wardrobe.WardrobeCatalog
+  _tops:
+  - Id: Flannel
+    NameKey: wardrobe.flannel.name
+    MaleMesh: LSW_Crowd_Top_Flannel_M
+    FemaleMesh: LSW_Crowd_Top_Flannel_F
+    Hides:
+    - Torso
+    - UpperArm
+    - Forearm
+  - Id: Hoodie
+    NameKey: wardrobe.hoodie.name
+    MaleMesh: LSW_Crowd_Top_Hoodie_M
+    FemaleMesh: LSW_Crowd_Top_Hoodie_F
+    Hides:
+    - Torso
+    - UpperArm
+    - Forearm
+  - Id: Puffer
+    NameKey: wardrobe.puffer.name
+    MaleMesh: LSW_Crowd_Top_Puffer_M
+    FemaleMesh: LSW_Crowd_Top_Puffer_F
+    Hides:
+    - Torso
+    - UpperArm
+    - Forearm
+  - Id: Raincoat
+    NameKey: wardrobe.raincoat.name
+    MaleMesh: LSW_Crowd_Top_Raincoat_M
+    FemaleMesh: LSW_Crowd_Top_Raincoat_F
+    Hides:
+    - Torso
+    - UpperArm
+    - Forearm
+    - Hair
+  - Id: Sweater
+    NameKey: wardrobe.sweater.name
+    MaleMesh: LSW_Crowd_Top_Sweater_M
+    FemaleMesh: LSW_Crowd_Top_Sweater_F
+    Hides:
+    - Torso
+    - UpperArm
+    - Forearm
+  - Id: TShirt
+    NameKey: wardrobe.tshirt.name
+    MaleMesh: LSW_Crowd_Top_TShirt_M
+    FemaleMesh: LSW_Crowd_Top_TShirt_F
+    Hides:
+    - Torso
+  - Id: Trench
+    NameKey: wardrobe.trench.name
+    MaleMesh: LSW_Crowd_Top_Trench_M
+    FemaleMesh: LSW_Crowd_Top_Trench_F
+    Hides:
+    - Torso
+    - UpperArm
+    - Forearm
+  - Id: Vest
+    NameKey: wardrobe.vest.name
+    MaleMesh: LSW_Crowd_Top_Vest_M
+    FemaleMesh: LSW_Crowd_Top_Vest_F
+    Hides:
+    - Torso
+  _bottoms:
+  - Id: Jeans
+    NameKey: wardrobe.jeans.name
+    MaleMesh: LSW_Crowd_Bottom_Jeans_M
+    FemaleMesh: LSW_Crowd_Bottom_Jeans_F
+    Hides:
+    - Pelvis
+    - Thigh
+    - Shin
+  - Id: Overalls
+    NameKey: wardrobe.overalls.name
+    MaleMesh: LSW_Crowd_Bottom_Overalls_M
+    FemaleMesh: LSW_Crowd_Bottom_Overalls_F
+    Hides:
+    - Pelvis
+    - Thigh
+    - Shin
+  - Id: Shorts
+    NameKey: wardrobe.shorts.name
+    MaleMesh: LSW_Crowd_Bottom_Shorts_M
+    FemaleMesh: LSW_Crowd_Bottom_Shorts_F
+    Hides:
+    - Pelvis
+  - Id: Skirt
+    NameKey: wardrobe.skirt.name
+    MaleMesh: LSW_Crowd_Bottom_Skirt_M
+    FemaleMesh: LSW_Crowd_Bottom_Skirt_F
+    Hides:
+    - Pelvis
+    - Thigh
+  - Id: Trousers
+    NameKey: wardrobe.trousers.name
+    MaleMesh: LSW_Crowd_Bottom_Trousers_M
+    FemaleMesh: LSW_Crowd_Bottom_Trousers_F
+    Hides:
+    - Pelvis
+    - Thigh
+    - Shin
+  - Id: WideLeg
+    NameKey: wardrobe.wideleg.name
+    MaleMesh: LSW_Crowd_Bottom_WideLeg_M
+    FemaleMesh: LSW_Crowd_Bottom_WideLeg_F
+    Hides:
+    - Pelvis
+    - Thigh
+    - Shin
+  _hats:
+  - Id: Beanie
+    NameKey: wardrobe.beanie.name
+    MaleMesh: LSW_Crowd_Hat_Beanie_M
+    FemaleMesh: LSW_Crowd_Hat_Beanie_F
+    Hides: []
+  - Id: Bucket
+    NameKey: wardrobe.bucket.name
+    MaleMesh: LSW_Crowd_Hat_Bucket_M
+    FemaleMesh: LSW_Crowd_Hat_Bucket_F
+    Hides: []
+  - Id: Cap
+    NameKey: wardrobe.cap.name
+    MaleMesh: LSW_Crowd_Hat_Cap_M
+    FemaleMesh: LSW_Crowd_Hat_Cap_F
+    Hides: []
+  - Id: Crown
+    NameKey: wardrobe.crown.name
+    MaleMesh: LSW_Crowd_Hat_Crown_M
+    FemaleMesh: LSW_Crowd_Hat_Crown_F
+    Hides: []
+  - Id: Straw
+    NameKey: wardrobe.straw.name
+    MaleMesh: LSW_Crowd_Hat_Straw_M
+    FemaleMesh: LSW_Crowd_Hat_Straw_F
+    Hides: []
+  _hairStyles:
+  - Id: Afro
+    NameKey: wardrobe.afro.name
+    MaleMeshes:
+    - LSW_Crowd_Hair_Afro_M
+    FemaleMeshes:
+    - LSW_Crowd_Hair_Afro_F
+    Bald: 0
+  - Id: Bald
+    NameKey: wardrobe.bald.name
+    MaleMeshes: []
+    FemaleMeshes: []
+    Bald: 1
+  - Id: BaldingMoustache
+    NameKey: wardrobe.baldingmoustache.name
+    MaleMeshes:
+    - LSW_Crowd_Hair_Balding_M
+    - LSW_Crowd_Moustache_M
+    FemaleMeshes: []
+    Bald: 0
+  - Id: Bob
+    NameKey: wardrobe.bob.name
+    MaleMeshes:
+    - LSW_Crowd_Hair_Bob_M
+    FemaleMeshes:
+    - LSW_Crowd_Hair_Bob_F
+    Bald: 0
+  - Id: Crew
+    NameKey: wardrobe.crew.name
+    MaleMeshes:
+    - LSW_Crowd_Hair_Crew_M
+    FemaleMeshes:
+    - LSW_Crowd_Hair_Crew_F
+    Bald: 0
+  - Id: CrewBeard
+    NameKey: wardrobe.crewbeard.name
+    MaleMeshes:
+    - LSW_Crowd_Hair_Crew_M
+    - LSW_Crowd_Beard_M
+    FemaleMeshes: []
+    Bald: 0
+  - Id: Long
+    NameKey: wardrobe.long.name
+    MaleMeshes:
+    - LSW_Crowd_Hair_Long_M
+    FemaleMeshes:
+    - LSW_Crowd_Hair_Long_F
+    Bald: 0
+  - Id: Ponytail
+    NameKey: wardrobe.ponytail.name
+    MaleMeshes:
+    - LSW_Crowd_Hair_Ponytail_M
+    FemaleMeshes:
+    - LSW_Crowd_Hair_Ponytail_F
+    Bald: 0
+  _body:
+  - Mesh: LSW_Crowd_Foot_F.L
+    Region: Foot
+    Sex: 1
+  - Mesh: LSW_Crowd_Foot_F.R
+    Region: Foot
+    Sex: 1
+  - Mesh: LSW_Crowd_Foot_M.L
+    Region: Foot
+    Sex: 0
+  - Mesh: LSW_Crowd_Foot_M.R
+    Region: Foot
+    Sex: 0
+  - Mesh: LSW_Crowd_Forearm_F.L
+    Region: Forearm
+    Sex: 1
+  - Mesh: LSW_Crowd_Forearm_F.R
+    Region: Forearm
+    Sex: 1
+  - Mesh: LSW_Crowd_Forearm_M.L
+    Region: Forearm
+    Sex: 0
+  - Mesh: LSW_Crowd_Forearm_M.R
+    Region: Forearm
+    Sex: 0
+  - Mesh: LSW_Crowd_Hand_F.L
+    Region: Hand
+    Sex: 1
+  - Mesh: LSW_Crowd_Hand_F.R
+    Region: Hand
+    Sex: 1
+  - Mesh: LSW_Crowd_Hand_M.L
+    Region: Hand
+    Sex: 0
+  - Mesh: LSW_Crowd_Hand_M.R
+    Region: Hand
+    Sex: 0
+  - Mesh: LSW_Crowd_Head_F
+    Region: Head
+    Sex: 1
+  - Mesh: LSW_Crowd_Head_M
+    Region: Head
+    Sex: 0
+  - Mesh: LSW_Crowd_Pelvis_F
+    Region: Pelvis
+    Sex: 1
+  - Mesh: LSW_Crowd_Pelvis_M
+    Region: Pelvis
+    Sex: 0
+  - Mesh: LSW_Crowd_Shin_F.L
+    Region: Shin
+    Sex: 1
+  - Mesh: LSW_Crowd_Shin_F.R
+    Region: Shin
+    Sex: 1
+  - Mesh: LSW_Crowd_Shin_M.L
+    Region: Shin
+    Sex: 0
+  - Mesh: LSW_Crowd_Shin_M.R
+    Region: Shin
+    Sex: 0
+  - Mesh: LSW_Crowd_Thigh_F.L
+    Region: Thigh
+    Sex: 1
+  - Mesh: LSW_Crowd_Thigh_F.R
+    Region: Thigh
+    Sex: 1
+  - Mesh: LSW_Crowd_Thigh_M.L
+    Region: Thigh
+    Sex: 0
+  - Mesh: LSW_Crowd_Thigh_M.R
+    Region: Thigh
+    Sex: 0
+  - Mesh: LSW_Crowd_Torso_F
+    Region: Torso
+    Sex: 1
+  - Mesh: LSW_Crowd_Torso_M
+    Region: Torso
+    Sex: 0
+  - Mesh: LSW_Crowd_UpperArm_F.L
+    Region: UpperArm
+    Sex: 1
+  - Mesh: LSW_Crowd_UpperArm_F.R
+    Region: UpperArm
+    Sex: 1
+  - Mesh: LSW_Crowd_UpperArm_M.L
+    Region: UpperArm
+    Sex: 0
+  - Mesh: LSW_Crowd_UpperArm_M.R
+    Region: UpperArm
+    Sex: 0
+  _skins:
+  - Name: SkinPale
+    Colour: {r: 0.9490196, g: 0.827451, b: 0.74509805, a: 1}
+    Luma: 0.847
+  - Name: SkinLight
+    Colour: {r: 0.8901961, g: 0.7176471, b: 0.5882353, a: 1}
+    Luma: 0.745
+  - Name: SkinMid
+    Colour: {r: 0.78431374, g: 0.5764706, b: 0.41960785, a: 1}
+    Luma: 0.609
+  - Name: SkinTan
+    Colour: {r: 0.65882355, g: 0.43529412, b: 0.2901961, a: 1}
+    Luma: 0.472
+  - Name: SkinBrown
+    Colour: {r: 0.4862745, g: 0.3019608, b: 0.1882353, a: 1}
+    Luma: 0.333
+  - Name: SkinDeep
+    Colour: {r: 0.30588236, g: 0.18039216, b: 0.11764706, a: 1}
+    Luma: 0.203
+  _hairColours:
+  - Name: HairBlack
+    Colour: {r: 0.101960786, g: 0.09019608, b: 0.08627451, a: 1}
+    Luma: 0.092
+  - Name: HairDarkBrown
+    Colour: {r: 0.23137255, g: 0.14901961, b: 0.09803922, a: 1}
+    Luma: 0.163
+  - Name: HairBrown
+    Colour: {r: 0.41568628, g: 0.26666668, b: 0.16078432, a: 1}
+    Luma: 0.291
+  - Name: HairAuburn
+    Colour: {r: 0.5568628, g: 0.23137255, b: 0.13333334, a: 1}
+    Luma: 0.293
+  - Name: HairBlonde
+    Colour: {r: 0.84705883, g: 0.7137255, b: 0.43137255, a: 1}
+    Luma: 0.722
+  - Name: HairGrey
+    Colour: {r: 0.6117647, g: 0.59607846, b: 0.5803922, a: 1}
+    Luma: 0.598
+  - Name: HairWhite
+    Colour: {r: 0.9098039, g: 0.89411765, b: 0.8627451, a: 1}
+    Luma: 0.895
+  _cloth:
+  - Name: ClothRed
+    Light:
+      Name: ClothRedLight
+      Colour: {r: 0.9490196, g: 0.54901963, b: 0.5176471, a: 1}
+      Luma: 0.632
+    Dark:
+      Name: ClothRedDark
+      Colour: {r: 0.43137255, g: 0.10980392, b: 0.1254902, a: 1}
+      Luma: 0.179
+  - Name: ClothOrange
+    Light:
+      Name: ClothOrangeLight
+      Colour: {r: 0.95686275, g: 0.65882355, b: 0.38431373, a: 1}
+      Luma: 0.702
+    Dark:
+      Name: ClothOrangeDark
+      Colour: {r: 0.41568628, g: 0.19215687, b: 0.07058824, a: 1}
+      Luma: 0.231
+  - Name: ClothMustard
+    Light:
+      Name: ClothMustardLight
+      Colour: {r: 0.91764706, g: 0.79607844, b: 0.39215687, a: 1}
+      Luma: 0.793
+    Dark:
+      Name: ClothMustardDark
+      Colour: {r: 0.30588236, g: 0.22745098, b: 0.047058824, a: 1}
+      Luma: 0.231
+  - Name: ClothGreen
+    Light:
+      Name: ClothGreenLight
+      Colour: {r: 0.63529414, g: 0.8117647, b: 0.5176471, a: 1}
+      Luma: 0.753
+    Dark:
+      Name: ClothGreenDark
+      Colour: {r: 0.13725491, g: 0.27450982, b: 0.1254902, a: 1}
+      Luma: 0.235
+  - Name: ClothTeal
+    Light:
+      Name: ClothTealLight
+      Colour: {r: 0.5254902, g: 0.80784315, b: 0.76862746, a: 1}
+      Luma: 0.745
+    Dark:
+      Name: ClothTealDark
+      Colour: {r: 0.08627451, g: 0.25882354, b: 0.2509804, a: 1}
+      Luma: 0.222
+  - Name: ClothBlue
+    Light:
+      Name: ClothBlueLight
+      Colour: {r: 0.5764706, g: 0.7294118, b: 0.91764706, a: 1}
+      Luma: 0.71
+    Dark:
+      Name: ClothBlueDark
+      Colour: {r: 0.11372549, g: 0.21568628, b: 0.40784314, a: 1}
+      Luma: 0.208
+  - Name: ClothDenim
+    Light:
+      Name: ClothDenimLight
+      Colour: {r: 0.6392157, g: 0.7254902, b: 0.8235294, a: 1}
+      Luma: 0.714
+    Dark:
+      Name: ClothDenimDark
+      Colour: {r: 0.14901961, g: 0.22352941, b: 0.34509805, a: 1}
+      Luma: 0.216
+  - Name: ClothPurple
+    Light:
+      Name: ClothPurpleLight
+      Colour: {r: 0.74509805, g: 0.63529414, b: 0.8627451, a: 1}
+      Luma: 0.675
+    Dark:
+      Name: ClothPurpleDark
+      Colour: {r: 0.2627451, g: 0.15294118, b: 0.34901962, a: 1}
+      Luma: 0.19
+  - Name: ClothPink
+    Light:
+      Name: ClothPinkLight
+      Colour: {r: 0.95686275, g: 0.6901961, b: 0.78431374, a: 1}
+      Luma: 0.754
+    Dark:
+      Name: ClothPinkDark
+      Colour: {r: 0.41568628, g: 0.13333334, b: 0.26666668, a: 1}
+      Luma: 0.203
+  - Name: ClothBrown
+    Light:
+      Name: ClothBrownLight
+      Colour: {r: 0.8392157, g: 0.7254902, b: 0.56078434, a: 1}
+      Luma: 0.738
+    Dark:
+      Name: ClothBrownDark
+      Colour: {r: 0.2901961, g: 0.1882353, b: 0.1254902, a: 1}
+      Luma: 0.205
+  - Name: ClothOlive
+    Light:
+      Name: ClothOliveLight
+      Colour: {r: 0.7764706, g: 0.78431374, b: 0.5568628, a: 1}
+      Luma: 0.766
+    Dark:
+      Name: ClothOliveDark
+      Colour: {r: 0.21960784, g: 0.22745098, b: 0.1254902, a: 1}
+      Luma: 0.218
+  - Name: ClothMono
+    Light:
+      Name: ClothMonoLight
+      Colour: {r: 0.9254902, g: 0.9137255, b: 0.8901961, a: 1}
+      Luma: 0.915
+    Dark:
+      Name: ClothMonoDark
+      Colour: {r: 0.16470589, g: 0.16470589, b: 0.1882353, a: 1}
+      Luma: 0.166
