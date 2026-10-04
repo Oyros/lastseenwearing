@@ -10,9 +10,9 @@ namespace LastSeenWearing.UI.Round
 {
     /// <summary>
     /// The round on everyone's screen (GDD §06, P1.10): phase, time left, which round of the case, the
-    /// festival programme as it happens, and the end-of-round line. It renders <see cref="RoundDirector"/>;
-    /// it decides nothing. Hidden in the lobby. P1 placeholder look, built in code — the results screen
-    /// proper is P1.26.
+    /// festival programme as it happens, the cuffs left and a wrong arrest. It renders <see cref="RoundDirector"/>;
+    /// it decides nothing. Hidden in the lobby. P1 placeholder look, built in code — the end of a round is
+    /// <c>ResultsScreen</c> (P1.26).
     /// </summary>
     public sealed class RoundHud : MonoBehaviour
     {
@@ -92,11 +92,8 @@ namespace LastSeenWearing.UI.Round
             switch (_director.Phase)
             {
                 case RoundPhase.Result:
-                    var next = _director.Round + 1 < _director.RoundsPerCase ? "ui.round.next_round_in" : "ui.round.lobby_in";
-                    _line.text = OutcomeLine() + "\n" + Text(UiTable, next, seconds);
-                    break;
                 case RoundPhase.CaseEnd:
-                    _line.text = Text(UiTable, "ui.round.lobby_in", seconds);
+                    _line.text = string.Empty; // the results screen says it (P1.26)
                     break;
                 default:
                     if (Time.time >= _bannerUntil)
@@ -106,18 +103,6 @@ namespace LastSeenWearing.UI.Round
 
                     break;
             }
-        }
-
-        private string OutcomeLine()
-        {
-            return _director.Outcome switch
-            {
-                RoundOutcome.TimeUp => Text(UiTable, "ui.round.result.time_up"),
-                RoundOutcome.Escaped => Text(UiTable, "ui.round.result.escaped"),
-                RoundOutcome.Arrested => Text(UiTable, "ui.round.result.arrested"),
-                RoundOutcome.OutOfCuffs => Text(UiTable, "ui.round.result.out_of_cuffs"),
-                _ => string.Empty,
-            };
         }
 
         private void OnPhaseChanged(RoundPhase phase)

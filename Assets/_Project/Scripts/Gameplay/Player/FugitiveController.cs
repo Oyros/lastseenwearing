@@ -113,16 +113,21 @@ namespace LastSeenWearing.Gameplay.Player
         /// <summary>The local fugitive's tent panel is open: the body stands still and the camera holds.</summary>
         public bool Paused { get; set; }
 
+        /// <summary>Server: tents this fugitive changed in this round (for the result, P1.26).</summary>
+        public int TentsUsed { get; private set; }
+
         /// <summary>Server, right after spawning: the case, and the crowd this fugitive hides in this round.</summary>
         public void SetSeeds(int caseSeed, int crowdSeed)
         {
             _change.Value = default;
+            TentsUsed = 0;
             _seeds.Value = new Vector2Int(caseSeed, crowdSeed);
         }
 
         /// <summary>Server, from a tent: in for <paramref name="seconds"/>, out in <paramref name="outfit"/>'s clothes.</summary>
         public void ChangeInto(Outfit outfit, float seconds)
         {
+            TentsUsed++;
             _change.Value = new Change
             {
                 Changed = true,

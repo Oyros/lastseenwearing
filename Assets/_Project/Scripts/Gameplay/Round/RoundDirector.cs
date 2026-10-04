@@ -48,6 +48,9 @@ namespace LastSeenWearing.Gameplay.Round
         private readonly NetworkVariable<int> _round = new();
         private readonly NetworkVariable<RoundOutcome> _outcome = new();
         private readonly NetworkVariable<float> _bonusSeconds = new(); // wrong arrests' time for the fugitive (P1.24)
+        private readonly NetworkVariable<Summary> _summary = new();   // the round just decided (P1.26)
+        private readonly NetworkVariable<int> _policeRounds = new();  // this case's score
+        private readonly NetworkVariable<int> _fugitiveRounds = new();
 
         private readonly List<NetworkObject> _bodies = new();
         private double _programmeClock = -1d;
@@ -63,6 +66,12 @@ namespace LastSeenWearing.Gameplay.Round
         public int Round => _round.Value;
         public int RoundsPerCase => _config.RoundsPerCase;
         public RoundOutcome Outcome => _outcome.Value;
+
+        /// <summary>The round just decided, as everyone may now see it (P1.26).</summary>
+        public RoundSummary LastSummary => _summary.Value.Value;
+
+        public int PoliceRounds => _policeRounds.Value;
+        public int FugitiveRounds => _fugitiveRounds.Value;
         public double PhaseElapsed => NetworkManager.ServerTime.Time - _phaseStart.Value;
 
         /// <summary>Seconds left in a timed phase; 0 in one that waits (Lobby).</summary>
@@ -138,6 +147,8 @@ namespace LastSeenWearing.Gameplay.Round
 
             _caseSeed = Environment.TickCount;
             _round.Value = 0;
+            _policeRounds.Value = 0;
+            _fugitiveRounds.Value = 0;
             _composite.BeginCase(_caseSeed, _config.RoundsPerCase, ClientOf(Role.Watcher), ClientOf(Role.Fugitive));
             Fire(RoundEvent.StartCase);
         }
@@ -211,6 +222,11 @@ namespace LastSeenWearing.Gameplay.Round
                 _round.Value++;
             }
 
+            if (to == RoundPhase.Result)
+            {
+                Decide(from == RoundPhase.Live ? Math.Max(0d, LengthOf(from) - PhaseElapsed) : 0d);
+            }
+
             _phaseStart.Value = NetworkManager.ServerTime.Time;
             _phase.Value = to;
             Enter(to);
@@ -244,6 +260,42 @@ namespace LastSeenWearing.Gameplay.Round
                     _roster.Unlock(); // roles rotate next case (GDD §06)
                     break;
             }
+        }
+
+        // The round's verdict for everyone (P1.26): who won, the score, and what the fugitive did unseen.
+        private void Decide(double secondsLeft)
+        {
+            switch (RoundOutcomes.Winner(_outcome.Value))
+            {
+                case Side.Police:
+                    _policeRounds.Value++;
+                    break;
+                case Side.Fugitive:
+                    _fugitiveRounds.Value++;
+                    break;
+            }
+
+            var tents = 0;
+            foreach (var body in _bodies)
+            {
+                if (body != null && body.TryGetComponent<FugitiveController>(out var fugitive))
+                {
+                    tents = fugitive.TentsUsed;
+                }
+            }
+
+            _summary.Value = new Summary
+            {
+                Value = new RoundSummary
+                {
+                    TargetsDone = (byte)_objectives.DoneCount,
+                    TargetsNeeded = (byte)_objectives.Needed,
+                    CuffsLeft = (byte)_arrests.CuffsLeft,
+                    CuffsPerRound = (byte)_arrests.CuffsPerRound,
+                    TentsUsed = (byte)tents,
+                    SecondsLeft = (float)secondsLeft,
+                },
+            };
         }
 
         private void SpawnBodies()
@@ -330,6 +382,22 @@ namespace LastSeenWearing.Gameplay.Round
         private void OnPhaseChanged(RoundPhase previous, RoundPhase current)
         {
             PhaseChanged?.Invoke(current);
+        }
+    
+        // RoundSummary lives in Core, which knows nothing of Netcode; this carries it.
+        private struct Summary : INetworkSerializable
+        {
+            public RoundSummary Value;
+
+            public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+            {
+                serializer.SerializeValue(ref Value.TargetsDone);
+                serializer.SerializeValue(ref Value.TargetsNeeded);
+                serializer.SerializeValue(ref Value.CuffsLeft);
+                serializer.SerializeValue(ref Value.CuffsPerRound);
+                serializer.SerializeValue(ref Value.TentsUsed);
+                serializer.SerializeValue(ref Value.SecondsLeft);
+            }
         }
     }
 }

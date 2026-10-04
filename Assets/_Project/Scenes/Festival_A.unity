@@ -359,6 +359,7 @@ GameObject:
   - component: {fileID: 46670589}
   - component: {fileID: 46670590}
   - component: {fileID: 46670591}
+  - component: {fileID: 46670592}
   m_Layer: 0
   m_Name: Round
   m_TagString: Untagged
@@ -518,6 +519,19 @@ MonoBehaviour:
   _director: {fileID: 46670588}
   _roster: {fileID: 1375030074}
   _crowd: {fileID: 1113662437}
+--- !u!114 &46670592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46670584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99909d7b391ad114d83db347ef8c8447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LastSeenWearing.UI::LastSeenWearing.UI.Round.ResultsScreen
+  _director: {fileID: 46670588}
 --- !u!1 &78049861
 GameObject:
   m_ObjectHideFlags: 0

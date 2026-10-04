@@ -635,3 +635,16 @@ out on screen.
 **Why.** A one-shot is something cameras must see, so it is public even when the job behind it is the fugitive's
 secret. Driving the tent from shared times needs no extra messages and keeps every screen in step.
 **Reversing.** Cheap: the layer is regenerated from the menu; despawn timing is one line in `RoundDirector.Enter`.
+
+---
+
+### D-045 — The results screen: sides for every ending, a case score, and the fugitive's secrets told at the end
+**Decision.** `RoundOutcomes.Winner` gives every ending a side: arrest and time-up (D-028) → police; escape and
+out-of-cuffs → fugitive. `RoundDirector` keeps the case's score (reset when a case starts) and, on entering
+Result, a `RoundSummary` for everyone: targets done (secret while played, D-041), tents used, cuffs spent, and the
+play time left when it ended from Live. `ResultsScreen` shows it through Result and, at CaseEnd, the side with more
+rounds (a tie is a draw). The old result line left `RoundHud`. The composite's mistakes are **not** revealed yet —
+left until P1.27's playtest says whether the reveal is wanted.
+**Why.** The end of a round is where the hidden half of the game can be told; everything it shows is state the
+server already had, sent once.
+**Reversing.** Cheap: one struct and one screen.

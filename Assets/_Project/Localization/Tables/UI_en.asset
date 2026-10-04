@@ -365,6 +365,51 @@ MonoBehaviour:
     m_Localized: The cuffs ran out. The fugitive got away.
     m_Metadata:
       m_Items: []
+  - m_Id: 356730822569984
+    m_Localized: Police win
+    m_Metadata:
+      m_Items: []
+  - m_Id: 356731040673792
+    m_Localized: Fugitive wins
+    m_Metadata:
+      m_Items: []
+  - m_Id: 356731040673793
+    m_Localized: 'Targets done: {0}/{1}'
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
+  - m_Id: 356731044868096
+    m_Localized: 'Tents used: {0}'
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
+  - m_Id: 356731044868097
+    m_Localized: 'Cuffs spent: {0}/{1}'
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
+  - m_Id: 356731044868098
+    m_Localized: 'Time left: {0}:{1:00}'
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
+  - m_Id: 356731044868099
+    m_Localized: "Case: Police {0} \u2013 {1} Fugitive"
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
+  - m_Id: 356731044868100
+    m_Localized: The police win the case
+    m_Metadata:
+      m_Items: []
+  - m_Id: 356731044868101
+    m_Localized: The fugitive wins the case
+    m_Metadata:
+      m_Items: []
+  - m_Id: 356731044868102
+    m_Localized: The case is a draw
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
@@ -393,3 +438,8 @@ MonoBehaviour:
         - id: 294043887448065
         - id: 296933171507200
         - id: 302276945489920
+        - id: 356731040673793
+        - id: 356731044868096
+        - id: 356731044868097
+        - id: 356731044868098
+        - id: 356731044868099

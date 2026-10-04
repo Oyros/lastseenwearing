@@ -339,6 +339,46 @@ MonoBehaviour:
     m_Key: ui.round.result.out_of_cuffs
     m_Metadata:
       m_Items: []
+  - m_Id: 356730822569984
+    m_Key: results.police_win
+    m_Metadata:
+      m_Items: []
+  - m_Id: 356731040673792
+    m_Key: results.fugitive_win
+    m_Metadata:
+      m_Items: []
+  - m_Id: 356731040673793
+    m_Key: results.targets
+    m_Metadata:
+      m_Items: []
+  - m_Id: 356731044868096
+    m_Key: results.tents
+    m_Metadata:
+      m_Items: []
+  - m_Id: 356731044868097
+    m_Key: results.cuffs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 356731044868098
+    m_Key: results.time_left
+    m_Metadata:
+      m_Items: []
+  - m_Id: 356731044868099
+    m_Key: results.score
+    m_Metadata:
+      m_Items: []
+  - m_Id: 356731044868100
+    m_Key: results.case.police
+    m_Metadata:
+      m_Items: []
+  - m_Id: 356731044868101
+    m_Key: results.case.fugitive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 356731044868102
+    m_Key: results.case.draw
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
