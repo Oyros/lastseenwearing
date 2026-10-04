@@ -379,6 +379,30 @@ MonoBehaviour:
     m_Key: results.case.draw
     m_Metadata:
       m_Items: []
+  - m_Id: 366768819646464
+    m_Key: tent.inspect.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 366769020973056
+    m_Key: tent.inspect.missing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 366769020973057
+    m_Key: tent.inspect.gone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 366769020973058
+    m_Key: tent.inspect.nothing_missing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 366769025167360
+    m_Key: tent.rails.title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 366769025167361
+    m_Key: tent.rails.line
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -16,11 +16,11 @@ using UnityEngine;
 namespace LastSeenWearing.Gameplay.Disguise
 {
     /// <summary>
-    /// A changing tent (GDD §05, P1.21). Its rail is public: every client draws it from the round's crowd seed
-    /// (<see cref="TentStock"/>); the server keeps what has been taken and whether the tent is used, and is the only
-    /// one that changes anyone. The fugitive interacts, picks garments on their own screen
-    /// (<see cref="Opened"/>), and the server checks the choice (<see cref="TentChange"/>) before the fugitive goes
-    /// in. What came off stays here — the dog's scent later (GDD §03).
+    /// A changing tent (GDD §05, P1.21, P2.02). Its rail is public: every client draws it from the round's crowd seed
+    /// (<see cref="TentStock"/>). What has been taken and whether it is used are the server's alone: the fugitive hears
+    /// them on opening it, the plainclothes on going in (<see cref="Inspected"/>), nobody else. The fugitive picks
+    /// garments on their own screen (<see cref="Opened"/>) and the server checks the choice (<see cref="TentChange"/>)
+    /// before the fugitive goes in. What came off stays here, unseen — the dog's scent (P2.04).
     /// </summary>
     public sealed class ChangingTent : NetworkBehaviour, IInteractable
     {
@@ -35,8 +35,9 @@ namespace LastSeenWearing.Gameplay.Disguise
         [SerializeField] private RoleRosterSync _roster;
         [SerializeField] private RoundDirector _director;
 
-        private readonly NetworkVariable<int> _usesLeft = new();
-        private readonly NetworkVariable<int> _taken = new(); // bit i: rail item i is gone
+        // Server only (P2.02): a used tent or a missing item is a clue, told only to who may know it.
+        private int _usesLeft;
+        private int _taken; // bit i: rail item i is gone
 
         private readonly List<Worn> _leftBehind = new();
         private StockItem[] _rail = Array.Empty<StockItem>();
@@ -49,6 +50,15 @@ namespace LastSeenWearing.Gameplay.Disguise
         /// <summary>The server turned the local fugitive's change down.</summary>
         public static event Action<ChangeRefusal> Refused;
 
+        /// <summary>The local plainclothes went in: show them this tent's rail and what is missing.</summary>
+        public static event Action<ChangingTent> Inspected;
+
+        /// <summary>Which of the layout's tents this is (its number on the door).</summary>
+        public int Index => _index;
+
+        /// <summary>What this client was last told is gone from the rail (bit i: item i).</summary>
+        public int KnownTaken { get; private set; }
+
         public Vector3 InteractionPoint => transform.position;
 
         public WardrobeCatalog Catalog => _catalog;
@@ -56,7 +66,8 @@ namespace LastSeenWearing.Gameplay.Disguise
         /// <summary>Server only: what changing fugitives left here this round.</summary>
         public IReadOnlyList<Worn> LeftBehind => _leftBehind;
 
-        public bool Used => _usesLeft.Value <= 0;
+        /// <summary>Server only.</summary>
+        public bool Used => _usesLeft <= 0;
 
         /// <summary>This round's rail, the same on every client.</summary>
         public StockItem[] Rail
@@ -75,7 +86,8 @@ namespace LastSeenWearing.Gameplay.Disguise
             }
         }
 
-        public bool IsTaken(int item) => (_taken.Value & (1 << item)) != 0;
+        /// <summary>As this client was last told (<see cref="KnownTaken"/>).</summary>
+        public bool IsTaken(int item) => (KnownTaken & (1 << item)) != 0;
 
         // Server: a new round's crowd seed is a new round.
         private void Update()
@@ -90,18 +102,48 @@ namespace LastSeenWearing.Gameplay.Disguise
         // A new round's crowd is a new rail; the tent opens again (GDD §05: one use per round).
         private void Restock()
         {
-            _usesLeft.Value = _config.UsesPerTent;
-            _taken.Value = 0;
+            _usesLeft = _config.UsesPerTent;
+            _taken = 0;
             _leftBehind.Clear();
         }
 
-        public bool CanInteract(ulong clientId) =>
-            !Used && _roster.RoleOf(clientId) == Role.Fugitive && _director.Phase is RoundPhase.Live or RoundPhase.LastCuff;
+        // Whether the tent is used is the server's; a client only asks whether its role does anything here.
+        public bool CanInteract(ulong clientId)
+        {
+            var role = _roster.RoleOf(clientId);
+            return (TentRules.MayChange(role) || TentRules.MayInspect(role)) && _director.Phase is RoundPhase.Live or RoundPhase.LastCuff;
+        }
 
-        public void Interact(ulong clientId) => OpenRpc(RpcTarget.Single(clientId, RpcTargetUse.Temp));
+        public void Interact(ulong clientId)
+        {
+            var target = RpcTarget.Single(clientId, RpcTargetUse.Temp);
+            if (TentRules.MayInspect(_roster.RoleOf(clientId)))
+            {
+                InspectRpc(_taken, target);
+            }
+            else if (Used)
+            {
+                RefusedRpc(ChangeRefusal.TentUsed, target);
+            }
+            else
+            {
+                OpenRpc(_taken, target);
+            }
+        }
 
         [Rpc(SendTo.SpecifiedInParams)]
-        private void OpenRpc(RpcParams rpcParams) => Opened?.Invoke(this);
+        private void OpenRpc(int taken, RpcParams rpcParams)
+        {
+            KnownTaken = taken;
+            Opened?.Invoke(this);
+        }
+
+        [Rpc(SendTo.SpecifiedInParams)]
+        private void InspectRpc(int taken, RpcParams rpcParams)
+        {
+            KnownTaken = taken;
+            Inspected?.Invoke(this);
+        }
 
         /// <summary>The local fugitive's choice: a rail index per slot, or <see cref="TentChange.Keep"/>.</summary>
         public void RequestChange(int top, int bottom, int hat) => ChangeRpc(top, bottom, hat);
@@ -110,7 +152,7 @@ namespace LastSeenWearing.Gameplay.Disguise
         private void ChangeRpc(int top, int bottom, int hat, RpcParams rpcParams = default)
         {
             var sender = rpcParams.Receive.SenderClientId;
-            if (!CanInteract(sender) || !NetworkManager.ConnectedClients.TryGetValue(sender, out var client)
+            if (!CanInteract(sender) || !TentRules.MayChange(_roster.RoleOf(sender)) || Used || !NetworkManager.ConnectedClients.TryGetValue(sender, out var client)
                 || client.PlayerObject == null || !client.PlayerObject.TryGetComponent<FugitiveController>(out var fugitive)
                 || fugitive.IsChanging)
             {
@@ -128,24 +170,22 @@ namespace LastSeenWearing.Gameplay.Disguise
             var taken = new bool[Rail.Length];
             for (var i = 0; i < taken.Length; i++)
             {
-                taken[i] = IsTaken(i);
+                taken[i] = (_taken & (1 << i)) != 0;
             }
 
-            var result = TentChange.Apply(fugitive.Outfit, Rail, taken, _usesLeft.Value, top, bottom, hat, _catalog);
+            var result = TentChange.Apply(fugitive.Outfit, Rail, taken, _usesLeft, top, bottom, hat, _catalog);
             if (!result.Done)
             {
                 RefusedRpc(result.Refusal, RpcTarget.Single(sender, RpcTargetUse.Temp));
                 return;
             }
 
-            _usesLeft.Value--;
-            var mask = _taken.Value;
+            _usesLeft--;
             foreach (var item in result.Taken)
             {
-                mask |= 1 << item;
+                _taken |= 1 << item;
             }
 
-            _taken.Value = mask;
             _leftBehind.AddRange(result.LeftBehind);
             fugitive.ChangeInto(result.Outfit, _config.ChangeSeconds);
         }

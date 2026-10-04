@@ -6,6 +6,7 @@ using LastSeenWearing.Core.Round;
 using LastSeenWearing.Core.Wardrobe;
 using LastSeenWearing.Core.Watcher;
 using LastSeenWearing.Gameplay.Round;
+using LastSeenWearing.UI.Common;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
@@ -121,16 +122,11 @@ namespace LastSeenWearing.UI.Round
             var text = new StringBuilder();
             text.AppendLine();
             text.AppendLine($"<b>{Text(UiTable, "lastseen.title")}</b>");
-            text.AppendLine(Text(UiTable, "lastseen.clothes", Garment(sighting.Top, catalog.Tops), Garment(sighting.Bottom, catalog.Bottoms),
-                sighting.Hat.IsNone ? Text(UiTable, "lastseen.nohat") : Garment(sighting.Hat, catalog.Hats)));
+            text.AppendLine(Text(UiTable, "lastseen.clothes", WardrobeWords.Garment(sighting.Top, catalog.Tops), WardrobeWords.Garment(sighting.Bottom, catalog.Bottoms),
+                sighting.Hat.IsNone ? Text(UiTable, "lastseen.nohat") : WardrobeWords.Garment(sighting.Hat, catalog.Hats)));
             text.AppendLine(Text(UiTable, "lastseen.when", Text(UiTable, $"lastseen.source.{sighting.Source.ToString().ToLowerInvariant()}"), minutes, seconds));
             return text.ToString();
         }
-
-        // What the Watcher can say of a garment on a black-and-white feed: light or dark, and what it is.
-        private static string Garment(Worn worn, WardrobeCatalog.Garment[] items) =>
-            Text(UiTable, "lastseen.garment", Text(FestivalTable, $"person.tone.{worn.Tone.ToString().ToLowerInvariant()}"),
-                Text(FestivalTable, items[worn.Item].NameKey));
 
         private string Value(CompositeTrait trait, int value, GaitSignature walk)
         {

@@ -3,6 +3,7 @@ using LastSeenWearing.Core.Disguise;
 using LastSeenWearing.Core.Wardrobe;
 using LastSeenWearing.Gameplay.Disguise;
 using LastSeenWearing.Gameplay.Player;
+using LastSeenWearing.UI.Common;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
@@ -99,8 +100,8 @@ namespace LastSeenWearing.UI.Field
                 return;
             }
 
-            // In, or the tent went to someone else first, or the round moved on: the choice is over.
-            if (_fugitive == null || !_tent.IsSpawned || _fugitive.IsChanging || (!_sent && _tent.Used))
+            // In, or gone: the choice is over. A tent used meanwhile is the server's refusal to say.
+            if (_fugitive == null || !_tent.IsSpawned || _fugitive.IsChanging)
             {
                 Close();
             }
@@ -179,18 +180,7 @@ namespace LastSeenWearing.UI.Field
             return Garment(_tent.Rail[choice].Garment, slot);
         }
 
-        private string Garment(Worn worn, ClothingSlot slot)
-        {
-            var catalog = _tent.Catalog;
-            var items = slot switch
-            {
-                ClothingSlot.Top => catalog.Tops,
-                ClothingSlot.Bottom => catalog.Bottoms,
-                _ => catalog.Hats,
-            };
-            return Text(UiTable, "lastseen.garment", Text(FestivalTable, $"person.tone.{worn.Tone.ToString().ToLowerInvariant()}"),
-                Text(FestivalTable, items[worn.Item].NameKey));
-        }
+        private string Garment(Worn worn, ClothingSlot slot) => WardrobeWords.Garment(worn, slot, _tent.Catalog);
 
         private static string Text(string table, string key, params object[] arguments)
         {

@@ -674,3 +674,17 @@ and like a stranger to the Watcher. Its first-person arms are the patrol's until
 **Why.** The two roles share everything in first person — look, move, aim, arms; only speed, the cuffs and the
 body differ. One controller keeps stop, questioning and tents (P2.02–P2.06) in one place.
 **Reversing.** Moderate: split the class again; prefabs reference it by GUID.
+
+---
+
+### D-048 — Tent rails are public; what is missing is told only to the plainclothes, inside
+**Decision.** Every tent's rail is public at round start (GDD §05): everyone reads it in the briefing, the Watcher
+keeps it in the dossier column all round, and each tent shows its number over the door so "tent 2" means one
+place to all. Whether a tent is used and which rail items are gone are **server-only** now — before P2.02 they
+were network variables every client received, a clue sitting in memory the police were never shown. The fugitive
+is told them on opening a tent; the plainclothes on pressing Interact at its door (GDD §03), who sees the rail
+with the gone items struck through. Who may change and who may look are `TentRules` in Core. The clothes left
+behind are **not** shown (team): they would hand over the fugitive's previous outfit outright; they stay for the
+dog's scent (P2.04).
+**Why.** The rail narrows the search by design; the missing item is a clue the plainclothes earns by going there.
+**Reversing.** Cheap: one RPC per role; showing left-behind clothes would be one more line in the inspect panel.

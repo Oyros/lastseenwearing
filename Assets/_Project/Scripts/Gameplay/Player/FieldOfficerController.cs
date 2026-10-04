@@ -5,6 +5,7 @@ using LastSeenWearing.Core.Roles;
 using LastSeenWearing.Core.Wardrobe;
 using LastSeenWearing.Gameplay.Capture;
 using LastSeenWearing.Gameplay.Crowd;
+using LastSeenWearing.Gameplay.Interaction;
 using Unity.Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
@@ -164,6 +165,10 @@ namespace LastSeenWearing.Gameplay.Player
                 _yaw += look.x * scale;
                 _pitch = Mathf.Clamp(_pitch - look.y * scale, _camera.FirstPersonPitchMin, _camera.FirstPersonPitchMax);
                 ReadArrest(field);
+                if (field.Interact.WasPressedThisFrame())
+                {
+                    TryInteract();
+                }
             }
 
             // Every client: the walk runs on the ground this body covered (D-022); the owner's arms walk with it.
@@ -225,6 +230,33 @@ namespace LastSeenWearing.Gameplay.Player
                 {
                     _arms.CrossFadeInFixedTime(ArmsCuffsState, WalkCycle.ActionBlendSeconds, _arms.GetLayerIndex(WalkCycle.ActionLayer), 0f);
                 }
+            }
+        }
+
+        // Interact (DATA §7): a plainclothes at a tent goes in to look (P2.02). The server decides what it shows.
+        private void TryInteract()
+        {
+            var target = Interactor.NearestAround(transform.position, _movement.InteractRange, OwnerClientId);
+            if (target is Component component && component.TryGetComponent<NetworkObject>(out var networkObject))
+            {
+                InteractRpc(networkObject);
+            }
+        }
+
+        [Rpc(SendTo.Server)]
+        private void InteractRpc(NetworkObjectReference target, RpcParams rpcParams = default)
+        {
+            // The server checks what the client claimed: the thing exists, is in range, and lets them in.
+            if (!target.TryGet(out var networkObject) || !networkObject.TryGetComponent<IInteractable>(out var interactable))
+            {
+                return;
+            }
+
+            var sender = rpcParams.Receive.SenderClientId;
+            var inRange = (interactable.InteractionPoint - transform.position).sqrMagnitude <= _movement.InteractRange * _movement.InteractRange;
+            if (sender == OwnerClientId && inRange && interactable.CanInteract(sender))
+            {
+                interactable.Interact(sender);
             }
         }
 

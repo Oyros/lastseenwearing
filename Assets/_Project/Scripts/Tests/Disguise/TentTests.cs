@@ -2,9 +2,12 @@ using System;
 using System.Linq;
 using LastSeenWearing.Core.Config;
 using LastSeenWearing.Core.Disguise;
+using LastSeenWearing.Core.Roles;
+using LastSeenWearing.Gameplay.Disguise;
 using LastSeenWearing.Core.Wardrobe;
 using LastSeenWearing.Editor.Import;
 using NUnit.Framework;
+using Unity.Netcode;
 using UnityEditor;
 
 namespace LastSeenWearing.Tests.Disguise
@@ -110,6 +113,36 @@ namespace LastSeenWearing.Tests.Disguise
                 Worn.Nothing);
             var rail = new[] { new StockItem(ClothingSlot.Top, new Worn(trench, 0, Tone.Dark)) };
             Assert.That(TentChange.Apply(inSkirt, rail, new bool[1], 1, 0, TentChange.Keep, TentChange.Keep, Catalog).Refusal, Is.EqualTo(ChangeRefusal.Clash));
+        }
+
+        [Test]
+        public void OnlyTheFugitiveChangesAndOnlyThePlainclothesLooksIn()
+        {
+            Assert.That(TentRules.MayChange(Role.Fugitive), Is.True);
+            Assert.That(TentRules.MayChange(Role.Plainclothes), Is.False);
+            Assert.That(TentRules.MayInspect(Role.Plainclothes), Is.True, "GDD §03");
+            foreach (var role in new[] { Role.Patrol, Role.Dog, Role.Watcher, Role.Fugitive })
+            {
+                Assert.That(TentRules.MayInspect(role), Is.False, role.ToString());
+            }
+        }
+
+        [Test]
+        public void WhatIsMissingIsWhatWasTaken()
+        {
+            var rail = TentStock.For(Seed, 0, Crowd, Config);
+            Assert.That(TentRules.Missing(rail, 0), Is.Empty);
+            var missing = TentRules.Missing(rail, (1 << 0) | (1 << 3));
+            Assert.That(missing.Select(i => (i.Slot, i.Garment)), Is.EqualTo(new[] { (rail[0].Slot, rail[0].Garment), (rail[3].Slot, rail[3].Garment) }));
+        }
+
+        [Test]
+        public void ATentSharesNothingButItsRail()
+        {
+            // P2.02: whether a tent is used and what is gone are the server's, told only on opening or inspecting it.
+            var shared = typeof(ChangingTent).GetFields(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public)
+                .Where(f => typeof(NetworkVariableBase).IsAssignableFrom(f.FieldType)).Select(f => f.Name);
+            Assert.That(shared, Is.Empty);
         }
 
         // Someone from the crowd and a top on the rail they can wear: different from theirs, no clash.

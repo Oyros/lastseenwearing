@@ -410,6 +410,34 @@ MonoBehaviour:
     m_Localized: The case is a draw
     m_Metadata:
       m_Items: []
+  - m_Id: 366768819646464
+    m_Localized: Tent {0}
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
+  - m_Id: 366769020973056
+    m_Localized: <s>{0}</s> (gone)
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
+  - m_Id: 366769020973057
+    m_Localized: '{0} gone from the rail.'
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
+  - m_Id: 366769020973058
+    m_Localized: Nothing is missing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 366769025167360
+    m_Localized: Tent rails
+    m_Metadata:
+      m_Items: []
+  - m_Id: 366769025167361
+    m_Localized: 'Tent {0}: {1}'
+    m_Metadata:
+      m_Items:
+      - rid: 3517454320335585380
   references:
     version: 2
     RefIds:
@@ -443,3 +471,7 @@ MonoBehaviour:
         - id: 356731044868097
         - id: 356731044868098
         - id: 356731044868099
+        - id: 366768819646464
+        - id: 366769020973056
+        - id: 366769020973057
+        - id: 366769025167361

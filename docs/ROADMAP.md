@@ -201,7 +201,7 @@ open Blender; never save a `.blend` unasked.
 | ID | Task | § | Done when |
 |---|---|---|---|
 | [x] P2.01 | Plainclothes role (cannot arrest) | §03 | Plays a round as plainclothes |
-| [ ] P2.02 | Tent inventories public; missing-item view on entry | §05 | Missing items shown to the plainclothes |
+| [x] P2.02 | Tent inventories public; missing-item view on entry | §05 | Missing items shown to the plainclothes |
 | [ ] P2.03 | Witness memory + questioning (short, vague, may contradict) | §04.3 | Tests: only recent sightings produce a description |
 | [ ] P2.04 | Dog role: first person, sniff → 10 s trail from tent clothes; bark → NPC step back, stamina, anger | §03, D-011 | Trail leads to the fugitive's path |
 | [ ] P2.05 | Suspicion (heat) per character | §04.3 | Tests: each source raises it by its config value |

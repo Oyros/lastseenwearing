@@ -1183,6 +1183,9 @@ GameObject:
   m_Component:
   - component: {fileID: 625267157}
   - component: {fileID: 625267156}
+  - component: {fileID: 625267160}
+  - component: {fileID: 625267159}
+  - component: {fileID: 625267158}
   m_Layer: 0
   m_Name: CompositePanel
   m_TagString: Untagged
@@ -1219,6 +1222,46 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &625267158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625267155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d59eedb0f7f2992418081124d609317e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LastSeenWearing.UI::LastSeenWearing.UI.Round.TentNumbers
+--- !u!114 &625267159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625267155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1faf90f119f3add4db2cb48877944154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LastSeenWearing.UI::LastSeenWearing.UI.Round.TentRailsPanel
+  _director: {fileID: 46670588}
+  _roster: {fileID: 1375030074}
+  _crowd: {fileID: 1113662437}
+--- !u!114 &625267160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625267155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc12bb36804bc864db900068c2dab69b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: LastSeenWearing.UI::LastSeenWearing.UI.Field.TentInspectPanel
+  _movement: {fileID: 11400000, guid: 1cd9eff69a4b471439075844be22e455, type: 2}
 --- !u!1 &630626981
 GameObject:
   m_ObjectHideFlags: 0
